@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>f194b996c91510991bbde64902024114d733f886</guid>
+	<type>mesh</type>
+	<hash>515213ba</hash>
+	<parameters>
+		<parameter type="bool" name="unchanged">1</parameter>
+		<parameter type="float" name="scale">1</parameter>
+		<parameter type="bool" name="animation">1</parameter>
+		<parameter type="bool" name="vertex_cache">1</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="f194b996c91510991bbde64902024114d733f886" name="ViveTeleport.mesh" link="0"/>
+	</runtimes>
+</asset>

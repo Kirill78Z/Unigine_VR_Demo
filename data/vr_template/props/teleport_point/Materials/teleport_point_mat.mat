@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="teleport_point_mat" guid="3e78dc9a213fa85a96587d0c5225ab5aed373bed" base_material="mesh_base">
+	<state name="emission">1</state>
+	<parameter name="albedo_color">0 0 0 1</parameter>
+	<parameter name="specular">0</parameter>
+</material>

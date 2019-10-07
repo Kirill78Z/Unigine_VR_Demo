@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>dbda08a48b6070b01d89fa98a0571a31f392132d</guid>
+	<type>property</type>
+	<hash>0f3f46e5</hash>
+	<runtimes>
+		<runtime id="dbda08a48b6070b01d89fa98a0571a31f392132d" name="laser_pointer" link="0"/>
+	</runtimes>
+</asset>

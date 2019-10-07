@@ -1,0 +1,1816 @@
+{
+	"version": "2",
+	"run_settings": {
+		"application": "default",
+		"debug": 0,
+		"architecture": "x64",
+		"app_name": "/vr_test_x64.exe",
+		"arguments": "-extern_plugin \"AppVive\""
+	},
+	"project_settings": {
+		"name": "vr_test",
+		"default_world": "vr_test",
+		"editor_version": "editor2",
+		"engine_binaries": "development",
+		"launcher_gui": 0,
+		"component_system": 1,
+		"launcher_console": 1,
+		"bin_flags": 6,
+		"precision": 1,
+		"precision_forced": "0",
+		"project_template": "vr",
+		"api": "vs2013cpp",
+		"stereo": "",
+		"monitors": "",
+		"sound": "auto",
+		"plugins": [
+			"FbxImporter",
+			"CadImporter",
+			"AppOculus",
+			"AppVive"
+		],
+		"addons": [
+		],
+		"files": [
+			{
+				"file": "bin/",
+				"tags": [
+					"unigine",
+					"binaries",
+					"user_binaries",
+					"plugins"
+				],
+				"hash": ""
+			},
+			{
+				"file": "bin/AppOculus_double_x64.dll",
+				"tags": [
+					"plugins"
+				],
+				"hash": "1570016964143360"
+			},
+			{
+				"file": "bin/AppOculus_double_x64d.dll",
+				"tags": [
+					"plugins"
+				],
+				"hash": "1570016964254464"
+			},
+			{
+				"file": "bin/AppOculus_double_x64d.pdb",
+				"tags": [
+					"plugins"
+				],
+				"hash": "15700169642732032"
+			},
+			{
+				"file": "bin/AppVive_double_x64.dll",
+				"tags": [
+					"plugins"
+				],
+				"hash": "1570016964104960"
+			},
+			{
+				"file": "bin/AppVive_double_x64d.dll",
+				"tags": [
+					"plugins"
+				],
+				"hash": "1570016964182784"
+			},
+			{
+				"file": "bin/AppVive_double_x64d.pdb",
+				"tags": [
+					"plugins"
+				],
+				"hash": "15700169642281472"
+			},
+			{
+				"file": "bin/CadImporter_double_x64.dll",
+				"tags": [
+					"plugins"
+				],
+				"hash": "157001696416759808"
+			},
+			{
+				"file": "bin/CadImporter_double_x64d.dll",
+				"tags": [
+					"plugins"
+				],
+				"hash": "157001696448353792"
+			},
+			{
+				"file": "bin/CadImporter_double_x64d.pdb",
+				"tags": [
+					"plugins"
+				],
+				"hash": "157001696453506048"
+			},
+			{
+				"file": "bin/Editor2_double_x64.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696127565056"
+			},
+			{
+				"file": "bin/Editor2_double_x64d.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696128887552"
+			},
+			{
+				"file": "bin/Editor2_double_x64d.pdb",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016963124325888"
+			},
+			{
+				"file": "bin/FbxImporter_double_x64.dll",
+				"tags": [
+					"plugins"
+				],
+				"hash": "157001696313064192"
+			},
+			{
+				"file": "bin/FbxImporter_double_x64d.dll",
+				"tags": [
+					"plugins"
+				],
+				"hash": "157001696417600000"
+			},
+			{
+				"file": "bin/FbxImporter_double_x64d.pdb",
+				"tags": [
+					"plugins"
+				],
+				"hash": "157001696415486976"
+			},
+			{
+				"file": "bin/NCSEcw.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169639610808"
+			},
+			{
+				"file": "bin/Qt5Concurrent.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696129696"
+			},
+			{
+				"file": "bin/Qt5Core.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169615715968"
+			},
+			{
+				"file": "bin/Qt5Gui.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169615941760"
+			},
+			{
+				"file": "bin/Qt5Network.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169611213952"
+			},
+			{
+				"file": "bin/Qt5Widgets.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169615561344"
+			},
+			{
+				"file": "bin/Unigine_double_x64.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696118888704"
+			},
+			{
+				"file": "bin/Unigine_double_x64.pdb",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696123400448"
+			},
+			{
+				"file": "bin/Unigine_double_x64d.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696140466944"
+			},
+			{
+				"file": "bin/Unigine_double_x64d.pdb",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016961167686144"
+			},
+			{
+				"file": "bin/d3dcompiler_47.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169634310328"
+			},
+			{
+				"file": "bin/gdal.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696313219328"
+			},
+			{
+				"file": "bin/gdaldata/",
+				"tags": [
+					"binaries"
+				],
+				"hash": ""
+			},
+			{
+				"file": "bin/gdaldata/compdcs.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169639116"
+			},
+			{
+				"file": "bin/gdaldata/coordinate_axis.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169638302"
+			},
+			{
+				"file": "bin/gdaldata/datum_shift.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016963179890"
+			},
+			{
+				"file": "bin/gdaldata/ellipsoid.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696314365"
+			},
+			{
+				"file": "bin/gdaldata/gcs.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696353326"
+			},
+			{
+				"file": "bin/gdaldata/gcs.override.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016963513"
+			},
+			{
+				"file": "bin/gdaldata/gdal_datum.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016963234839"
+			},
+			{
+				"file": "bin/gdaldata/geoccs.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696314047"
+			},
+			{
+				"file": "bin/gdaldata/gt_datum.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696315804"
+			},
+			{
+				"file": "bin/gdaldata/gt_ellips.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169631719"
+			},
+			{
+				"file": "bin/gdaldata/ozi_datum.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169638482"
+			},
+			{
+				"file": "bin/gdaldata/ozi_ellips.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169631349"
+			},
+			{
+				"file": "bin/gdaldata/pcs.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016963764672"
+			},
+			{
+				"file": "bin/gdaldata/pcs.override.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169631581"
+			},
+			{
+				"file": "bin/gdaldata/prime_meridian.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169631910"
+			},
+			{
+				"file": "bin/gdaldata/projop_wparm.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016963278765"
+			},
+			{
+				"file": "bin/gdaldata/s57agencies.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696313304"
+			},
+			{
+				"file": "bin/gdaldata/s57attributes.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696320001"
+			},
+			{
+				"file": "bin/gdaldata/s57attributes_aml.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696318555"
+			},
+			{
+				"file": "bin/gdaldata/s57attributes_iw.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169638981"
+			},
+			{
+				"file": "bin/gdaldata/s57expectedinput.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696320885"
+			},
+			{
+				"file": "bin/gdaldata/s57objectclasses.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696353297"
+			},
+			{
+				"file": "bin/gdaldata/s57objectclasses_aml.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696364289"
+			},
+			{
+				"file": "bin/gdaldata/s57objectclasses_iw.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696337247"
+			},
+			{
+				"file": "bin/gdaldata/stateplane.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696310360"
+			},
+			{
+				"file": "bin/gdaldata/unit_of_measure.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696322291"
+			},
+			{
+				"file": "bin/gdaldata/vertcs.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "157001696312679"
+			},
+			{
+				"file": "bin/gdaldata/vertcs.override.csv",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169631081"
+			},
+			{
+				"file": "bin/gdalplugins/",
+				"tags": [
+					"binaries"
+				],
+				"hash": ""
+			},
+			{
+				"file": "bin/gdalplugins/gdal_ECW_JP2ECW.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016963184320"
+			},
+			{
+				"file": "bin/main_double_x64.exe",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016961425472"
+			},
+			{
+				"file": "bin/main_double_x64d.exe",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016961541184"
+			},
+			{
+				"file": "bin/msvcp120.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016963660128"
+			},
+			{
+				"file": "bin/msvcr120.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016963963232"
+			},
+			{
+				"file": "bin/openal32.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "1570016963761856"
+			},
+			{
+				"file": "bin/openvr_api.dll",
+				"tags": [
+					"plugins"
+				],
+				"hash": "1570016964593184"
+			},
+			{
+				"file": "bin/platforms/",
+				"tags": [
+					"binaries"
+				],
+				"hash": ""
+			},
+			{
+				"file": "bin/platforms/qwindows.dll",
+				"tags": [
+					"binaries"
+				],
+				"hash": "15700169611337344"
+			},
+			{
+				"file": "bin/vr_test_x64.exe",
+				"tags": [
+					"user_binaries"
+				],
+				"hash": "1570016963477184"
+			},
+			{
+				"file": "bin/vr_test_x64d.exe",
+				"tags": [
+					"user_binaries"
+				],
+				"hash": "1570016963863744"
+			},
+			{
+				"file": "bin/vr_test_x64d.pdb",
+				"tags": [
+					"user_binaries"
+				],
+				"hash": "15700169635001216"
+			},
+			{
+				"file": "data/",
+				"tags": [
+					"unigine",
+					"unigine_data",
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/core.ung",
+				"tags": [
+					"unigine_data"
+				],
+				"hash": "157001698548756563"
+			},
+			{
+				"file": "data/editor2.ung",
+				"tags": [
+					"unigine_data"
+				],
+				"hash": "15700169861957487"
+			},
+			{
+				"file": "data/scripts.ung",
+				"tags": [
+					"unigine_data"
+				],
+				"hash": "157001698526794"
+			},
+			{
+				"file": "data/shader_d3d11.cache",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698615048242"
+			},
+			{
+				"file": "data/shader_gl.cache",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698783837255"
+			},
+			{
+				"file": "data/vr_template/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/VR.node",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169877929"
+			},
+			{
+				"file": "data/vr_template/VR.node.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987279"
+			},
+			{
+				"file": "data/vr_template/materials/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/materials/ground_grid.mat",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987611"
+			},
+			{
+				"file": "data/vr_template/materials/ground_grid.mat.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987287"
+			},
+			{
+				"file": "data/vr_template/properties/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/properties/gui.prop",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987115"
+			},
+			{
+				"file": "data/vr_template/properties/gui.prop.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987284"
+			},
+			{
+				"file": "data/vr_template/properties/handle.prop",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169871468"
+			},
+			{
+				"file": "data/vr_template/properties/handle.prop.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987287"
+			},
+			{
+				"file": "data/vr_template/properties/movable.prop",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169872217"
+			},
+			{
+				"file": "data/vr_template/properties/movable.prop.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987288"
+			},
+			{
+				"file": "data/vr_template/properties/player_oculus.prop",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169871017"
+			},
+			{
+				"file": "data/vr_template/properties/player_oculus.prop.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987294"
+			},
+			{
+				"file": "data/vr_template/properties/player_pc.prop",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987518"
+			},
+			{
+				"file": "data/vr_template/properties/player_pc.prop.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987289"
+			},
+			{
+				"file": "data/vr_template/properties/player_vive.prop",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169871016"
+			},
+			{
+				"file": "data/vr_template/properties/player_vive.prop.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987292"
+			},
+			{
+				"file": "data/vr_template/properties/switch.prop",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169871401"
+			},
+			{
+				"file": "data/vr_template/properties/switch.prop.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987287"
+			},
+			{
+				"file": "data/vr_template/properties/vr_object.prop",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987121"
+			},
+			{
+				"file": "data/vr_template/properties/vr_object.prop.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987290"
+			},
+			{
+				"file": "data/vr_template/properties/vr_player.prop",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987121"
+			},
+			{
+				"file": "data/vr_template/properties/vr_player.prop.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987290"
+			},
+			{
+				"file": "data/vr_template/properties/vr_player_spawner.prop",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169872630"
+			},
+			{
+				"file": "data/vr_template/properties/vr_player_spawner.prop.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987298"
+			},
+			{
+				"file": "data/vr_template/props/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/oculus/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/oculus/Materials/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/oculus/Materials/oculus_touch_mat.mat",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987752"
+			},
+			{
+				"file": "data/vr_template/props/oculus/Materials/oculus_touch_mat.mat.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987291"
+			},
+			{
+				"file": "data/vr_template/props/oculus/fbxes/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/oculus/fbxes/oculus_touch_left.fbx",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987609056"
+			},
+			{
+				"file": "data/vr_template/props/oculus/fbxes/oculus_touch_left.fbx.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169874421"
+			},
+			{
+				"file": "data/vr_template/props/oculus/fbxes/oculus_touch_right.fbx",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987613408"
+			},
+			{
+				"file": "data/vr_template/props/oculus/fbxes/oculus_touch_right.fbx.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169874430"
+			},
+			{
+				"file": "data/vr_template/props/oculus/oculus_touch_left.node",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169873072"
+			},
+			{
+				"file": "data/vr_template/props/oculus/oculus_touch_left.node.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987294"
+			},
+			{
+				"file": "data/vr_template/props/oculus/oculus_touch_right.node",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169873207"
+			},
+			{
+				"file": "data/vr_template/props/oculus/oculus_touch_right.node.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987295"
+			},
+			{
+				"file": "data/vr_template/props/oculus/textures/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/oculus/textures/oculus_touch_a.png",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987285191"
+			},
+			{
+				"file": "data/vr_template/props/oculus/textures/oculus_touch_a.png.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987657"
+			},
+			{
+				"file": "data/vr_template/props/oculus/textures/oculus_touch_alb.png",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698727259"
+			},
+			{
+				"file": "data/vr_template/props/oculus/textures/oculus_touch_alb.png.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987965"
+			},
+			{
+				"file": "data/vr_template/props/oculus/textures/oculus_touch_sh.png",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987135002"
+			},
+			{
+				"file": "data/vr_template/props/oculus/textures/oculus_touch_sh.png.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987964"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/Materials/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/Materials/teleport_point_black_mat.mat",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987280"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/Materials/teleport_point_black_mat.mat.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987300"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/Materials/teleport_point_mat.mat",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987308"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/Materials/teleport_point_mat.mat.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987294"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/Materials/teleport_ray.mat",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987445"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/Materials/teleport_ray.mat.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987288"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/fbxes/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/fbxes/Materials/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/fbxes/Materials/vive_teleport_black_mat.mat",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987237"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/fbxes/Materials/vive_teleport_black_mat.mat.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987299"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/fbxes/Materials/vive_teleport_white_mat.mat",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987174"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/fbxes/Materials/vive_teleport_white_mat.mat.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987299"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/fbxes/ViveTeleport.mesh",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698715959"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/fbxes/ViveTeleport.mesh.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987542"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/fbxes/teleport_point.fbx",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698723520"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/fbxes/teleport_point.fbx.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169873250"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/ray_alb.jpg",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169877939"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/ray_alb.jpg.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987947"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/teleport_point.node",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987718"
+			},
+			{
+				"file": "data/vr_template/props/teleport_point/teleport_point.node.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016987291"
+			},
+			{
+				"file": "data/vr_template/props/vive/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/vive/fbxes/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/vive/fbxes/Materials/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/vive/fbxes/Materials/vive_basestation_mat.mat",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988240"
+			},
+			{
+				"file": "data/vr_template/props/vive/fbxes/Materials/vive_basestation_mat.mat.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988296"
+			},
+			{
+				"file": "data/vr_template/props/vive/fbxes/Materials/vive_pad_mat.mat",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988232"
+			},
+			{
+				"file": "data/vr_template/props/vive/fbxes/Materials/vive_pad_mat.mat.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988288"
+			},
+			{
+				"file": "data/vr_template/props/vive/fbxes/vive_basestation.fbx",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988101216"
+			},
+			{
+				"file": "data/vr_template/props/vive/fbxes/vive_basestation.fbx.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169883162"
+			},
+			{
+				"file": "data/vr_template/props/vive/fbxes/vive_pad.fbx",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988770320"
+			},
+			{
+				"file": "data/vr_template/props/vive/fbxes/vive_pad.fbx.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169883331"
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/vive_basestation_alb.jpg",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698876835"
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/vive_basestation_alb.jpg.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988973"
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/vive_basestation_e.jpg",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698816209"
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/vive_basestation_e.jpg.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988965"
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/vive_basestation_sh.jpg",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698861035"
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/vive_basestation_sh.jpg.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988971"
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/vive_pad_a.jpg",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988235213"
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/vive_pad_a.jpg.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988649"
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/vive_pad_alb.jpg",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988134658"
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/vive_pad_alb.jpg.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988957"
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/vive_pad_e.jpg",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698870108"
+			},
+			{
+				"file": "data/vr_template/props/vive/textures/vive_pad_e.jpg.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988948"
+			},
+			{
+				"file": "data/vr_template/props/vive/vive_basestation.node",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988516"
+			},
+			{
+				"file": "data/vr_template/props/vive/vive_basestation.node.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988293"
+			},
+			{
+				"file": "data/vr_template/props/vive/vive_basestation_mat.mat",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988595"
+			},
+			{
+				"file": "data/vr_template/props/vive/vive_basestation_mat.mat.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988296"
+			},
+			{
+				"file": "data/vr_template/props/vive/vive_pad.node",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988926"
+			},
+			{
+				"file": "data/vr_template/props/vive/vive_pad.node.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988285"
+			},
+			{
+				"file": "data/vr_template/props/vive/vive_pad_mat.mat",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988743"
+			},
+			{
+				"file": "data/vr_template/props/vive/vive_pad_mat.mat.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988288"
+			},
+			{
+				"file": "data/vr_template/render_settings/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/render_settings/vr_render_settings.render",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698824641"
+			},
+			{
+				"file": "data/vr_template/render_settings/vr_render_settings.render.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988308"
+			},
+			{
+				"file": "data/vr_template/shaders/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/shaders/screen_space/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/shaders/screen_space/filter_selection.frag",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169881342"
+			},
+			{
+				"file": "data/vr_template/shaders/screen_space/filter_selection.frag.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988293"
+			},
+			{
+				"file": "data/vr_template/shaders/screen_space/vr_post_filter_selection.basemat",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988664"
+			},
+			{
+				"file": "data/vr_template/shaders/screen_space/vr_post_filter_selection.basemat.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988308"
+			},
+			{
+				"file": "data/vr_template/sounds/",
+				"tags": [
+					"project_data"
+				],
+				"hash": ""
+			},
+			{
+				"file": "data/vr_template/sounds/clunk.oga",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698819138"
+			},
+			{
+				"file": "data/vr_template/sounds/clunk.oga.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988282"
+			},
+			{
+				"file": "data/vr_template/sounds/lever_loop.oga",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698818027"
+			},
+			{
+				"file": "data/vr_template/sounds/lever_loop.oga.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988287"
+			},
+			{
+				"file": "data/vr_template/sounds/lever_start.oga",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169886097"
+			},
+			{
+				"file": "data/vr_template/sounds/lever_start.oga.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988288"
+			},
+			{
+				"file": "data/vr_template/sounds/lever_stop.oga",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169887093"
+			},
+			{
+				"file": "data/vr_template/sounds/lever_stop.oga.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988287"
+			},
+			{
+				"file": "data/vr_template/sounds/sliding.oga",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698818027"
+			},
+			{
+				"file": "data/vr_template/sounds/sliding.oga.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988284"
+			},
+			{
+				"file": "data/vr_template/sounds/switch.oga",
+				"tags": [
+					"project_data"
+				],
+				"hash": "15700169887624"
+			},
+			{
+				"file": "data/vr_template/sounds/switch.oga.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988283"
+			},
+			{
+				"file": "data/vr_test.world",
+				"tags": [
+					"project_data"
+				],
+				"hash": "157001698837522"
+			},
+			{
+				"file": "data/vr_test.world.meta",
+				"tags": [
+					"project_data"
+				],
+				"hash": "1570016988263"
+			},
+			{
+				"file": "launch_debug.bat",
+				"tags": [
+					"launcher_console"
+				],
+				"hash": "1570016989416"
+			},
+			{
+				"file": "launch_editor.bat",
+				"tags": [
+					"launcher_console"
+				],
+				"hash": "1570016989474"
+			},
+			{
+				"file": "launch_release.bat",
+				"tags": [
+					"launcher_console"
+				],
+				"hash": "1570016989413"
+			},
+			{
+				"file": "source/",
+				"tags": [
+					"feature_component_system",
+					"project_sources"
+				],
+				"hash": ""
+			},
+			{
+				"file": "source/AppEditorLogic.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169882064"
+			},
+			{
+				"file": "source/AppEditorLogic.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169881061"
+			},
+			{
+				"file": "source/AppSystemLogic.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "1570016988337"
+			},
+			{
+				"file": "source/AppSystemLogic.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "1570016988323"
+			},
+			{
+				"file": "source/AppWorldLogic.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169882843"
+			},
+			{
+				"file": "source/AppWorldLogic.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169881132"
+			},
+			{
+				"file": "source/ComponentSystem/",
+				"tags": [
+					"feature_component_system"
+				],
+				"hash": ""
+			},
+			{
+				"file": "source/ComponentSystem/ComponentSystem.cpp",
+				"tags": [
+					"feature_component_system"
+				],
+				"hash": "157001698832974"
+			},
+			{
+				"file": "source/ComponentSystem/ComponentSystem.h",
+				"tags": [
+					"feature_component_system"
+				],
+				"hash": "157001698840388"
+			},
+			{
+				"file": "source/Framework/",
+				"tags": [
+					"project_sources"
+				],
+				"hash": ""
+			},
+			{
+				"file": "source/Framework/Components/",
+				"tags": [
+					"project_sources"
+				],
+				"hash": ""
+			},
+			{
+				"file": "source/Framework/Components/Objects/",
+				"tags": [
+					"project_sources"
+				],
+				"hash": ""
+			},
+			{
+				"file": "source/Framework/Components/Objects/ObjHandle.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169886347"
+			},
+			{
+				"file": "source/Framework/Components/Objects/ObjHandle.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169881806"
+			},
+			{
+				"file": "source/Framework/Components/Objects/ObjMovable.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169889331"
+			},
+			{
+				"file": "source/Framework/Components/Objects/ObjMovable.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169883331"
+			},
+			{
+				"file": "source/Framework/Components/Objects/ObjSwitch.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169882798"
+			},
+			{
+				"file": "source/Framework/Components/Objects/ObjSwitch.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169881417"
+			},
+			{
+				"file": "source/Framework/Components/Players/",
+				"tags": [
+					"project_sources"
+				],
+				"hash": ""
+			},
+			{
+				"file": "source/Framework/Components/Players/AppOculusProxy.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169884131"
+			},
+			{
+				"file": "source/Framework/Components/Players/AppOculusProxy.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169882988"
+			},
+			{
+				"file": "source/Framework/Components/Players/AppViveProxy.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169884986"
+			},
+			{
+				"file": "source/Framework/Components/Players/AppViveProxy.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169882423"
+			},
+			{
+				"file": "source/Framework/Components/Players/VRPlayer.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169882924"
+			},
+			{
+				"file": "source/Framework/Components/Players/VRPlayer.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169885209"
+			},
+			{
+				"file": "source/Framework/Components/Players/VRPlayerOculus.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "157001698813051"
+			},
+			{
+				"file": "source/Framework/Components/Players/VRPlayerOculus.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169882173"
+			},
+			{
+				"file": "source/Framework/Components/Players/VRPlayerPC.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "157001698815074"
+			},
+			{
+				"file": "source/Framework/Components/Players/VRPlayerPC.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169883990"
+			},
+			{
+				"file": "source/Framework/Components/Players/VRPlayerVR.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "157001698921012"
+			},
+			{
+				"file": "source/Framework/Components/Players/VRPlayerVR.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169896090"
+			},
+			{
+				"file": "source/Framework/Components/Players/VRPlayerVive.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169898856"
+			},
+			{
+				"file": "source/Framework/Components/Players/VRPlayerVive.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169891678"
+			},
+			{
+				"file": "source/Framework/Components/VRInteractable.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "1570016988528"
+			},
+			{
+				"file": "source/Framework/Components/VRPlayerSpawner.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169884508"
+			},
+			{
+				"file": "source/Framework/Components/VRPlayerSpawner.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169881919"
+			},
+			{
+				"file": "source/Framework/SoundManager.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "157001698812829"
+			},
+			{
+				"file": "source/Framework/SoundManager.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169883136"
+			},
+			{
+				"file": "source/Framework/Triggers.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169885787"
+			},
+			{
+				"file": "source/Framework/Triggers.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "1570016988970"
+			},
+			{
+				"file": "source/Framework/Utils.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "157001698819002"
+			},
+			{
+				"file": "source/Framework/Utils.h",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169888405"
+			},
+			{
+				"file": "source/main.cpp",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "15700169891303"
+			},
+			{
+				"file": "source/vr_test.vcxproj",
+				"tags": [
+					"project_sources"
+				],
+				"hash": "157001698910585"
+			}
+		]
+	},
+	"sdk": {
+		"key": "engineeringbin2.7.3.1windows",
+		"internal_id": "tier2_bin_windows",
+		"products": [
+			"tier2_bin_windows"
+		],
+		"edition": "engineering",
+		"version": "2.7.3.1",
+		"internal_version": "42",
+		"base_version": "",
+		"timestamp": "201902121700",
+		"type": "bin",
+		"os": "windows",
+		"path": "C:/Users/kzaharov/Unigine SDK Browser/sdks/engineering_windows_2.7.3.1/",
+		"name": "UNIGINE 2 Engineering",
+		"resource": "sdk",
+		"size": "1158326079",
+		"uncompressed_size": "3813208384",
+		"activation_types": [
+			"1",
+			"2"
+		]
+	}
+}

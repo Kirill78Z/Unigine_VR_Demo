@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>b2784c19a94dc6a4388b61b32eeb3b762697fc5d</guid>
+	<type>world</type>
+	<hash>e6ef6523</hash>
+	<parameters>
+		<parameter type="string" name="script_name"/>
+	</parameters>
+	<runtimes>
+		<runtime id="b2784c19a94dc6a4388b61b32eeb3b762697fc5d" name="vr_test.world" link="0"/>
+	</runtimes>
+</asset>

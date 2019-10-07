@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>32c5165b98f8c7247b4f47b903561b2937e31a79</guid>
+	<type>material</type>
+	<hash>845caa7d</hash>
+	<runtimes>
+		<runtime id="32c5165b98f8c7247b4f47b903561b2937e31a79" name="teleport_point_black_mat" link="0"/>
+	</runtimes>
+</asset>
