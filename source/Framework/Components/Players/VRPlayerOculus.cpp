@@ -275,6 +275,12 @@ Mat4 VRPlayerOculus::getControllerTransform(int controller_num)
 	return Mat4(controller_num == 0 ? oculus.getDevicePose(OCULUS_DEVICE_CONTROLLER_LEFT) : oculus.getDevicePose(OCULUS_DEVICE_CONTROLLER_RIGHT));
 }
 
+Mat4 VRPlayerOculus::gui_near_eyes_pos() {
+	return player->getWorldTransform()
+		* Mat4(oculus.getDevicePose(OCULUS_DEVICE_HMD))
+		* Mat4(translate(0.0f, 0.0f, -2.0f));
+}
+
 int VRPlayerOculus::getControllerButton(int controller_num, int button)
 {
 	if (!controller_valid[controller_num])

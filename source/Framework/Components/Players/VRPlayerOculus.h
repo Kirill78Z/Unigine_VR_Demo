@@ -37,6 +37,8 @@ public:
 	UNIGINE_INLINE Unigine::Math::vec3 getHandyPos() override { return Unigine::Math::vec3(0.007f, -0.018f, 0.018f); }
 	UNIGINE_INLINE Unigine::Math::quat getHandyRot() override { return Unigine::Math::quat(33.0f, 0, 0); }
 
+	Unigine::Math::Mat4 gui_near_eyes_pos() override;
+
 protected:
 	// main loop
 	void init();

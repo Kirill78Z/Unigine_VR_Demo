@@ -1,3 +1,8 @@
+# Unigine
+.thumbnails/
+.runtimes/
+*.cache
+
 # User-specific files
 *.suo
 *.user
@@ -22,6 +27,3 @@ bld/
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 
-# Unigine
-.thumbnails/
-.runtimes/

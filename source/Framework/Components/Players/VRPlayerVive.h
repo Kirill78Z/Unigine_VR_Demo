@@ -33,6 +33,8 @@ public:
 	float getControllerAxis(int controller_num, int button) override;
 	void vibrateController(int controller_num, float amplitude = 1.0f) override;
 
+	Unigine::Math::Mat4 gui_near_eyes_pos() override;
+
 protected:
 	// main loop
 	void init();

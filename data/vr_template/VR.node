@@ -44,7 +44,7 @@
 					<screen_width>640</screen_width>
 					<screen_height>480</screen_height>
 					<surface name="gui" cast_shadow="0" cast_world_shadow="0" collision="0" physics_friction="1" physics_restitution="1" material="45130945fbfdc3e6f898cbb99e9d01e51d3f4bbd"/>
-					<transform>-0.9999994 1.8199339e-006 -1.8199152e-006 0.0 -1.8199189e-006 -0.99999738 -4.0425161e-006 0.0 -1.8199109e-006 -4.0425057e-006 0.99999404 0.0 -8.1956387e-008 -0.17345846 -3.2037497e-007 1.0</transform>
+					<transform>0.999999284744 -5.68435882674e-014 -1.00230577554e-014 0.0 5.7720375788e-014 0.984805047512 0.173647686839 0.0 4.23513949272e-022 -0.173647135496 0.984801888466 0.0 -8.19563869964e-008 0.2 -3.20374969998e-007 1.0</transform>
 				</node>
 			</node>
 			<node type="NodeReference" id="2141071959" name="controller_1">
@@ -60,7 +60,7 @@
 				<transform>0.99999928 0 0 0.0 0 0.99999928 0 0.0 0 0 0.99999952 0.0 0.23667538 -0.63038027 0.049862765 1.0</transform>
 			</node>
 		</node>
-		<node type="NodeDummy" id="1756049254" name="Oculus">
+		<node type="NodeDummy" id="1756049254" enabled="0" name="Oculus">
 			<transform>1 0 0 0.0 0 1 0 0.0 0 0 1 0.0 0 0 0 1.0</transform>
 			<node type="NodeReference" id="238529386" name="oculus_touch_left">
 				<reference>guid://c8f383022b3bfd13b3017498e2d7819d8830167d</reference>

@@ -36,7 +36,6 @@ void VRPlayer::init()
 
 	instance = this;
 
-	//hotpoints_init("vr_hotpoints");
 }
 
 void VRPlayer::render()
@@ -89,6 +88,15 @@ void VRPlayer::shutdown()
 	delete throw_callback;
 
 	instance = nullptr;
+
+	if (gui) 
+	{
+		if (background)
+			gui->removeChild(background->getWidget());
+		gui->removeChild(toggle->getWidget());
+	}
+		
+	window->removeChild(button->getWidget());
 }
 
 void VRPlayer::setPlayerPosition(const Vec3 &pos)

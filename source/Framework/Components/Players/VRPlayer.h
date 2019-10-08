@@ -11,6 +11,7 @@
 
 #include "../../../ComponentSystem/ComponentSystem.h"
 #include "../VRInteractable.h"
+#include <UnigineWidgets.h>
 
 class VRInteractable;
 
@@ -106,8 +107,6 @@ public:
 	virtual float getControllerAxis(int controller_num, int button) = 0;
 	virtual void vibrateController(int controller_num, float amplitude = 1.0f) = 0;
 
-	// gui
-	UNIGINE_INLINE virtual Unigine::GuiPtr getGui() { return Unigine::Gui::get(); }
 
 	// callbacks
 	// called when player holds "use" button when holding some object
@@ -134,7 +133,12 @@ protected:
 	Unigine::NodeDummyPtr head;
 	GRAB_MODE grab_mode = GRAB_MODE::BOUNDBOX;
 
-	
+	// gui
+	Unigine::GuiPtr gui;
+	Unigine::WidgetSpritePtr background;
+	Unigine::WidgetButtonPtr toggle;
+	Unigine::WidgetWindowPtr window;
+	Unigine::WidgetButtonPtr button;
 
 private:
 	// singleton

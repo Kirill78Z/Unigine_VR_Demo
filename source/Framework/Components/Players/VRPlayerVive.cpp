@@ -27,6 +27,8 @@ void VRPlayerVive::init()
 #endif
 	teleport_init();
 	grab_init();
+
+	gui_init();
 }
 
 void VRPlayerVive::update()
@@ -69,11 +71,11 @@ void VRPlayerVive::update()
 	controller_update(0, player_transform, CONTROLLER_DEVICE_0);
 	controller_update(1, player_transform, CONTROLLER_DEVICE_1);
 
-	teleport_update(0, controller_valid[0] ? 
+	teleport_update(0, controller_valid[0] ?
 		//vive.getControllerButtonPressed(CONTROLLER_DEVICE_0, /*BUTTON_DPAD_UP*/BUTTON_STEAMVR_TOUCHPAD) 
 		vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_UP)
 		: 0, head_offset);
-	teleport_update(1, controller_valid[1] ? 
+	teleport_update(1, controller_valid[1] ?
 		//vive.getControllerButtonPressed(CONTROLLER_DEVICE_1, /*BUTTON_DPAD_UP*/BUTTON_STEAMVR_TOUCHPAD) 
 		vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_UP)
 		: 0, head_offset);
@@ -95,6 +97,7 @@ void VRPlayerVive::update()
 		push_hand_linear_velocity(1, rot * vive.getDeviceVelocity(CONTROLLER_DEVICE_1) * hand_force_multiplier);
 		push_hand_angular_velocity(1, rot * vive.getDeviceAngularVelocity(CONTROLLER_DEVICE_1));
 	}
+
 
 	update_gui();
 
@@ -213,6 +216,21 @@ void VRPlayerVive::vibrateController(int controller_num, float amplitude)
 Mat4 VRPlayerVive::getControllerTransform(int controller_num)
 {
 	return Mat4(controller_num == 0 ? vive.getDevicePose(CONTROLLER_DEVICE_0) : vive.getDevicePose(CONTROLLER_DEVICE_1));
+}
+
+Mat4 VRPlayerVive::gui_near_eyes_pos() {
+	Mat4 flatHeadTransform = Mat4::IDENTITY;
+
+	Mat4 headTransform = Mat4(vive.getDevicePose(HMD_DEVICE_0));
+	flatHeadTransform.setRotateY(headTransform.getRotate().getAngle(vec3::FORWARD));
+
+	dvec3 transl = headTransform.getTranslate();
+	flatHeadTransform.setColumn3(3, transl);
+
+
+	return player->getWorldTransform()
+		* flatHeadTransform
+		* Mat4(translate(0.0f, player_height, -2.0f));
 }
 
 int VRPlayerVive::getControllerButton(int controller_num, int button)

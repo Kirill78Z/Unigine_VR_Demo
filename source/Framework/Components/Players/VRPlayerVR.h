@@ -6,6 +6,8 @@
 #include <UnigineGame.h>
 #include "VRPlayer.h"
 #include "../../Triggers.h"
+#include <UnigineGui.h>
+#include <UnigineWidgets.h>
 
 #define CONTROLLER_COUNT 2
 
@@ -28,7 +30,7 @@ public:
 
 	// player
 	Unigine::PlayerPtr getPlayer() override;
-	
+
 	// hands
 	int getNumHands() override;										// get count of hands
 	Unigine::NodePtr getHandNode(int num) override;					// get hand's node
@@ -46,7 +48,7 @@ public:
 	int getControllerButtonUp(int controller_num, int button) override;
 
 	// gui
-	Unigine::GuiPtr getGui() override;
+	virtual Unigine::Math::Mat4 gui_near_eyes_pos() = 0;
 
 protected:
 	// methods
@@ -59,7 +61,7 @@ protected:
 	void land_player_to(const Unigine::Math::mat4 &hmd_transform, const Unigine::Math::Vec3 &position, const Unigine::Math::vec3 &direction); // teleport player to position, head to direction, foot to ground
 	void move_update(const Unigine::Math::Mat4 &world_head_transform);
 	void collisions_update(const Unigine::Math::Mat4 &head_transform, const Unigine::Math::Vec3 &offset);
-	
+
 	void controllers_init();
 	void find_obj_in_children(const Unigine::NodePtr &node, Unigine::Vector<Unigine::ObjectPtr> *obj);
 	void controller_update(
@@ -67,7 +69,7 @@ protected:
 		const Unigine::Math::Mat4 &player_transform,
 		int is_device_connected,
 		const Unigine::Math::mat4 &device_pose);
-	
+
 	void teleport_init();
 	void teleport_update(int num, int button_pressed, const Unigine::Math::Vec3 &offset);
 
@@ -80,7 +82,6 @@ protected:
 	void push_hand_linear_velocity(int num, const Unigine::Math::vec3 &velocity);
 	void push_hand_angular_velocity(int num, const Unigine::Math::vec3 &velocity);
 
-	void update_gui();
 
 	// common
 	Unigine::PlayerDummyPtr player;
@@ -99,7 +100,19 @@ protected:
 	float player_height = 1.7f;
 
 	// gui
+	void gui_init();
 	Unigine::ObjectGuiPtr object_gui;
+	bool gui_near_eyes = false;
+
+	void toggle_clicked();
+	void button_clicked();
+	void window_changed();
+
+
+	void update_gui();
+
+
+
 
 	// moving
 	Unigine::ControlsXPad360Ptr xpad360;
@@ -162,7 +175,6 @@ protected:
 	int hotpoint_button_pressed;
 
 	void hotpoints_init(const char * hotpoints_name);
-	void teleport_to(const Unigine::Math::dvec3 &position, const Unigine::Math::dvec3 &offset);
 	void hotpoints_update(int button_prev, int button_next);
 
 	// bounds
@@ -171,5 +183,8 @@ protected:
 	UNIGINE_BOUND_BOX teleport_bound_box;
 
 	void teleport_bounds_init(const char * teleport_bounds_name);
+
+private:
+	int controller_menu_btn_down;
 
 };
