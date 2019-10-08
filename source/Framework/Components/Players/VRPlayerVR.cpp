@@ -99,7 +99,6 @@ void VRPlayerVR::init_player()
 
 
 	hotpoints_init("vr_hotpoints");
-	teleport_bounds_init("vr_teleport_bounds");
 }
 
 void VRPlayerVR::load_player_height(float default_value)
@@ -298,15 +297,13 @@ void VRPlayerVR::gui_init() {
 #pragma region GUI near eyes
 	ObjectGui::cast(controller[0]->getChild(gui_index))->setEnabled(0);
 
-	object_gui = ObjectGui::create(2, 2);
+	object_gui = ObjectGui::create(4, 2);
+	object_gui->setScreenSize(4000, 2000);
 	object_gui->setBackground(0);
 	object_gui->setMouseMode(ObjectGui::MOUSE_VIRTUAL);
 	object_gui->setEnabled(0);
 
-	object_gui->setMaterial("gui_base", 0);
-	Unigine::MaterialPtr gui_mat = object_gui->getMaterialInherit(0);
-	gui_mat->setDepthTest(0);
-
+	object_gui->setDepthTest(0);
 
 	gui_near_eyes = true;
 #pragma endregion
@@ -315,10 +312,10 @@ void VRPlayerVR::gui_init() {
 
 
 
-	// attach current GUI to the VR Player (on the left controller)
+
 	gui = object_gui->getGui();
 
-	// create background (when VR is loaded)
+	// create background
 	if (gui != Gui::get())
 	{
 		background = WidgetSprite::create(gui, "black.dds");
@@ -326,53 +323,50 @@ void VRPlayerVR::gui_init() {
 		gui->addChild(background->getWidget(), Gui::ALIGN_BACKGROUND | Gui::ALIGN_EXPAND);
 	}
 
-	// toggle button
-	toggle = WidgetButton::create(gui, "Press me!");
-	toggle->setToggleable(1);
-	toggle->setFontSize(32);
-	toggle->setPosition(128, 128);
-	gui->addChild(toggle->getWidget(), Gui::ALIGN_OVERLAP);
-	toggle->addCallback(Gui::CLICKED, MakeCallback(this, &VRPlayerVR::toggle_clicked));
 
-	// window
-	window = WidgetWindow::create(gui/*_2*/, "Congratulations! You pressed the button!");
-	window->setFontSize(32);
-	window->addCallback(Gui::CURSOR_MOVE, MakeCallback(this, &VRPlayerVR::window_changed));
 
-	// close button
-	button = WidgetButton::create(gui/*_2*/, "OK");
-	button->setFontSize(32);
-	window->addChild(button->getWidget(), Gui::ALIGN_CENTER);
-	button->addCallback(Gui::CLICKED, MakeCallback(this, &VRPlayerVR::button_clicked));
 
-	window->arrange();
-	window->setSizeable(1);
+	//create main HBox
+	hBox = Unigine::WidgetHBox::create(gui);
+	gui->addChild(hBox->getWidget(), Gui::ALIGN_OVERLAP | Gui::ALIGN_EXPAND);
+
+	//create scroll box
+	scroll = Unigine::WidgetVBox::create(gui);
+	scroll->setWidth(1000);
+	scroll->setHeight(gui->getHeight() - 30);
+
+	hBox->addChild(scroll->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
+
+	//create toggles
+	for (int i = 0; i < hotpoints.size(); i++) {
+		create_hotpoint_toggle(hotpoints[i]);
+	}
+
+	//create image
+	image = WidgetSprite::create(gui, "Images/default.jpg");
+	image->setHeight(gui->getHeight() - 30);
+	image->setWidth(gui->getWidth() - scroll->getWidth() - 30);
+	hBox->addChild(image->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
+
+	//set current hotpoint 0
+	if (hotpoints.size() > 0)
+		setCurrHotpoint(0);
 
 }
 
 
 
-void VRPlayerVR::toggle_clicked()
-{
-	if (toggle->isToggled())
-		gui->addChild(window->getWidget(), Gui::ALIGN_OVERLAP | Gui::ALIGN_CENTER);
-	else
-		gui->removeChild(window->getWidget());
-}
 
-void VRPlayerVR::button_clicked()
-{
-	toggle->setToggled(0);
-}
+void VRPlayerVR::create_hotpoint_toggle(HotPoint* hotpt) {
+	hotpt->toggle = WidgetButton::create(gui, hotpt->name);
+	//hotpt->toggle->setToggleable(1);
+	hotpt->toggle->setFontSize(96);
+	hotpt->toggle->setWidth(1000);
+	scroll->addChild(hotpt->toggle->getWidget(), Gui::ALIGN_LEFT);
 
-void VRPlayerVR::window_changed()
-{
-	// do not let the window go beyond the gui plane
-	int x = Math::clamp(window->getPositionX(), 0, window->getGui()->getWidth() - window->getWidth());
-	int y = Math::clamp(window->getPositionY(), 0, window->getGui()->getHeight() - window->getHeight());
-	window->setPosition(x, y);
+	//callback
+	hotpt->toggle->addCallback(Gui::CLICKED, MakeCallback(this, &VRPlayerVR::setCurrHotpoint, hotpt->_index));
 }
-
 
 
 
@@ -396,12 +390,12 @@ void VRPlayerVR::update_gui()
 
 			teleport_ray->setEnabled(pressed);
 		}
-		else 
+		else
 		{
 			controller_menu_btn_down = menu_btn_down;
 			// put GUI around player
 			if (gui_near_eyes)
-			object_gui->setWorldTransform(gui_near_eyes_pos());
+				object_gui->setWorldTransform(gui_near_eyes_pos()* Mat4(translate(0.0f, player_height, -2.0f)));
 		}
 	}
 
@@ -413,7 +407,7 @@ void VRPlayerVR::update_gui()
 	// update visuals (we are using teleport ray)
 
 
-	int c =  1;
+	int c = 1;
 	if (gui_near_eyes) c = controller_menu_btn_down;
 
 	Vec3 p0 = controller[c]->getWorldPosition();
@@ -540,9 +534,10 @@ void VRPlayerVR::teleport_update(int num, int button_pressed, const Vec3 &offset
 		ObjectPtr hitObj = World::get()->getIntersection(pos1, pos2, teleportation_mask, intersection);
 		if (hitObj)
 		{
-			bool inside_bound = teleport_bound_box.isValid()
-				&& teleport_bound_box.inside(intersection->getPoint(),
-					UNIGINE_EPSILON);
+			bool inside_bound = true;
+
+			if (teleport_bound_box.isValid())
+				inside_bound = teleport_bound_box.inside(intersection->getPoint(), UNIGINE_EPSILON);
 
 			// show marker
 			if (button_pressed == 1)
@@ -922,48 +917,102 @@ void VRPlayerVR::push_hand_angular_velocity(int num, const vec3 &velocity)
 //hot points
 void VRPlayerVR::hotpoints_init(const char * hotpoints_name)
 {
-	hotpoints = Editor::get()->getNodeByName(hotpoints_name);
-	if (hotpoints)
+
+	Unigine::NodePtr hotpointsNode = Editor::get()->getNodeByName(hotpoints_name);
+	if (hotpointsNode)
 	{
-		cur_hotpoint = 0;
-		landPlayerTo(hotpoints->getChild(cur_hotpoint)->getWorldPosition(), hotpoints->getChild(cur_hotpoint)->getWorldDirection());
-		hotpoint_button_pressed = 0;
+		int nc = hotpointsNode->getNumChildren();
+		for (int c = 0; c < nc; c++) {
+			Unigine::NodePtr hpNode = hotpointsNode->getChild(c);
+			HotPoint* hp = new HotPoint(hpNode, c);
+			hotpoints.append(hp);
+
+			//find teleport bound
+			//Unigine::String name();
+			Unigine::StringArray<> strArr = Unigine::String::split(hpNode->getName(), "_");
+			Unigine::String num = strArr[strArr.size() - 1];
+			for (int i = 0; i < num.size(); i++) {
+				if (!Unigine::String::isdigit(num[i])) continue;
+			}
+
+			Unigine::String searchStr("teleport_bound");
+			searchStr.append("_");
+			searchStr.append(num);
+
+			Unigine::NodePtr teleportBoundNode = Editor::get()->getNodeByName(searchStr);
+			if (!teleportBoundNode) continue;
+
+			hp->teleport_bound = teleportBoundNode;
+		}
+
+		//set current hotpoint 0
+		setCurrHotpoint(0);
 	}
+
+}
+
+void VRPlayerVR::setCurrHotpoint(int index)
+{
+	cur_hotpoint = index;
+
+	HotPoint* hotpoint = hotpoints[cur_hotpoint];
+	Unigine::NodePtr hpNode = hotpoint->hotpoint;
+
+	Mat4 guiLocalTransf = Mat4(translate(0.0f, player_height, -2.0f));
+	if (object_gui) {
+		Mat4 baseGuiCoords = Unigine::Math::inverse(gui_near_eyes_pos());
+		Mat4 guiWorldTransf = object_gui->getWorldTransform();
+
+		guiLocalTransf = baseGuiCoords * guiWorldTransf;
+	}
+
+
+	landPlayerTo(hpNode->getWorldPosition(), hpNode->getWorldDirection());
+	hotpoint_button_pressed = 0;
+
+	if (hotpoint->teleport_bound) {
+		teleport_bound_box = hotpoint->teleport_bound->getWorldBoundBox();
+	}
+	else
+	{
+		teleport_bound_box = Unigine::WorldBoundBox(dvec3::ZERO, dvec3(-1, -1, -1));
+	}
+
+	if (gui_near_eyes)
+		object_gui->setWorldTransform(gui_near_eyes_pos() * guiLocalTransf);
+
+	//toggles
+	for (int h = 0; h < hotpoints.size(); h++) {
+		if (hotpoints[h]->toggle && hotpoints[h]->toggle->isFocused() && h != cur_hotpoint)
+			hotpoints[h]->toggle->removeFocus();
+	}
+	if (hotpoint->toggle && !hotpoint->toggle->isFocused())
+		hotpoint->toggle->setFocus();
+
+	//image
+	if (image)
+		image->setImage(hotpoint->image);
 }
 
 
-void VRPlayerVR::teleport_bounds_init(const char * teleport_bounds_name) {
-	teleport_bounds = Editor::get()->getNodeByName(teleport_bounds_name);
-	if (teleport_bounds)
-	{
-		cur_teleport_bound = 0;
-		teleport_bound_box = teleport_bounds
-			->getChild(cur_teleport_bound)->getWorldBoundBox();
-	}
-}
+
 
 
 
 void VRPlayerVR::hotpoints_update(int button_prev, int button_next)
 {
-	if (!hotpoints)
+	if (hotpoints.size() == 0)
 		return;
 
 	if (!hotpoint_button_pressed && (button_prev || button_next))
 	{
 		cur_hotpoint += button_next - button_prev;
 		if (cur_hotpoint < 0)
-			cur_hotpoint = hotpoints->getNumChildren() - 1;
-		else if (cur_hotpoint >= hotpoints->getNumChildren())
+			cur_hotpoint = hotpoints.size() - 1;
+		else if (cur_hotpoint >= hotpoints.size())
 			cur_hotpoint = 0;
 
-		landPlayerTo(hotpoints->getChild(cur_hotpoint)->getWorldPosition(), hotpoints->getChild(cur_hotpoint)->getWorldDirection());
-
-		cur_teleport_bound = cur_hotpoint;
-		teleport_bound_box = teleport_bounds
-			->getChild(cur_teleport_bound)->getWorldBoundBox();
-
-		object_gui->setWorldTransform(gui_near_eyes_pos());
+		setCurrHotpoint(cur_hotpoint);
 	}
 	hotpoint_button_pressed = clamp(button_prev + button_next, 0, 1);
 }

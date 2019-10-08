@@ -144,6 +144,11 @@
 			<size>30 30 15</size>
 			<transform>0.999999821186 0 0 0.0 0 0.999999940395 0 0.0 0 0 1 0.0 -24 0 0 1.0</transform>
 		</node>
+		<node type="FieldSpacer" id="1392394172" name="teleport_bound_4">
+			<ellipse>0</ellipse>
+			<size>10 10 15</size>
+			<transform>0.999999821181 0 0 0.0 0 0.999999940391 0 0.0 0 0 0.999999999995 0.0 -14.9212384423 -14.6842375822 0 1.0</transform>
+		</node>
 	</node>
 	<node type="NodeDummy" id="1531025213" name="vr_hotpoints">
 		<transform>1.0000000604 0 0 0.0 0 1.0000000604 0 0.0 0 0 1.0000000004 0.0 0 0 0 1.0</transform>
@@ -152,13 +157,25 @@
 			<zfar>200000</zfar>
 			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
 			<is_oblique_frustum>0</is_oblique_frustum>
-			<transform>0.999999701977 0 0 0.0 0 1.78813817087e-007 0.999999284745 0.0 0 -0.999999165535 1.78813802876e-007 0.0 0 -8 1.28444118569 1.0</transform>
+			<properties>
+				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="7ca71be75f98681a7b3098b144063a5c5efc920b">
+					<parameter name="Name">Точка 1</parameter>
+					<parameter name="Image">guid://37aed44773d304fa2e8bd01120184a3c4b1aa06b</parameter>
+				</property>
+			</properties>
+			<transform>0.999999701972 0 0 0.0 0 -0.444512036114 0.895771914464 0.0 0 -0.89577185486 -0.444511976509 0.0 0 -8 1.28444118569 1.0</transform>
 		</node>
 		<node type="PlayerDummy" id="109762732" name="vr_hotpoint_1">
 			<fov>50</fov>
 			<zfar>200000</zfar>
 			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
 			<is_oblique_frustum>0</is_oblique_frustum>
+			<properties>
+				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="263247d2391c450924410ad40cc0f82300847f26">
+					<parameter name="Name">Точка 2</parameter>
+					<parameter name="Image">guid://07cde814564fb4637e058e664169d28d4877d288</parameter>
+				</property>
+			</properties>
 			<transform>-0.999999523163 1.74845524725e-007 1.04109676613e-006 0.0 1.04109653876e-006 5.96046092483e-008 0.999999344349 0.0 1.74845425249e-007 0.999999046326 5.96045914847e-008 0.0 0 8 1.28443596895 1.0</transform>
 		</node>
 		<node type="PlayerDummy" id="148690845" name="vr_hotpoint_2">
@@ -166,7 +183,36 @@
 			<zfar>200000</zfar>
 			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
 			<is_oblique_frustum>0</is_oblique_frustum>
+			<properties>
+				<property/>
+			</properties>
 			<transform>-0.432702805561 -0.901535981985 1.0728828741e-006 0.0 1.3411035642e-006 4.76836817143e-007 0.999999284745 0.0 -0.901535683962 0.43270253734 8.94068758584e-007 0.0 -24 0 1.28444662783 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="734937621" name="vr_hotpoint_3">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<properties>
+				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="63afc4fc11745c2b7c43c38e24a87595336349f0">
+					<parameter name="Name">Точка 4</parameter>
+					<parameter name="Image">guid://06f831d95916f164798b0d732015743643195e1d</parameter>
+				</property>
+			</properties>
+			<transform>0.998998761113 -0.0447255511416 -1.3019882411e-006 0.0 1.34669161366e-006 9.60367572528e-007 0.999999344344 0.0 -0.044725543691 -0.998998641903 1.01968106885e-006 0.0 -20.0282022225 -40.6588514651 1.28447461229 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="1811213659" name="vr_hotpoint_4">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<properties>
+				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="1b9394f67c4d87dd3515e79846aa46170340ac8a">
+					<parameter name="Name">Точка 5 ДЛИННОЕ НАЗВАНИЕЕЕЕЕЕЕЕ</parameter>
+					<parameter name="Image">guid://67aff1c1368a202c2e901d9b69af363e35ff6885</parameter>
+				</property>
+			</properties>
+			<transform>0.588822757529 -0.808261621487 1.19209225601e-007 0.0 1.31130135372e-006 9.83476015288e-007 0.999999463554 0.0 -0.808261621487 -0.588822876738 1.59442343327e-006 0.0 -16.0302317493 -15.3165192834 1.28444489034 1.0</transform>
 		</node>
 	</node>
 </nodes>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>0265cadd3a034e982cc281171cfdab8a0823a561</guid>
+	<type>texture</type>
+	<hash>78df3fb1</hash>
+	<parameters>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="image_format">RGB8</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="string" name="width">auto</parameter>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="preset_name">custom</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="0265cadd3a034e982cc281171cfdab8a0823a561" name="anshu-a-3UFS5Oe_arw-unsplash.jpg" link="0"/>
+		<runtime id="07cde814564fb4637e058e664169d28d4877d288" name="anshu-a-3UFS5Oe_arw-unsplash.dds" link="1"/>
+	</runtimes>
+</asset>

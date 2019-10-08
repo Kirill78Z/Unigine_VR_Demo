@@ -101,12 +101,24 @@ void VRPlayerVive::update()
 
 	update_gui();
 
-
+	if(!object_gui->isEnabled())
 	hotpoints_update(
 		(controller_valid[0] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_LEFT)) ||
 		(controller_valid[1] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_LEFT)),
 		(controller_valid[0] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_RIGHT)) ||
 		(controller_valid[1] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_RIGHT)));
+	else
+		hotpoints_update(
+			(controller_valid[0] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_LEFT)) ||
+			(controller_valid[1] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_LEFT)) ||
+			(controller_valid[0] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_UP)) ||
+			(controller_valid[1] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_UP))
+			,
+			(controller_valid[0] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_RIGHT)) ||
+			(controller_valid[1] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_RIGHT))||
+			(controller_valid[0] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_DOWN)) ||
+			(controller_valid[1] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_DOWN))
+		);
 }
 
 void VRPlayerVive::setLock(int lock)
@@ -229,9 +241,9 @@ Mat4 VRPlayerVive::gui_near_eyes_pos() {
 
 
 	return player->getWorldTransform()
-		* flatHeadTransform
-		* Mat4(translate(0.0f, player_height, -2.0f));
+		* flatHeadTransform;
 }
+
 
 int VRPlayerVive::getControllerButton(int controller_num, int button)
 {

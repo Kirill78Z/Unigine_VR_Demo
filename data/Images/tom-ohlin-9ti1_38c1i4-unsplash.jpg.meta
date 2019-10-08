@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>337b35f135b7b69c7ec1614b3957c62e795857b5</guid>
+	<type>texture</type>
+	<hash>3316405</hash>
+	<parameters>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="image_format">RGB8</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="string" name="width">auto</parameter>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="preset_name">custom</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="337b35f135b7b69c7ec1614b3957c62e795857b5" name="tom-ohlin-9ti1_38c1i4-unsplash.jpg" link="0"/>
+		<runtime id="67aff1c1368a202c2e901d9b69af363e35ff6885" name="tom-ohlin-9ti1_38c1i4-unsplash.dds" link="1"/>
+	</runtimes>
+</asset>

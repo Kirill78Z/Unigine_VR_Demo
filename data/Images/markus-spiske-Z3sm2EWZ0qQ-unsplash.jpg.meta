@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>1432adc66c94aa6d208808e8758bd7276f116a5a</guid>
+	<type>texture</type>
+	<hash>d965cbb2</hash>
+	<parameters>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="image_format">RGB8</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="string" name="width">auto</parameter>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="preset_name">custom</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="1432adc66c94aa6d208808e8758bd7276f116a5a" name="markus-spiske-Z3sm2EWZ0qQ-unsplash.jpg" link="0"/>
+		<runtime id="5326bace21f283d5761383305161bccf3fd703e2" name="markus-spiske-Z3sm2EWZ0qQ-unsplash.dds" link="1"/>
+	</runtimes>
+</asset>

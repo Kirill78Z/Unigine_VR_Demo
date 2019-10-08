@@ -104,10 +104,10 @@ protected:
 	Unigine::ObjectGuiPtr object_gui;
 	bool gui_near_eyes = false;
 
-	void toggle_clicked();
-	void button_clicked();
-	void window_changed();
 
+	
+
+	void create_hotpoint_toggle(HotPoint * hotpt);
 
 	void update_gui();
 
@@ -170,21 +170,21 @@ protected:
 
 
 	// - hotpoints
-	Unigine::NodePtr hotpoints;
 	int cur_hotpoint;
 	int hotpoint_button_pressed;
 
 	void hotpoints_init(const char * hotpoints_name);
+
 	void hotpoints_update(int button_prev, int button_next);
 
 	// bounds
-	Unigine::NodePtr teleport_bounds;
-	int cur_teleport_bound;
 	UNIGINE_BOUND_BOX teleport_bound_box;
-
-	void teleport_bounds_init(const char * teleport_bounds_name);
 
 private:
 	int controller_menu_btn_down;
 
+	void setCurrHotpoint(int index);
+
 };
+
+

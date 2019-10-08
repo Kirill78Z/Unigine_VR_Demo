@@ -89,14 +89,27 @@ void VRPlayer::shutdown()
 
 	instance = nullptr;
 
-	if (gui) 
+	if (gui)
 	{
+		for (int i = 0; i < hotpoints.size(); i++) {
+			if (hotpoints[i]->toggle)
+				scroll->removeChild(hotpoints[i]->toggle->getWidget());
+		}
+
+		if (scroll)
+			hBox->removeChild(scroll->getWidget());
+
+		if (image)
+			hBox->removeChild(image->getWidget());
+
+		if (hBox)
+			gui->removeChild(hBox->getWidget());
+
 		if (background)
 			gui->removeChild(background->getWidget());
-		gui->removeChild(toggle->getWidget());
+
 	}
-		
-	window->removeChild(button->getWidget());
+
 }
 
 void VRPlayer::setPlayerPosition(const Vec3 &pos)

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="mesh_base_1" guid="7272c9ed00dca2680c80a2a70214bfda58378d71" base_material="mesh_base">
+	<options depth_test="1"/>
+</material>

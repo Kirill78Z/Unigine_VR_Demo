@@ -13,6 +13,55 @@
 #include "../VRInteractable.h"
 #include <UnigineWidgets.h>
 
+
+
+struct HotPoint
+{
+	HotPoint(Unigine::NodePtr hp, int index) {
+		hotpoint = hp;
+		_index = index;
+		name = hotpoint->getName();
+		image = Unigine::Image::create("Images/default.jpg");
+
+		int n = hotpoint->findProperty("hotpoint");
+		if (n != -1)
+		{
+			Unigine::PropertyPtr prop = hotpoint->getProperty(n);
+			n = prop->findParameter("Name");
+			if (n != -1)
+				name = prop->getParameterString(n);
+
+			n = prop->findParameter("Image");
+			if (n != -1)
+				image = Unigine::Image::create(prop->getParameterFile(n));
+		}
+
+		if (name.size() > 28) {
+			//Unigine::String::substr()
+			name = name.substr(0, 25);
+			name.append("...");
+		}
+
+
+
+	}
+
+	int _index;
+
+	Unigine::String name;
+
+	Unigine::ImagePtr image;
+
+	Unigine::NodePtr hotpoint;
+
+	Unigine::NodePtr teleport_bound;
+
+	Unigine::WidgetButtonPtr toggle;
+
+
+};
+
+
 class VRInteractable;
 
 class VRPlayer : public ComponentBase
@@ -68,7 +117,7 @@ public:
 	///////////////////////////////////////
 	// methods
 	///////////////////////////////////////
-	
+
 	// sets intersection mask for teleportation (where player can be)
 	virtual void setTeleportationMask(int mask) {}
 
@@ -86,7 +135,7 @@ public:
 
 	// head
 	UNIGINE_INLINE virtual Unigine::NodePtr getHead() { return head->getNode(); }
-	
+
 	// hands
 	virtual void setGrabMode(GRAB_MODE mode) { grab_mode = mode; } // grab via BoundBox-BoundBox or Line-Surface intersection?
 	virtual int getNumHands() { return 0; }						// get count of hands
@@ -136,9 +185,13 @@ protected:
 	// gui
 	Unigine::GuiPtr gui;
 	Unigine::WidgetSpritePtr background;
-	Unigine::WidgetButtonPtr toggle;
-	Unigine::WidgetWindowPtr window;
-	Unigine::WidgetButtonPtr button;
+	Unigine::WidgetHBoxPtr hBox;
+	Unigine::WidgetVBoxPtr scroll;
+
+	Unigine::WidgetSpritePtr image;
+
+	Unigine::Vector<HotPoint*> hotpoints;
+
 
 private:
 	// singleton
@@ -151,7 +204,7 @@ private:
 	Unigine::CallbackBase* throw_callback;
 
 
-	
-	
-	
+
+
+
 };

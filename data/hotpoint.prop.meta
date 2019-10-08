@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>4da32fe66044060d51917008443cd3c71e55fe7a</guid>
+	<type>property</type>
+	<hash>01b8dce5</hash>
+	<parameters>
+		<parameter type="bool" name="unchanged">1</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="4da32fe66044060d51917008443cd3c71e55fe7a" name="hotpoint" link="0"/>
+	</runtimes>
+</asset>
