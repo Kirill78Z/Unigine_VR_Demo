@@ -2,4 +2,5 @@
 <property version="2.7.3.0" name="hotpoint" guid="4da32fe66044060d51917008443cd3c71e55fe7a" parent="1c613bbca0afd78c1ef165fc8e419352c5903d9e">
 	<parameter name="Name" type="string"/>
 	<parameter name="Image" type="file"/>
+	<parameter name="Teleport bound" type="node"/>
 </property>

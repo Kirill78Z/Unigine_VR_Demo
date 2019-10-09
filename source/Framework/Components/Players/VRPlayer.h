@@ -34,13 +34,21 @@ struct HotPoint
 				name = prop->getParameterString(n);
 
 			n = prop->findParameter("Image");
+			if (n != -1) {
+				Unigine::String fileName = prop->getParameterFile(n);
+				if (Unigine::FileSystem::get()->isFileExist(fileName))
+					image = Unigine::Image::create(fileName);
+			}
+
+
+			n = prop->findParameter("Teleport bound");
 			if (n != -1)
-				image = Unigine::Image::create(prop->getParameterFile(n));
+				teleport_bound = prop->getParameterNode(n);
 		}
 
-		if (name.size() > 28) {
+		if (name.size() > 43) {
 			//Unigine::String::substr()
-			name = name.substr(0, 25);
+			name = name.substr(0, 40);
 			name.append("...");
 		}
 
@@ -193,7 +201,7 @@ protected:
 	Unigine::WidgetHBoxPtr hBox;
 	Unigine::WidgetGridBoxPtr menuVBox;
 	Unigine::WidgetVBoxPtr pageVBox;
-	const int btnsOnPageMaxCount = 17;
+	const int btnsOnPageMaxCount = 12;
 	Unigine::WidgetHBoxPtr controlsHBox;
 	Unigine::WidgetButtonPtr nextPageBtn;
 	Unigine::WidgetButtonPtr prevPageBtn;

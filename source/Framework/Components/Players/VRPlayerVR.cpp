@@ -326,20 +326,20 @@ void VRPlayerVR::gui_init() {
 
 	//create menu vbox
 	menuVBox = Unigine::WidgetGridBox::create(gui, 1);
-	menuVBox->setWidth(1000);
+	menuVBox->setWidth(1500);
 	menuVBox->setHeight(gui->getHeight() - 30);
 
 	hBox->addChild(menuVBox->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
 
 	//create page vbox
 	pageVBox = Unigine::WidgetVBox::create(gui);
-	pageVBox->setWidth(1000);
+	pageVBox->setWidth(1500);
 	pageVBox->setHeight(gui->getHeight() - 100);
 	menuVBox->addChild(pageVBox->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
 
 	//create controls hbox with buttons
 	controlsHBox = Unigine::WidgetHBox::create(gui, 0, 0);
-	controlsHBox->setWidth(1000);
+	controlsHBox->setWidth(1500);
 	controlsHBox->setHeight(100);
 	//controlsHBox->setColor(vec4(1, 0, 0, 1));
 
@@ -364,7 +364,7 @@ void VRPlayerVR::gui_init() {
 	//create image
 	image = WidgetSprite::create(gui, "Images/default.jpg");
 	image->setHeight(gui->getHeight());
-	image->setWidth(gui->getWidth() - menuVBox->getWidth() - 30);
+	image->setWidth(gui->getWidth() - menuVBox->getWidth());
 	hBox->addChild(image->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
 
 	//set current hotpoint 0
@@ -388,7 +388,8 @@ void VRPlayerVR::create_hotpoint_toggle(HotPoint* hotpt) {
 	hotpt->toggle = WidgetButton::create(gui, hotpt->name);
 	//hotpt->toggle->setToggleable(1);
 	hotpt->toggle->setFontSize(96);
-	hotpt->toggle->setWidth(1000);
+	hotpt->toggle->setWidth(1500);
+	hotpt->toggle->setHeight(150);
 	//pageVBox->addChild(hotpt->toggle->getWidget(), Gui::ALIGN_LEFT);
 
 	//callback
@@ -1037,8 +1038,7 @@ void VRPlayerVR::hotpoints_init(const char * hotpoints_name)
 			hotpoints.append(hp);
 
 			//find teleport bound
-			//Unigine::String name();
-			Unigine::StringArray<> strArr = Unigine::String::split(hpNode->getName(), "_");
+			/*Unigine::StringArray<> strArr = Unigine::String::split(hpNode->getName(), "_");
 			Unigine::String num = strArr[strArr.size() - 1];
 			for (int i = 0; i < num.size(); i++) {
 				if (!Unigine::String::isdigit(num[i])) continue;
@@ -1051,7 +1051,7 @@ void VRPlayerVR::hotpoints_init(const char * hotpoints_name)
 			Unigine::NodePtr teleportBoundNode = Editor::get()->getNodeByName(searchStr);
 			if (!teleportBoundNode) continue;
 
-			hp->teleport_bound = teleportBoundNode;
+			hp->teleport_bound = teleportBoundNode;*/
 		}
 
 		//set current hotpoint 0
