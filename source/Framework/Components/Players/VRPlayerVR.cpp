@@ -289,7 +289,7 @@ void VRPlayerVR::gui_init() {
 
 
 	// GUI near eyes
-	ObjectGui::cast(controller[0]->getChild(gui_index))->setEnabled(0);
+	//ObjectGui::cast(controller[0]->getChild(gui_index))->setEnabled(0);
 
 	object_gui = ObjectGui::create(4, 2);
 	object_gui->setScreenSize(4000, 2000);

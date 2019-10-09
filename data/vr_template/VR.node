@@ -30,8 +30,8 @@
 			<transform>1 0 0 0.0 0 1 0 0.0 0 0 1 0.0 0 0 0 1.0</transform>
 			<node type="NodeReference" id="704167994" name="controller_0">
 				<reference>guid://a9f22a948b7fbb481cdb370c9d2909067db3c076</reference>
-				<transform>0.99999845 0 0 0.0 0 0.99999726 0 0.0 0 0 0.99999791 0.0 0.082000002 -0.6833334 0.083881341 1.0</transform>
-				<node type="ObjectGui" id="523201013" collider="0" name="vr_gui">
+				<transform>0.999998452651 -3.02859991953e-016 0 0.0 3.02893502694e-016 0.999997260557 0 0.0 0 0 0.999997914233 0.0 0.0848612818488 -0.689594143799 0.083881341 1.0</transform>
+				<node type="ObjectGui" id="523201013" enabled="0" collider="0" name="menu_btn_caption">
 					<gui_name>core/gui/</gui_name>
 					<billboard>0</billboard>
 					<background>1</background>
@@ -39,12 +39,87 @@
 					<mouse_show>1</mouse_show>
 					<control_distance>2</control_distance>
 					<polygon_offset>1</polygon_offset>
-					<physical_width>0.400000006</physical_width>
-					<physical_height>0.300000012</physical_height>
+					<physical_width>0.0500000007</physical_width>
+					<physical_height>0.00999999978</physical_height>
 					<screen_width>640</screen_width>
 					<screen_height>480</screen_height>
 					<surface name="gui" cast_shadow="0" cast_world_shadow="0" collision="0" physics_friction="1" physics_restitution="1" material="45130945fbfdc3e6f898cbb99e9d01e51d3f4bbd"/>
-					<transform>0.999999284744 -5.68435882674e-014 -1.00230577554e-014 0.0 5.7720375788e-014 0.984805047512 0.173647686839 0.0 4.23513949272e-022 -0.173647135496 0.984801888466 0.0 -8.19563869964e-008 0.2 -3.20374969998e-007 1.0</transform>
+					<transform>0.999999284743 -2.84218178506e-014 0 0.0 2.84218415675e-014 0.999997258178 0 0.0 0 0 0.999994039523 0.0 0.0292856449722 -0.0181922703151 0.00696321069119 1.0</transform>
+				</node>
+				<node type="ObjectGui" id="971195056" enabled="0" collider="0" name="up_caption">
+					<gui_name>core/gui/</gui_name>
+					<billboard>0</billboard>
+					<background>1</background>
+					<depth_test>0</depth_test>
+					<mouse_show>1</mouse_show>
+					<control_distance>2</control_distance>
+					<polygon_offset>1</polygon_offset>
+					<physical_width>0.00999999978</physical_width>
+					<physical_height>0.00999999978</physical_height>
+					<screen_width>640</screen_width>
+					<screen_height>480</screen_height>
+					<surface name="gui" cast_shadow="0" cast_world_shadow="0" collision="0" physics_friction="1" physics_restitution="1" material="45130945fbfdc3e6f898cbb99e9d01e51d3f4bbd"/>
+					<transform>0.999999284743 -2.84218178506e-014 0 0.0 2.84218415675e-014 0.999997258178 0 0.0 0 0 0.999994039523 0.0 0.000979033838242 -0.0345686713988 0.00736498330352 1.0</transform>
+				</node>
+				<node type="ObjectGui" id="1646925820" enabled="0" collider="0" name="up_caption">
+					<gui_name>core/gui/</gui_name>
+					<billboard>0</billboard>
+					<background>1</background>
+					<depth_test>0</depth_test>
+					<mouse_show>1</mouse_show>
+					<control_distance>2</control_distance>
+					<polygon_offset>1</polygon_offset>
+					<physical_width>0.00999999978</physical_width>
+					<physical_height>0.00999999978</physical_height>
+					<screen_width>640</screen_width>
+					<screen_height>480</screen_height>
+					<surface name="gui" cast_shadow="0" cast_world_shadow="0" collision="0" physics_friction="1" physics_restitution="1" material="45130945fbfdc3e6f898cbb99e9d01e51d3f4bbd"/>
+					<transform>0.999999284743 -2.84218178506e-014 0 0.0 2.84218415675e-014 0.999997258178 0 0.0 0 0 0.999994039523 0.0 0.000979033838242 -0.0345686713988 0.00736498330352 1.0</transform>
+				</node>
+				<node type="ObjectGui" id="2063361099" enabled="0" collider="0" name="down_caption">
+					<gui_name>core/gui/</gui_name>
+					<billboard>0</billboard>
+					<background>1</background>
+					<depth_test>0</depth_test>
+					<mouse_show>1</mouse_show>
+					<control_distance>2</control_distance>
+					<polygon_offset>1</polygon_offset>
+					<physical_width>0.00999999978</physical_width>
+					<physical_height>0.00999999978</physical_height>
+					<screen_width>640</screen_width>
+					<screen_height>480</screen_height>
+					<surface name="gui" cast_shadow="0" cast_world_shadow="0" collision="0" physics_friction="1" physics_restitution="1" material="45130945fbfdc3e6f898cbb99e9d01e51d3f4bbd"/>
+					<transform>0.999999284743 -2.84218178506e-014 0 0.0 2.84218415675e-014 0.999997258178 0 0.0 0 0 0.999994039523 0.0 -5.83159041094e-005 -0.0652953243299 0.00341467103641 1.0</transform>
+				</node>
+				<node type="ObjectGui" id="452319524" enabled="0" collider="0" name="left_caption">
+					<gui_name>core/gui/</gui_name>
+					<billboard>0</billboard>
+					<background>1</background>
+					<depth_test>0</depth_test>
+					<mouse_show>1</mouse_show>
+					<control_distance>2</control_distance>
+					<polygon_offset>1</polygon_offset>
+					<physical_width>0.00999999978</physical_width>
+					<physical_height>0.00999999978</physical_height>
+					<screen_width>640</screen_width>
+					<screen_height>480</screen_height>
+					<surface name="gui" cast_shadow="0" cast_world_shadow="0" collision="0" physics_friction="1" physics_restitution="1" material="45130945fbfdc3e6f898cbb99e9d01e51d3f4bbd"/>
+					<transform>0.999999284743 -2.84218178506e-014 0 0.0 2.84218415675e-014 0.999997258178 0 0.0 0 0 0.999994039523 0.0 -0.0148632955213 -0.0489790478359 0.00585242861633 1.0</transform>
+				</node>
+				<node type="ObjectGui" id="1611745784" enabled="0" collider="0" name="right_caption">
+					<gui_name>core/gui/</gui_name>
+					<billboard>0</billboard>
+					<background>1</background>
+					<depth_test>0</depth_test>
+					<mouse_show>1</mouse_show>
+					<control_distance>2</control_distance>
+					<polygon_offset>1</polygon_offset>
+					<physical_width>0.00999999978</physical_width>
+					<physical_height>0.00999999978</physical_height>
+					<screen_width>640</screen_width>
+					<screen_height>480</screen_height>
+					<surface name="gui" cast_shadow="0" cast_world_shadow="0" collision="0" physics_friction="1" physics_restitution="1" material="45130945fbfdc3e6f898cbb99e9d01e51d3f4bbd"/>
+					<transform>0.999999284743 -2.84218178506e-014 0 0.0 2.84218415675e-014 0.999997258178 0 0.0 0 0 0.999994039523 0.0 0.0143180757817 -0.049026419769 0.00556900753468 1.0</transform>
 				</node>
 			</node>
 			<node type="NodeReference" id="2141071959" name="controller_1">

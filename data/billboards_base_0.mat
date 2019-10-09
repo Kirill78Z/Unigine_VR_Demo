@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="billboards_base_0" guid="54675e20664f7aff1c60cc5232c3ff895c948354" base_material="billboards_base">
+	<state name="axis_x">1</state>
+	<state name="axis_z">1</state>
+	<state name="screen">1</state>
+	<texture name="diffuse">guid://edf5dbe16c25c3185d9ce7b15e99469442484856</texture>
+	<parameter name="billboard_scale">0.100000001</parameter>
+</material>
