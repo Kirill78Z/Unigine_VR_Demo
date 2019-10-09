@@ -8,6 +8,7 @@
 #include <UnigineGui.h>
 #include <UnigineMap.h>
 #include <UnigineGame.h>
+#include <UnigineHashMap.h>
 
 #include "../../../ComponentSystem/ComponentSystem.h"
 #include "../VRInteractable.h"
@@ -17,9 +18,10 @@
 
 struct HotPoint
 {
-	HotPoint(Unigine::NodePtr hp, int index) {
+	HotPoint(Unigine::NodePtr hp, int index, int pageNum) {
 		hotpoint = hp;
 		_index = index;
+		_pageNum = pageNum;
 		name = hotpoint->getName();
 		image = Unigine::Image::create("Images/default.jpg");
 
@@ -47,6 +49,8 @@ struct HotPoint
 	}
 
 	int _index;
+
+	int _pageNum;
 
 	Unigine::String name;
 
@@ -186,7 +190,18 @@ protected:
 	Unigine::GuiPtr gui;
 	Unigine::WidgetSpritePtr background;
 	Unigine::WidgetHBoxPtr hBox;
-	Unigine::WidgetVBoxPtr scroll;
+	Unigine::WidgetGridBoxPtr menuVBox;
+	Unigine::WidgetVBoxPtr pageVBox;
+	const int btnsOnPageMaxCount = 17;
+	Unigine::WidgetHBoxPtr controlsHBox;
+	Unigine::WidgetButtonPtr nextPageBtn;
+	Unigine::WidgetButtonPtr prevPageBtn;
+
+	Unigine::HashMap<int, Unigine::Vector<HotPoint*>> pages;
+	int currPage;
+	int pageCount;
+
+	//Unigine::WidgetScrollPtr testScroll;
 
 	Unigine::WidgetSpritePtr image;
 

@@ -102,12 +102,21 @@ protected:
 	// gui
 	void gui_init();
 	Unigine::ObjectGuiPtr object_gui;
-	bool gui_near_eyes = false;
 
 
 	
 
 	void create_hotpoint_toggle(HotPoint * hotpt);
+
+	void setPage(int pageNum);
+
+	void nextPage();
+
+	void prevPage();
+
+	void turn_page_update(int button_prev, int button_next);
+
+	void refresh_current_page();
 
 	void update_gui();
 
@@ -171,7 +180,6 @@ protected:
 
 	// - hotpoints
 	int cur_hotpoint;
-	int hotpoint_button_pressed;
 
 	void hotpoints_init(const char * hotpoints_name);
 

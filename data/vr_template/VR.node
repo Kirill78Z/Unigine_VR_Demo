@@ -214,5 +214,138 @@
 			</properties>
 			<transform>0.588822757529 -0.808261621487 1.19209225601e-007 0.0 1.31130135372e-006 9.83476015288e-007 0.999999463554 0.0 -0.808261621487 -0.588822876738 1.59442343327e-006 0.0 -16.0302317493 -15.3165192834 1.28444489034 1.0</transform>
 		</node>
+		<node type="PlayerDummy" id="6911422" name="vr_hotpoint_5">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.588822697924 -0.808261621487 1.78813831297e-007 0.0 1.25169681908e-006 1.01327833945e-006 0.999999523158 0.0 -0.808261740696 -0.588822936343 1.5497201744e-006 0.0 -18.9784538294 -17.4643147005 1.28445070617 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="1109982447" name="vr_hotpoint_6">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.588822697924 -0.808261621487 1.78813831297e-007 0.0 1.25169681908e-006 1.01327833945e-006 0.999999523158 0.0 -0.808261740696 -0.588822936343 1.5497201744e-006 0.0 -23.4861811478 -20.7482179524 1.28445959838 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="2116615044" name="vr_hotpoint_7">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.588822280692 -0.808261859906 3.27825338429e-007 0.0 1.2218946086e-006 1.16229007396e-006 0.999999642367 0.0 -0.808262157929 -0.588822578715 1.62422621219e-006 0.0 -28.5279511901 -24.4211739902 1.28446926521 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="226558749" name="vr_hotpoint_8">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.588822340296 -0.808261859906 4.17232282499e-007 0.0 1.19209251181e-006 1.32620285686e-006 0.999999642367 0.0 -0.808262098324 -0.588822578715 1.6987320226e-006 0.0 -32.9353217001 -27.6319630191 1.28447812195 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="1419430946" name="vr_hotpoint_9">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.588822399901 -0.808261800301 5.06639226569e-007 0.0 1.16229018765e-006 1.53481901232e-006 0.999999582763 0.0 -0.808262098324 -0.588822578715 1.87754596758e-006 0.0 -43.3173733535 -35.1953344051 1.284499942 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="2005678500" name="vr_hotpoint_10">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.588822459506 -0.808261859906 6.55650790546e-007 0.0 1.16229007396e-006 1.75833632986e-006 0.999999523158 0.0 -0.808262098324 -0.588822578715 2.0265575884e-006 0.0 -51.5551728022 -41.1966084032 1.28451907793 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="1478459714" name="vr_hotpoint_11">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.588822459506 -0.80826191951 7.45057763037e-007 0.0 1.16229007396e-006 1.78813854034e-006 0.999999523158 0.0 -0.80826203872 -0.588822578715 2.02655736103e-006 0.0 -64.417861731 -50.5671352162 1.28455132859 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="833477203" name="vr_hotpoint_12">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.588822459506 -0.80826191951 8.6426700285e-007 0.0 1.16229007396e-006 1.95205109587e-006 0.999999523158 0.0 -0.80826203872 -0.588822578715 2.10106317143e-006 0.0 -76.7378672774 -59.5423154029 1.28458221857 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="2133774744" name="vr_hotpoint_13">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.588822459506 -0.808261979115 9.53673918498e-007 0.0 1.19209228444e-006 1.95205109587e-006 0.999999642367 0.0 -0.808262098324 -0.58882263832 2.07126084727e-006 0.0 -86.0030856839 -66.2920692366 1.28460630334 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="10524072" name="vr_hotpoint_14">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.58882251911 -0.808261979115 9.53673975341e-007 0.0 1.19209239812e-006 1.95205132324e-006 0.999999701972 0.0 -0.808262157929 -0.588822697924 2.07126107464e-006 0.0 -111.855633681 -85.1257687884 1.28467255335 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="152861548" name="vr_hotpoint_15">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.58882251911 -0.80826203872 9.53674032185e-007 0.0 1.19209251181e-006 1.95205155062e-006 0.999999821181 0.0 -0.808262217534 -0.588822757529 2.07126130202e-006 0.0 -132.76303599 -100.356907489 1.28472613088 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="1757803479" name="vr_hotpoint_16">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.58882251911 -0.808261979115 9.53673975341e-007 0.0 1.19209273918e-006 1.95205177799e-006 0.999999940391 0.0 -0.808262217534 -0.588822757529 2.07126130202e-006 0.0 -159.10678947 -119.548453539 1.28479363966 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="855473513" name="vr_hotpoint_17">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.58882251911 -0.80826203872 9.53674032185e-007 0.0 1.19209273918e-006 1.95205177799e-006 0.999999999995 0.0 -0.808262217534 -0.588822757529 2.07126130202e-006 0.0 -177.348058266 -132.837302084 1.28484038493 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="132484497" name="vr_hotpoint_18">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.58882251911 -0.808261979115 9.53673975341e-007 0.0 1.19209285287e-006 1.95205200536e-006 1.0000000596 0.0 -0.808262277138 -0.588822757529 2.07126130202e-006 0.0 -204.006250442 -152.257918175 1.28490869949 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="864202008" name="vr_hotpoint_19">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.58882251911 -0.80826203872 9.53674032185e-007 0.0 1.19209296656e-006 1.95205223274e-006 1.00000017881 0.0 -0.808262336743 -0.588822817133 2.07126152939e-006 0.0 -232.942147357 -173.337851131 1.28498285092 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="1230661478" name="vr_hotpoint_20">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.58882251911 -0.808261979115 9.53673975341e-007 0.0 1.19209308024e-006 1.95205246011e-006 1.00000029802 0.0 -0.808262336743 -0.588822817133 2.07126152939e-006 0.0 -251.490689829 -186.850549342 1.28503038361 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="1605196109" name="vr_hotpoint_21">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.58882251911 -0.80826203872 9.53674032185e-007 0.0 1.19209308024e-006 1.95205246011e-006 1.00000029802 0.0 -0.808262455952 -0.588822876738 2.07126175677e-006 0.0 -262.906025176 -195.166673467 1.28505963667 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="1874165357" name="vr_hotpoint_22">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.58882251911 -0.808261979115 9.53673975341e-007 0.0 1.19209308024e-006 1.95205246011e-006 1.00000029802 0.0 -0.808262515557 -0.588822936343 2.07126198414e-006 0.0 -278.766138746 -206.720838366 1.28510027996 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="1111518544" name="vr_hotpoint_23">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<transform>0.58882251911 -0.80826203872 9.53674032185e-007 0.0 1.19209308024e-006 1.95205246011e-006 1.00000029802 0.0 -0.808262515557 -0.588822936343 2.07126198414e-006 0.0 -294.233814402 -217.989110769 1.28513991759 1.0</transform>
+		</node>
 	</node>
 </nodes>

@@ -57,4 +57,15 @@ private:
 		CONTROLLER_DEVICE_0 = -1,
 		CONTROLLER_DEVICE_1 = -1,
 		HMD_DEVICE_0 = -1;
+
+
+	int dpadLeftPressed0;
+	int dpadRightPressed0;
+	int dpadUpPressed0;
+	int dpadDownPressed0;
+
+	int dpadLeftPressed1;
+	int dpadRightPressed1;
+	int dpadUpPressed1;
+	int dpadDownPressed1;
 };

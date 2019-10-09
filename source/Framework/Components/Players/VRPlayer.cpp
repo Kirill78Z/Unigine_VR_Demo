@@ -92,21 +92,17 @@ void VRPlayer::shutdown()
 	if (gui)
 	{
 		for (int i = 0; i < hotpoints.size(); i++) {
-			if (hotpoints[i]->toggle)
-				scroll->removeChild(hotpoints[i]->toggle->getWidget());
+			pageVBox->removeChild(hotpoints[i]->toggle->getWidget());
 		}
 
-		if (scroll)
-			hBox->removeChild(scroll->getWidget());
-
-		if (image)
-			hBox->removeChild(image->getWidget());
-
-		if (hBox)
-			gui->removeChild(hBox->getWidget());
-
-		if (background)
-			gui->removeChild(background->getWidget());
+		menuVBox->removeChild(pageVBox->getWidget());
+		controlsHBox->removeChild(nextPageBtn->getWidget());
+		controlsHBox->removeChild(prevPageBtn->getWidget());
+		menuVBox->removeChild(controlsHBox->getWidget());
+		hBox->removeChild(menuVBox->getWidget());
+		hBox->removeChild(image->getWidget());
+		gui->removeChild(hBox->getWidget());
+		gui->removeChild(background->getWidget());
 
 	}
 

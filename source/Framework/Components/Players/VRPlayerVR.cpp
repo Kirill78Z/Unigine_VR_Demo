@@ -287,14 +287,8 @@ void VRPlayerVR::gui_init() {
 	if (gui_index == -1)
 		Log::error("VRPlayerVR::controllers_init(): Node \"vr_gui\" does not exist in the left controller!\n");
 
-#pragma region GUI on controller
-	/*object_gui = ObjectGui::cast(controller[0]->getChild(gui_index));
-	object_gui->setBackground(0);
-	object_gui->setMouseMode(ObjectGui::MOUSE_VIRTUAL);
-	object_gui->setEnabled(0);*/
-#pragma endregion
 
-#pragma region GUI near eyes
+	// GUI near eyes
 	ObjectGui::cast(controller[0]->getChild(gui_index))->setEnabled(0);
 
 	object_gui = ObjectGui::create(4, 2);
@@ -304,9 +298,6 @@ void VRPlayerVR::gui_init() {
 	object_gui->setEnabled(0);
 
 	object_gui->setDepthTest(0);
-
-	gui_near_eyes = true;
-#pragma endregion
 
 	object_gui->setIntersectionMask(2, 0);
 
@@ -330,12 +321,40 @@ void VRPlayerVR::gui_init() {
 	hBox = Unigine::WidgetHBox::create(gui);
 	gui->addChild(hBox->getWidget(), Gui::ALIGN_OVERLAP | Gui::ALIGN_EXPAND);
 
-	//create scroll box
-	scroll = Unigine::WidgetVBox::create(gui);
-	scroll->setWidth(1000);
-	scroll->setHeight(gui->getHeight() - 30);
 
-	hBox->addChild(scroll->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
+
+
+	//create menu vbox
+	menuVBox = Unigine::WidgetGridBox::create(gui, 1);
+	menuVBox->setWidth(1000);
+	menuVBox->setHeight(gui->getHeight() - 30);
+
+	hBox->addChild(menuVBox->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
+
+	//create page vbox
+	pageVBox = Unigine::WidgetVBox::create(gui);
+	pageVBox->setWidth(1000);
+	pageVBox->setHeight(gui->getHeight() - 100);
+	menuVBox->addChild(pageVBox->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
+
+	//create controls hbox with buttons
+	controlsHBox = Unigine::WidgetHBox::create(gui, 0, 0);
+	controlsHBox->setWidth(1000);
+	controlsHBox->setHeight(100);
+	//controlsHBox->setColor(vec4(1, 0, 0, 1));
+
+	menuVBox->addChild(controlsHBox->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_BOTTOM/*Gui::ALIGN_EXPAND*/);
+
+	prevPageBtn = Unigine::WidgetButton::create(gui, "<");
+	prevPageBtn->setFontSize(96);
+	prevPageBtn->addCallback(Gui::CLICKED, MakeCallback(this, &VRPlayerVR::prevPage));
+	controlsHBox->addChild(prevPageBtn->getWidget(), Gui::ALIGN_RIGHT | Gui::ALIGN_BOTTOM);
+
+	nextPageBtn = Unigine::WidgetButton::create(gui, ">");
+	nextPageBtn->setFontSize(96);
+	nextPageBtn->addCallback(Gui::CLICKED, MakeCallback(this, &VRPlayerVR::nextPage));
+	controlsHBox->addChild(nextPageBtn->getWidget(), Gui::ALIGN_RIGHT | Gui::ALIGN_BOTTOM);
+
 
 	//create toggles
 	for (int i = 0; i < hotpoints.size(); i++) {
@@ -344,14 +363,19 @@ void VRPlayerVR::gui_init() {
 
 	//create image
 	image = WidgetSprite::create(gui, "Images/default.jpg");
-	image->setHeight(gui->getHeight() - 30);
-	image->setWidth(gui->getWidth() - scroll->getWidth() - 30);
+	image->setHeight(gui->getHeight());
+	image->setWidth(gui->getWidth() - menuVBox->getWidth() - 30);
 	hBox->addChild(image->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
 
 	//set current hotpoint 0
-	if (hotpoints.size() > 0)
+	if (hotpoints.size() > 0) {
 		setCurrHotpoint(0);
+		setPage(0);
+	}
 
+	if (pageCount == 1) {
+		nextPageBtn->setEnabled(0);
+	}
 }
 
 
@@ -362,13 +386,76 @@ void VRPlayerVR::create_hotpoint_toggle(HotPoint* hotpt) {
 	//hotpt->toggle->setToggleable(1);
 	hotpt->toggle->setFontSize(96);
 	hotpt->toggle->setWidth(1000);
-	scroll->addChild(hotpt->toggle->getWidget(), Gui::ALIGN_LEFT);
+	//pageVBox->addChild(hotpt->toggle->getWidget(), Gui::ALIGN_LEFT);
 
 	//callback
 	hotpt->toggle->addCallback(Gui::CLICKED, MakeCallback(this, &VRPlayerVR::setCurrHotpoint, hotpt->_index));
 }
 
+void VRPlayerVR::setPage(int pageNum) {
+	if (currPage == pageNum || !pageVBox) return;
 
+	//clear pageVBox
+	Unigine::Vector<HotPoint*> hps = pages[currPage];
+	for (int i = 0; i < hps.size(); i++)
+		pageVBox->removeChild(hps[i]->toggle->getWidget());
+
+	//populate pageVBox
+	hps = pages[pageNum];
+	for (int i = 0; i < hps.size(); i++)
+		pageVBox->addChild(hps[i]->toggle->getWidget());
+
+	currPage = pageNum;
+
+	if (currPage == pageCount - 1) nextPageBtn->setEnabled(0);
+	else nextPageBtn->setEnabled(1);
+
+	if (currPage == 0) prevPageBtn->setEnabled(0);
+	else prevPageBtn->setEnabled(1);
+}
+
+void VRPlayerVR::nextPage()
+{
+	if (pageCount == 1) return;
+
+	int pageNum = currPage + 1;
+	if (pageNum >= pageCount) return;
+
+	setPage(pageNum);
+}
+
+void VRPlayerVR::prevPage()
+{
+	if (pageCount == 1) return;
+
+	int pageNum = currPage - 1;
+	if (pageNum < 0) return;
+
+	setPage(pageNum);
+}
+
+
+void VRPlayerVR::turn_page_update(int button_prev, int button_next) {
+	if (pageCount == 1)
+		return;
+
+	if (button_prev)
+		prevPage();
+
+	if (button_next)
+		nextPage();
+}
+
+void VRPlayerVR::refresh_current_page() {
+	//clear pageVBox
+	Unigine::Vector<HotPoint*> hps = pages[currPage];
+	for (int i = 0; i < hps.size(); i++)
+		pageVBox->removeChild(hps[i]->toggle->getWidget());
+
+	//populate pageVBox
+	for (int i = 0; i < hps.size(); i++)
+		pageVBox->addChild(hps[i]->toggle->getWidget());
+}
 
 void VRPlayerVR::update_gui()
 {
@@ -394,8 +481,9 @@ void VRPlayerVR::update_gui()
 		{
 			controller_menu_btn_down = menu_btn_down;
 			// put GUI around player
-			if (gui_near_eyes)
-				object_gui->setWorldTransform(gui_near_eyes_pos()* Mat4(translate(0.0f, player_height, -2.0f)));
+			object_gui->setWorldTransform(gui_near_eyes_pos()* Mat4(translate(0.0f, player_height, -2.0f)));
+
+			refresh_current_page();
 		}
 	}
 
@@ -407,8 +495,7 @@ void VRPlayerVR::update_gui()
 	// update visuals (we are using teleport ray)
 
 
-	int c = 1;
-	if (gui_near_eyes) c = controller_menu_btn_down;
+	int c = controller_menu_btn_down;
 
 	Vec3 p0 = controller[c]->getWorldPosition();
 	mat4 m = mat4(controller[c]->getWorldTransform());
@@ -922,9 +1009,24 @@ void VRPlayerVR::hotpoints_init(const char * hotpoints_name)
 	if (hotpointsNode)
 	{
 		int nc = hotpointsNode->getNumChildren();
+		int pageNum = 0;
+		pages.append(pageNum);
+		pageCount = 1;
 		for (int c = 0; c < nc; c++) {
+
+			if (pages[pageNum].size() >= btnsOnPageMaxCount) {
+				//next page
+				pageNum++;
+				pages.append(pageNum);
+				pageCount++;
+			}
+
+
 			Unigine::NodePtr hpNode = hotpointsNode->getChild(c);
-			HotPoint* hp = new HotPoint(hpNode, c);
+			HotPoint* hp = new HotPoint(hpNode, c, pageNum);
+
+			pages[pageNum].append(hp);
+
 			hotpoints.append(hp);
 
 			//find teleport bound
@@ -968,7 +1070,7 @@ void VRPlayerVR::setCurrHotpoint(int index)
 
 
 	landPlayerTo(hpNode->getWorldPosition(), hpNode->getWorldDirection());
-	hotpoint_button_pressed = 0;
+	//hotpoint_button_pressed = 0;
 
 	if (hotpoint->teleport_bound) {
 		teleport_bound_box = hotpoint->teleport_bound->getWorldBoundBox();
@@ -978,7 +1080,7 @@ void VRPlayerVR::setCurrHotpoint(int index)
 		teleport_bound_box = Unigine::WorldBoundBox(dvec3::ZERO, dvec3(-1, -1, -1));
 	}
 
-	if (gui_near_eyes)
+	if (object_gui)
 		object_gui->setWorldTransform(gui_near_eyes_pos() * guiLocalTransf);
 
 	//toggles
@@ -992,6 +1094,9 @@ void VRPlayerVR::setCurrHotpoint(int index)
 	//image
 	if (image)
 		image->setImage(hotpoint->image);
+
+	//page
+	setPage(hotpoint->_pageNum);
 }
 
 
@@ -1004,7 +1109,7 @@ void VRPlayerVR::hotpoints_update(int button_prev, int button_next)
 	if (hotpoints.size() == 0)
 		return;
 
-	if (!hotpoint_button_pressed && (button_prev || button_next))
+	if (button_prev || button_next)
 	{
 		cur_hotpoint += button_next - button_prev;
 		if (cur_hotpoint < 0)
@@ -1014,5 +1119,4 @@ void VRPlayerVR::hotpoints_update(int button_prev, int button_next)
 
 		setCurrHotpoint(cur_hotpoint);
 	}
-	hotpoint_button_pressed = clamp(button_prev + button_next, 0, 1);
 }

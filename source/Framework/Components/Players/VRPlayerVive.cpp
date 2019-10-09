@@ -99,26 +99,50 @@ void VRPlayerVive::update()
 	}
 
 
+
+	int dpadLeftReleased0 = !vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_LEFT) && dpadLeftPressed0;
+	int dpadRightReleased0 = !vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_RIGHT) && dpadRightPressed0;
+	int dpadUpReleased0 = !vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_UP) && dpadUpPressed0;
+	int dpadDownReleased0 = !vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_DOWN) && dpadDownPressed0;
+
+	int dpadLeftReleased1 = !vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_LEFT) && dpadLeftPressed1;
+	int dpadRightReleased1 = !vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_RIGHT) && dpadRightPressed1;
+	int dpadUpReleased1 = !vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_UP) && dpadUpPressed1;
+	int dpadDownReleased1 = !vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_DOWN) && dpadDownPressed1;
+
+	turn_page_update(
+		(controller_valid[0] && dpadLeftReleased0) ||
+		(controller_valid[1] && dpadLeftReleased1),
+		(controller_valid[0] && dpadRightReleased0) ||
+		(controller_valid[1] && dpadRightReleased1)
+		);
 	update_gui();
 
-	if(!object_gui->isEnabled())
-	hotpoints_update(
-		(controller_valid[0] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_LEFT)) ||
-		(controller_valid[1] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_LEFT)),
-		(controller_valid[0] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_RIGHT)) ||
-		(controller_valid[1] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_RIGHT)));
+	if (!object_gui->isEnabled())
+		hotpoints_update(
+		(controller_valid[0] && dpadLeftReleased0) ||
+			(controller_valid[1] && dpadLeftReleased1),
+			(controller_valid[0] && dpadRightReleased0) ||
+			(controller_valid[1] && dpadRightReleased1));
 	else
 		hotpoints_update(
-			(controller_valid[0] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_LEFT)) ||
-			(controller_valid[1] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_LEFT)) ||
-			(controller_valid[0] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_UP)) ||
-			(controller_valid[1] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_UP))
+			(controller_valid[0] && dpadUpReleased0) ||
+			(controller_valid[1] && dpadUpReleased1)
 			,
-			(controller_valid[0] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_RIGHT)) ||
-			(controller_valid[1] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_RIGHT))||
-			(controller_valid[0] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_DOWN)) ||
-			(controller_valid[1] && vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_DOWN))
+			(controller_valid[0] && dpadDownReleased0) ||
+			(controller_valid[1] && dpadDownReleased1)
 		);
+
+
+	dpadLeftPressed0 = vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_LEFT);
+	dpadRightPressed0 = vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_RIGHT);
+	dpadUpPressed0 = vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_UP);
+	dpadDownPressed0 = vive_getControllerDPadPressed(CONTROLLER_DEVICE_0, BUTTON_DPAD_DOWN);
+
+	dpadLeftPressed1 = vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_LEFT);
+	dpadRightPressed1 = vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_RIGHT);
+	dpadUpPressed1 = vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_UP);
+	dpadDownPressed1 = vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_DOWN);
 }
 
 void VRPlayerVive::setLock(int lock)
@@ -297,8 +321,8 @@ int VRPlayerVive::vive_getControllerDPadPressed(int device, int button)
 	if (vive.getControllerButtonPressed(device, BUTTON_STEAMVR_TOUCHPAD))
 	{
 		vec2 axis = vive.getControllerAxis(device, 0);
-		if ((axis.y > 0.3f && button == BUTTON_DPAD_UP) ||
-			(axis.y < -0.3f && button == BUTTON_DPAD_DOWN) ||
+		if ((axis.y > 0.6f && button == BUTTON_DPAD_UP) ||
+			(axis.y < -0.6f && button == BUTTON_DPAD_DOWN) ||
 			(axis.x > 0.6f && button == BUTTON_DPAD_RIGHT) ||
 			(axis.x < -0.6f && button == BUTTON_DPAD_LEFT))
 			return 1;
