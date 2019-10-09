@@ -62,6 +62,7 @@ struct HotPoint
 
 	Unigine::WidgetButtonPtr toggle;
 
+	Unigine::WidgetHBoxPtr toggleContainer;
 
 };
 

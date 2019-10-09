@@ -382,6 +382,9 @@ void VRPlayerVR::gui_init() {
 
 
 void VRPlayerVR::create_hotpoint_toggle(HotPoint* hotpt) {
+	hotpt->toggleContainer = WidgetHBox::create(gui);
+
+
 	hotpt->toggle = WidgetButton::create(gui, hotpt->name);
 	//hotpt->toggle->setToggleable(1);
 	hotpt->toggle->setFontSize(96);
@@ -390,6 +393,10 @@ void VRPlayerVR::create_hotpoint_toggle(HotPoint* hotpt) {
 
 	//callback
 	hotpt->toggle->addCallback(Gui::CLICKED, MakeCallback(this, &VRPlayerVR::setCurrHotpoint, hotpt->_index));
+
+
+	hotpt->toggleContainer->addChild(hotpt->toggle->getWidget());
+
 }
 
 void VRPlayerVR::setPage(int pageNum) {
@@ -398,12 +405,12 @@ void VRPlayerVR::setPage(int pageNum) {
 	//clear pageVBox
 	Unigine::Vector<HotPoint*> hps = pages[currPage];
 	for (int i = 0; i < hps.size(); i++)
-		pageVBox->removeChild(hps[i]->toggle->getWidget());
+		pageVBox->removeChild(hps[i]->toggleContainer->getWidget());
 
 	//populate pageVBox
 	hps = pages[pageNum];
 	for (int i = 0; i < hps.size(); i++)
-		pageVBox->addChild(hps[i]->toggle->getWidget());
+		pageVBox->addChild(hps[i]->toggleContainer->getWidget());
 
 	currPage = pageNum;
 
@@ -450,11 +457,11 @@ void VRPlayerVR::refresh_current_page() {
 	//clear pageVBox
 	Unigine::Vector<HotPoint*> hps = pages[currPage];
 	for (int i = 0; i < hps.size(); i++)
-		pageVBox->removeChild(hps[i]->toggle->getWidget());
+		pageVBox->removeChild(hps[i]->toggleContainer->getWidget());
 
 	//populate pageVBox
 	for (int i = 0; i < hps.size(); i++)
-		pageVBox->addChild(hps[i]->toggle->getWidget());
+		pageVBox->addChild(hps[i]->toggleContainer->getWidget());
 }
 
 void VRPlayerVR::update_gui()
@@ -1085,11 +1092,11 @@ void VRPlayerVR::setCurrHotpoint(int index)
 
 	//toggles
 	for (int h = 0; h < hotpoints.size(); h++) {
-		if (hotpoints[h]->toggle && hotpoints[h]->toggle->isFocused() && h != cur_hotpoint)
-			hotpoints[h]->toggle->removeFocus();
+		if (hotpoints[h]->toggleContainer && h != cur_hotpoint)
+			hotpoints[h]->toggleContainer->setColor(vec4(1, 1, 1, 1));
 	}
-	if (hotpoint->toggle && !hotpoint->toggle->isFocused())
-		hotpoint->toggle->setFocus();
+	if (hotpoint->toggleContainer)
+		hotpoint->toggleContainer->setColor(vec4(0.5, 0.8, 0.8, 1));
 
 	//image
 	if (image)
