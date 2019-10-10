@@ -101,10 +101,11 @@ protected:
 
 	// gui
 	void gui_init();
+	void set_image(Unigine::ImagePtr img);
 	Unigine::ObjectGuiPtr object_gui;
 
-
-	
+	int imageMaxWidth;
+	int imageMaxHeight;
 
 	void create_hotpoint_toggle(HotPoint * hotpt);
 

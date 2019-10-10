@@ -235,7 +235,7 @@
 			<properties>
 				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="7ca71be75f98681a7b3098b144063a5c5efc920b">
 					<parameter name="Name">Точка 1</parameter>
-					<parameter name="Image">guid://37aed44773d304fa2e8bd01120184a3c4b1aa06b</parameter>
+					<parameter name="Image">guid://5abc2c7a299fd1917e355dbc0fd99deb2b5a9a4e</parameter>
 					<parameter name="Teleport bound">704002483</parameter>
 				</property>
 			</properties>

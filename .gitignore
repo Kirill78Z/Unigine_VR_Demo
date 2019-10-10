@@ -27,3 +27,5 @@ bld/
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 
+data/shader_d3d11.cache
+data/unigine.cache

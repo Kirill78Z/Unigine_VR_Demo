@@ -198,7 +198,7 @@ protected:
 	// gui
 	Unigine::GuiPtr gui;
 	Unigine::WidgetSpritePtr background;
-	Unigine::WidgetHBoxPtr hBox;
+	Unigine::WidgetGridBoxPtr hBox;
 	Unigine::WidgetGridBoxPtr menuVBox;
 	Unigine::WidgetVBoxPtr pageVBox;
 	const int btnsOnPageMaxCount = 12;
@@ -212,6 +212,7 @@ protected:
 
 	//Unigine::WidgetScrollPtr testScroll;
 
+	Unigine::WidgetHBoxPtr imageContainer;
 	Unigine::WidgetSpritePtr image;
 
 	Unigine::Vector<HotPoint*> hotpoints;

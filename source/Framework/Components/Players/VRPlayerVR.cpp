@@ -318,7 +318,7 @@ void VRPlayerVR::gui_init() {
 
 
 	//create main HBox
-	hBox = Unigine::WidgetHBox::create(gui);
+	hBox = Unigine::WidgetGridBox::create(gui, 2);
 	gui->addChild(hBox->getWidget(), Gui::ALIGN_OVERLAP | Gui::ALIGN_EXPAND);
 
 
@@ -343,7 +343,7 @@ void VRPlayerVR::gui_init() {
 	controlsHBox->setHeight(100);
 	//controlsHBox->setColor(vec4(1, 0, 0, 1));
 
-	menuVBox->addChild(controlsHBox->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_BOTTOM/*Gui::ALIGN_EXPAND*/);
+	menuVBox->addChild(controlsHBox->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_BOTTOM);
 
 	prevPageBtn = Unigine::WidgetButton::create(gui, "<");
 	prevPageBtn->setFontSize(96);
@@ -361,11 +361,20 @@ void VRPlayerVR::gui_init() {
 		create_hotpoint_toggle(hotpoints[i]);
 	}
 
+	//image container
+	imageMaxWidth = gui->getWidth() - menuVBox->getWidth();
+	imageMaxHeight = gui->getHeight();
+	imageContainer = WidgetHBox::create(gui);
+	imageContainer->setWidth(imageMaxWidth);
+	imageContainer->setHeight(imageMaxHeight);
+	hBox->addChild(imageContainer->getWidget(),Gui::ALIGN_CENTER | Gui::ALIGN_EXPAND);
+
 	//create image
-	image = WidgetSprite::create(gui, "Images/default.jpg");
-	image->setHeight(gui->getHeight());
-	image->setWidth(gui->getWidth() - menuVBox->getWidth());
-	hBox->addChild(image->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
+	image = WidgetSprite::create(gui);
+	
+	image->setWidth(imageMaxWidth);
+	image->setHeight(imageMaxHeight);
+	imageContainer->addChild(image->getWidget(), Gui::ALIGN_CENTER);
 
 	//set current hotpoint 0
 	if (hotpoints.size() > 0) {
@@ -378,7 +387,32 @@ void VRPlayerVR::gui_init() {
 	}
 }
 
+void VRPlayerVR::set_image(Unigine::ImagePtr img) {
+	if (!image) return;
 
+	//set aspect ratio of WidgetSprite same as Image
+	int imgWidth = img->getWidth();
+	int imgHeight = img->getHeight();
+
+	float imgAspect = (float)imgWidth / imgHeight;
+	float spaceAspect = (float)imageMaxWidth / imageMaxHeight;
+
+	if (imgAspect > spaceAspect) {
+		image->setWidth(imageMaxWidth);
+		float h = (float)imageMaxWidth* imgHeight / imgWidth;
+		image->setHeight(h);
+	}
+	else
+	{
+		image->setHeight(imageMaxHeight);
+		float w = (float)imgWidth *imageMaxHeight / imgHeight;
+		image->setWidth(w);
+	}
+
+	image->setImage(img);
+	image->arrange();
+	hBox->arrange();
+}
 
 
 void VRPlayerVR::create_hotpoint_toggle(HotPoint* hotpt) {
@@ -1099,8 +1133,7 @@ void VRPlayerVR::setCurrHotpoint(int index)
 		hotpoint->toggleContainer->setColor(vec4(0.5, 0.8, 0.8, 1));
 
 	//image
-	if (image)
-		image->setImage(hotpoint->image);
+	set_image(hotpoint->image);
 
 	//page
 	setPage(hotpoint->_pageNum);

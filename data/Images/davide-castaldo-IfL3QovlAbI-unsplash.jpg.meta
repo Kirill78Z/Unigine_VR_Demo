@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>06d1cce32ee3cce66419ff0d15a5150829fa34c7</guid>
+	<type>texture</type>
+	<hash>854de144</hash>
+	<parameters>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="image_format">RGB8</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="string" name="width">auto</parameter>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="preset_name">custom</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="06d1cce32ee3cce66419ff0d15a5150829fa34c7" name="davide-castaldo-IfL3QovlAbI-unsplash.jpg" link="0"/>
+		<runtime id="5abc2c7a299fd1917e355dbc0fd99deb2b5a9a4e" name="davide-castaldo-IfL3QovlAbI-unsplash.dds" link="1"/>
+	</runtimes>
+</asset>
