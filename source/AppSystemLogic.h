@@ -11,6 +11,7 @@ public:
 	virtual ~AppSystemLogic() {}
 	
 	virtual int init();
+	void ConfigureSplashScreen();
 };
 
 #endif // __APP_SYSTEM_LOGIC_H__
