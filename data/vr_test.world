@@ -547,5 +547,18 @@
 			<surface name="capsule" physics_friction="1" physics_restitution="1" material="401e90ccd85f4f2bb97c19ab9e1351325c4012eb"/>
 			<transform>0.999999880791 0 0 0.0 0 0.999999880791 0 0.0 0 0 0.999999940395 0.0 -15.1304885969 -14.7387993992 -0.100001908839 1.0</transform>
 		</node>
+		<node type="NodeDummy" id="1796845" name="traffic">
+			<transform>0.999999940395 0 0 0.0 0 0.999999940395 0 0.0 0 0 0.999999940395 0.0 0 0 0 1.0</transform>
+			<node id="112724430" type="ObjectMeshDynamic" name="Plane">
+				<object_surface name="plane" begin="0" end="6"/>
+				<vertex type="float" num_vertex="4" offset="0" size="3">-5 -5 0 5 -5 0 -5 5 0 5 5 0</vertex>
+				<vertex type="float" num_vertex="4" offset="16" size="4">0 1 0 0 1 1 0 0 0 0 0 0 1 0 0 0</vertex>
+				<vertex type="float" num_vertex="4" offset="32" size="4">-0 -0 -0 -1 -0 -0 -0 -1 -0 -0 -0 -1 -0 -0 -0 -1</vertex>
+				<vertex type="float" num_vertex="4" offset="48" size="4">1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</vertex>
+				<indices num_indices="6">0 1 3 3 2 0</indices>
+				<surface name="plane" material="401e90ccd85f4f2bb97c19ab9e1351325c4012eb"/>
+				<transform>0.990267693416 -0.0121297275427 0.138643466749 0.0 1.39698372315e-009 0.996194600832 0.0871557123754 0.0 -0.139173128556 -0.0863075382297 0.986499964386 0.0 7.38061660043 4.89003243418 5.59271224902 1.0</transform>
+			</node>
+		</node>
 	</editor>
 </world>

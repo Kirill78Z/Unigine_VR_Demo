@@ -100,7 +100,8 @@ void VRPlayer::shutdown()
 		controlsHBox->removeChild(prevPageBtn->getWidget());
 		menuVBox->removeChild(controlsHBox->getWidget());
 		hBox->removeChild(menuVBox->getWidget());
-		hBox->removeChild(image->getWidget());
+		imageContainer->removeChild(image->getWidget());
+		hBox->removeChild(imageContainer->getWidget());
 		gui->removeChild(hBox->getWidget());
 		gui->removeChild(background->getWidget());
 
