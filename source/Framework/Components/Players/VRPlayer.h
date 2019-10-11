@@ -48,7 +48,7 @@ struct HotPoint
 
 		if (name.size() > 43) {
 			//Unigine::String::substr()
-			name = name.substr(0, 40);
+			name = name.substr(0, 43);
 			//name.append("...");
 		}
 
