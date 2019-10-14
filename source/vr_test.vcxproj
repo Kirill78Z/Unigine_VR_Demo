@@ -64,7 +64,7 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Users\kzaharov\Unigine SDK Browser\sdks\engineering_windows_2.7.3.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/Users/kzaharov/Unigine SDK Browser/sdks/engineering_windows_2.7.3.1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FloatingPointModel>Fast</FloatingPointModel>
       <PreprocessorDefinitions>DEBUG;UNIGINE_DOUBLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -80,7 +80,7 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Full</Optimization>
-      <AdditionalIncludeDirectories>C:\Users\kzaharov\Unigine SDK Browser\sdks\engineering_windows_2.7.3.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/Users/kzaharov/Unigine SDK Browser/sdks/engineering_windows_2.7.3.1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FloatingPointModel>Fast</FloatingPointModel>
       <PreprocessorDefinitions>UNIGINE_DOUBLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -95,7 +95,7 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Users\kzaharov\Unigine SDK Browser\sdks\engineering_windows_2.7.3.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/Users/kzaharov/Unigine SDK Browser/sdks/engineering_windows_2.7.3.1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FloatingPointModel>Fast</FloatingPointModel>
       <PreprocessorDefinitions>DEBUG;UNIGINE_DOUBLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -111,7 +111,7 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Full</Optimization>
-      <AdditionalIncludeDirectories>C:\Users\kzaharov\Unigine SDK Browser\sdks\engineering_windows_2.7.3.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/Users/kzaharov/Unigine SDK Browser/sdks/engineering_windows_2.7.3.1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FloatingPointModel>Fast</FloatingPointModel>
       <PreprocessorDefinitions>UNIGINE_DOUBLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
