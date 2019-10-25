@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>7005ccc73bc0a37a7d43dc912cebecbc2318e0eb</guid>
+	<type>material</type>
+	<hash>47cbee7a</hash>
+	<runtimes>
+		<runtime id="7005ccc73bc0a37a7d43dc912cebecbc2318e0eb" name="wheels" link="0"/>
+	</runtimes>
+</asset>

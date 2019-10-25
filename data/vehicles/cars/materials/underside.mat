@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="underside" guid="1b5f5e41542da2ac145cbe1b49865cbe0fc35d05" base_material="mesh_base">
+	<parameter name="albedo_color">0.129411772 0.129411772 0.129411772 1</parameter>
+</material>

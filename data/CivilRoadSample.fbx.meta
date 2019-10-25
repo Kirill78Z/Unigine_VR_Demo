@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>73b7856342912b66320ecb8d0d0e778856133547</guid>
+	<type>fbx</type>
+	<hash>556dd907</hash>
+	<parameters>
+		<parameter type="bool" name="merge_static_meshes">0</parameter>
+		<parameter type="bool" name="merge_surfaces_by_materials">0</parameter>
+		<parameter type="bool" name="use_instances">1</parameter>
+		<parameter type="bool" name="vertex_cache">1</parameter>
+		<parameter type="bool" name="import_meshes">1</parameter>
+		<parameter type="bool" name="import_materials">1</parameter>
+		<parameter type="bool" name="merge_similar_materials">1</parameter>
+		<parameter type="bool" name="import_textures">1</parameter>
+		<parameter type="bool" name="import_animations">0</parameter>
+		<parameter type="bool" name="import_bones_without_skin">0</parameter>
+		<parameter type="bool" name="create_transform_bones_for_joints">0</parameter>
+		<parameter type="bool" name="joints_reorientation">1</parameter>
+		<parameter type="bool" name="import_lights">0</parameter>
+		<parameter type="bool" name="import_cameras">0</parameter>
+		<parameter type="bool" name="import_tangent_space">0</parameter>
+		<parameter type="bool" name="import_morph_targets">0</parameter>
+		<parameter type="float" name="scale">1</parameter>
+		<parameter type="float" name="fps">30</parameter>
+		<parameter type="string" name="prefix_materials"/>
+		<parameter type="int" name="import_materials_mode">0</parameter>
+		<parameter type="int" name="workflow">0</parameter>
+		<parameter type="int" name="up_axis">0</parameter>
+		<parameter type="int" name="front_axis">0</parameter>
+		<parameter type="bool" name="need_split">0</parameter>
+		<parameter type="bool" name="need_repivot">1</parameter>
+		<parameter type="bool" name="need_triagulate">1</parameter>
+		<parameter type="bool" name="skip_empty_nodes">0</parameter>
+		<parameter type="float" name="bound_size">10000</parameter>
+		<parameter type="float" name="linear_deflection">0.200000003</parameter>
+		<parameter type="float" name="angular_deflection">0.699999988</parameter>
+		<parameter type="bool" name="combine_by_lods">0</parameter>
+		<parameter type="int" name="index_max_count_lods">1</parameter>
+		<parameter type="string" name="lods"/>
+		<parameter type="string" name="animations"/>
+		<parameter type="string" name="material_guids">proxyobject_sunandsky,68369cd51a7ec83025523dcf6f7390e217195ad9,Индекс цвета autocad 7,27dab82863d23d6711a21b9a6ab3b6310cefb9dc,Индекс цвета autocad 147,1d2135ff38894b522a6c728948f45a541f0901a3,Индекс цвета autocad 41,4aa3000a79b3efe1091ec7cc798660bb650f5ede,Индекс цвета autocad 161,5a9e8e3966b7e244509088d346e4f8164b0e507d,Индекс цвета autocad 11,70dc89bc49ded9eb0f86a64e6a2679554e07fab0,Индекс цвета autocad 61,186cb4035df849861d6c132d29f4daa84764fde7</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="3131c1be7ab57e05165957a00682267f2ec881d2" name="CivilRoadSample.node" link="1" type="3">
+			<parameters>
+				<parameter type="string" name="id">1f487555</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2dd937097c4554d47474ba2355f1592677eb9e4d" name="3d тело.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ae76f494</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="29fdab482a97560719141bba3aaa77d1563d4efc" name="3d тело_1.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9ccb97e8</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="41a05e2b294bdd8e326dc795071473f0111a768f" name="3d тело_2.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9d3b2218</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="39faf2a25cabd1995e9c8e244c888333539eeef6" name="3d тело_3.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ef5e8a0a</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="24bd19dd78ec519800c9a81709e4a68a1ae06461" name="3d тело_4.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">04ce6541</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4f4bb24c55bd493b28fc2d5e397eb52554a7e440" name="3d тело_5.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ce432e2</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="38270a9f2e2cd7727caf50293f475b744fd2d043" name="3d тело_6.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ec0c1df4</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1fa938c64ffbb96d33bdcbe865f8be2717a3255a" name="3d тело_7.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">e07b9e5a</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1663b4f14520299c1fe1384b169fb12e50a146b5" name="3d тело_8.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">e11dcbd7</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7e78a89031c8e2af710b304225acb2b9697abcc4" name="3d тело_9.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">64b4c211</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6e04a1536c0d369651807cfd46771a3854659837" name="3d тело_10.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">1d7fe676</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5d9c982a3e1d6981698fb4ec05dd2b5b63d368fe" name="3d тело_11.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">d611fc2d</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4ace7c45712bc0e04060febf0782fd1205acf949" name="3d тело_12.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b99553bb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="49abb214470ef6635e07e8665b64648d325d3c88" name="body.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">316ebd1</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5a9136477e5dfefa0136821137af543c25c2226b" name="body_1.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">848341e2</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5d7454ce1d3f55d556a62d3042905ecf65c13de2" name="body_2.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">220865d</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="70f923d93d8f3b643b22cf735e164e360a00701d" name="body_3.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">f9a3ae2</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5df532d82b3c985773b459ca3d17fea143d4078c" name="body_4.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">d4087743</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="65e11d7b7b9f749e6f6cd365660ced80433802df" name="body_5.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ad54bd9</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="73b7856342912b66320ecb8d0d0e778856133547" name="CivilRoadSample.fbx" link="0"/>
+	</runtimes>
+</asset>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>3c446ee26428a0d937c694642e685473689c0f36</guid>
+	<type>texture</type>
+	<hash>7a19a485</hash>
+	<parameters>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="image_format">RGB8</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="string" name="width">auto</parameter>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="preset_name">custom</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="3c446ee26428a0d937c694642e685473689c0f36" name="ACC_Main.tga" link="0"/>
+		<runtime id="25f6808c6ed7427b1fdd559e6737406547c27680" name="ACC_Main.dds" link="1"/>
+	</runtimes>
+</asset>

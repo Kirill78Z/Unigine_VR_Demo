@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>325e42fc6484c22b32bcf18e2f23cb9545eaa7f0</guid>
+	<type>material</type>
+	<hash>ad6d7a3a</hash>
+	<runtimes>
+		<runtime id="325e42fc6484c22b32bcf18e2f23cb9545eaa7f0" name="fueltank" link="0"/>
+	</runtimes>
+</asset>

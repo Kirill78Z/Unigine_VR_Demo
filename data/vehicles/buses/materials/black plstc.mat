@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="black plstc" guid="5ace0fef0195fc823c5a91f92482930479080293" base_material="mesh_base">
+	<options two_sided="1"/>
+	<parameter name="albedo_color">0.0156862754 0.0156862754 0.0156862754 1</parameter>
+</material>

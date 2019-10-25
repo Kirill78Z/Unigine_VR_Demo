@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>4e9de84854086f0734c860ba334ff8d1010adbfc</guid>
+	<type>texture</type>
+	<hash>c03e9c77</hash>
+	<parameters>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="image_format">RGB8</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="string" name="width">auto</parameter>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="preset_name">custom</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="4e9de84854086f0734c860ba334ff8d1010adbfc" name="FIT_Tires.tga" link="0"/>
+		<runtime id="3937d7a273017299581bbb2408ebcc3314bfa3f6" name="FIT_Tires.dds" link="1"/>
+	</runtimes>
+</asset>

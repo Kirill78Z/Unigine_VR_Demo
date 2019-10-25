@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>5c4d3d0327f53e8615e2842d01fe97a8163196e7</guid>
+	<type>fbx</type>
+	<hash>7e4d52e1</hash>
+	<parameters>
+		<parameter type="bool" name="merge_static_meshes">0</parameter>
+		<parameter type="bool" name="merge_surfaces_by_materials">0</parameter>
+		<parameter type="bool" name="use_instances">1</parameter>
+		<parameter type="bool" name="vertex_cache">1</parameter>
+		<parameter type="bool" name="import_meshes">1</parameter>
+		<parameter type="bool" name="import_materials">1</parameter>
+		<parameter type="bool" name="merge_similar_materials">1</parameter>
+		<parameter type="bool" name="import_textures">1</parameter>
+		<parameter type="bool" name="import_animations">0</parameter>
+		<parameter type="bool" name="import_bones_without_skin">0</parameter>
+		<parameter type="bool" name="create_transform_bones_for_joints">0</parameter>
+		<parameter type="bool" name="joints_reorientation">1</parameter>
+		<parameter type="bool" name="import_lights">0</parameter>
+		<parameter type="bool" name="import_cameras">0</parameter>
+		<parameter type="bool" name="import_tangent_space">0</parameter>
+		<parameter type="bool" name="import_morph_targets">0</parameter>
+		<parameter type="float" name="scale">1</parameter>
+		<parameter type="float" name="fps">30</parameter>
+		<parameter type="string" name="prefix_materials"/>
+		<parameter type="int" name="import_materials_mode">0</parameter>
+		<parameter type="int" name="workflow">0</parameter>
+		<parameter type="int" name="up_axis">0</parameter>
+		<parameter type="int" name="front_axis">0</parameter>
+		<parameter type="bool" name="need_split">0</parameter>
+		<parameter type="bool" name="need_repivot">1</parameter>
+		<parameter type="bool" name="need_triagulate">1</parameter>
+		<parameter type="bool" name="skip_empty_nodes">0</parameter>
+		<parameter type="float" name="bound_size">10000</parameter>
+		<parameter type="float" name="linear_deflection">0.200000003</parameter>
+		<parameter type="float" name="angular_deflection">0.699999988</parameter>
+		<parameter type="bool" name="combine_by_lods">0</parameter>
+		<parameter type="int" name="index_max_count_lods">1</parameter>
+		<parameter type="string" name="lods"/>
+		<parameter type="string" name="animations"/>
+		<parameter type="string" name="material_guids">body (green),0b0056bb6644dcde6f9c9ea54cb5bfc045d0301f,body (blue),4711b6162f07f67d5e4145b8567ecdb73db54faa,body (light blue),54865f55608aa8b05bdfa44f0df8c56257480559,body (silver),7ea0c8a852f413e72451001a5d2050b13882925c,body (white),79c17c7f2b43dfd25590fd090f7e62d407ee7023,body (black),160b448a09ca6a614592004c78633f3b116dab5e,body (red),49a0f8b966c64ac4436ed75359f5f496300622fd,body (cherry red),7cf8223c4a88986b548c52ce06ab3bd524c4db30,body (yellow),646be28370f4a6062997c5ad1fcbeb281063d467,trim red,46e6ce3e70622085375c98204bdf6cff411c1652,front grille,6784ac5d2fedc2185b2f5e977a45eb0a419bdee1,trim grey,1d0a491071a1092f10dc24c265341d397e4a2544,wheels,7005ccc73bc0a37a7d43dc912cebecbc2318e0eb,tyres,6d0947326c277ce928f62134203d5b03351ac486,underside,1b5f5e41542da2ac145cbe1b49865cbe0fc35d05,windows,04ab512427fa6a336971a9f679f298dd043dc498,indicators (off),2e9b6fa67005c2cd3e5c85c854f76e876e385a3a,registration front,2d5dbf4b12bc8c2e005a65b534393b90022259af,interior,05bae366327d238d21b8ef88068b4d471e3b29fa</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="30b09d2a6d1faa810b9301ec15b6145b5fad3dfe" name="HONDA FIT_MED.node" link="1" type="3">
+			<parameters>
+				<parameter type="string" name="id">fbc59f84</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2cbc4d4514855de0157bf7bf6a17a2125df75a49" name="honda_fit.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">d956f588</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5c4d3d0327f53e8615e2842d01fe97a8163196e7" name="HONDA FIT_MED.FBX" link="0"/>
+	</runtimes>
+</asset>

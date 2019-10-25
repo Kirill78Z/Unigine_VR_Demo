@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>1b085afe52eac6455a1782e075a5d8bf74de0f12</guid>
+	<type>texture</type>
+	<hash>d6acf934</hash>
+	<parameters>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="image_format">RGBA8</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="string" name="width">auto</parameter>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="preset_name">custom</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="1b085afe52eac6455a1782e075a5d8bf74de0f12" name="License_Plat.tga" link="0"/>
+		<runtime id="0ac13e8862715047391b50fa6d7fac117822763c" name="License_Plat.dds" link="1"/>
+	</runtimes>
+</asset>

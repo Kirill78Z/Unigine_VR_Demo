@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>099f5d6b583253ce737f48d56db78430561bc9cf</guid>
+	<type>material</type>
+	<hash>c314c81c</hash>
+	<runtimes>
+		<runtime id="099f5d6b583253ce737f48d56db78430561bc9cf" name="leather_dark" link="0"/>
+	</runtimes>
+</asset>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="1sidec" guid="4568633a0aef19510792827c3cf8fbab1d0cdd0e" base_material="mesh_base">
+	<options two_sided="1"/>
+	<parameter name="albedo_color">0 0 0 1</parameter>
+</material>

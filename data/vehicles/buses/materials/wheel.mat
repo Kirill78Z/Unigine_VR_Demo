@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="wheel" guid="3d830924763ec23335fa21f674b0b0dd5574fc98" base_material="mesh_base">
+	<options two_sided="1"/>
+	<parameter name="albedo_color">0.105882362 0.105882362 0.105882362 1</parameter>
+</material>

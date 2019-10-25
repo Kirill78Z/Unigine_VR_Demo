@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="ik255d_pol" guid="0a0bfbac191d431b394b1dbe7aa72a052c2713a0" base_material="mesh_base">
+	<options two_sided="1"/>
+	<texture name="albedo">guid://38f3e4ae22ece4352e90a810264ddc2f34b4dbc2</texture>
+</material>

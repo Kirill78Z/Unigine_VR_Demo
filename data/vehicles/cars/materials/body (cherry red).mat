@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="body (cherry red)" guid="7cf8223c4a88986b548c52ce06ab3bd524c4db30" base_material="mesh_base">
+	<parameter name="albedo_color">0.250980407 0.0431372561 0.023529416 1</parameter>
+</material>

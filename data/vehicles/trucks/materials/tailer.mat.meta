@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>7be0c47944f223842ec5591370cd0b5644c2cabd</guid>
+	<type>material</type>
+	<hash>1d82977c</hash>
+	<runtimes>
+		<runtime id="7be0c47944f223842ec5591370cd0b5644c2cabd" name="tailer" link="0"/>
+	</runtimes>
+</asset>

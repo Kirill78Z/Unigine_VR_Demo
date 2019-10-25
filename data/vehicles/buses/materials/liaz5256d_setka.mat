@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="liaz5256d_setka" guid="1bee8b18484f939707069c0a76eadbe152f0c3cc" base_material="mesh_base">
+	<options two_sided="1"/>
+	<texture name="albedo">guid://18e673fa25c273115dd0913c48c03b6b535199ce</texture>
+</material>

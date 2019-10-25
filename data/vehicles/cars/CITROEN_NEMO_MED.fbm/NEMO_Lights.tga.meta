@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>1adb4a4339b36ac6146c436d7e70cde835dbd827</guid>
+	<type>texture</type>
+	<hash>595b2893</hash>
+	<parameters>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="image_format">RGBA8</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="string" name="width">auto</parameter>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="preset_name">custom</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="1adb4a4339b36ac6146c436d7e70cde835dbd827" name="NEMO_Lights.tga" link="0"/>
+		<runtime id="7d2310b5318bea90680f3caf0479c24272761cb9" name="NEMO_Lights.dds" link="1"/>
+	</runtimes>
+</asset>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="liaz5256d_gre01" guid="5f4bed8505ea012061e3c1ff66326752192ade89" base_material="mesh_base">
+	<options two_sided="1"/>
+	<texture name="albedo">guid://70178baf735fc542045643b970dd19c414115a53</texture>
+	<parameter name="albedo_color">0.0666666701 0.254901975 0.509803951 1</parameter>
+</material>

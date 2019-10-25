@@ -5,7 +5,7 @@
 		"debug": 0,
 		"architecture": "x64",
 		"app_name": "/vr_test_x64.exe",
-		"arguments": "-extern_plugin \"AppVive\""
+		"arguments": ""
 	},
 	"project_settings": {
 		"name": "vr_test",

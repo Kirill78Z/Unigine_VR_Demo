@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="foglights" guid="2210da3c7e19f06b73fdcace0d3e53d56dcd1330" base_material="mesh_base">
+	<options two_sided="1"/>
+	<parameter name="albedo_color">0.980392277 0.980392277 0.980392277 1</parameter>
+</material>

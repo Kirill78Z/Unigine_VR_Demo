@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>27485773182e36362ba7381d0f1d5ad81236a057</guid>
+	<type>fbx</type>
+	<hash>90befe57</hash>
+	<parameters>
+		<parameter type="bool" name="merge_static_meshes">0</parameter>
+		<parameter type="bool" name="merge_surfaces_by_materials">0</parameter>
+		<parameter type="bool" name="use_instances">1</parameter>
+		<parameter type="bool" name="vertex_cache">1</parameter>
+		<parameter type="bool" name="import_meshes">1</parameter>
+		<parameter type="bool" name="import_materials">1</parameter>
+		<parameter type="bool" name="merge_similar_materials">1</parameter>
+		<parameter type="bool" name="import_textures">1</parameter>
+		<parameter type="bool" name="import_animations">0</parameter>
+		<parameter type="bool" name="import_bones_without_skin">0</parameter>
+		<parameter type="bool" name="create_transform_bones_for_joints">0</parameter>
+		<parameter type="bool" name="joints_reorientation">1</parameter>
+		<parameter type="bool" name="import_lights">0</parameter>
+		<parameter type="bool" name="import_cameras">0</parameter>
+		<parameter type="bool" name="import_tangent_space">0</parameter>
+		<parameter type="bool" name="import_morph_targets">0</parameter>
+		<parameter type="float" name="scale">1</parameter>
+		<parameter type="float" name="fps">30</parameter>
+		<parameter type="string" name="prefix_materials"/>
+		<parameter type="int" name="import_materials_mode">0</parameter>
+		<parameter type="int" name="workflow">0</parameter>
+		<parameter type="int" name="up_axis">0</parameter>
+		<parameter type="int" name="front_axis">0</parameter>
+		<parameter type="bool" name="need_split">0</parameter>
+		<parameter type="bool" name="need_repivot">1</parameter>
+		<parameter type="bool" name="need_triagulate">1</parameter>
+		<parameter type="bool" name="skip_empty_nodes">0</parameter>
+		<parameter type="float" name="bound_size">10000</parameter>
+		<parameter type="float" name="linear_deflection">0.200000003</parameter>
+		<parameter type="float" name="angular_deflection">0.699999988</parameter>
+		<parameter type="bool" name="combine_by_lods">0</parameter>
+		<parameter type="int" name="index_max_count_lods">1</parameter>
+		<parameter type="string" name="lods"/>
+		<parameter type="string" name="animations"/>
+		<parameter type="string" name="material_guids">liaz5256d_wite ,38709a2a05ad8381003d06ec3d56555b15b68afe,liaz5256d_green,1acafdd944134d647103b97311be30361f92ea1d,vehiclelights12,2375a0dc1cfbc68b69e66a6e50482ef528bbf3d0,liaz525640d_gos,44a9dca372e319a60f6564cd42c3bfc859516087,liaz5256d_black,435c1dde46b0eba5546ba8c065e3051f5d078ff2,liaz5256d_grey,26d5237d189a8eb8011d82b750e280aa27cd3801,liaz525625d_far,434b51b023fe394f73e45662090462590b8867e4,vehiclelights01,570688e720def11a475b8db12cd2ab5c2f644f0b,matte 66d3ffff,27d830d22a5f1a095283dbd46e6b952345bc7826,liaz5256d_wite1,32bf67612bd0d94c650a443b1ee6ec5e65846825,liaz5256d_sal01,264283c40c73bc535f7395963e8d4ffd072fd138,leather_dark,099f5d6b583253ce737f48d56db78430561bc9cf,liaz525640d_nom,766707067c0cb2ad0b29f4285cc049673a80b79a,liaz5256d_gre01,5f4bed8505ea012061e3c1ff66326752192ade89,liaz5256d_setka,1bee8b18484f939707069c0a76eadbe152f0c3cc,liaz5256d_set01,3ed11e2f31ab35c2397dfa3949185e445cded4d3,liaz5256d_koles,7282147a611c99910f3b85bc4919a5eb5ecb024e,liaz5256d_salon,77a319e953cb1a34794400037d2f25860add3f2d,ik255d_pol,0a0bfbac191d431b394b1dbe7aa72a052c2713a0,liaz5256d_main,04a8cf33778acaf66d5f45dd12b08d985ba8b417,liaz5256d_rul,634e0d2e2a23f2b566a364905edc6eaf30d14c42,liaz525625d_vod,5ff7908d5d5e78886389424773be9afa31466e11,liaz525625d_sid,3254a98013c48edf021e0eb241329e692f5fd4b4,liaz5256d_polos,3227b47739f9876a53690fc15ee4a62c628ceb9b,liaz5256d_shtor,438ee5227a4e2219686da4a44d9da7b35ebcc976</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="326a35715527b01c125a0ccb4bed7bae4ac38f35" name="BUS_LIAZ.node" link="1" type="3">
+			<parameters>
+				<parameter type="string" name="id">6f53721</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6f9957100078bf2f0a5462c20703433974f31344" name="object01.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c196bcb8</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="681805d3299451165c6bd57d3e2d98b8799104b7" name="bump_fro01.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">e1f1dad7</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="268c1aaa1ec60a012e92db6c0add1fdb00bdd37e" name="bump_rea01.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9790d0e9</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0fa4e4c512320f601b79fb3f44e2cf925fe9a9c9" name="windscre01.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">bec06d1e</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4993a894448d7ae316bfa2e62787dd0d76ad5b08" name="door_rf_ok.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">018a23ac</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="3949c2c70e38217a178942911f161abc3b9136eb" name="chassis.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c8ceaa7d</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7ba35f4e6a51de55777a1bb028da7b4f675fb062" name="whr1.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">badc8c83</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5623f4594c4ed1e4035473f360a6a8b605e4089d" name="whr0.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b906da01</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="3bc6f1581b4a44d76fa11c4a5c1cdf2135066e0c" name="stop.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">4ea8ce6a</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="3cc751fb3ebb1f1e04437be570967c00057b3f5f" name="headlights.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">bb58f61e</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4f380532163b22e956198f3446ddf1034d066286" name="ped_backse.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9326bf8f</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5019582d033f5ba818938ae755d40b1a2a29dfb1" name="union02.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ba3e3974</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="67f8d55c7f10710b476212ee4932bd752bec3050" name="door2.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">f6246dcd</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4a7d476f6918ce0212f835795128e08411daf213" name="door3.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b3bcb727</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="04dbd0566900cbbd481b99f86e6694f7431dedea" name="union01.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6326a1d2</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4d99444168c250ac5b3d941b5e353abe7718a305" name="union.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">45cc3312</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="052038a05d41937f00ef0ad215642c0908f1c5d4" name="vyhlop.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">15e4a35b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="573c77236463f2264db3634d5aa0ac482e446307" name="door_rr_ok.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b46aaa1f</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="010bc4ba30940cd17177dffc225fbb2b6711968e" name="whr02.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">badc8c83</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2e2e2c95551794f07f69238f11e7bba24cc80699" name="whr03.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b906da01</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="27485773182e36362ba7381d0f1d5ad81236a057" name="BUS_LIAZ.FBX" link="0"/>
+	</runtimes>
+</asset>

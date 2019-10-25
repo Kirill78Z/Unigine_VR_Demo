@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="indicators (off)" guid="2e9b6fa67005c2cd3e5c85c854f76e876e385a3a" base_material="mesh_base">
+	<texture name="albedo">guid://51c98e631a11a0663f32bc8d12e7b48825694e47</texture>
+	<parameter name="albedo_color">0.270588249 0.270588249 0.270588249 1</parameter>
+</material>

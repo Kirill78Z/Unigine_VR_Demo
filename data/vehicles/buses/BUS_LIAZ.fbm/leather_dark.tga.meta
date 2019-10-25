@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>758a2e1342a9dc56513f67bd417185f85fcb90f7</guid>
+	<type>texture</type>
+	<hash>69840a1d</hash>
+	<parameters>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="image_format">RGBA8</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="string" name="width">auto</parameter>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="preset_name">custom</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="758a2e1342a9dc56513f67bd417185f85fcb90f7" name="leather_dark.tga" link="0"/>
+		<runtime id="632abf057533a4a057460f7f189156d25eea0809" name="leather_dark.dds" link="1"/>
+	</runtimes>
+</asset>

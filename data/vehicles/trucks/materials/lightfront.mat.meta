@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>7b0cb4432671ccc607233d6d23577fe8627ee227</guid>
+	<type>material</type>
+	<hash>ba4e4dee</hash>
+	<runtimes>
+		<runtime id="7b0cb4432671ccc607233d6d23577fe8627ee227" name="lightfront" link="0"/>
+	</runtimes>
+</asset>

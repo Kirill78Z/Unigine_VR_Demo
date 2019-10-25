@@ -142,6 +142,10 @@
     <ClCompile Include="Framework\Triggers.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TrafficLane.cpp" />
+    <ClCompile Include="TrafficSimulation.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
+    <ClCompile Include="Сarriageway.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppEditorLogic.h" />
@@ -163,6 +167,10 @@
     <ClInclude Include="Framework\SoundManager.h" />
     <ClInclude Include="Framework\Triggers.h" />
     <ClInclude Include="Framework\Utils.h" />
+    <ClInclude Include="TrafficLane.h" />
+    <ClInclude Include="TrafficSimulation.h" />
+    <ClInclude Include="Vehicle.h" />
+    <ClInclude Include="Сarriageway.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="C:/Users/kzaharov/Unigine SDK Browser/sdks/engineering_windows_2.7.3.1/utils/natvis/unigine_stl.natvis" />

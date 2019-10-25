@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Natvis Include="C:/Users/kzaharov/Unigine SDK Browser/sdks/engineering_windows_2.7.3.1/utils/natvis/unigine_stl.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AppEditorLogic.cpp" />
+    <ClCompile Include="AppSystemLogic.cpp" />
+    <ClCompile Include="AppWorldLogic.cpp" />
+    <ClCompile Include="ComponentSystem\ComponentSystem.cpp" />
+    <ClCompile Include="Framework\Components\Objects\ObjHandle.cpp" />
+    <ClCompile Include="Framework\Components\Objects\ObjMovable.cpp" />
+    <ClCompile Include="Framework\Components\Objects\ObjSwitch.cpp" />
+    <ClCompile Include="Framework\Components\Players\AppOculusProxy.cpp" />
+    <ClCompile Include="Framework\Components\Players\AppViveProxy.cpp" />
+    <ClCompile Include="Framework\Components\Players\VRPlayer.cpp" />
+    <ClCompile Include="Framework\Components\Players\VRPlayerOculus.cpp" />
+    <ClCompile Include="Framework\Components\Players\VRPlayerPC.cpp" />
+    <ClCompile Include="Framework\Components\Players\VRPlayerVR.cpp" />
+    <ClCompile Include="Framework\Components\Players\VRPlayerVive.cpp" />
+    <ClCompile Include="Framework\Components\VRPlayerSpawner.cpp" />
+    <ClCompile Include="Framework\SoundManager.cpp" />
+    <ClCompile Include="Framework\Triggers.cpp" />
+    <ClCompile Include="Framework\Utils.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="TrafficSimulation.cpp">
+      <Filter>TrafficSimulation</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLane.cpp">
+      <Filter>TrafficSimulation</Filter>
+    </ClCompile>
+    <ClCompile Include="Сarriageway.cpp">
+      <Filter>TrafficSimulation</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AppEditorLogic.h" />
+    <ClInclude Include="AppSystemLogic.h" />
+    <ClInclude Include="AppWorldLogic.h" />
+    <ClInclude Include="ComponentSystem\ComponentSystem.h" />
+    <ClInclude Include="Framework\Components\Objects\ObjHandle.h" />
+    <ClInclude Include="Framework\Components\Objects\ObjMovable.h" />
+    <ClInclude Include="Framework\Components\Objects\ObjSwitch.h" />
+    <ClInclude Include="Framework\Components\Players\AppOculusProxy.h" />
+    <ClInclude Include="Framework\Components\Players\AppViveProxy.h" />
+    <ClInclude Include="Framework\Components\Players\VRPlayer.h" />
+    <ClInclude Include="Framework\Components\Players\VRPlayerOculus.h" />
+    <ClInclude Include="Framework\Components\Players\VRPlayerPC.h" />
+    <ClInclude Include="Framework\Components\Players\VRPlayerVR.h" />
+    <ClInclude Include="Framework\Components\Players\VRPlayerVive.h" />
+    <ClInclude Include="Framework\Components\VRInteractable.h" />
+    <ClInclude Include="Framework\Components\VRPlayerSpawner.h" />
+    <ClInclude Include="Framework\SoundManager.h" />
+    <ClInclude Include="Framework\Triggers.h" />
+    <ClInclude Include="Framework\Utils.h" />
+    <ClInclude Include="TrafficSimulation.h">
+      <Filter>TrafficSimulation</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLane.h">
+      <Filter>TrafficSimulation</Filter>
+    </ClInclude>
+    <ClInclude Include="Сarriageway.h">
+      <Filter>TrafficSimulation</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="TrafficSimulation">
+      <UniqueIdentifier>{42fa8f0a-0282-40e0-87ab-0c23d70b3a0a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

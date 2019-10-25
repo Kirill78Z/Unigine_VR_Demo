@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>20030de06efde7bf2b50d21226feca497d194f14</guid>
+	<type>texture</type>
+	<hash>9029b6ae</hash>
+	<parameters>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="image_format">RGBA8</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="string" name="width">auto</parameter>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="preset_name">custom</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="20030de06efde7bf2b50d21226feca497d194f14" name="liaz5256d_setkag.tga" link="0"/>
+		<runtime id="18e673fa25c273115dd0913c48c03b6b535199ce" name="liaz5256d_setkag.dds" link="1"/>
+	</runtimes>
+</asset>

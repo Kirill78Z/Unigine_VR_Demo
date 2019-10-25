@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="wheelcup" guid="3714b07b02cfeb9e3b4cde6517cf7c80461345df" base_material="mesh_base">
+	<options two_sided="1"/>
+</material>

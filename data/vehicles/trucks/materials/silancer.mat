@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="silancer" guid="51fbc9e46fed0bf308f660b64d40609d3e876958" base_material="mesh_base">
+	<options two_sided="1"/>
+	<parameter name="albedo_color">0.960784376 0.960784376 0.960784376 1</parameter>
+</material>

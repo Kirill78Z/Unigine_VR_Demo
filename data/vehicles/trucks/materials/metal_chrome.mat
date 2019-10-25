@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="metal_chrome" guid="42c37cfe38f7804544d8f4e016e4a2bf638a5112" base_material="mesh_base">
+	<options two_sided="1"/>
+	<parameter name="albedo_color">0.43921572 0.43921572 0.43921572 1</parameter>
+</material>

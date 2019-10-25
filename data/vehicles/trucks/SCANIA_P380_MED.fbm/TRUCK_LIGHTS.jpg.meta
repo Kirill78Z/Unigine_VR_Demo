@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>2fd820a777ba25da2e41bb71147d7e1c17c982cb</guid>
+	<type>texture</type>
+	<hash>588c1c9d</hash>
+	<parameters>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="image_format">RGB8</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="string" name="width">auto</parameter>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="preset_name">custom</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="2fd820a777ba25da2e41bb71147d7e1c17c982cb" name="TRUCK_LIGHTS.jpg" link="0"/>
+		<runtime id="33cb89395d02a14441763bd302e10f1607057b7d" name="TRUCK_LIGHTS.dds" link="1"/>
+	</runtimes>
+</asset>

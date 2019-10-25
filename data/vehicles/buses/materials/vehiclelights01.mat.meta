@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>570688e720def11a475b8db12cd2ab5c2f644f0b</guid>
+	<type>material</type>
+	<hash>70bfc735</hash>
+	<runtimes>
+		<runtime id="570688e720def11a475b8db12cd2ab5c2f644f0b" name="vehiclelights01" link="0"/>
+	</runtimes>
+</asset>

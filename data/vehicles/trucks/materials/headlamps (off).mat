@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="headlamps (off)" guid="4ee66e84590f281336068e567de071bd299b07f8" base_material="mesh_base">
+	<options two_sided="1"/>
+	<texture name="albedo">guid://33cb89395d02a14441763bd302e10f1607057b7d</texture>
+</material>

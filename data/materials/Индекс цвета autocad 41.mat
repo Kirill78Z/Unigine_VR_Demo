@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="Индекс цвета autocad 41" guid="4aa3000a79b3efe1091ec7cc798660bb650f5ede" base_material="mesh_base">
+	<parameter name="albedo_color">1 0.875 0.5 1</parameter>
+</material>

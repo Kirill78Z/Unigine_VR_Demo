@@ -19,6 +19,7 @@
 #include <UnigineStreams.h>
 #include <UnigineWidgets.h>
 #include <UnigineGui.h>
+#include "TrafficSimulation.h"
 
 class AppWorldLogic : public Unigine::WorldLogic {
 	
@@ -48,6 +49,8 @@ private:
 	Unigine::WidgetCheckBoxPtr trafficCheckBox;
 
 	void enableTraffic();
+
+	TrafficSimulation* trafficSimulation;
 };
 
 #endif // __APP_WORLD_LOGIC_H__

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="liaz525640d_nom" guid="766707067c0cb2ad0b29f4285cc049673a80b79a" base_material="mesh_base">
+	<options two_sided="1"/>
+	<texture name="albedo">guid://2abf7e981170f1172a795b8a2f8b95615a832f4c</texture>
+</material>

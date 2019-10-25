@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>21baf41d4705e6d83ccdbc57306b2dca5ed8c2a1</guid>
+	<type>material</type>
+	<hash>8939dc5c</hash>
+	<runtimes>
+		<runtime id="21baf41d4705e6d83ccdbc57306b2dca5ed8c2a1" name="backlight" link="0"/>
+	</runtimes>
+</asset>

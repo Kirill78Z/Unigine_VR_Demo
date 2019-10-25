@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="leather_dark" guid="099f5d6b583253ce737f48d56db78430561bc9cf" base_material="mesh_base">
+	<options two_sided="1"/>
+	<texture name="albedo">guid://632abf057533a4a057460f7f189156d25eea0809</texture>
+</material>

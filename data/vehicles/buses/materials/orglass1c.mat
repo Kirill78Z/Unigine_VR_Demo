@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="orglass1c" guid="14fa17bb43d9a9de7ed907a5659d14c0026d811f" base_material="mesh_base">
+	<options two_sided="1"/>
+	<parameter name="albedo_color">1 0.36470589 0 1</parameter>
+</material>

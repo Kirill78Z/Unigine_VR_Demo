@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="interior" guid="05bae366327d238d21b8ef88068b4d471e3b29fa" base_material="mesh_base">
+	<parameter name="albedo_color">0.392156929 0.329411775 0.203921601 1</parameter>
+</material>

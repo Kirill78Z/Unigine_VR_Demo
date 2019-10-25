@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>542169751e92ec5067dcd36f24baea026d5ba179</guid>
+	<type>texture</type>
+	<hash>504f2d07</hash>
+	<parameters>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="image_format">RGB8</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="string" name="width">auto</parameter>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="preset_name">custom</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="542169751e92ec5067dcd36f24baea026d5ba179" name="FIT_Lights.tga" link="0"/>
+		<runtime id="23b7a0f76f0389ea406a304107664cac5bf9601b" name="FIT_Lights.dds" link="1"/>
+	</runtimes>
+</asset>

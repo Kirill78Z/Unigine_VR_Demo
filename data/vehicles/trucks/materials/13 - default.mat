@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="13 - default" guid="62134cd668ed1e3d7e7aca785b0f0b777962f26a" base_material="mesh_base">
+	<options two_sided="1"/>
+	<parameter name="albedo_color">0.270588249 0.270588249 0.270588249 1</parameter>
+	<parameter name="specular">0</parameter>
+</material>

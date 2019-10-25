@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>5ce5a1f2434098a94c0b09f477c9acc30b8d6b46</guid>
+	<type>material</type>
+	<hash>56d2c9c5</hash>
+	<runtimes>
+		<runtime id="5ce5a1f2434098a94c0b09f477c9acc30b8d6b46" name="mirror" link="0"/>
+	</runtimes>
+</asset>

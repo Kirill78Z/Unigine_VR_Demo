@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="front grille" guid="6784ac5d2fedc2185b2f5e977a45eb0a419bdee1" base_material="mesh_base">
+	<texture name="albedo">guid://25f6808c6ed7427b1fdd559e6737406547c27680</texture>
+	<parameter name="albedo_color">0.023529416 0.023529416 0.023529416 1</parameter>
+</material>

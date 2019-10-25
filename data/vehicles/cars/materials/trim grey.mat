@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="trim grey" guid="1d0a491071a1092f10dc24c265341d397e4a2544" base_material="mesh_base">
+	<parameter name="albedo_color">0.301960796 0.301960796 0.301960796 1</parameter>
+</material>

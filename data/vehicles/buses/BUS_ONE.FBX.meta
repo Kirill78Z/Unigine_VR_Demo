@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>674004bd73077ef8769f35f777241aea4cd78d41</guid>
+	<type>fbx</type>
+	<hash>6541ff89</hash>
+	<parameters>
+		<parameter type="bool" name="merge_static_meshes">0</parameter>
+		<parameter type="bool" name="merge_surfaces_by_materials">0</parameter>
+		<parameter type="bool" name="use_instances">1</parameter>
+		<parameter type="bool" name="vertex_cache">1</parameter>
+		<parameter type="bool" name="import_meshes">1</parameter>
+		<parameter type="bool" name="import_materials">1</parameter>
+		<parameter type="bool" name="merge_similar_materials">1</parameter>
+		<parameter type="bool" name="import_textures">1</parameter>
+		<parameter type="bool" name="import_animations">0</parameter>
+		<parameter type="bool" name="import_bones_without_skin">0</parameter>
+		<parameter type="bool" name="create_transform_bones_for_joints">0</parameter>
+		<parameter type="bool" name="joints_reorientation">1</parameter>
+		<parameter type="bool" name="import_lights">0</parameter>
+		<parameter type="bool" name="import_cameras">0</parameter>
+		<parameter type="bool" name="import_tangent_space">0</parameter>
+		<parameter type="bool" name="import_morph_targets">0</parameter>
+		<parameter type="float" name="scale">1</parameter>
+		<parameter type="float" name="fps">30</parameter>
+		<parameter type="string" name="prefix_materials"/>
+		<parameter type="int" name="import_materials_mode">0</parameter>
+		<parameter type="int" name="workflow">0</parameter>
+		<parameter type="int" name="up_axis">0</parameter>
+		<parameter type="int" name="front_axis">0</parameter>
+		<parameter type="bool" name="need_split">0</parameter>
+		<parameter type="bool" name="need_repivot">1</parameter>
+		<parameter type="bool" name="need_triagulate">1</parameter>
+		<parameter type="bool" name="skip_empty_nodes">0</parameter>
+		<parameter type="float" name="bound_size">10000</parameter>
+		<parameter type="float" name="linear_deflection">0.200000003</parameter>
+		<parameter type="float" name="angular_deflection">0.699999988</parameter>
+		<parameter type="bool" name="combine_by_lods">0</parameter>
+		<parameter type="int" name="index_max_count_lods">1</parameter>
+		<parameter type="string" name="lods"/>
+		<parameter type="string" name="animations"/>
+		<parameter type="string" name="material_guids">02 - default,158e547f4abad7d20d6b950956281ad435dcc823,window,39bf3c8a46be02614480b84c7fd2973b6725235e,side windows,210d90b973da02c440bf2f53521a6c9609b03afd,foglights,2210da3c7e19f06b73fdcace0d3e53d56dcd1330,crome lining,329e3a8310931e062073ddad32892328604fac67,door,1392463e5ee7388533aed020565c44ff1f830e52,11 - default,1912c45d29b4fa18629d369736e9e30a62bf76e1,blinkers,1c2681101c5fe12f5e9d1cc272d0b5396bcddd44,screen,4875a4c7617e9b7a50b974911c74a4bc3e5a38eb,backlights,45a43f3262d614e91863d934781fb30372a93c86,metal_chromefast,16a6f64175605aac7140161b2e21d4be55787505,wheel,3d830924763ec23335fa21f674b0b0dd5574fc98</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="7d63174b5c12042e7f817db514c573903f9131af" name="BUS_ONE.node" link="1" type="3">
+			<parameters>
+				<parameter type="string" name="id">e04548ab</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2ab13342034cd9b94926b7c452c260534ac9e996" name="bus.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">75bdfee8</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4b6793fd495d45386237c7376702fb2a2ec27081" name="tube01.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">e93097cb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="11bb0fec3952ca5b65267bfe5098734553d74be0" name="cylinder04.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ac85a08c</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2f790dbf38b5c01249f2e0492a426d1400387563" name="tube02.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">e93097cb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="34bd5b66496d3b8d4d7a278833ab254730e921fa" name="cylinder06.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ac85a08c</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6d3949113e1d6f3c7b1b816b15d827ce5b630cd5" name="tube03.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">e93097cb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1860783025e82dcf24b0c0e25c54cad904c0b664" name="cylinder07.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ac85a08c</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="12a80e730df481367b9b071d79f8ddd8408e4757" name="tube04.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">e93097cb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2b943cca72e885a14434e28c650e3c7b7244079e" name="cylinder08.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ac85a08c</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="635a4a650585f88029bf91df6e0f35b220fb9969" name="tube05.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">e93097cb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="239693b476822b835e2c5b061489f6ad569e6828" name="tube06.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">e93097cb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="674004bd73077ef8769f35f777241aea4cd78d41" name="BUS_ONE.FBX" link="0"/>
+	</runtimes>
+</asset>

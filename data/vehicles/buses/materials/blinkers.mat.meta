@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>1c2681101c5fe12f5e9d1cc272d0b5396bcddd44</guid>
+	<type>material</type>
+	<hash>1551510a</hash>
+	<runtimes>
+		<runtime id="1c2681101c5fe12f5e9d1cc272d0b5396bcddd44" name="blinkers" link="0"/>
+	</runtimes>
+</asset>
