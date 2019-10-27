@@ -2561,10 +2561,5 @@
 				</node>
 			</node>
 		</node>
-		<node curved="0" type="WorldSplineGraph" id="766033942" name="WorldSplineGraph">
-			<spline_name>guid://37f18ae4614dd8f3618ec9b647d3b59d78e0ba58</spline_name>
-			<point_nodes/>
-			<transform>1 0 0 0.0 0 0.999999761581 0 0.0 0 0 0.999999880791 0.0 0 0 0 1.0</transform>
-		</node>
 	</editor>
 </world>

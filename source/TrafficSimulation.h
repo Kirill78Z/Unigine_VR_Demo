@@ -1,8 +1,8 @@
 #pragma once
 #include <UnigineNodes.h>
 #include <UnigineHashMap.h>
-#include "Ñarriageway.h"
 
+class Ñarriageway;
 
 class TrafficSimulation
 {

@@ -32,7 +32,9 @@
     <ClCompile Include="Сarriageway.cpp">
       <Filter>TrafficSimulation</Filter>
     </ClCompile>
-    <ClCompile Include="Vehicle.cpp" />
+    <ClCompile Include="Vehicle.cpp">
+      <Filter>TrafficSimulation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppEditorLogic.h" />
@@ -63,7 +65,9 @@
     <ClInclude Include="Сarriageway.h">
       <Filter>TrafficSimulation</Filter>
     </ClInclude>
-    <ClInclude Include="Vehicle.h" />
+    <ClInclude Include="Vehicle.h">
+      <Filter>TrafficSimulation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="TrafficSimulation">

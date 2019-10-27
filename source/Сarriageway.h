@@ -2,6 +2,8 @@
 #include <UnigineNodes.h>
 #include "TrafficSimulation.h"
 
+class TrafficLane;
+
 class Ñarriageway
 {
 public:
@@ -14,5 +16,7 @@ public:
 private:
 	Unigine::NodeDummyPtr _node;
 	TrafficSimulation* _trafficSim;
+
+	Unigine::Vector<TrafficLane*> trafficLanes;
 };
 

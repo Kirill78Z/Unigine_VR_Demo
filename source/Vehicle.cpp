@@ -3,11 +3,15 @@
 
 
 Vehicle::Vehicle(Ñarriageway* carriageway,
-	TrafficLane* trafficLane, Unigine::NodeDummyPtr node)
+	TrafficLane* trafficLane, Unigine::NodePtr node, float velocity)
 {
 	this->carriageway = carriageway;
 	this->trafficLane = trafficLane;
 	this->node = node;
+	this->velocity = velocity;
+
+	//TODO: get static envelop of node
+	//place node into start position (in start of first spline segment with respect to ground position)
 }
 
 
