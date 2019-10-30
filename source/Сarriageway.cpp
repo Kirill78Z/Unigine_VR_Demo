@@ -20,7 +20,11 @@
 		trafficLanes.append(tl);
 	}
 
-	//TODO: sort trafficLanes from left to right
+	//TODO: sort trafficLanes from left to right (or use parameters for lanes numbering)
+
+	for (int tl = 0; tl < trafficLanes.size(); tl++) {
+		trafficLanes[tl]->setNum(tl);
+	}
 }
 
 

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<asset version="2.7.3.0">
-	<guid>17477dbe2eb80a056a4273a06680927f79bbfdd2</guid>
-	<type>spline_graph</type>
-	<hash>e8e3be76</hash>
-	<runtimes>
-		<runtime id="17477dbe2eb80a056a4273a06680927f79bbfdd2" name="line1.spl" link="0"/>
-	</runtimes>
-</asset>

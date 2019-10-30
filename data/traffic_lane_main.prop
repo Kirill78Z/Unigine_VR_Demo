@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<property version="2.7.3.0" name="traffic_lane_main" guid="2b8404be0294e5050ebb92a00a01257f5cd574d2" parent="1c613bbca0afd78c1ef165fc8e419352c5903d9e">
+	<parameter name="0_cars" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="1_trucks" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="2_trucks" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="3_trucks" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="4_trucks" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="5_trucks" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="6_trucks" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="7_trucks" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="8_trucks" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="9_trucks" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="10_buses" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="11_buses" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="12_buses" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="13_buses" min="0" max="10000" flags="max_expand">0</parameter>
+	<parameter name="leads_to_end_of_road">1</parameter>
+</property>

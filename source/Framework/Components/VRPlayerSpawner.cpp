@@ -98,7 +98,7 @@ void VRPlayerSpawner::init()
 		engine->findPlugin("AppOculus") == -1)
 	{
 		// add node
-		PlayerActorPtr player = PlayerActor::create();
+		PlayerSpectatorPtr player = PlayerSpectator::create();
 		init_player(player->getPlayer());
 		player->release();
 

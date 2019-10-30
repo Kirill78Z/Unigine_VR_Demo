@@ -22,23 +22,16 @@ void VRPlayerPC::init()
 	collision_height_min = 0.6f;
 
 	// player
-	actor = PlayerActor::cast(node);
-	actor->setCollisionRadius(0.3f);
-	actor->setCollisionHeight(collision_height_max);
-	actor->setMinVelocity(move_speed);
-	actor->setMaxVelocity(move_speed * 2.0f);
-	actor->setAcceleration(acceleration);
-	actor->setPhysicalMass(60.0f);
-	actor->setDamping(damping);
-	actor->setJumping(1.0f);
-	actor->getShape()->setContinuous(1);
-	actor->setControlled(1);
-	actor->setPhysical(0);
-	collision_height = actor->getCollisionHeight();
+	spect = PlayerSpectator::cast(node);
+	spect->setMinVelocity(move_speed);
+	spect->setMaxVelocity(move_speed * 2.0f);
+	spect->setAcceleration(acceleration);
+	spect->setDamping(damping);
+	spect->setControlled(1);
 
 	saved_dof_blur = Render::get()->getDOFBlur();
 
-	Game::get()->setPlayer(actor->getPlayer());
+	Game::get()->setPlayer(spect->getPlayer());
 
 	head = NodeDummy::create();
 
@@ -48,19 +41,25 @@ void VRPlayerPC::init()
 
 	// controls
 	xpad360 = ControlsXPad360::create(0);
-	controls = actor->getControls();
+	controls = spect->getControls();
 	last_used_control = 0;
 	xpad_back = xpad_start = 0;
 
 	last_selected = null_selected;
+
+
+
+	Unigine::NodePtr hotpointsNode = Unigine::Editor::get()->getNodeByName("vr_hotpoints");
+	if (hotpointsNode->getNumChildren() > 0) {
+		Unigine::Math::dmat4 transf = hotpointsNode->getChild(0)->getWorldTransform();
+		spect->setWorldTransform(transf);
+	}
 }
 
 void VRPlayerPC::update()
 {
 	controls_update();
 	zoom_update();
-	dof_update();
-	crouch_update();
 	time_scale_update();
 }
 
@@ -76,7 +75,7 @@ void VRPlayerPC::shutdown()
 	VRPlayer::shutdown();
 	hand.destroy();
 	head.destroy();
-	actor.destroy();
+	spect.destroy();
 }
 
 void VRPlayerPC::setEnabled(int enabled)
@@ -88,13 +87,13 @@ void VRPlayerPC::setEnabled(int enabled)
 		PlayerPtr player = Game::get()->getPlayer();
 		if (player)
 		{
-			actor->setWorldTransform(player->getWorldTransform());
+			spect->setWorldTransform(player->getWorldTransform());
 
-			Vec3 pos = actor->getPosition();
-			pos -= actor->getCamera()->getPosition() - pos; // substract height of player
+			Vec3 pos = spect->getPosition();
+			pos -= spect->getCamera()->getPosition() - pos; // substract height of player
 			if (pos.z < 0) pos.z = 0; // check floor
 
-			actor->setPosition(pos);
+			spect->setPosition(pos);
 		}
 		Game::get()->setPlayer(getPlayer());
 		Render::get()->setFadeColor(vec4::ZERO);
@@ -108,12 +107,12 @@ void VRPlayerPC::setEnabled(int enabled)
 
 PlayerPtr VRPlayerPC::getPlayer()
 {
-	return actor->getPlayer();
+	return spect->getPlayer();
 }
 
-PlayerActorPtr VRPlayerPC::getActor()
+PlayerSpectatorPtr VRPlayerPC::getActor()
 {
-	return actor;
+	return spect;
 }
 
 void VRPlayerPC::disable_outline()
@@ -123,7 +122,7 @@ void VRPlayerPC::disable_outline()
 		for (int i = 0; i < last_selected->getNumSurfaces(); i++)
 			last_selected->setMaterialState("auxiliary", 0, i);
 
-		actor->setPostMaterials("");
+		spect->setPostMaterials("");
 
 		last_selected = null_selected;
 	}
@@ -244,14 +243,14 @@ void VRPlayerPC::controls_update()
 
 void VRPlayerPC::head_update()
 {
-	head->setPosition(actor->getCamera()->getPosition());
-	head->setDirection(actor->getViewDirection(), vec3(0, 0, 1));
+	head->setPosition(spect->getCamera()->getPosition());
+	head->setDirection(spect->getViewDirection(), vec3(0, 0, 1));
 }
 
 void VRPlayerPC::grab_update()
 {
 	// clear key state analogue
-	int real_button_pressed = actor->getControls()->getState(Controls::STATE_USE) || (App::get()->getMouseButtonState(App::BUTTON_MIDDLE));
+	int real_button_pressed = spect->getControls()->getState(Controls::STATE_USE) || (App::get()->getMouseButtonState(App::BUTTON_MIDDLE));
 	int button_pressed = real_button_pressed;
 	if (last_grab_button_state == button_pressed && button_pressed == 1)
 		button_pressed = 0;
@@ -263,8 +262,8 @@ void VRPlayerPC::grab_update()
 	{
 		hand_state = HAND_FREE;
 
-		Vec3 p1 = actor->getCamera()->getPosition();
-		Vec3 p2 = p1 + Vec3(actor->getViewDirection()) * hand_length;
+		Vec3 p1 = spect->getCamera()->getPosition();
+		Vec3 p2 = p1 + Vec3(spect->getViewDirection()) * hand_length;
 
 		ObjectPtr hit_obj = World::get()->getIntersection(p1, p2, 1, intersection);
 		if (hit_obj)
@@ -282,7 +281,7 @@ void VRPlayerPC::grab_update()
 					for (int i = 0; i < hit_obj->getNumSurfaces(); i++)
 						hit_obj->setMaterialState("auxiliary", 1, i);
 
-					actor->setPostMaterials("vr_post_filter_selection");
+					spect->setPostMaterials("vr_post_filter_selection");
 				}
 				last_selected = hit_obj;
 
@@ -340,49 +339,21 @@ void VRPlayerPC::grab_update()
 void VRPlayerPC::zoom_update()
 {
 	float ifps = Game::get()->getIFps() / Game::get()->getScale();
-	zoom = lerp_clamped(zoom, actor->getControls()->getState(Controls::STATE_FIRE) ? zoom_min : zoom_max, zoom_factor * ifps);
-	actor->setFov(zoom);
+	zoom = lerp_clamped(zoom, spect->getControls()->getState(Controls::STATE_FIRE) ? zoom_min : zoom_max, zoom_factor * ifps);
+	spect->setFov(zoom);
 	ControlsApp::get()->setMouseSensitivity(mouse_sensitivity * zoom / zoom_max);
 }
 
-void VRPlayerPC::dof_update()
-{
-	Vec3 p1 = head->getPosition();
-	Vec3 p2 = p1 + Vec3(head->getDirection()) * actor->getZFar();
 
-	ObjectPtr hit_obj = World::get()->getIntersection(p1, p2, 1, intersection);
-	if (hit_obj)
-		dof_dist = lerp_clamped(dof_dist, (float)(intersection->getPoint() - p1).length(), dof_dist_factor * Game::get()->getIFps() / Game::get()->getScale());
 
-	float z = zoom / zoom_max;
-	float dof_blur = saturate(1.0f - ((zoom - zoom_min) / (zoom_max - zoom_min)));
-	if (dof_blur < 0.01f) dof_blur = 0;
-
-	Render::get()->setDOFBlur(dof_blur);
-	Render::get()->setDOFFocalDistance(dof_dist);
-	Render::get()->setDOFNearDistance(lerp(dof_min_dist, dof_max_dist, dof_dist / actor->getZFar()) * z);
-	Render::get()->setDOFFarDistance(lerp(dof_min_dist, dof_max_dist, dof_dist / actor->getZFar()) * z);
-}
-
-void VRPlayerPC::crouch_update()
-{
-	if (actor->getControls()->getState(Controls::STATE_CROUCH))
-		collision_height = lerp(collision_height, collision_height_min, 10.0f * Game::get()->getIFps() / Game::get()->getScale());
-	else
-		collision_height = lerp(collision_height, collision_height_max, 10.0f * Game::get()->getIFps() / Game::get()->getScale());
-
-	Vec3 pos = actor->getPosition();
-	actor->setCollisionHeight(collision_height);
-	actor->setTransform(translate(pos) * rotation(actor->getCamera()->getIModelview()));
-}
 
 void VRPlayerPC::time_scale_update()
 {
 	float scale = Game::get()->getScale();
-	actor->setMinVelocity(move_speed / scale);
-	actor->setMaxVelocity(move_speed * 2.0f / scale);
-	actor->setAcceleration(acceleration / scale);
-	actor->setDamping(damping / scale);
+	spect->setMinVelocity(move_speed / scale);
+	spect->setMaxVelocity(move_speed * 2.0f / scale);
+	spect->setAcceleration(acceleration / scale);
+	spect->setDamping(damping / scale);
 }
 
 int VRPlayerPC::getNumHands()
@@ -407,7 +378,7 @@ vec3 VRPlayerPC::getHandLinearVelocity(int num)
 		if (App::get()->getMouseButtonState(App::BUTTON_MIDDLE))
 			return vec3::ZERO;
 		else
-			return actor->getViewDirection() * throw_force;
+			return spect->getViewDirection() * throw_force;
 	}
 	else
 		return vec3(hand_offset * 0.1f * Game::get()->getScale() / Game::get()->getIFps());

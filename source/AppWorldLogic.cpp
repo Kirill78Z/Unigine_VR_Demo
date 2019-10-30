@@ -15,6 +15,7 @@
 #include "AppWorldLogic.h"
 #include <UnigineGui.h>
 #include <UnigineEditor.h>
+#include <UnigineGame.h>
  // World logic, it takes effect only when the world is loaded.
  // These methods are called right after corresponding world script's (UnigineScript) methods.
 
@@ -50,6 +51,9 @@ int AppWorldLogic::init() {
 
 
 
+	
+	
+
 	//traffic
 	trafficSimulation = new TrafficSimulation;
 
@@ -59,7 +63,7 @@ int AppWorldLogic::init() {
 
 void AppWorldLogic::enableTraffic() {
 	Unigine::NodePtr trafficNode = Unigine::Editor::get()->getNodeByName("Traffic");
-	if(!trafficNode)
+	if (!trafficNode)
 		trafficNode = Unigine::Editor::get()->getNodeByName("traffic");
 
 	if (!trafficNode) return;
@@ -68,12 +72,11 @@ void AppWorldLogic::enableTraffic() {
 	else trafficNode->setEnabled(0);
 }
 
+
 // start of the main loop
 int AppWorldLogic::update() {
 	// Write here code to be called before updating each render frame: specify all graphics-related functions you want to be called every frame while your application executes.
-
 	trafficSimulation->update();
-
 	return 1;
 }
 

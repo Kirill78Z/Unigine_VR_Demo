@@ -13,10 +13,14 @@ public:
 	void update();
 
 
+	TrafficLane* getTrafficLane(int num) {
+		return trafficLanes[num];
+	}
+
 private:
 	Unigine::NodeDummyPtr _node;
 	TrafficSimulation* _trafficSim;
 
-	Unigine::Vector<TrafficLane*> trafficLanes;
+	Unigine::Vector<TrafficLane*> trafficLanes;//TODO: sorting of Unigine::Vector
 };
 

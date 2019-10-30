@@ -34,7 +34,7 @@ public:
 
 	// player
 	Unigine::PlayerPtr getPlayer();
-	Unigine::PlayerActorPtr getActor();
+	Unigine::PlayerSpectatorPtr getActor();
 	//int isEnabled();
 	void setEnabled(int enabled);
 
@@ -64,7 +64,7 @@ protected:
 	void shutdown();
 
 private:
-	Unigine::PlayerActorPtr actor;
+	Unigine::PlayerSpectatorPtr spect;
 	Unigine::NodeDummyPtr hand;
 
 	Unigine::ControlsPtr controls;
@@ -109,8 +109,6 @@ private:
 	void head_update();
 	void grab_update();
 	void zoom_update();
-	void dof_update();
 	void time_scale_update();
-	void crouch_update();
 	void disable_outline();
 };
