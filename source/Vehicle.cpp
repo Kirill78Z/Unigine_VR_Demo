@@ -31,7 +31,7 @@ Vehicle::Vehicle(Ñarriageway* carriageway,
 
 
 	//place node into start position
-	TrafficLane* lane = getCurrTrafficLane();
+	MainLane* lane = getCurrTrafficLane();
 	Position3D vp = lane->startOfLane();
 	moveOnPos(vp);
 	currLinearPosOnLane = startLinPos;
@@ -73,7 +73,7 @@ void Vehicle::update() {
 		double clearDist = getClearDist(nextIt, currLinearPosOnLane, obstacleType, obstacleLP);
 
 		//get next vehicle in this line
-		TrafficLane* lane = getCurrTrafficLane();
+		MainLane* lane = getCurrTrafficLane();
 
 		//here the decision on current acceleration has to be made. 
 		//if the path is free, then we accelerate with standard acceleration. 
@@ -120,12 +120,12 @@ void Vehicle::update() {
 			velocity = velocity + currAcceleration * time;
 		}
 
-		if (velocity < 0) velocity = 0;
+		if (velocity < UNIGINE_EPSILON) velocity = 0;
 
 		if (velocity != 0) {
 			float s = velocity * time;
 
-			Unigine::SplineSegmentPtr oldSeg = currLinearPosOnLane.splSegment;
+			//Unigine::SplineSegmentPtr oldSeg = currLinearPosOnLane.splSegment;
 
 			if (currLinearPosOnLane.increaseLinearPos(s)) {
 				_reachedEndOfRoad = lane->getLeadToEndOfRoad();
@@ -136,8 +136,7 @@ void Vehicle::update() {
 				moveOnPos(vp);
 
 				if (!movingThroughObstacle.isEmpty() 
-					&& oldSeg == movingThroughObstacle.splSegment
-					&& oldSeg != currLinearPosOnLane.splSegment) {
+					&& currLinearPosOnLane.absLinearPos >= movingThroughObstacle.getSegEndLinearPos()) {
 					//we path through obstacle!
 					movingThroughObstacle = LinearPosition::Null();
 				}
@@ -181,7 +180,7 @@ void Vehicle::update() {
 double Vehicle::getClearDist(std::list<Vehicle*>::iterator nextIt,
 	LinearPosition linPos, ObstacleType &obstacleType, LinearPosition &obstacleLP)
 {
-	TrafficLane * lane = getCurrTrafficLane();
+	MainLane * lane = getCurrTrafficLane();
 
 	double clearDist = DBL_MAX;
 	obstacleType = ObstacleType::None;

@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdditionalLane.cpp" />
     <ClCompile Include="AppEditorLogic.cpp" />
     <ClCompile Include="AppSystemLogic.cpp" />
     <ClCompile Include="AppWorldLogic.cpp" />
@@ -142,12 +143,14 @@
     <ClCompile Include="Framework\Triggers.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainLane.cpp" />
     <ClCompile Include="TrafficLane.cpp" />
     <ClCompile Include="TrafficSimulation.cpp" />
     <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="Сarriageway.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdditionalLane.h" />
     <ClInclude Include="AppEditorLogic.h" />
     <ClInclude Include="AppSystemLogic.h" />
     <ClInclude Include="AppWorldLogic.h" />
@@ -167,6 +170,7 @@
     <ClInclude Include="Framework\SoundManager.h" />
     <ClInclude Include="Framework\Triggers.h" />
     <ClInclude Include="Framework\Utils.h" />
+    <ClInclude Include="MainLane.h" />
     <ClInclude Include="TrafficLane.h" />
     <ClInclude Include="TrafficSimulation.h" />
     <ClInclude Include="Vehicle.h" />

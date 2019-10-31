@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>193d254c05d2203b66b5185e7c84a425702f0740</guid>
+	<type>material</type>
+	<hash>3d09d1ec</hash>
+	<runtimes>
+		<runtime id="193d254c05d2203b66b5185e7c84a425702f0740" name="proxyobject_sunandsky" link="0"/>
+	</runtimes>
+</asset>

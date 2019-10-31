@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<material version="2.7.3.0" name="proxyobject_sunandsky" guid="68369cd51a7ec83025523dcf6f7390e217195ad9" base_material="mesh_base">
-	<options two_sided="1"/>
-	<parameter name="albedo_color">0.800000012 0.800000012 0.800000012 1</parameter>
-</material>

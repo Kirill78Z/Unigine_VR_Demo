@@ -5,6 +5,12 @@
 
 TrafficSimulation::TrafficSimulation()
 {
+	//find vehicle parking
+	{
+		vehicles = Unigine::NodeDummy::cast(Unigine::Editor::get()->getNodeByName("vehicles"));
+		assert(vehicles);
+	}
+
 	//find all carriageways
 	{
 		Unigine::NodePtr carriagewaysNode = Unigine::Editor::get()->getNodeByName("carriageways");
@@ -13,17 +19,6 @@ TrafficSimulation::TrafficSimulation()
 			if (node->getType() != Unigine::Node::NODE_DUMMY) continue;
 			Ñarriageway* cw = new Ñarriageway(this, Unigine::NodeDummy::cast(node));
 			carriageways.append(cw);
-		}
-	}
-
-
-	//find vehicle parking
-	{
-		Unigine::NodePtr vehiclesNode = Unigine::Editor::get()->getNodeByName("vehicles");
-		for (int n = 0; n < vehiclesNode->getNumChildren(); n++) {
-			Unigine::NodePtr node = vehiclesNode->getChild(n);
-			if (node->getType() != Unigine::Node::NODE_DUMMY) continue;
-			vehicles.append(node->getName(), Unigine::NodeDummy::cast(node));
 		}
 	}
 

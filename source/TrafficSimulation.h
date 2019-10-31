@@ -14,10 +14,16 @@ public:
 
 	Unigine::NodeDummyPtr createCar();
 
+	Unigine::NodeDummyPtr getVehicles() {
+		return  vehicles;
+	}
+
 private:
 	Unigine::Vector<Ñarriageway*> carriageways;
 
 
-	Unigine::HashMap<Unigine::String, Unigine::NodeDummyPtr> vehicles;
+	//Unigine::HashMap<Unigine::String, Unigine::NodeDummyPtr> vehicles;
+
+	Unigine::NodeDummyPtr vehicles;
 };
 

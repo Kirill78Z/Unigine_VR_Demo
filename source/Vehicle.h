@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Сarriageway.h";
-#include "TrafficLane.h";
+#include "MainLane.h";
 
 
 enum VehicleActivity
@@ -62,7 +62,7 @@ private:
 
 	Сarriageway* carriageway;
 	int trafficLane;
-	TrafficLane* getCurrTrafficLane() {
+	MainLane* getCurrTrafficLane() {
 		//TODO: переработать способ получения текущей полосы с учетом хранения дополнительных полос уширения 
 		return carriageway->getTrafficLane(trafficLane);
 	}

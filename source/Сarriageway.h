@@ -2,7 +2,7 @@
 #include <UnigineNodes.h>
 #include "TrafficSimulation.h"
 
-class TrafficLane;
+class MainLane;
 
 class Ñarriageway
 {
@@ -13,7 +13,7 @@ public:
 	void update();
 
 
-	TrafficLane* getTrafficLane(int num) {
+	MainLane* getTrafficLane(int num) {
 		return trafficLanes[num];
 	}
 
@@ -21,6 +21,6 @@ private:
 	Unigine::NodeDummyPtr _node;
 	TrafficSimulation* _trafficSim;
 
-	Unigine::Vector<TrafficLane*> trafficLanes;//TODO: sorting of Unigine::Vector
+	Unigine::Vector<MainLane*> trafficLanes;//TODO: sorting of Unigine::Vector
 };
 

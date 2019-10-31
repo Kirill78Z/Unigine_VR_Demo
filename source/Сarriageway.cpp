@@ -1,6 +1,6 @@
 #include "Ñarriageway.h"
-#include "TrafficLane.h"
-
+#include "MainLane.h"
+#include <time.h>
 
 
 Ñarriageway::Ñarriageway(TrafficSimulation* trafficSim, Unigine::NodeDummyPtr node)
@@ -16,9 +16,14 @@
 		Unigine::NodePtr tlnode = tlsnode->getChild(c);
 		if (tlnode->getType() != Unigine::Node::WORLD_SPLINE_GRAPH) continue;
 
-		TrafficLane* tl = new TrafficLane(trafficSim, this, Unigine::WorldSplineGraph::cast(tlnode));
+		MainLane* tl = new MainLane(trafficSim, this, Unigine::WorldSplineGraph::cast(tlnode));
 		trafficLanes.append(tl);
 	}
+
+	//init random numbers for vehicle types
+	long ltime = time(NULL);
+	unsigned int stime = (unsigned int)ltime / 2;
+	srand(stime);
 
 	//TODO: sort trafficLanes from left to right (or use parameters for lanes numbering)
 

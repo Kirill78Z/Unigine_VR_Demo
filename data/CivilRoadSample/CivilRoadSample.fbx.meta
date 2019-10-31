@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>79824da267cd70995baba12402de7a33756679f6</guid>
+	<type>fbx</type>
+	<hash>08c1e73f</hash>
+	<parameters>
+		<parameter type="bool" name="merge_static_meshes">0</parameter>
+		<parameter type="bool" name="merge_surfaces_by_materials">0</parameter>
+		<parameter type="bool" name="use_instances">1</parameter>
+		<parameter type="bool" name="vertex_cache">1</parameter>
+		<parameter type="bool" name="import_meshes">1</parameter>
+		<parameter type="bool" name="import_materials">1</parameter>
+		<parameter type="bool" name="merge_similar_materials">1</parameter>
+		<parameter type="bool" name="import_textures">1</parameter>
+		<parameter type="bool" name="import_animations">0</parameter>
+		<parameter type="bool" name="import_bones_without_skin">0</parameter>
+		<parameter type="bool" name="create_transform_bones_for_joints">0</parameter>
+		<parameter type="bool" name="joints_reorientation">1</parameter>
+		<parameter type="bool" name="import_lights">0</parameter>
+		<parameter type="bool" name="import_cameras">0</parameter>
+		<parameter type="bool" name="import_tangent_space">0</parameter>
+		<parameter type="bool" name="import_morph_targets">0</parameter>
+		<parameter type="float" name="scale">1</parameter>
+		<parameter type="float" name="fps">30</parameter>
+		<parameter type="string" name="prefix_materials"/>
+		<parameter type="int" name="import_materials_mode">0</parameter>
+		<parameter type="int" name="workflow">0</parameter>
+		<parameter type="int" name="up_axis">0</parameter>
+		<parameter type="int" name="front_axis">0</parameter>
+		<parameter type="bool" name="need_split">0</parameter>
+		<parameter type="bool" name="need_repivot">1</parameter>
+		<parameter type="bool" name="need_triagulate">1</parameter>
+		<parameter type="bool" name="skip_empty_nodes">0</parameter>
+		<parameter type="float" name="bound_size">10000</parameter>
+		<parameter type="float" name="linear_deflection">0.200000003</parameter>
+		<parameter type="float" name="angular_deflection">0.699999988</parameter>
+		<parameter type="bool" name="combine_by_lods">0</parameter>
+		<parameter type="int" name="index_max_count_lods">1</parameter>
+		<parameter type="string" name="lods"/>
+		<parameter type="string" name="animations"/>
+		<parameter type="string" name="material_guids">proxyobject_sunandsky,193d254c05d2203b66b5185e7c84a425702f0740,Индекс цвета autocad 6,787e185378a241966a740bfd0ccf5d381c92ff37,Индекс цвета autocad 40,0cf17fce18bc84d513bb90300d1865cf107398e2,Индекс цвета autocad 1,69106ead6d4280284bc765676f05239a65eb1e31,Индекс цвета autocad 2,61c70d204ae55dff1b6f53521f4ada897dafa254,Индекс цвета autocad 92,673baf97682c080a5ad957e107750fcc4c9808bb,Индекс цвета autocad 165,5be921c216aaf6390cc92a442a2130d35e2d8016,Индекс цвета autocad 45,5cf8159168c8d1bc0d8e81eb64622e4e797c6155,Индекс цвета autocad 157,0be4e63405db5c036b86d1865fd8fb2d15eca2a8,Индекс цвета autocad 62,58c71f1b1e9349be2cd96605189c1fa047964e7f,Индекс цвета autocad 4,73f376f63f3801dd719a1998674cd017687dae8a,Индекс цвета autocad 11,08132eb559b170907b5b0aaf516738427d891ab9,Индекс цвета autocad 161,6841048860d25e472d9d06fa4c99ea114f2b9c3c,Индекс цвета autocad 149,7bc82adf7674fab257a49a695991a0b4006fd483,Индекс цвета autocad 37,3bf8f36a3e698bc11b52f22c526ec79b0db9d83e,Индекс цвета autocad 25,5d4d1e1923c870a46a8203b34efd757634a0ee5d,Индекс цвета autocad 35,7e1efc1c1b30e8cb567ea7ae77aacb35353f6310,Индекс цвета autocad 41,5246d6e31fd14ee673f5990d6d27e7083d4adec7,Индекс цвета autocad 133,7c7d4b1e50a7b7e51d9588001936db5f4be6f132,Индекс цвета autocad 9,7fcb87bd134f25f875ccb0f70e7559ea0211c041,Индекс цвета autocad 222,482fa0f01869bf8f5117a7a2263f0299099c0b24,Индекс цвета autocad 13,79ef6727637fba5a60f545f1374a869c6215f14b,Индекс цвета autocad 20,5e9372126d20ea494594ef1475350f6354ed2d66,Индекс цвета autocad 53,02d24fa17390248c1afc967b713a999e560bb465,Индекс цвета autocad 3,32a507043effe69369a73ad67a44343d38aae878,Индекс цвета autocad 91,5c965fab31e2f10e3b5ec51541d25370074bd00f,Индекс цвета autocad 5,6e119c461a6dc6ed3e697b687c1da7a73a0c00da,Индекс цвета autocad 150,2be799c542b34060548f783f6fc8289220052ec9,navisworks material,2e8682586bcaa1d74033d54a7a464421185e8f0c,Индекс цвета autocad 147,0cfc846f70dce7020ae37a796299618460f77f13,Индекс цвета autocad 61,13053dba517531d16ea4c0fc584d282b628e1f8e,Индекс цвета autocad 212,1b37ca2916d18d7433c35a4303dc3ac66b5ed36d,Индекс цвета autocad 252,6e44a6ec7d79755b763f2afe1b9356454406d2e0</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="53d2d9733d02d03649cf0a1d76cf04d839f84257" name="CivilRoadSample.node" link="1" type="3">
+			<parameters>
+				<parameter type="string" name="id">f3b9652c</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="12f7fbca181338a125b1f98c6e92677b4a1c369e" name="alignment - (1).mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">498d93</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="130ead657c20ff802368ecdf78ead4b2367cac69" name="Составная деталь.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">7845bd12</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="03b68ab4338bb683580a6a0635cab9ad5f9a4f28" name="Подобъект.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">373549de</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4db6e8674160ca9a681c993160b540dc32f6e68b" name="Подобъект_1.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">2e5eedb6</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="36670a6e12904ef5632593d02d8c54ef41bd7d82" name="Подобъект_2.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">2e5eedb6</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="54c21ef968f2bc042410179347ffb7d63b908d3d" name="Подобъект_3.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">8c30d488</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="26016d786cd752771bd88d6a3e205dc171479c2c" name="Подобъект_4.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">629434d9</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4597699b6956123e292094854f407c20134a00ff" name="Подобъект_5.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c0da50ad</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4c7d9a523c4e758909a081544e50fca3271fb9a6" name="Подобъект_6.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">fb530948</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7e3984cd08495fc83eda808709ec443a0a478651" name="basiccurbandgutter - (right).mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9512e331</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5f7e0b7c6d84f0ab44c64e0e5cf87e154756b870" name="basicsidewalk - (right).mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9cf106f2</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6c42f10f72582b22626ab0197074daa45b7f65b3" name="Подобъект_7.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">890f889c</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="12e76f764b1ea05d69f726184f8172970a68ef0a" name="Подобъект_8.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">fc3c8357</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6afb12e10cad8ecc7a107bbb15d4bdde26910ba5" name="Подобъект_9.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">434ef6aa</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1f8d48c03c58251f0bba2ff2329fcea92964c7f4" name="Подобъект_10.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">07537133</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="050c52c37c13d94629d8dfed23cfc0681ecd28a7" name="basiccurbandgutter - (right) (1).mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6b4ea22b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="035b8dda3ce40371036b261c52cb0acb64de61ae" name="basicsidewalk - (right) (1).mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9cf106f2</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="00a33d3549492d1003aa9d2f4050a8c21eb6d139" name="Подобъект_11.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">2602eacc</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="11a5494424a8c3d376a1f7166c41437d53d82eb8" name="Подобъект_12.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">16b58051</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="30fea2b7121120aa2aeb5801478bd16c07859ddb" name="Подобъект_13.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ce16e26e</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4580397e782812c5232f65604e9b593f57089592" name="Подобъект_14.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">963bf9fc</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2eb8b7c927ab5e944445b8e309cec8e63e70cb0d" name="Подобъект_15.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">4ac08be2</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2d5571081e96e0c75b16a77a3e3a1091262490bc" name="alignment design speed label group.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a9665b12</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="605134eb2697454e3c588c554924f1b045cb594f" name="surface1.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">06b60c89</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="79824da267cd70995baba12402de7a33756679f6" name="CivilRoadSample.fbx" link="0"/>
+	</runtimes>
+</asset>
