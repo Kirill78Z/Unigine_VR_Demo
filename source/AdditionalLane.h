@@ -1,8 +1,10 @@
 #pragma once
-class AdditionalLane
+#include "TrafficLane.h"
+
+class AdditionalLane : public TrafficLane
 {
 public:
-	AdditionalLane();
+	AdditionalLane(TrafficSimulation* trafficSim, Ñarriageway* carriageway, Unigine::WorldSplineGraphPtr node);
 	~AdditionalLane();
 };
 

@@ -5,11 +5,11 @@
 
 
 Vehicle::Vehicle(Ñarriageway* carriageway,
-	int trafficLaneNum, Unigine::NodeDummyPtr node,
+	TrafficLane* trafficLane, Unigine::NodeDummyPtr node,
 	float speedLimit, LinearPosition startLinPos)
 {
 	this->carriageway = carriageway;
-	this->trafficLane = trafficLaneNum;
+	this->trafficLane = trafficLane;
 	this->node = node;
 	this->speedLimit = speedLimit;
 
@@ -31,7 +31,7 @@ Vehicle::Vehicle(Ñarriageway* carriageway,
 
 
 	//place node into start position
-	MainLane* lane = getCurrTrafficLane();
+	TrafficLane* lane = trafficLane;
 	Position3D vp = lane->startOfLane();
 	moveOnPos(vp);
 	currLinearPosOnLane = startLinPos;
@@ -73,7 +73,7 @@ void Vehicle::update() {
 		double clearDist = getClearDist(nextIt, currLinearPosOnLane, obstacleType, obstacleLP);
 
 		//get next vehicle in this line
-		MainLane* lane = getCurrTrafficLane();
+		TrafficLane* lane = trafficLane;
 
 		//here the decision on current acceleration has to be made. 
 		//if the path is free, then we accelerate with standard acceleration. 
@@ -180,7 +180,7 @@ void Vehicle::update() {
 double Vehicle::getClearDist(std::list<Vehicle*>::iterator nextIt,
 	LinearPosition linPos, ObstacleType &obstacleType, LinearPosition &obstacleLP)
 {
-	MainLane * lane = getCurrTrafficLane();
+	TrafficLane * lane = trafficLane;
 
 	double clearDist = DBL_MAX;
 	obstacleType = ObstacleType::None;

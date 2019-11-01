@@ -3,144 +3,175 @@
 #include "Ñarriageway.h"
 #include <list>
 #include <UnigineWorlds.h>
+#include "LinearPosition.h"
+#include "Position3D.h"
 
 class Vehicle;
+class AdditionalLane;
+class MainLane;
 
-struct Position3D
+
+enum LaneType
 {
-	Unigine::SplineSegmentPtr splSegment;
-
-	Unigine::Math::dvec3 absPos = Unigine::Math::dvec3::ZERO;
-	Unigine::Math::vec3 tangent = Unigine::Math::vec3::ZERO;
-	Unigine::Math::vec3 up = Unigine::Math::vec3::ZERO;
+	MainLane_,
+	AdditionalLane_
 };
 
-struct LinearPosition
-{
-	double segStartLinearPos = -1;
-	Unigine::SplineSegmentPtr splSegment;
-	double absLinearPos = -1;
-
-	double getSegEndLinearPos() {
-		return segStartLinearPos + splSegment->getLength();
-	}
-
-	static LinearPosition Null() {
-		LinearPosition lp = LinearPosition(Unigine::SplineSegmentPtr::Ptr(), -1, -1);
-		return lp;
-	}
-
-	LinearPosition(Unigine::SplineSegmentPtr splSegment,
-		double segStartLinearPos, double absLinearPos) {
-		this->segStartLinearPos = segStartLinearPos;
-		this->splSegment = splSegment;
-		this->absLinearPos = absLinearPos;
-	}
+struct LinearSpan {
+	LinearPosition start;
+	LinearPosition end;
 
 
-	bool isEmpty() {
-		if (splSegment) {
-			return segStartLinearPos == -1;
-		}
-		else
-		{
-			return true;
-		}
-	}
+	LaneType dataType;
+	void* data;
 
-
-	float distOnSplineSeg() {
-		float distOnSplineSeg = (float)(absLinearPos - segStartLinearPos);
-
-		assert(distOnSplineSeg > -UNIGINE_EPSILON);
-
-		if (Unigine::Math::abs(distOnSplineSeg) < UNIGINE_EPSILON)
-			distOnSplineSeg = 0;
-
-		return distOnSplineSeg;
-	}
-
-
-	//returns true if end of spline graph reached
-	bool increaseLinearPos(double s) {
-		absLinearPos += s;
-
-
-		//splSegment
-		float distOnSplineSeg = this->distOnSplineSeg();
-
-		while (distOnSplineSeg > splSegment->getLength())
-		{
-			//move to next segment
-			Unigine::SplinePointPtr pt = splSegment->getEndPoint();
-
-			assert(pt->getNumSegments() <= 2);
-
-			if (pt->getNumSegments() >= 2) {
-				Unigine::Vector<Unigine::SplineSegmentPtr> segments;
-				pt->getSplineSegments(segments);
-				Unigine::SplineSegmentPtr nextSeg;
-				for (int s = 0; s < segments.size(); s++) {
-					Unigine::SplineSegmentPtr seg = segments[s];
-					if (seg != splSegment) {
-						nextSeg = seg;
-						break;
-					}
-
-				}
-
-				assert(nextSeg);
-
-				segStartLinearPos += splSegment->getLength();
-				splSegment = nextSeg;
-				distOnSplineSeg = this->distOnSplineSeg();
-
-			}
-			else
-			{
-				return true;
-			}
-		}
-
-		return false;
-
-	}
-
-
-
-
-
-	Position3D getPos3D() {
-		//TODO
-		float distOnSplineSeg = this->distOnSplineSeg();
-
-		float segLen = splSegment->getLength();
-
-		assert(distOnSplineSeg < segLen);
-
-		float linearParam = distOnSplineSeg / segLen;
-
-		float nonLinearParam = splSegment->linearToParametric(linearParam);
-		Unigine::Math::dvec3 pt = splSegment->calcPoint(nonLinearParam);
-		Unigine::Math::vec3 tan = splSegment->calcTangent(nonLinearParam);
-		Unigine::Math::vec3 up = splSegment->calcUpVector(nonLinearParam);
-
-		Position3D vp;
-		vp.splSegment = splSegment;
-		vp.absPos = pt;
-		vp.tangent = tan;
-		vp.up = up;
-		return vp;
+	bool isNull() {
+		return start.isEmpty();
 	}
 };
 
-
+enum ObstacleType
+{
+	None,
+	MovingVehicle,
+	EndOfLane,
+	PaymentCollectionPoint
+};
 
 
 class TrafficLane
 {
 public:
-	TrafficLane();
+	TrafficLane(TrafficSimulation* trafficSim, Ñarriageway* carriageway, Unigine::WorldSplineGraphPtr node);
+	void scanNeighboringLanes(std::list<TrafficLane *> &additionalLanes);
 	~TrafficLane();
+
+	void virtual update();
+
+	Position3D startOfLane()
+	{
+		Position3D vp;
+		vp.splSegment = segments[0];
+		vp.absPos = segments[0]->getStartPoint()->getPosition();
+		vp.tangent = segments[0]->getStartTangent();
+		vp.up = segments[0]->getStartUp();
+		return vp;
+	}
+
+	Position3D endOfLane() {
+		Position3D vp;
+		vp.splSegment = segments[segments.size() - 1];
+		vp.absPos = vp.splSegment->getEndPoint()->getPosition();
+		vp.tangent = vp.splSegment->getEndTangent();
+		vp.up = vp.splSegment->getEndUp();
+		return vp;
+	}
+
+	LinearPosition startOfLaneLinear() {
+		//generate new struct
+		LinearPosition lp = LinearPosition(segments[0], 0, 0);
+		return lp;
+	}
+
+	LinearPosition endOfLaneLinear() {
+		//generate new struct
+		LinearPosition lp = LinearPosition(segmentPositions[segmentPositions.size() - 1]);
+		lp.increaseLinearPos(lp.splSegment->getLength());
+		return lp;
+	}
+
+
+	//end of vehicle list
+	std::list<Vehicle*>::iterator getQueueEnd() {
+		return vehicles.end();
+	}
+
+	LinearPosition getNextObstacle(LinearPosition pos, bool ignoreFirst);
+
+	double getOveralLength() {
+		return overalLength;
+	}
+
+	bool getLeadToEndOfRoad() {
+		return leadToEndOfRoad;
+	}
+
+protected:
+
+	LaneType laneType = LaneType::MainLane_;
+
+
+	Unigine::WorldSplineGraphPtr worldSplineGraph;
+
+	//vehicles on this lane
+	std::list<Vehicle*> vehicles;
+
+	Unigine::Vector<Unigine::SplineSegmentPtr> segments;
+	Unigine::Vector<LinearPosition> segmentPositions;
+	Unigine::Vector<LinearPosition> obstacles;//Immovable obstacles. Currently it is PaymentCollectionPoint only
+
+	int searchNearestLinearPosAhead(
+		Unigine::Vector<LinearPosition> arr, int first, int last, LinearPosition searchingPos)
+	{
+		if (last >= first) {
+			int mid = first + (last - first) / 2;
+			LinearPosition lp = arr[mid];
+
+			if (searchingPos.absLinearPos <= lp.absLinearPos) {
+				if (mid == 0 || searchingPos.absLinearPos > arr[mid - 1].absLinearPos) {
+					return mid; //we find nearest position ahead
+				}
+				//search in left subarray
+				return searchNearestLinearPosAhead(arr, first, mid - 1, searchingPos);
+			}
+			else
+			{
+				//search in right subarray
+				return searchNearestLinearPosAhead(arr, mid + 1, last, searchingPos);
+			}
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	int searchNearestLinearPosÂehind(
+		Unigine::Vector<LinearPosition> sortedArr, int first, int last, LinearPosition searchingPos)
+	{
+		if (last >= first) {
+			int mid = first + (last - first) / 2;
+			LinearPosition lp = sortedArr[mid];
+
+			if (searchingPos.absLinearPos < lp.absLinearPos) {
+				//search in left subarray
+				return searchNearestLinearPosÂehind(sortedArr, first, mid - 1, searchingPos);
+			}
+			else
+			{
+				if (mid == sortedArr.size() - 1 || searchingPos.absLinearPos < sortedArr[mid + 1].absLinearPos) {
+					return mid; //we find nearest position behind
+				}
+
+				//search in right subarray
+				return searchNearestLinearPosÂehind(sortedArr, mid + 1, last, searchingPos);
+			}
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	//neighboring lanes
+	Unigine::Vector<LinearSpan> lanesToTheLeft;
+	Unigine::Vector<LinearSpan> lanesToTheRight;
+
+	double overalLength;
+
+	TrafficSimulation* trafficSim;
+	Ñarriageway* carriageway;
+
+	bool leadToEndOfRoad = false;
 };
 

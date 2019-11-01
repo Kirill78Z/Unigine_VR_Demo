@@ -551,30 +551,29 @@
 			<transform>0.999999940395 0 0 0.0 0 0.999999940395 0 0.0 0 0 0.999999940395 0.0 0 0 0 1.0</transform>
 			<node type="NodeDummy" id="1032014316" name="carriageways">
 				<transform>0.999999940396 0 0 0.0 0 1 0 0.0 0 0 1.00000005961 0.0 0 0 0 1.0</transform>
-				<node type="NodeDummy" id="2031811339" name="carriageway_0">
+				<node type="NodeDummy" id="2032243421" name="carriageway_1">
 					<transform>0.999999880791 0 0 0.0 0 0.999999940395 0 0.0 0 0 0.999999821186 0.0 0 0 0 1.0</transform>
-					<node type="NodeDummy" id="1616801237" name="traffic_lanes">
+					<node type="NodeDummy" id="310170078" name="traffic_lanes">
 						<transform>0.999999821186 0 0 0.0 0 1.00000011921 0 0.0 0 0 0.999999701977 0.0 0 0 0 1.0</transform>
-						<node curved="0" type="WorldSplineGraph" id="369612218" name="traffic_lane_0">
-							<spline_name>guid://12355442232886b9533c80c424f395533f679a96</spline_name>
+						<node curved="0" type="WorldSplineGraph" id="621378860" name="WorldSplineGraph">
+							<spline_name>guid://6ca57ffe31a3a7454c20efe0268e61bf78430412</spline_name>
 							<point_nodes/>
 							<properties>
-								<property parent="2b8404be0294e5050ebb92a00a01257f5cd574d2" guid="4bed7735592a1f101482e72f02c86ac22817ab39">
-									<parameter name="0_cars">1730</parameter>
+								<property parent="2b8404be0294e5050ebb92a00a01257f5cd574d2" guid="3241c49b313eb13e064aa78528f573205ae48bff">
+									<parameter name="0_cars">1477</parameter>
 								</property>
 							</properties>
-							<transform>1.00000041723 0 0 0.0 0 0.999999880791 0 0.0 0 0 1.00000047683 0.0 0 0 0 1.0</transform>
+							<transform>1.00000023842 0 0 0.0 0 0.999999940395 0 0.0 0 0 1.00000029802 0.0 0 0 0 1.0</transform>
 						</node>
-						<node curved="0" type="WorldSplineGraph" id="1021467896" name="traffic_lane_1">
-							<spline_name>guid://6f89f8ec2eaa9f5b267a4cfe702010454b4844e0</spline_name>
+						<node curved="0" type="WorldSplineGraph" id="730103329" name="WorldSplineGraph_1">
+							<spline_name>guid://6df29b3723f7bf2a7148648125c073ec2770de5b</spline_name>
 							<point_nodes/>
 							<properties>
-								<property parent="2b8404be0294e5050ebb92a00a01257f5cd574d2" guid="1bbf5b7e52e8ccc53314d7602aae233f3a78d792">
-									<parameter name="0_cars">1435</parameter>
-									<parameter name="5_trucks">1224</parameter>
+								<property parent="2b8404be0294e5050ebb92a00a01257f5cd574d2" guid="03fbd27c54320bab1752ad0e42f3511500256f70">
+									<parameter name="0_cars">886</parameter>
 								</property>
 							</properties>
-							<transform>1.00000053644 0 0 0.0 0 1 0 0.0 0 0 1.00000059604 0.0 0 0 0 1.0</transform>
+							<transform>1.00000017881 0 0 0.0 0 1 0 0.0 0 0 1.00000017881 0.0 0 0 0 1.0</transform>
 						</node>
 					</node>
 				</node>
@@ -12130,6 +12129,104 @@
 				</node>
 				<node type="NodeDummy" id="1035709599" name="NodeDummy_6">
 					<transform>1 0 0 0.0 0 1 0 0.0 0 0 1 0.0 0 0 0 1.0</transform>
+				</node>
+			</node>
+		</node>
+		<node curved="0" type="WorldSplineGraph" id="208978950" name="WorldSplineGraph_2">
+			<spline_name>guid://7137544942f4511466190963501cdf661fdeef8d</spline_name>
+			<point_nodes/>
+			<transform>0.999999880791 0 0 0.0 0 0.999999880791 0 0.0 0 0 0.999999940395 0.0 0 0 0 1.0</transform>
+		</node>
+		<node curved="0" type="WorldSplineGraph" id="1925811005" name="WorldSplineGraph_3">
+			<spline_name>guid://510e956b41282bce540b40d551a31c301fa281cf</spline_name>
+			<point_nodes/>
+			<transform>0.999999821186 0 0 0.0 0 0.999999940395 0 0.0 0 0 0.999999821186 0.0 0 0 0 1.0</transform>
+		</node>
+		<node curved="0" type="WorldSplineGraph" id="681898279" name="WorldSplineGraph_4">
+			<spline_name>guid://5d49bb1d1f9001d865931b572d4b00ca7f4879a1</spline_name>
+			<point_nodes/>
+			<transform>1.00000047684 0 0 0.0 0 0.999999940395 0 0.0 0 0 1.00000083447 0.0 0 0 0 1.0</transform>
+		</node>
+		<node curved="0" type="WorldSplineGraph" id="1159026076" name="WorldSplineGraph_5">
+			<spline_name>guid://43a61a316916cddc43190f8b25791f6e77d95ff5</spline_name>
+			<point_nodes/>
+			<transform>1.00000023842 0 0 0.0 0 0.999999821186 0 0.0 0 0 1.00000023842 0.0 0 0 0 1.0</transform>
+		</node>
+		<node curved="0" type="WorldSplineGraph" id="1218550143" name="WorldSplineGraph_6">
+			<spline_name>guid://5974198707af093a44a987517bde187c689399ab</spline_name>
+			<point_nodes/>
+			<transform>1.00000011921 0 0 0.0 0 1.00000011921 0 0.0 0 0 1.00000011921 0.0 0 0 0 1.0</transform>
+		</node>
+		<node curved="0" type="WorldSplineGraph" id="1841588924" name="WorldSplineGraph_7">
+			<spline_name>guid://76f1e58512279920639479ff5d7bbf5278f45689</spline_name>
+			<point_nodes/>
+			<transform>1.00000023842 0 0 0.0 0 0.999999880791 0 0.0 0 0 1.00000035763 0.0 0 0 0 1.0</transform>
+		</node>
+		<node curved="0" type="WorldSplineGraph" id="1807739627" name="WorldSplineGraph_8">
+			<spline_name>guid://2eb2ee542cae85a31775aea65f34f5cd2d141cc8</spline_name>
+			<point_nodes/>
+			<transform>1.00000011921 0 0 0.0 0 0.999999761581 0 0.0 0 0 1.00000011921 0.0 0 0 0 1.0</transform>
+			<node type="NodeDummy" id="2031811339" name="carriageway_0">
+				<transform>0.999999642373 0 0 0.0 0 1.00000011921 0 0.0 0 0 0.999999701982 0.0 0 0 0 1.0</transform>
+				<node type="NodeDummy" id="1616801237" name="traffic_lanes">
+					<transform>0.999999821186 0 0 0.0 0 1.00000011921 0 0.0 0 0 0.999999701977 0.0 0 0 0 1.0</transform>
+					<node curved="0" type="WorldSplineGraph" id="369612218" name="traffic_lane_0">
+						<spline_name>guid://12355442232886b9533c80c424f395533f679a96</spline_name>
+						<point_nodes/>
+						<properties>
+							<property parent="2b8404be0294e5050ebb92a00a01257f5cd574d2" guid="4bed7735592a1f101482e72f02c86ac22817ab39">
+								<parameter name="0_cars">1730</parameter>
+							</property>
+						</properties>
+						<transform>1.00000041723 0 0 0.0 0 0.999999880791 0 0.0 0 0 1.00000047683 0.0 0 0 0 1.0</transform>
+						<node curved="0" type="WorldSplineGraph" id="232868808" name="additional_lane_0">
+							<spline_name>guid://798b4c665ee8788d740a408803f26a476705a2fa</spline_name>
+							<point_nodes/>
+							<transform>0.999999940395 0 0 0.0 0 1.00000023842 0 0.0 0 0 1 0.0 0 0 0 1.0</transform>
+						</node>
+					</node>
+					<node curved="0" type="WorldSplineGraph" id="1021467896" name="traffic_lane_1">
+						<spline_name>guid://6f89f8ec2eaa9f5b267a4cfe702010454b4844e0</spline_name>
+						<point_nodes/>
+						<properties>
+							<property parent="2b8404be0294e5050ebb92a00a01257f5cd574d2" guid="1bbf5b7e52e8ccc53314d7602aae233f3a78d792">
+								<parameter name="0_cars">1435</parameter>
+								<parameter name="5_trucks">1224</parameter>
+							</property>
+						</properties>
+						<transform>1.00000053644 0 0 0.0 0 1 0 0.0 0 0 1.00000059604 0.0 0 0 0 1.0</transform>
+						<node curved="0" type="WorldSplineGraph" id="268568303" name="additional_lane_1">
+							<spline_name>guid://146bb2bf23c62112396dcd4972ee76141d8aea63</spline_name>
+							<point_nodes/>
+							<transform>0.999999761581 0 0 0.0 0 1 0 0.0 0 0 0.999999821186 0.0 0 0 0 1.0</transform>
+							<node curved="0" type="WorldSplineGraph" id="2107115514" name="additional_lane_2">
+								<spline_name>guid://2111d6116d4a983c5fbc966b6d6438ce4545e9d5</spline_name>
+								<point_nodes/>
+								<transform>1.0000000596 0 0 0.0 0 0.999999284744 0 0.0 0 0 0.999999284744 0.0 0 0 0 1.0</transform>
+							</node>
+						</node>
+					</node>
+				</node>
+			</node>
+		</node>
+		<node type="NodeDummy" id="1974670518" name="ТР3_civil">
+			<transform>0.999999940395 0 0 0.0 0 0.999999940395 0 0.0 0 0 0.999999940395 0.0 0 0 0 1.0</transform>
+			<node type="NodeDummy" id="110183052" name="C3D-Поверхность">
+				<transform>1 0 0 0.0 0 1 0 0.0 0 0 1 0.0 0 0 0 1.0</transform>
+				<node type="ObjectMeshStatic" id="446301062" name="ТР3_Axis_С1 3">
+					<mesh_name>guid://50c1af8926967354673a46a318747ba676d35ecd</mesh_name>
+					<surface name="Индекс цвета AutoCAD 7" physics_friction="1" physics_restitution="1" material="5f600083614e2c061f8793ad470d612829bad267"/>
+					<transform>1 0 0 0.0 0 1 0 0.0 0 0 1 0.0 546086.832736 4841499.98404 18.8725230705 1.0</transform>
+				</node>
+				<node type="ObjectMeshStatic" id="1405610060" name="ТР3_Axis_С2 6">
+					<mesh_name>guid://3ef571c856c36a8767fc263a372200511d323d7c</mesh_name>
+					<surface name="Индекс цвета AutoCAD 7" physics_friction="1" physics_restitution="1" material="5f600083614e2c061f8793ad470d612829bad267"/>
+					<transform>1 0 0 0.0 0 1 0 0.0 0 0 1 0.0 546470.987516 4841411.53824 25.886715978 1.0</transform>
+				</node>
+				<node type="ObjectMeshStatic" id="1935445597" name="Сущ. дорога 7">
+					<mesh_name>guid://3d977aab32b3500e12cd981575850a703b491b0f</mesh_name>
+					<surface name="Индекс цвета AutoCAD 7" physics_friction="1" physics_restitution="1" material="5f600083614e2c061f8793ad470d612829bad267"/>
+					<transform>1 0 0 0.0 0 1 0 0.0 0 0 1 0.0 545976.219395 4841473.58305 31.7092484146 1.0</transform>
 				</node>
 			</node>
 		</node>

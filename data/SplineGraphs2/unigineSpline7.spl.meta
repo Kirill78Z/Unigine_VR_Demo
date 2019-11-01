@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>2eb2ee542cae85a31775aea65f34f5cd2d141cc8</guid>
+	<type>spline_graph</type>
+	<hash>9c8ff97a</hash>
+	<runtimes>
+		<runtime id="2eb2ee542cae85a31775aea65f34f5cd2d141cc8" name="unigineSpline7.spl" link="0"/>
+	</runtimes>
+</asset>

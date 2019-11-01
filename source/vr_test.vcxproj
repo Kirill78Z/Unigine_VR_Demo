@@ -142,8 +142,10 @@
     <ClCompile Include="Framework\SoundManager.cpp" />
     <ClCompile Include="Framework\Triggers.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
+    <ClCompile Include="LinearPosition.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainLane.cpp" />
+    <ClCompile Include="Position3D.cpp" />
     <ClCompile Include="TrafficLane.cpp" />
     <ClCompile Include="TrafficSimulation.cpp" />
     <ClCompile Include="Vehicle.cpp" />
@@ -170,7 +172,9 @@
     <ClInclude Include="Framework\SoundManager.h" />
     <ClInclude Include="Framework\Triggers.h" />
     <ClInclude Include="Framework\Utils.h" />
+    <ClInclude Include="LinearPosition.h" />
     <ClInclude Include="MainLane.h" />
+    <ClInclude Include="Position3D.h" />
     <ClInclude Include="TrafficLane.h" />
     <ClInclude Include="TrafficSimulation.h" />
     <ClInclude Include="Vehicle.h" />

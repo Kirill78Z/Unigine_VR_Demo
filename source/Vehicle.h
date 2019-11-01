@@ -16,7 +16,7 @@ class Vehicle
 {
 public:
 	Vehicle(Сarriageway* carriageway,
-		int trafficLaneNum, Unigine::NodeDummyPtr node,
+		TrafficLane* trafficLane, Unigine::NodeDummyPtr node,
 		float speedLimit, LinearPosition startLinPos);
 	~Vehicle();
 
@@ -61,11 +61,11 @@ private:
 	const float timeToWaitOnPaymentCollectionPoint = 0.5;
 
 	Сarriageway* carriageway;
-	int trafficLane;
-	MainLane* getCurrTrafficLane() {
-		//TODO: переработать способ получения текущей полосы с учетом хранения дополнительных полос уширения 
-		return carriageway->getTrafficLane(trafficLane);
-	}
+	TrafficLane* trafficLane;
+	//MainLane* getCurrTrafficLane() {
+	//	//TODO: переработать способ получения текущей полосы с учетом хранения дополнительных полос уширения 
+	//	return carriageway->getTrafficLane(trafficLane);
+	//}
 
 	Unigine::NodeDummyPtr node;
 

@@ -25,11 +25,9 @@
 	unsigned int stime = (unsigned int)ltime / 2;
 	srand(stime);
 
-	//TODO: sort trafficLanes from left to right (or use parameters for lanes numbering)
+	//TODO: sort main traffic lanes from left to right (or use parameters for lanes numbering)
+	//And set to left and to right pointers for each main traffic lane
 
-	for (int tl = 0; tl < trafficLanes.size(); tl++) {
-		trafficLanes[tl]->setNum(tl);
-	}
 }
 
 

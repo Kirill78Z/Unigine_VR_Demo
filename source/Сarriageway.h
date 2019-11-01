@@ -12,11 +12,6 @@ public:
 
 	void update();
 
-
-	MainLane* getTrafficLane(int num) {
-		return trafficLanes[num];
-	}
-
 private:
 	Unigine::NodeDummyPtr _node;
 	TrafficSimulation* _trafficSim;

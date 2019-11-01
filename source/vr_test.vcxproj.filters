@@ -41,6 +41,12 @@
     <ClCompile Include="TrafficLane.cpp">
       <Filter>TrafficSimulation\Lanes</Filter>
     </ClCompile>
+    <ClCompile Include="Position3D.cpp">
+      <Filter>TrafficSimulation\Orientation</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearPosition.cpp">
+      <Filter>TrafficSimulation\Orientation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppEditorLogic.h" />
@@ -80,6 +86,12 @@
     <ClInclude Include="TrafficLane.h">
       <Filter>TrafficSimulation\Lanes</Filter>
     </ClInclude>
+    <ClInclude Include="Position3D.h">
+      <Filter>TrafficSimulation\Orientation</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearPosition.h">
+      <Filter>TrafficSimulation\Orientation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="TrafficSimulation">
@@ -87,6 +99,9 @@
     </Filter>
     <Filter Include="TrafficSimulation\Lanes">
       <UniqueIdentifier>{871c7779-8efa-47c8-8953-734e292d6291}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TrafficSimulation\Orientation">
+      <UniqueIdentifier>{b7ab2f8a-17b8-4918-a7a3-b9b7e082c181}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
