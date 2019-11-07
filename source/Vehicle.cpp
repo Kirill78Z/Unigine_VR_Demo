@@ -177,7 +177,7 @@ void Vehicle::update() {
 			//TODO: start to change lane if possible
 			if (laneToTheLeft != trafficLane->lanesToTheLeftEnd()) {
 
-				bool can = canChangeLane(*laneToTheLeft, posOnLaneToTheLeft, obstacleType);
+				LinearPosition lp = canChangeLane(*laneToTheLeft, posOnLaneToTheLeft, obstacleType);
 
 
 				
