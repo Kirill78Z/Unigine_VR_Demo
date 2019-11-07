@@ -1,8 +1,11 @@
 #include "TrafficLane.h"
 #include "Vehicle.h"
 #include "AdditionalLane.h"
+#include <UnigineEditor.h>
+#include <UnigineGame.h>
 
-TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway, Unigine::WorldSplineGraphPtr node)
+TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway,
+	Unigine::WorldSplineGraphPtr node)
 {
 	worldSplineGraph = node;
 	this->trafficSim = trafficSim;
@@ -13,12 +16,16 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 	//create splines where there are obstacles and save obstacle position
 	Unigine::Vector<Unigine::SplinePointPtr> points;
 	worldSplineGraph->getSplinePoints(points);
-	worldSplineGraph->getSplineSegments(segments);
+
+	Unigine::Vector<Unigine::SplineSegmentPtr> segmentsTemp;
+	worldSplineGraph->getSplineSegments(segmentsTemp);
+	segments.append(segmentsTemp);
+
 
 	int prevSegEndIndex = 1;
 	Unigine::SplineSegmentPtr prevSeg = segments[0];
 	if (prevSeg->getEndPoint() != points[1]) {
-		throw std::exception("Invalid spline graph");//something wrong
+		assert(false);//something wrong
 	}
 	LinearPosition startLp = LinearPosition(segments[0], 0, 0);
 	segmentPositions.append(startLp);
@@ -56,7 +63,7 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 			}
 			else
 			{
-				throw std::exception("Invalid spline graph");//something wrong
+				assert(false);//something wrong
 			}
 		}
 
@@ -71,37 +78,107 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 
 	overalLength = currLinearPos;
 
-	//get additional lanes
-	std::list< TrafficLane*> additionalLanes;
-	for (int c = 0; c < worldSplineGraph->getNumChildren(); c++) {
-		Unigine::NodePtr cn = worldSplineGraph->getChild(c);
-		if (cn->getType() == Unigine::Node::WORLD_SPLINE_GRAPH) {
-			//additional line founded
-			AdditionalLane* additionalLane = new AdditionalLane(
-				trafficSim, carriageway, Unigine::WorldSplineGraph::cast(cn));
+	std::list< TrafficLane*> neighborLanes;
 
-			additionalLanes.push_back(additionalLane);
+	
+	//get start intensity for all vehicle types
+
+	int n = worldSplineGraph->findProperty("traffic_lane_main");
+	if (n != -1) {
+		Unigine::PropertyPtr prop = worldSplineGraph->getProperty(n);
+
+		int sumVehPerHour = 0;
+		Unigine::HashMap<int, int> absIntencity;
+
+		for (int p = 0; p < prop->getNumParameters(); p++) {
+			Unigine::String pn = prop->getParameterName(p);
+			if (pn == "leads_to_end_of_road") {
+				leadToEndOfRoad = prop->getParameterInt(p) > 0;
+			}
+			else if (pn == "lane_num_from_left_to_right")
+			{
+				numFromLeftToRight = prop->getParameterInt(p);
+			}
+			else if (pn == "transition_length_start")
+			{
+				transitionLengthStart = prop->getParameterDouble(p);
+			}
+			else if (pn == "transition_length_end")
+			{
+				transitionLengthEnd = prop->getParameterDouble(p);
+			}
+			//TODO: Also add speed limit for each vehicle type
+			else
+			{
+				//Find vehicle type container node
+				int vehTypeContainerI = trafficSim->getVehicles()->findChild(pn);
+				assert(vehTypeContainerI >= 0);
+				if (vehTypeContainerI < 0) continue;
+
+				int vehPerHour = prop->getParameterInt(p);
+
+				if (vehPerHour > 0) {
+					sumVehPerHour += vehPerHour;
+					absIntencity.append(vehTypeContainerI, vehPerHour);
+				}
+
+			}
 		}
+
+		if (absIntencity.size() > 0) {
+			//calculate timeSpanBetweenAddingVehicles by sumVehPerHour
+			timeSpanBetweenAddingVehicles = 1 / ((float)sumVehPerHour / 3600);
+
+			//calculate probability of vehicle each type
+			float prevProbDivider = 0;
+			for (auto it = absIntencity.begin(); it != absIntencity.end(); it++) {
+				int nodeId = it->key;
+				int vehPerHour = it->data;
+
+				float ratio = (float)vehPerHour / sumVehPerHour;
+				assert(ratio <= 1.0f);
+				float probDivider = prevProbDivider + ratio;
+				vehProbability.append(nodeId, probDivider);
+				prevProbDivider = probDivider;
+
+				if (std::next(it) == absIntencity.end()) {
+					assert(probDivider == 1.0f);
+				}
+
+			}
+		}
+
+		if (sumVehPerHour == 0) {
+
+		}
+
+
 	}
 
-	Position3D pos = this->startOfLane();
-
-	//get additional lanes linear spans
-	scanNeighboringLanes(additionalLanes);
 
 }
 
-void TrafficLane::scanNeighboringLanes(std::list<TrafficLane *> &neighboringLanes)
+/*void TrafficLane::scanNeighboringLanes(std::list<TrafficLane *> &neighboringLanes)
 {
 	LinearSpan* currentLSLeft = nullptr;
+	LinearSpan* currentLSLeftInverse = nullptr;
+
+
 	LinearSpan* currentLSRight = nullptr;
+	LinearSpan* currentLSRightInverse = nullptr;
+
+
 	for (int s = 0; s < segmentPositions.size(); s++) {
+
+		LinearPosition lp = LinearPosition(segmentPositions[s]);
+
+
 		if (currentLSLeft == nullptr || currentLSRight == nullptr) {
 			//searching for start points of lanes
 			std::list<TrafficLane*>::iterator i = neighboringLanes.begin();
+
 			while (i != neighboringLanes.end()) {//https://stackoverflow.com/a/596180/8020304
 				Position3D pos = (*i)->startOfLane();
-				LinearPosition lp = LinearPosition(segmentPositions[s]);
 				int checkResult = pos.isParallelLineInFrontOf(&lp);
 				if (checkResult != 0) {
 					//start of lane founded
@@ -109,25 +186,27 @@ void TrafficLane::scanNeighboringLanes(std::list<TrafficLane *> &neighboringLane
 
 					ls = new LinearSpan;
 					ls->start = lp;
-					ls->dataType = LaneType::AdditionalLane_;
+					ls->dataType = DataType::AdditionalLane_;
 					ls->data = (*i);
 
 
-					LinearSpan lsThisLane;
-					lsThisLane.start = (*i)->startOfLaneLinear();
-					lsThisLane.end = (*i)->endOfLaneLinear();
-					lsThisLane.dataType = this->laneType;
-					lsThisLane.data = this;
+					LinearSpan lsPointingThisLane;
+					lsPointingThisLane.start = (*i)->startOfLaneLinear();
+					lsPointingThisLane.end = (*i)->endOfLaneLinear();//this can be changed if this line ends earler
+					lsPointingThisLane.dataType = this->laneType;
+					lsPointingThisLane.data = this;
 
 					if (checkResult == -1) {
 						assert(currentLSLeft == nullptr);
 						currentLSLeft = ls;
-						(*i)->lanesToTheRight.append(lsThisLane);
+						currentLSLeftInverse = &lsPointingThisLane;
+						(*i)->lanesToTheRight.append(lsPointingThisLane);
 					}
 					else {
 						assert(currentLSRight == nullptr);
 						currentLSRight = ls;
-						(*i)->lanesToTheLeft.append(lsThisLane);
+						currentLSRightInverse = &lsPointingThisLane;
+						(*i)->lanesToTheLeft.append(lsPointingThisLane);
 					}
 
 
@@ -150,10 +229,9 @@ void TrafficLane::scanNeighboringLanes(std::list<TrafficLane *> &neighboringLane
 
 			for (int l = 0; l < lanesToSearchEnd.size(); l++) {
 				LinearSpan* ls = lanesToSearchEnd[l];
-				Position3D endPos = ((AdditionalLane*)ls->data)->endOfLane();
-				LinearPosition lp = LinearPosition(segmentPositions[s]);
+				Position3D endPos = ((MainLane*)ls->data)->endOfLane();
 
-				Position3D test = lp.getPos3D();
+				//Position3D test = lp.getPos3D();
 
 				int checkResult = endPos.isParallelLineInFrontOf(&lp);
 				if (checkResult != 0) {
@@ -164,12 +242,14 @@ void TrafficLane::scanNeighboringLanes(std::list<TrafficLane *> &neighboringLane
 						assert(currentLSLeft == ls);
 						lanesToTheLeft.append(*currentLSLeft);
 						currentLSLeft = nullptr;
+						currentLSLeftInverse = nullptr;
 					}
 					else
 					{
 						assert(currentLSRight == ls);
 						lanesToTheRight.append(*currentLSRight);
 						currentLSRight = nullptr;
+						currentLSRightInverse = nullptr;
 					}
 
 
@@ -182,8 +262,19 @@ void TrafficLane::scanNeighboringLanes(std::list<TrafficLane *> &neighboringLane
 		}
 
 	}
-}
 
+
+	//if we still have currentLSLeft or currentLSRight
+	//then this lane ends earler than neighbor lane
+	if (currentLSLeft) {
+		currentLSLeft->end = endOfLaneLinear();
+		currentLSLeftInverse->end = ;//чтобы найти это значение нужно ???
+		lanesToTheLeft.append(*currentLSLeft);
+	}
+
+
+}
+*/
 
 TrafficLane::~TrafficLane()
 {
@@ -210,9 +301,130 @@ void TrafficLane::update() {
 		delete (*toErase[i]);
 		vehicles.erase(toErase[i]);
 	}
+
+
+	//add new vehicle if needed
+	if (vehProbability.size() == 0) return;
+
+	if (waitingVehicle == nullptr) {
+		if (timeToAddNewVehicle >= 0.0f)
+		{
+			timeToAddNewVehicle -= Unigine::Game::get()->getIFps();
+			if (timeToAddNewVehicle < 0.0f)
+			{
+				//it is time to add new vehicle
+
+				int rn = rand();
+				float randomRatio = (float)rn / RAND_MAX;
+				int vehContainerId = -1;
+				for (auto it = vehProbability.begin(); it != vehProbability.end(); it++) {
+					float probDivider = it->data;
+					if (randomRatio <= probDivider) {
+						vehContainerId = it->key;
+						break;
+					}
+
+				}
+
+				assert(vehContainerId != -1);
+
+				Unigine::NodePtr car;
+				Unigine::NodePtr vehContainer = trafficSim->getVehicles()->getChild(vehContainerId);
+				if ((!vehContainer) || vehContainer->getNumChildren() == 0) {
+					//dummy car
+					int dcn = trafficSim->getVehicles()->findChild("DummyCar");
+					assert(dcn >= 0);
+
+					Unigine::NodePtr dummyCar = trafficSim->getVehicles()->getChild(dcn);
+
+					car = dummyCar->clone();
+				}
+				else
+				{
+					//get random car from container
+					int cn = rand() % vehContainer->getNumChildren();
+
+					Unigine::NodePtr carToClone = vehContainer->getChild(cn);
+
+					car = carToClone->clone();
+				}
+
+
+				car->release();
+				Unigine::Editor::get()->addNode(car, 1);
+				car->setWorldParent(Unigine::NodePtr::Ptr() /*worldSplineGraph->getNode()*/);
+
+
+
+				float speedLimit = 30.5556f;//TODO: speed limit
+
+				Vehicle* vehicle = new Vehicle(carriageway, this,
+					Unigine::NodeDummy::cast(car), speedLimit, startOfLaneLinear());
+
+				float velocity = 0;
+
+				getNewVehicleVelocity(vehicle, velocity, speedLimit);
+
+				//take into account is there enough space to add new vehicle
+				if (velocity > 0) {
+					startNewVehicle(vehicle, velocity);
+				}
+				else
+				{
+					waitingVehicle = vehicle;
+					waitingVehicle->setEnabled(0);
+				}
+
+
+
+			}
+
+		}
+	}
+	else
+	{
+		float velocity = 0;
+		getNewVehicleVelocity(waitingVehicle, velocity, waitingVehicle->getSpeedLimit());
+
+		if (velocity > 0) {
+			startNewVehicle(waitingVehicle, velocity);
+			waitingVehicle->setEnabled(1);
+			waitingVehicle = nullptr;
+		}
+	}
 }
 
 
+void TrafficLane::getNewVehicleVelocity(Vehicle * vehicle, float &velocity, float speedLimit)
+{
+	ObstacleType obstacleType;
+	LinearPosition obstacleLP = LinearPosition::Null();
+	double clearDist = vehicle->getClearDist(vehicles.begin(),
+		startOfLaneLinear(), obstacleType, obstacleLP);
+	if (clearDist == DBL_MAX)
+	{
+		velocity = speedLimit;
+	}
+	else
+	{
+		velocity = vehicle->getVelocityToFitIntoSpan(clearDist);
+	}
+}
+
+void TrafficLane::startNewVehicle(Vehicle * &vehicle, float velocity)
+{
+	vehicles.push_front(vehicle);
+	std::list<Vehicle*>::iterator it = vehicles.begin();
+	vehicle->setIterator(it);
+	vehicle->setVelocity(velocity);
+
+
+	timeToAddNewVehicle = timeSpanBetweenAddingVehicles;
+}
+
+
+
+//получает только неподвижные препятствия
 LinearPosition TrafficLane::getNextObstacle(LinearPosition pos, bool ignoreFirst) {
 	LinearPosition empty = LinearPosition::Null();
 
@@ -236,6 +448,155 @@ LinearPosition TrafficLane::getNextObstacle(LinearPosition pos, bool ignoreFirst
 	}
 
 }
+
+
+
+void TrafficLane::calcNeighborLanesLinearSpansOneSide(
+	Unigine::Vector<TrafficLane*> lanes, bool right) {
+
+	//проход по всем сегментам текущего графа
+	//сначала - поиск начала или конца любой из полос
+	//если найден конец раньше чем начало - это полоса, которая начинается раньше этой
+	//после того как найдено начало полосы, далее искать только ее конец
+	//после того как найден конец - опять искать только начало любой полосы
+
+	std::list< TrafficLane*> notFoundedLanes;
+	for (int i = 0; i < lanes.size(); i++) {
+		notFoundedLanes.push_back(lanes[i]);
+	}
+	bool firstNeigborFounded = false;
+	LinearSpan* currNeighborLaneLS = nullptr;
+
+	for (int s = 0; s < segmentPositions.size(); s++) {
+
+		//поиск начала или конца любой из полос
+		if (currNeighborLaneLS == nullptr) {
+			std::list<TrafficLane*>::iterator i = notFoundedLanes.begin();
+			while (i != notFoundedLanes.end()) {//https://stackoverflow.com/a/596180/8020304
+
+				//поиск начала
+				{
+					Position3D pos = (*i)->startOfLane();
+					LinearPosition lp = LinearPosition(segmentPositions[s]);
+
+#ifdef DEBUG
+					double testLen = (lp.getPos3D().absPos - pos.absPos).length();
+#endif
+
+
+
+					int checkResult = pos.isParallelLineInFrontOf(&lp);
+					if (checkResult != 0) {
+						//TODO: можно сверить лево-право
+
+						//найдено начало полосы
+						firstNeigborFounded = true;
+						currNeighborLaneLS = new LinearSpan();
+						currNeighborLaneLS->data = (*i);
+						currNeighborLaneLS->start = lp;
+						addNeighborLaneLinearSpan(currNeighborLaneLS, right);
+
+
+
+						notFoundedLanes.erase(i++);
+						continue;//ASSERTION: НЕ УЧТЕН СЛУЧАЙ ПРИ КОТОРОМ 
+								//БОЛЕЕ ЧЕМ ОДНА СОСЕДНЯЯ ПОЛОСА НАХОДИТСЯ 
+								//НА ПРОМЕЖУТКЕ ОДНОГО СЕГМЕНТА ТЕКУЩЕЙ
+					}
+				}
+
+				//поиск конца полосы
+				if (!firstNeigborFounded) //только если еще не найдено ни одной полосы
+				{
+
+					Position3D pos = (*i)->endOfLane();
+					LinearPosition lp = LinearPosition(segmentPositions[s]);
+					int checkResult = pos.isParallelLineInFrontOf(&lp);
+					if (checkResult != 0) {
+						//TODO: можно сверить лево-право
+
+						//найден конец полосы
+						firstNeigborFounded = true;
+
+						//добавить промежуток от начала
+						LinearSpan* ls = new LinearSpan;
+						ls->data = (*i);
+						ls->start = this->startOfLaneLinear();
+						ls->end = lp;
+						addNeighborLaneLinearSpan(ls, right);
+
+
+						notFoundedLanes.erase(i++);
+						continue;
+					}
+				}
+
+				++i;
+
+			}
+
+
+		}
+
+		//поиск конца полосы для которой найдено начало
+		if (currNeighborLaneLS) {
+			TrafficLane*tl = currNeighborLaneLS->data;
+
+			Position3D pos = tl->endOfLane();
+			LinearPosition lp = LinearPosition(segmentPositions[s]);
+			int checkResult = pos.isParallelLineInFrontOf(&lp);
+			if (checkResult != 0) {
+				//TODO: можно сверить лево-право
+
+				//найден конец полосы. Полоса полностью находится в пределах текущей
+				currNeighborLaneLS->end = lp;
+
+				//для таких полос необходимо добавить линейный промежуток от начала до конца,
+				//указывающий на текущую полосу
+				LinearSpan* ls = new LinearSpan;
+				ls->data = this;
+				ls->start = tl->startOfLaneLinear();
+				ls->end = tl->endOfLaneLinear();
+				tl->addNeighborLaneLinearSpan(ls, !right);
+
+
+				currNeighborLaneLS = nullptr;
+			}
+
+		}
+
+
+
+
+	}
+
+
+	if (currNeighborLaneLS) {
+		//значит эта полоса заканчивается после текущей
+		currNeighborLaneLS->end = this->endOfLaneLinear();
+	}
+
+
+}
+
+
+void TrafficLane::calcNeighborLanesLinearSpans() {
+	//const char* test = worldSplineGraph->getName();
+
+
+	Unigine::Vector<TrafficLane*> lanesToLeft
+		= carriageway->getLanesToLeft(numFromLeftToRight);
+
+	Unigine::Vector<TrafficLane*> lanesToRight
+		= carriageway->getLanesToRight(numFromLeftToRight);
+
+	if (lanesToLeft.size() > 0 && lanesToTheLeft.size() == 0)
+		calcNeighborLanesLinearSpansOneSide(lanesToLeft, false);
+	if (lanesToRight.size() > 0 && lanesToTheRight.size() == 0)
+		calcNeighborLanesLinearSpansOneSide(lanesToRight, true);
+
+}
+
 
 
 

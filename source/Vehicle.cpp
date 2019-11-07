@@ -35,6 +35,29 @@ Vehicle::Vehicle(Сarriageway* carriageway,
 	Position3D vp = lane->startOfLane();
 	moveOnPos(vp);
 	currLinearPosOnLane = startLinPos;
+
+
+
+#ifdef DEBUG 
+	Unigine::MeshPtr sphere = Unigine::Mesh::create();
+	sphere->addSphereSurface("testMarker", 0.5f, 8, 8);
+
+	testMarkerLeft = Unigine::ObjectMeshStatic::create(sphere);
+	testMarkerLeft->release();
+	Unigine::Editor::get()->addNode(testMarkerLeft->getNode());
+	testMarkerLeft->setMaterialParameter("albedo_color", Unigine::Math::vec4(1, 0, 0, 1), 0);
+	testMarkerLeft->setEnabled(0);
+
+	sphere = Unigine::Mesh::create();
+	sphere->addSphereSurface("testMarker", 0.5f, 8, 8);
+
+	testMarkerRight = Unigine::ObjectMeshStatic::create(sphere);
+	testMarkerRight->release();
+	Unigine::Editor::get()->addNode(testMarkerRight->getNode());
+	testMarkerRight->setMaterialParameter("albedo_color", Unigine::Math::vec4(1, 0, 0, 1), 0);
+	testMarkerRight->setEnabled(0);
+
+#endif
 }
 
 
@@ -42,6 +65,13 @@ Vehicle::~Vehicle()
 {
 	Unigine::Editor::get()->removeNode(node->getNode(), 1);
 	node.clear();
+
+#ifdef DEBUG 
+	Unigine::Editor::get()->removeNode(testMarkerLeft->getNode(), 1);
+	testMarkerLeft.clear();
+	Unigine::Editor::get()->removeNode(testMarkerRight->getNode(), 1);
+	testMarkerRight.clear();
+#endif
 }
 
 void Vehicle::update() {
@@ -60,6 +90,57 @@ void Vehicle::update() {
 
 	//keep track vehicle position on all traffic lanes of current carrageway
 
+	TrafficLane* lane = trafficLane;
+
+	if (justChangedLane) {
+		laneToTheLeft = trafficLane->lanesToTheLeftBegin();
+		laneToTheRight = trafficLane->lanesToTheRightBegin();
+		justChangedLane = false;
+	}
+
+	if (distFromLastNeighborLanesPositionUpdate > 1e-3f) 
+		//to avoid errors update neighbor positions only if moved significaly
+	{
+		//update current laneToTheLeft and laneToTheRight
+		laneToTheLeft = updateNeighborLane(laneToTheLeft, trafficLane->lanesToTheLeftEnd());
+		laneToTheRight = updateNeighborLane(laneToTheRight, trafficLane->lanesToTheRightEnd());
+
+		if (laneToTheLeft != trafficLane->lanesToTheLeftEnd())
+			updatePosOnNeighborLane(&posOnLaneToTheLeft, *laneToTheLeft);
+		else posOnLaneToTheLeft = LinearPosition::Null();//больше доп полос с этой стороны нет
+		if (laneToTheRight != trafficLane->lanesToTheRightEnd())
+			updatePosOnNeighborLane(&posOnLaneToTheRight, *laneToTheRight);
+		else posOnLaneToTheRight = LinearPosition::Null();
+
+#ifdef DEBUG 
+		if (!posOnLaneToTheLeft.isEmpty()) {
+			testMarkerLeft->setEnabled(1);
+			Position3D pos = posOnLaneToTheLeft.getPos3D();
+			testMarkerLeft->setWorldPosition(pos.absPos);
+			testMarkerLeft->setWorldDirection(pos.tangent, pos.up, Unigine::Math::AXIS_Y);
+		}
+		else
+		{
+			testMarkerLeft->setEnabled(0);
+		}
+
+		if (!posOnLaneToTheRight.isEmpty()) {
+			testMarkerRight->setEnabled(1);
+			Position3D pos = posOnLaneToTheRight.getPos3D();
+			testMarkerRight->setWorldPosition(pos.absPos);
+			testMarkerRight->setWorldDirection(pos.tangent, pos.up, Unigine::Math::AXIS_Y);
+		}
+		else
+		{
+			testMarkerRight->setEnabled(0);
+		}
+#endif
+
+
+		distFromLastNeighborLanesPositionUpdate = 0;//increase if moved
+	}
+
+	
 
 	switch (currentActivity)
 	{
@@ -73,7 +154,7 @@ void Vehicle::update() {
 		double clearDist = getClearDist(nextIt, currLinearPosOnLane, obstacleType, obstacleLP);
 
 		//get next vehicle in this line
-		TrafficLane* lane = trafficLane;
+
 
 		//here the decision on current acceleration has to be made. 
 		//if the path is free, then we accelerate with standard acceleration. 
@@ -94,8 +175,27 @@ void Vehicle::update() {
 		else
 		{
 			//TODO: start to change lane if possible
+			if (laneToTheLeft != trafficLane->lanesToTheLeftEnd()) {
 
-			//slow down to a complete stop
+				bool can = canChangeLane(*laneToTheLeft, posOnLaneToTheLeft, obstacleType);
+
+
+				
+
+
+				
+				
+			}
+
+
+			if (laneToTheRight != trafficLane->lanesToTheRightEnd()) {
+
+			}
+
+
+
+
+			//slow down to a complete stop if can't change lane
 			double distToStop = clearDist - reserveDistBetweenCars - length;
 			if (distToStop < 0) {
 				currAcceleration = 0;//we must stop already
@@ -134,8 +234,9 @@ void Vehicle::update() {
 			{
 				Position3D vp = currLinearPosOnLane.getPos3D();
 				moveOnPos(vp);
+				distFromLastNeighborLanesPositionUpdate += s;
 
-				if (!movingThroughObstacle.isEmpty() 
+				if (!movingThroughObstacle.isEmpty()
 					&& currLinearPosOnLane.absLinearPos >= movingThroughObstacle.getSegEndLinearPos()) {
 					//we path through obstacle!
 					movingThroughObstacle = LinearPosition::Null();

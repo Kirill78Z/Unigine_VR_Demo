@@ -2,8 +2,13 @@
 #include "LinearPosition.h"
 
 
-Position3D::Position3D()
+Position3D::Position3D(Unigine::SplineSegmentPtr splSegment,
+	Unigine::Math::dvec3 pos, Unigine::Math::vec3 tangent, Unigine::Math::vec3 up)
 {
+	this->splSegment = splSegment;
+	this->absPos = splSegment->getParent()->getWorldTransform()*pos;
+	this->tangent = tangent;//TODO?: also use spline grafh world transform
+	this->up = up;
 }
 
 
@@ -20,10 +25,31 @@ int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
 	//CHECK 2 NEIGHBORING SEGMENTS!!!
 	Unigine::SplineSegmentPtr seg0 = lp->splSegment;
 	Unigine::SplineSegmentPtr seg1 = lp->getNextSegment();
+	dmat4 globalTransf = seg0->getParent()->getWorldTransform();
 
-	dvec3 p0 = seg0->getStartPoint()->getPosition();
-	dvec3 p1 = seg0->getEndPoint()->getPosition();
-	dvec3 p2 = seg1->getEndPoint()->getPosition();
+	float startDistOnSeg = lp->distOnSplineSeg();
+
+
+	float len = seg0->getLength();
+	if (!seg1 && startDistOnSeg == len) return 0;//it can be if lp is the end of lane!
+
+	assert(startDistOnSeg < len);
+	dvec3 p0 = dvec3::INF;
+
+	//if (startDistOnSeg == 0) {
+	p0 = globalTransf * seg0->getStartPoint()->getPosition();
+	/*}
+	else {
+		float param = seg0->linearToParametric(startDistOnSeg / seg0->getLength());
+		p0 = globalTransf * seg0->calcPoint(param);
+	}*/
+
+	dvec3 p1 = globalTransf * seg0->getEndPoint()->getPosition();
+
+
+	dvec3 p2 = dvec3::INF;
+	if (seg1)
+		p2 = globalTransf * seg1->getEndPoint()->getPosition();
 
 	bool afterSeg0 = false;
 	bool inFrontOfSeg0 = false;
@@ -36,7 +62,7 @@ int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
 		dvec2 w2d = dvec2(w0.x, w0.y);
 
 		c1_0 = dot(w2d, v2d);
-		if (c1_0 < 0) return 0;
+		if (c1_0 < -0.0001) return 0;
 		c2_0 = dot(v2d, v2d);
 		if (c2_0 < c1_0) afterSeg0 = true;
 
@@ -50,27 +76,35 @@ int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
 	dvec3 w1 = absPos - p1;
 	double c1_1 = 0;
 	double c2_1 = 0;
+	if (seg1) {
+
+		{
+			dvec2 v2d = dvec2(v1.x, v1.y);
+			dvec2 w2d = dvec2(w1.x, w1.y);
+
+			c1_1 = dot(w2d, v2d);
+
+			c2_1 = dot(v2d, v2d);
+			if (c2_1 < c1_1) return 0;
+
+			if (c1_1 < -0.0001) beforeSeg1 = true;
+			else inFrontOfSeg1 = true;
+		}
+	}
+	else if (!inFrontOfSeg0)
 	{
-		dvec2 v2d = dvec2(v1.x, v1.y);
-		dvec2 w2d = dvec2(w1.x, w1.y);
-
-		c1_1 = dot(w2d, v2d);
-
-		c2_1 = dot(v2d, v2d);
-		if (c2_1 < c1_1) return 0;
-
-		if (c1_1 < 0) beforeSeg1 = true;
-		else inFrontOfSeg1 = true;
+		return 0;
 	}
 
-	assert((afterSeg0 && beforeSeg1) || inFrontOfSeg0 || inFrontOfSeg1);
-
+	if (seg1)
+		assert((afterSeg0 && beforeSeg1) || inFrontOfSeg0 || inFrontOfSeg1);
+	else assert(inFrontOfSeg0);
 
 	double increaseLP = -DBL_MAX;
 	if (afterSeg0 && beforeSeg1) {
 		assert(!inFrontOfSeg0 && !inFrontOfSeg1);
 		//point is from the outside of convex vertex
-		increaseLP = seg0->getLength();
+		increaseLP = seg0->getLength() - startDistOnSeg;
 	}
 	else
 	{
@@ -82,26 +116,20 @@ int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
 		if (inFrontOfSeg0) {
 			double b = c1_0 / c2_0;
 			pi0 = p0 + v0 * b;
-			increaseLP0 = (pi0 - p0).length();
+			increaseLP0 = (pi0 - p0).length() - startDistOnSeg;
 			float d = dot(normalize(tangent), vec3(normalize(v0)));
 			codirectional0 = Unigine::Math::abs(d) > 0.9f;
-			if (!codirectional0) {
-				int q = 0;
-			}
 		}
 
 		dvec3 pi1 = dvec3::INF;
 		double increaseLP1 = -DBL_MAX;
 		bool codirectional1 = false;
-		if (inFrontOfSeg1) {
+		if (seg1 && inFrontOfSeg1) {
 			double b = c1_1 / c2_1;
 			pi1 = p1 + v1 * b;
-			increaseLP1 = seg0->getLength() + (pi1 - p1).length();
+			increaseLP1 = seg0->getLength() - startDistOnSeg + (pi1 - p1).length();
 			float d = dot(normalize(tangent), vec3(normalize(v1)));
 			codirectional1 = Unigine::Math::abs(d) > 0.9f;
-			if (!codirectional1) {
-				int q = 0;
-			}
 		}
 
 
@@ -129,8 +157,10 @@ int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
 		}
 	}
 
-
-	assert(increaseLP >= 0);
+	if (seg1)
+		assert(increaseLP <= seg0->getLength() + seg1->getLength());
+	else
+		assert(increaseLP <= seg0->getLength());
 	if (increaseLP < 0) return 0;
 
 	lp->increaseLinearPos(increaseLP);

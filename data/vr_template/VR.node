@@ -22,6 +22,9 @@
 					<parameter name="oculus_teleport_marker">884085613</parameter>
 					<parameter name="oculus_teleport_marker_mat">3105dcdd9a8231cf0db5af084675244dd66a3a3b</parameter>
 					<parameter name="oculus_obstacles">1953853657</parameter>
+					<parameter name="move_speed">20</parameter>
+					<parameter name="acceleration">15</parameter>
+					<parameter name="damping">15</parameter>
 				</property>
 			</properties>
 			<transform>0.99997592 0.0069813062 -9.8254546e-008 0.0 -0.0024566243 0.35189074 0.93603802 0.0 0.0065348013 -0.93601537 0.35189927 0.0 0.027523844 -0.93915486 1.3220505 1.0</transform>
@@ -238,7 +241,7 @@
 					<parameter name="Image">guid://5abc2c7a299fd1917e355dbc0fd99deb2b5a9a4e</parameter>
 				</property>
 			</properties>
-			<transform>0.843653133129 0.531854124773 -0.0733491449561 0.0 -0.37405677879 0.680275957598 0.630320109741 0.0 0.38513594181 -0.504334718245 0.772860513496 0.0 546086.832733 4841499.98402 204.942171809 1.0</transform>
+			<transform>0.843653252339 0.531854005564 -0.0733492492642 0.0 -0.374056659581 0.680276076807 0.630320169346 0.0 0.38513594181 -0.50433477785 0.772860513496 0.0 546116.951185 4841423.57517 151.769152744 1.0</transform>
 		</node>
 		<node type="PlayerDummy" id="1811213659" name="vr_hotpoint_4">
 			<fov>50</fov>

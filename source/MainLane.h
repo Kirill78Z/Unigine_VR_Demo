@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "TrafficLane.h"
 
 
@@ -18,7 +18,7 @@ public:
 
 	
 
-	Position3D pointByAbsPosOnLane(LinearPosition linearPos);//????
+	//Position3D pointByAbsPosOnLane(LinearPosition linearPos);//????
 	LinearPosition linearPosByPoint(Unigine::Math::dvec3 pt, int startSearchSegment);//TODO: use to get pos for parallel lines
 
 	
@@ -41,4 +41,4 @@ private:
 	void startNewVehicle(Vehicle * &vehicle, float velocity);
 
 };
-
+*/

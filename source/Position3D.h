@@ -7,7 +7,8 @@ struct LinearPosition;
 struct Position3D
 {
 
-	Position3D();
+	Position3D(Unigine::SplineSegmentPtr splSegment,
+		Unigine::Math::dvec3 pos, Unigine::Math::vec3 tangent, Unigine::Math::vec3 up);
 	~Position3D();
 
 	Unigine::SplineSegmentPtr splSegment;

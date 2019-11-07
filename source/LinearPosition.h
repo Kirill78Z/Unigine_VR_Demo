@@ -10,6 +10,20 @@ struct LinearPosition
 	Unigine::SplineSegmentPtr splSegment;
 	double absLinearPos = -1;
 
+
+#ifdef DEBUG
+	int lastIncrease = -1;
+#endif
+
+
+	void copyFrom(LinearPosition other) {
+		segStartLinearPos = other.segStartLinearPos;
+		splSegment = other.splSegment;
+		absLinearPos = other.absLinearPos;
+	}
+
+
+
 	double getSegEndLinearPos() {
 		return segStartLinearPos + splSegment->getLength();
 	}
@@ -21,7 +35,7 @@ struct LinearPosition
 
 	LinearPosition() {}
 
-	LinearPosition(Unigine::SplineSegmentPtr splSegment,
+	LinearPosition(Unigine::SplineSegmentPtr splSegment,//TODO: максимальная длина
 		double segStartLinearPos, double absLinearPos) {
 		this->segStartLinearPos = segStartLinearPos;
 		this->splSegment = splSegment;
@@ -48,6 +62,9 @@ struct LinearPosition
 		if (Unigine::Math::abs(distOnSplineSeg) < UNIGINE_EPSILON)
 			distOnSplineSeg = 0;
 
+		/*float len = splSegment->getLength();
+		assert(distOnSplineSeg < len);*/
+
 		return distOnSplineSeg;
 	}
 
@@ -55,13 +72,21 @@ struct LinearPosition
 	//returns true if end of spline graph reached
 	bool increaseLinearPos(double s) {
 		absLinearPos += s;
-
+#ifdef DEBUG
+		lastIncrease = 1;
+#endif
 
 		//splSegment
 		float distOnSplineSeg = this->distOnSplineSeg();
 
-		while (distOnSplineSeg > splSegment->getLength())
+#ifdef DEBUG
+		int n = 0;
+#endif
+		while (distOnSplineSeg >= splSegment->getLength())
 		{
+#ifdef DEBUG
+			n++;
+#endif
 			//move to next segment
 			Unigine::SplineSegmentPtr nextSeg = getNextSegment();
 
@@ -72,14 +97,47 @@ struct LinearPosition
 			}
 			else
 			{
+				//Уточнить absLinearPos, чтобы оно было не более максимальной длины!
+				absLinearPos = segStartLinearPos + splSegment->getLength();
+
+				assert(this->distOnSplineSeg() == splSegment->getLength());
 				return true;
 			}
 
 		}
 
+		assert(this->distOnSplineSeg() < splSegment->getLength());
 		return false;
 
 	}
+
+	//returns true if end of spline graph reached
+	bool moveToNextSegment() {
+
+		float distToSegEnd = splSegment->getLength() - distOnSplineSeg();
+		assert(distToSegEnd >= 0);
+		absLinearPos += distToSegEnd;
+#ifdef DEBUG
+		lastIncrease = 2;
+#endif
+
+		Unigine::SplineSegmentPtr nextSeg = getNextSegment();
+		if (nextSeg) {
+			segStartLinearPos += splSegment->getLength();
+			splSegment = nextSeg;
+
+			assert(this->distOnSplineSeg() < splSegment->getLength());
+			return false;
+		}
+		else
+		{
+			//Уточнить absLinearPos, чтобы оно было не более максимальной длины!
+			absLinearPos = segStartLinearPos + splSegment->getLength();
+			assert(this->distOnSplineSeg() == splSegment->getLength());
+			return true;
+		}
+	}
+
 
 
 	Unigine::SplineSegmentPtr getNextSegment() {
@@ -88,7 +146,7 @@ struct LinearPosition
 		Unigine::SplinePointPtr pt = splSegment->getEndPoint();
 		assert(pt->getNumSegments() <= 2);
 
-		if(pt->getNumSegments()<2) return nextSeg;
+		if (pt->getNumSegments() < 2) return nextSeg;
 
 		Unigine::Vector<Unigine::SplineSegmentPtr> segments;
 		pt->getSplineSegments(segments);
@@ -124,11 +182,7 @@ struct LinearPosition
 		Unigine::Math::vec3 tan = splSegment->calcTangent(nonLinearParam);
 		Unigine::Math::vec3 up = splSegment->calcUpVector(nonLinearParam);
 
-		Position3D vp;
-		vp.splSegment = splSegment;
-		vp.absPos = pt;
-		vp.tangent = tan;
-		vp.up = up;
+		Position3D vp = Position3D(splSegment, pt, tan, up);
 		return vp;
 	}
 };

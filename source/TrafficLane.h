@@ -11,19 +11,12 @@ class AdditionalLane;
 class MainLane;
 
 
-enum LaneType
-{
-	MainLane_,
-	AdditionalLane_
-};
 
 struct LinearSpan {
 	LinearPosition start;
 	LinearPosition end;
 
-
-	LaneType dataType;
-	void* data;
+	TrafficLane* data;
 
 	bool isNull() {
 		return start.isEmpty();
@@ -42,28 +35,31 @@ enum ObstacleType
 class TrafficLane
 {
 public:
-	TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway, Unigine::WorldSplineGraphPtr node);
-	void scanNeighboringLanes(std::list<TrafficLane *> &additionalLanes);
+	TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway,
+		Unigine::WorldSplineGraphPtr node);
+	//void scanNeighboringLanes(std::list<TrafficLane *> &additionalLanes);
 	~TrafficLane();
 
 	void virtual update();
 
 	Position3D startOfLane()
 	{
-		Position3D vp;
-		vp.splSegment = segments[0];
-		vp.absPos = segments[0]->getStartPoint()->getPosition();
-		vp.tangent = segments[0]->getStartTangent();
-		vp.up = segments[0]->getStartUp();
+		Position3D vp = Position3D(segments[0], segments[0]->getStartPoint()->getPosition(),
+			segments[0]->getStartTangent(), segments[0]->getStartUp());
 		return vp;
 	}
 
 	Position3D endOfLane() {
-		Position3D vp;
-		vp.splSegment = segments[segments.size() - 1];
-		vp.absPos = vp.splSegment->getEndPoint()->getPosition();
-		vp.tangent = vp.splSegment->getEndTangent();
-		vp.up = vp.splSegment->getEndUp();
+		int last = segmentPositions.size() - 1;
+
+		Unigine::SplineSegmentPtr lastSeg = segmentPositions[last].splSegment;
+
+		Unigine::Math::dvec3 lastPt = lastSeg->getEndPoint()->getPosition();
+
+		Unigine::Math::vec3 tan = lastSeg->getEndTangent();
+		Unigine::Math::vec3 up = lastSeg->getEndUp();
+
+		Position3D vp = Position3D(lastSeg, lastPt, tan, up);
 		return vp;
 	}
 
@@ -76,7 +72,7 @@ public:
 	LinearPosition endOfLaneLinear() {
 		//generate new struct
 		LinearPosition lp = LinearPosition(segmentPositions[segmentPositions.size() - 1]);
-		lp.increaseLinearPos(lp.splSegment->getLength());
+		assert(lp.increaseLinearPos(lp.splSegment->getLength()));
 		return lp;
 	}
 
@@ -96,9 +92,76 @@ public:
 		return leadToEndOfRoad;
 	}
 
+	int getNumFromLeftToRight() {
+		return numFromLeftToRight;
+	}
+
+	void calcNeighborLanesLinearSpans();
+
+
+	void addNeighborLaneLinearSpan(LinearSpan* ls, bool right) {
+		if (right) {
+			lanesToTheRight.push_back(ls);
+		}
+		else
+		{
+			lanesToTheLeft.push_back(ls);
+		}
+	}
+
+	std::list<LinearSpan*>::iterator lanesToTheLeftBegin() {
+		return lanesToTheLeft.begin();
+	}
+
+	std::list<LinearSpan*>::iterator lanesToTheRightBegin() {
+		return lanesToTheRight.begin();
+	}
+
+	std::list<LinearSpan*>::iterator lanesToTheLeftEnd() {
+		return lanesToTheLeft.end();
+	}
+
+	std::list<LinearSpan*>::iterator lanesToTheRightEnd() {
+		return lanesToTheRight.end();
+	}
+
+
+	double getTransitionLengthStart() {
+		return transitionLengthStart;
+	}
+
+	double getTransitionLengthEnd() {
+		return transitionLengthEnd;
+	}
+
+	//returns array of two iterators
+	std::list<Vehicle*>::iterator* getNextAndPrevVehicles(LinearPosition lp) {
+		//???
+		//need to change std::list<Vehicle*> to std::set<Vehicle*>
+
+	}
+
 protected:
 
-	LaneType laneType = LaneType::MainLane_;
+
+
+
+
+
+	//vehicles
+	Unigine::HashMap<int, float> vehProbability;
+	//measurement unit - sec
+	float timeToAddNewVehicle = 0;
+	float timeSpanBetweenAddingVehicles = 100000.0f;
+
+	Vehicle* waitingVehicle = nullptr;
+
+	void getNewVehicleVelocity(Vehicle * vehicle, float &velocity, float speedLimit);
+	void startNewVehicle(Vehicle * &vehicle, float velocity);
+
+
+
+	//DataType laneType = DataType::MainLane_;
 
 
 	Unigine::WorldSplineGraphPtr worldSplineGraph;
@@ -163,9 +226,16 @@ protected:
 		}
 	}
 
+
+	int numFromLeftToRight = 0;
 	//neighboring lanes
-	Unigine::Vector<LinearSpan> lanesToTheLeft;
-	Unigine::Vector<LinearSpan> lanesToTheRight;
+	void calcNeighborLanesLinearSpansOneSide(Unigine::Vector<TrafficLane*> lanes, bool right);
+
+	std::list<LinearSpan*> lanesToTheLeft;
+	std::list<LinearSpan*> lanesToTheRight;
+
+
+
 
 	double overalLength;
 
@@ -173,5 +243,11 @@ protected:
 	Сarriageway* carriageway;
 
 	bool leadToEndOfRoad = false;
+
+
+	//дополнительные расстояния, которые можно использовать 
+	//для перестроения на эту полосу в начале и в конце полосы
+	double transitionLengthStart = 0;
+	double transitionLengthEnd = 0;
 };
 
