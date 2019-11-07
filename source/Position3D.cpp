@@ -100,34 +100,49 @@ int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
 		assert((afterSeg0 && beforeSeg1) || inFrontOfSeg0 || inFrontOfSeg1);
 	else assert(inFrontOfSeg0);
 
-	double increaseLP = -DBL_MAX;
+	//double increaseLP = 0;
+
+	LinearPosition newLp = LinearPosition::Null();
+
 	if (afterSeg0 && beforeSeg1) {
 		assert(!inFrontOfSeg0 && !inFrontOfSeg1);
 		//point is from the outside of convex vertex
-		increaseLP = seg0->getLength() - startDistOnSeg;
+		//increaseLP = seg0->getLength() - startDistOnSeg;
+		newLp.copyFrom(*lp);
+		//newLp.moveToNextSegment();
+		newLp.absLinearPos = newLp.segStartLinearPos + newLp.splSegment->getLength() - 0.001;//must stay on current segment
 	}
 	else
 	{
 		assert(inFrontOfSeg0 || inFrontOfSeg1);
 
 		dvec3 pi0 = dvec3::INF;
-		double increaseLP0 = -DBL_MAX;
+		//double increaseLP0 = -DBL_MAX;
+		LinearPosition newLp0 = LinearPosition::Null();
 		bool codirectional0 = false;
 		if (inFrontOfSeg0) {
 			double b = c1_0 / c2_0;
 			pi0 = p0 + v0 * b;
-			increaseLP0 = (pi0 - p0).length() - startDistOnSeg;
+			//increaseLP0 = (pi0 - p0).length();
+			newLp0.copyFrom(*lp);
+			//сбросить текущую длину
+			newLp0.absLinearPos = newLp0.segStartLinearPos;
+			newLp0.increaseLinearPos((pi0 - p0).length());
 			float d = dot(normalize(tangent), vec3(normalize(v0)));
-			codirectional0 = Unigine::Math::abs(d) > 0.9f;
+			codirectional0 = /*seg1? d > 0.9f : */Unigine::Math::abs(d) > 0.9f;//на последней точке графа бывает наоборот
 		}
 
 		dvec3 pi1 = dvec3::INF;
-		double increaseLP1 = -DBL_MAX;
+		//double increaseLP1 = -DBL_MAX;
+		LinearPosition newLp1 = LinearPosition::Null();
 		bool codirectional1 = false;
 		if (seg1 && inFrontOfSeg1) {
 			double b = c1_1 / c2_1;
 			pi1 = p1 + v1 * b;
-			increaseLP1 = seg0->getLength() - startDistOnSeg + (pi1 - p1).length();
+			//increaseLP1 = seg0->getLength() - startDistOnSeg + (pi1 - p1).length();
+			newLp1.copyFrom(*lp);
+			newLp1.moveToNextSegment();
+			newLp1.increaseLinearPos((pi1 - p1).length());
 			float d = dot(normalize(tangent), vec3(normalize(v1)));
 			codirectional1 = Unigine::Math::abs(d) > 0.9f;
 		}
@@ -139,33 +154,44 @@ int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
 			double distToSeg1 = (absPos - pi1).length2();
 
 			if (distToSeg0 < distToSeg1) {
-				increaseLP = increaseLP0;
+				//increaseLP = increaseLP0;
+				newLp = newLp0;
 			}
 			else
 			{
-				increaseLP = increaseLP1;
+				//increaseLP = increaseLP1;
+				newLp = newLp1;
 			}
 		}
 		else if (inFrontOfSeg0 && codirectional0)
 		{
-			increaseLP = increaseLP0;
+			//increaseLP = increaseLP0;
+			newLp = newLp0;
 		}
 		else if (codirectional1)
 		{
 			assert(inFrontOfSeg1);
-			increaseLP = increaseLP1;
+			//increaseLP = increaseLP1;
+			newLp = newLp1;
 		}
 	}
 
-	if (seg1)
+	/*if (seg1)
 		assert(increaseLP <= seg0->getLength() + seg1->getLength());
 	else
-		assert(increaseLP <= seg0->getLength());
-	if (increaseLP < 0) return 0;
+		assert(increaseLP <= seg0->getLength());*/
 
-	lp->increaseLinearPos(increaseLP);
 
-	double leftOrRight = v0.x*w0.y - v0.y*w0.x;
-	return leftOrRight > 0 ? -1 : 1;
+	//assert(increaseLP >= 0);
+
+	//if (increaseLP == 0) return 0;
+	if (newLp.isEmpty()) return 0;
+
+	//lp->increaseLinearPos(increaseLP);
+	lp->copyFrom(newLp);
+
+	return 1;
+	/*double leftOrRight = v0.x*w0.y - v0.y*w0.x;
+	return leftOrRight > 0 ? -1 : 1;*/
 
 }

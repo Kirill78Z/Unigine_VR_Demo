@@ -560,7 +560,7 @@
 							<point_nodes/>
 							<properties>
 								<property parent="2b8404be0294e5050ebb92a00a01257f5cd574d2" guid="39b956ca7d26d7a1200b0c8c7daa5e7b39bdc19e">
-									<parameter name="0_cars">0</parameter>
+									<parameter name="0_cars">1211</parameter>
 									<parameter name="leads_to_end_of_road">0</parameter>
 									<parameter name="lane_num_from_left_to_right">2</parameter>
 								</property>
@@ -572,7 +572,7 @@
 							<point_nodes/>
 							<properties>
 								<property parent="2b8404be0294e5050ebb92a00a01257f5cd574d2" guid="46a7af6743e4e59a4e93f8316b9f13dc05e89d8b">
-									<parameter name="0_cars">0</parameter>
+									<parameter name="0_cars">1368</parameter>
 									<parameter name="leads_to_end_of_road">1</parameter>
 									<parameter name="lane_num_from_left_to_right">1</parameter>
 								</property>
@@ -584,7 +584,7 @@
 							<point_nodes/>
 							<properties>
 								<property parent="2b8404be0294e5050ebb92a00a01257f5cd574d2" guid="39d2e09b20c51d3e4b2623853782bf20505967ff">
-									<parameter name="0_cars">1158</parameter>
+									<parameter name="0_cars">3053</parameter>
 									<parameter name="leads_to_end_of_road">1</parameter>
 									<parameter name="lane_num_from_left_to_right">0</parameter>
 								</property>

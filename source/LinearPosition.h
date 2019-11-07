@@ -114,9 +114,12 @@ struct LinearPosition
 	//returns true if end of spline graph reached
 	bool moveToNextSegment() {
 
-		float distToSegEnd = splSegment->getLength() - distOnSplineSeg();
-		assert(distToSegEnd >= 0);
-		absLinearPos += distToSegEnd;
+		/*float distToSegEnd = splSegment->getLength() - distOnSplineSeg();
+		assert(distToSegEnd >= 0);*/
+		//absLinearPos += distToSegEnd;
+
+
+		absLinearPos = segStartLinearPos + splSegment->getLength();
 #ifdef DEBUG
 		lastIncrease = 2;
 #endif
@@ -131,8 +134,6 @@ struct LinearPosition
 		}
 		else
 		{
-			//Уточнить absLinearPos, чтобы оно было не более максимальной длины!
-			absLinearPos = segStartLinearPos + splSegment->getLength();
 			assert(this->distOnSplineSeg() == splSegment->getLength());
 			return true;
 		}

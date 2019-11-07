@@ -135,11 +135,11 @@ public:
 	}
 
 	//returns array of two iterators
-	std::list<Vehicle*>::iterator* getNextAndPrevVehicles(LinearPosition lp) {
-		//???
-		//need to change std::list<Vehicle*> to std::set<Vehicle*>
+	//std::list<Vehicle*>::iterator* getNextAndPrevVehicles(LinearPosition lp) {
+	//	//???
+	//	//need to change std::list<Vehicle*> to std::set<Vehicle*>
 
-	}
+	//}
 
 protected:
 
