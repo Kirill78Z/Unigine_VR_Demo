@@ -1,10 +1,18 @@
 #include "TrafficSimulation.h"
 #include "Ñarriageway.h"
 #include <UnigineEditor.h>
-
+#include <UnigineVisualizer.h>
+#include <UnigineConsole.h>
 
 TrafficSimulation::TrafficSimulation()
 {
+#ifdef DEBUG
+	Unigine::Visualizer *v = Unigine::Visualizer::get();
+	v->setEnabled(1);
+	Unigine::Console* console = Unigine::Console::get();
+	console->run("show_visualizer 2");
+#endif // DEBUG
+
 	//find vehicle parking
 	{
 		vehicles = Unigine::NodeDummy::cast(Unigine::Editor::get()->getNodeByName("vehicles"));

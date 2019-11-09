@@ -1,6 +1,6 @@
 #include "Vehicle.h"
 #include <UnigineGame.h>
-#include "UnigineEditor.h"
+
 
 
 
@@ -39,39 +39,41 @@ Vehicle::Vehicle(Сarriageway* carriageway,
 
 
 #ifdef DEBUG 
-	Unigine::MeshPtr sphere = Unigine::Mesh::create();
-	sphere->addSphereSurface("testMarker", 0.5f, 8, 8);
+	{
+		Unigine::MeshPtr sphere = Unigine::Mesh::create();
+		sphere->addSphereSurface("testMarker", 0.5f, 8, 8);
 
-	testMarkerLeft = Unigine::ObjectMeshStatic::create(sphere);
-	testMarkerLeft->release();
-	Unigine::Editor::get()->addNode(testMarkerLeft->getNode());
-	testMarkerLeft->setMaterialParameter("albedo_color", Unigine::Math::vec4(1, 0, 0, 1), 0);
-	testMarkerLeft->setEnabled(0);
+		testMarkerLeft = Unigine::ObjectMeshStatic::create(sphere);
+		testMarkerLeft->release();
+		Unigine::Editor::get()->addNode(testMarkerLeft->getNode());
+		testMarkerLeft->setMaterialParameter("albedo_color", Unigine::Math::vec4(1, 0, 0, 1), 0);
+		testMarkerLeft->setEnabled(0);
 
-	sphere = Unigine::Mesh::create();
-	sphere->addSphereSurface("testMarker", 0.5f, 8, 8);
+		sphere = Unigine::Mesh::create();
+		sphere->addSphereSurface("testMarker", 0.5f, 8, 8);
 
-	testMarkerRight = Unigine::ObjectMeshStatic::create(sphere);
-	testMarkerRight->release();
-	Unigine::Editor::get()->addNode(testMarkerRight->getNode());
-	testMarkerRight->setMaterialParameter("albedo_color", Unigine::Math::vec4(1, 0, 0, 1), 0);
-	testMarkerRight->setEnabled(0);
+		testMarkerRight = Unigine::ObjectMeshStatic::create(sphere);
+		testMarkerRight->release();
+		Unigine::Editor::get()->addNode(testMarkerRight->getNode());
+		testMarkerRight->setMaterialParameter("albedo_color", Unigine::Math::vec4(1, 0, 0, 1), 0);
+		testMarkerRight->setEnabled(0);
+	}
 
+
+	carriageway->vehn++;
+
+
+	if (carriageway->vehn == 7) {
+		testigVeh = true;
+		carriageway->vehn = 0;
+	}
 #endif
 }
 
 
 Vehicle::~Vehicle()
 {
-	Unigine::Editor::get()->removeNode(node->getNode(), 1);
-	node.clear();
 
-#ifdef DEBUG 
-	Unigine::Editor::get()->removeNode(testMarkerLeft->getNode(), 1);
-	testMarkerLeft.clear();
-	Unigine::Editor::get()->removeNode(testMarkerRight->getNode(), 1);
-	testMarkerRight.clear();
-#endif
 }
 
 void Vehicle::update() {
@@ -98,49 +100,171 @@ void Vehicle::update() {
 		justChangedLane = false;
 	}
 
-	if (distFromLastNeighborLanesPositionUpdate > 1e-3f) 
-		//to avoid errors update neighbor positions only if moved significaly
+	//if (testigVeh) 
 	{
-		//update current laneToTheLeft and laneToTheRight
-		laneToTheLeft = updateNeighborLane(laneToTheLeft, trafficLane->lanesToTheLeftEnd());
-		laneToTheRight = updateNeighborLane(laneToTheRight, trafficLane->lanesToTheRightEnd());
 
-		if (laneToTheLeft != trafficLane->lanesToTheLeftEnd())
-			updatePosOnNeighborLane(&posOnLaneToTheLeft, *laneToTheLeft);
-		else posOnLaneToTheLeft = LinearPosition::Null();//больше доп полос с этой стороны нет
-		if (laneToTheRight != trafficLane->lanesToTheRightEnd())
-			updatePosOnNeighborLane(&posOnLaneToTheRight, *laneToTheRight);
-		else posOnLaneToTheRight = LinearPosition::Null();
+
+		if (distFromLastNeighborLanesScanning > 1e-3f)
+			//to avoid errors update neighbor positions only if moved significaly
+		{
+			//update current laneToTheLeft and laneToTheRight
+			laneToTheLeft = updateNeighborLane(laneToTheLeft, trafficLane->lanesToTheLeftEnd());
+			laneToTheRight = updateNeighborLane(laneToTheRight, trafficLane->lanesToTheRightEnd());
+
+			if (laneToTheLeft != trafficLane->lanesToTheLeftEnd())
+				updatePosOnNeighborLane(&posOnLaneToTheLeft, *laneToTheLeft);
+			else 
+				posOnLaneToTheLeft = LinearPosition::Null();//больше доп полос с этой стороны нет
+			if (laneToTheRight != trafficLane->lanesToTheRightEnd())
+				updatePosOnNeighborLane(&posOnLaneToTheRight, *laneToTheRight);
+			else 
+				posOnLaneToTheRight = LinearPosition::Null();
 
 #ifdef DEBUG 
-		if (!posOnLaneToTheLeft.isEmpty()) {
-			testMarkerLeft->setEnabled(1);
-			Position3D pos = posOnLaneToTheLeft.getPos3D();
-			testMarkerLeft->setWorldPosition(pos.absPos);
-			testMarkerLeft->setWorldDirection(pos.tangent, pos.up, Unigine::Math::AXIS_Y);
-		}
-		else
-		{
-			testMarkerLeft->setEnabled(0);
-		}
+			//Визуализация положения на соседних полосах
+			if (!posOnLaneToTheLeft.isEmpty()) {
+				testMarkerLeft->setEnabled(1);
+				Position3D pos = posOnLaneToTheLeft.getPos3D();
+				testMarkerLeft->setWorldPosition(pos.absPos);
+				testMarkerLeft->setWorldDirection(pos.tangent, pos.up, Unigine::Math::AXIS_Y);
+			}
+			else
+			{
+				testMarkerLeft->setEnabled(0);
+			}
 
-		if (!posOnLaneToTheRight.isEmpty()) {
-			testMarkerRight->setEnabled(1);
-			Position3D pos = posOnLaneToTheRight.getPos3D();
-			testMarkerRight->setWorldPosition(pos.absPos);
-			testMarkerRight->setWorldDirection(pos.tangent, pos.up, Unigine::Math::AXIS_Y);
-		}
-		else
-		{
-			testMarkerRight->setEnabled(0);
-		}
+			if (!posOnLaneToTheRight.isEmpty()) {
+				testMarkerRight->setEnabled(1);
+				Position3D pos = posOnLaneToTheRight.getPos3D();
+				testMarkerRight->setWorldPosition(pos.absPos);
+				testMarkerRight->setWorldDirection(pos.tangent, pos.up, Unigine::Math::AXIS_Y);
+			}
+			else
+			{
+				testMarkerRight->setEnabled(0);
+			}
 #endif
 
 
-		distFromLastNeighborLanesPositionUpdate = 0;//increase if moved
+
+
+			distFromLastNeighborLanesScanning = 0;//increase if moved
+		}
+
+
+
+		//отслеживание ближайших машин на соседних полосах
+		//Если положение на соседней полосе устарело, то возможно неточное определение автомобилей,
+		//которые находятся очень близко к положению на соседней полосе
+		//Такие машины все равно будут определяться, но положение впереди или позади может быть неточным
+		if (laneToTheLeft != trafficLane->lanesToTheLeftEnd()) {
+			TrafficLane* neighborLane = (*laneToTheLeft)->data;
+			if (neighborVehiclesLeft == nullptr)//TODO: при перестроении удалять массив или брать данные с соседних машин
+			{
+				neighborVehiclesLeft = new std::list<Vehicle*>::iterator[2]
+				{ neighborLane->getQueueEnd(), neighborLane->getQueueEnd() };
+			}
+
+
+			if (!posOnLaneToTheLeft.isEmpty())
+			{
+				if (neighborLane->endOfLaneLinear().absLinearPos - posOnLaneToTheLeft.absLinearPos > changeLineMinDistance)
+					updateNeighborVehicles(neighborVehiclesLeft, neighborLane, posOnLaneToTheLeft);
+				else
+				{
+					//места на соседней полосе все равно не хватает для перестроения - можно не отслеживать
+					neighborVehiclesLeft[0] = neighborLane->getQueueEnd();
+					neighborVehiclesLeft[1] = neighborLane->getQueueEnd();
+				}
+			}
+			else
+			{
+				//поддъезжаем к полосе уширения
+				//просто брать первую машину на этой полосе
+				neighborVehiclesLeft[0] = neighborLane->getQueueEnd();
+				neighborVehiclesLeft[1] = neighborLane->getQueueStart();
+			}
+
+#ifdef DEBUG Визуализация
+			if (testigVeh) {
+				if (neighborVehiclesLeft[0] != neighborLane->getQueueEnd()) {
+					(*neighborVehiclesLeft[0])->highlight();
+					Unigine::Visualizer::get()->renderLine3D(node->getWorldPosition(),
+						(*neighborVehiclesLeft[0])->currLinearPosOnLane.getPos3D().absPos,
+						Unigine::Math::vec4(0, 0, 1, 1));
+				}
+
+				if (neighborVehiclesLeft[1] != neighborLane->getQueueEnd()) {
+					(*neighborVehiclesLeft[1])->highlight();
+					Unigine::Visualizer::get()->renderLine3D(node->getWorldPosition(),
+						(*neighborVehiclesLeft[1])->currLinearPosOnLane.getPos3D().absPos,
+						Unigine::Math::vec4(0, 0, 1, 1));
+				}
+			}
+#endif	
+		}
+		if (laneToTheRight != trafficLane->lanesToTheRightEnd()) {
+			TrafficLane* neighborLane = (*laneToTheRight)->data;
+
+			if (neighborVehiclesRight == nullptr)//TODO: при перестроении удалять массив или брать данные с соседних машин
+			{
+				neighborVehiclesRight = new std::list<Vehicle*>::iterator[2]
+				{ neighborLane->getQueueEnd(), neighborLane->getQueueEnd() };
+			}
+
+			if (!posOnLaneToTheRight.isEmpty()) {
+				if (neighborLane->endOfLaneLinear().absLinearPos - posOnLaneToTheRight.absLinearPos > changeLineMinDistance)
+					updateNeighborVehicles(neighborVehiclesRight, neighborLane, posOnLaneToTheRight);
+				else
+				{
+					//места на соседней полосе все равно не хватает для перестроения
+					neighborVehiclesRight[0] = neighborLane->getQueueEnd();
+					neighborVehiclesRight[1] = neighborLane->getQueueEnd();
+				}
+			}
+			else
+			{
+				//просто брать первую машину на полосе
+				neighborVehiclesRight[0] = neighborLane->getQueueEnd();
+				neighborVehiclesRight[1] = neighborLane->getQueueStart();
+			}
+
+#ifdef DEBUG Визуализация
+			if (testigVeh) {
+				if (neighborVehiclesRight[0] != neighborLane->getQueueEnd()) {
+					(*neighborVehiclesRight[0])->highlight();
+					Unigine::Visualizer::get()->renderLine3D(node->getWorldPosition(),
+						(*neighborVehiclesRight[0])->currLinearPosOnLane.getPos3D().absPos,
+						Unigine::Math::vec4(0, 0, 1, 1));
+				}
+
+				if (neighborVehiclesRight[1] != neighborLane->getQueueEnd()) {
+					(*neighborVehiclesRight[1])->highlight();
+					Unigine::Visualizer::get()->renderLine3D(node->getWorldPosition(),
+						(*neighborVehiclesRight[1])->currLinearPosOnLane.getPos3D().absPos,
+						Unigine::Math::vec4(0, 0, 1, 1));
+				}
+			}
+#endif
+		}
+
+
 	}
 
 	
+
+
+
+
+
+#ifdef DEBUG 
+	//тестирование отслеживания ближайших машин на соседних полосах
+	if (testigVeh) {
+
+	}
+
+#endif
+
 
 	switch (currentActivity)
 	{
@@ -174,28 +298,14 @@ void Vehicle::update() {
 		}
 		else
 		{
+
+
 			//TODO: start to change lane if possible
-			/*if (laneToTheLeft != trafficLane->lanesToTheLeftEnd()) {
-
-				LinearPosition lp = canChangeLane(*laneToTheLeft, posOnLaneToTheLeft, obstacleType);
-
-
-				
-
-
-				
-				
-			}
-
-
-			if (laneToTheRight != trafficLane->lanesToTheRightEnd()) {
-
-			}*/
 
 
 
 
-			//slow down to a complete stop if can't change lane
+//slow down to a complete stop if can't change lane
 			double distToStop = clearDist - reserveDistBetweenCars - length;
 			if (distToStop < 0) {
 				currAcceleration = 0;//we must stop already
@@ -228,13 +338,17 @@ void Vehicle::update() {
 			//Unigine::SplineSegmentPtr oldSeg = currLinearPosOnLane.splSegment;
 
 			if (currLinearPosOnLane.increaseLinearPos(s)) {
-				_reachedEndOfRoad = lane->getLeadToEndOfRoad();
+				if (lane->getLeadToEndOfRoad()) {
+
+					reachedEndOfRoad();
+				}
+				
 			}
 			else
 			{
 				Position3D vp = currLinearPosOnLane.getPos3D();
 				moveOnPos(vp);
-				distFromLastNeighborLanesPositionUpdate += s;
+				distFromLastNeighborLanesScanning += s;
 
 				if (!movingThroughObstacle.isEmpty()
 					&& currLinearPosOnLane.absLinearPos >= movingThroughObstacle.getSegEndLinearPos()) {
@@ -273,7 +387,12 @@ void Vehicle::update() {
 
 
 
-
+#ifdef DEBUG 
+	if (testigVeh) {
+		Unigine::Visualizer::get()->renderNodeBoundSphere(node->getNode(),
+			Unigine::Math::vec4(1, 0, 0, 1));
+	}
+#endif
 
 
 }

@@ -1,12 +1,10 @@
 #pragma once
 #include "TrafficSimulation.h"
 #include "Ñarriageway.h"
-#include <list>
 #include <UnigineWorlds.h>
 #include "LinearPosition.h"
 #include "Position3D.h"
 
-class Vehicle;
 class AdditionalLane;
 class MainLane;
 
@@ -82,6 +80,10 @@ public:
 		return vehicles.end();
 	}
 
+	std::list<Vehicle*>::iterator getQueueStart() {
+		return vehicles.begin();
+	}
+
 	LinearPosition getNextObstacle(LinearPosition pos, bool ignoreFirst);
 
 	double getOveralLength() {
@@ -135,11 +137,8 @@ public:
 	}
 
 	//returns array of two iterators
-	//std::list<Vehicle*>::iterator* getNextAndPrevVehicles(LinearPosition lp) {
-	//	//???
-	//	//need to change std::list<Vehicle*> to std::set<Vehicle*>
-
-	//}
+	void TrafficLane::getNextAndPrevVehicles(
+		LinearPosition lp, std::list<Vehicle*>::iterator* result);
 
 protected:
 

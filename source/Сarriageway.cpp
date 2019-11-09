@@ -1,6 +1,7 @@
 #include "Ñarriageway.h"
 #include "TrafficLane.h"
 #include <time.h>
+#include "Vehicle.h"
 
 
 Ñarriageway::Ñarriageway(TrafficSimulation* trafficSim, Unigine::NodeDummyPtr node)
@@ -9,7 +10,7 @@
 	_node = node;
 
 	//find traffic lanes
-	
+
 
 	int n = node->findChild("traffic_lanes");
 	if (n == -1) return;
@@ -26,7 +27,7 @@
 
 		int num = tl->getNumFromLeftToRight();
 		trafficLanesByNum[num].append(tl);
-		
+
 	}
 
 	//init random numbers for vehicle types
@@ -51,5 +52,24 @@ void Ñarriageway::update() {
 	//update all traffic lanes
 	for (int tl = 0; tl < trafficLanes.size(); tl++) {
 		trafficLanes[tl]->update();
+	}
+
+	if (deletedVehicles.size() > 100) {
+		long ltime = time(NULL);
+		std::list<Vehicle*>::iterator it = deletedVehicles.begin();
+		while (it != deletedVehicles.end())
+		{
+			double t = difftime(ltime, (*it)->reachedEndOfRoadTimeStamp());
+			if (t > 60) {
+				//óäàëèòü îêí÷àòåëüíî
+				delete (*it);
+				deletedVehicles.erase(++it);
+			}
+			else
+			{
+				//ïåğåéòè ê ñëåäóşùåìó
+				it++;
+			}
+		}
 	}
 }

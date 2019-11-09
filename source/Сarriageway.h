@@ -1,8 +1,12 @@
 #pragma once
 #include <UnigineNodes.h>
 #include "TrafficSimulation.h"
+#include <list>
+#include <UnigineHashSet.h>
+
 
 class TrafficLane;
+class Vehicle;
 
 class Ñarriageway
 {
@@ -33,6 +37,21 @@ public:
 		}
 		return result;
 	}
+
+#ifdef DEBUG
+	int vehn = 0;
+
+	//updateNeighborVehicles
+	int updateNeighborVehiclesCalls = 0;
+	int shiftedForwardCount = 0;
+	int shiftedBackwardCount = 0;
+	int succcessfulUpdatedByOldValues = 0;
+	int noInitialNeighborVehicles = 0;
+	int neighborsChangedLanes = 0;
+	int linearSearchOnEmptyLane = 0;
+#endif
+
+	std::list<Vehicle*> deletedVehicles;
 
 private:
 	Unigine::NodeDummyPtr _node;

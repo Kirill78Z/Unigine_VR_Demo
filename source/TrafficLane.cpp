@@ -3,6 +3,7 @@
 #include "AdditionalLane.h"
 #include <UnigineEditor.h>
 #include <UnigineGame.h>
+#include <algorithm>
 
 TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway,
 	Unigine::WorldSplineGraphPtr node)
@@ -80,7 +81,7 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 
 	std::list< TrafficLane*> neighborLanes;
 
-	
+
 	//get start intensity for all vehicle types
 
 	int n = worldSplineGraph->findProperty("traffic_lane_main");
@@ -293,13 +294,13 @@ void TrafficLane::update() {
 		{
 			toErase.append(it);
 		}
-
 	}
 
 	//remove from list end delete
 	for (int i = 0; i < toErase.size(); i++) {
-		delete (*toErase[i]);
-		vehicles.erase(toErase[i]);
+		//нужно пока сохранить объекты, так как на них могут быть ссылки
+		(*toErase[i])->deleteNode();
+		carriageway->deletedVehicles.splice(carriageway->deletedVehicles.end(), vehicles, toErase[i]);
 	}
 
 
@@ -595,6 +596,30 @@ void TrafficLane::calcNeighborLanesLinearSpans() {
 	if (lanesToRight.size() > 0 && lanesToTheRight.size() == 0)
 		calcNeighborLanesLinearSpansOneSide(lanesToRight, true);
 
+}
+
+//линейный поиск соседних машин по всей очереди машин на полосе
+//запуск линейного поиска должен быть редкой процедурой
+void TrafficLane::getNextAndPrevVehicles(
+	LinearPosition lp, std::list<Vehicle*>::iterator* result) {
+	bool found = false;
+
+	std::list<Vehicle*>::iterator founded = std::find_if(vehicles.begin(), vehicles.end(), [lp](Vehicle* v)
+	{
+		return v->getCurrPosOnLane().absLinearPos > lp.absLinearPos;
+	});
+
+	if (founded != vehicles.end()) {
+		result[1] = founded;
+		if (founded!= vehicles.begin()) {
+			std::list<Vehicle*>::iterator prev = std::prev(founded);
+			result[0] = prev;
+		}
+	}
+	else if (founded == vehicles.end() && vehicles.size() > 0) {
+		std::list<Vehicle*>::iterator last = std::prev(vehicles.end());
+		result[0] = last;
+	}
 }
 
 
