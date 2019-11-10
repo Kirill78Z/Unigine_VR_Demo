@@ -563,6 +563,7 @@
 									<parameter name="0_cars">1211</parameter>
 									<parameter name="leads_to_end_of_road">0</parameter>
 									<parameter name="lane_num_from_left_to_right">2</parameter>
+									<parameter name="transition_length_end">0</parameter>
 								</property>
 							</properties>
 							<transform>1.00000041723 0 0 0.0 0 1.00000035763 0 0.0 0 0 1.00000083446 0.0 546115.867857 4841479.83 20.0420095567 1.0</transform>
@@ -644,6 +645,8 @@
 								<property parent="2b8404be0294e5050ebb92a00a01257f5cd574d2" guid="581178536b5e2196793e6bfd4f563d381aac5f37">
 									<parameter name="leads_to_end_of_road">0</parameter>
 									<parameter name="lane_num_from_left_to_right">-2</parameter>
+									<parameter name="transition_length_start">30</parameter>
+									<parameter name="transition_length_end">30</parameter>
 								</property>
 							</properties>
 							<transform>1.00000029802 0 0 0.0 0 0.999999999997 0 0.0 0 0 1.00000029802 0.0 546171.02188 4841431.519 20.311009685 1.0</transform>
@@ -655,6 +658,8 @@
 								<property parent="2b8404be0294e5050ebb92a00a01257f5cd574d2" guid="76d3140853ea27c72d9b427a67b7ef912f62e3bc">
 									<parameter name="leads_to_end_of_road">0</parameter>
 									<parameter name="lane_num_from_left_to_right">3</parameter>
+									<parameter name="transition_length_start">30</parameter>
+									<parameter name="transition_length_end">30</parameter>
 								</property>
 							</properties>
 							<transform>1.00000029802 0 0 0.0 0 1 0 0.0 0 0 1.00000047683 0.0 546144.370869 4841449.089 20.2970096783 1.0</transform>

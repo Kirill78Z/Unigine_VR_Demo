@@ -20,7 +20,7 @@ Position3D::~Position3D()
 	//returns -1 if point is to the left of segment
 	//returns 1 if point is to the right of segment
 	//http://geomalgorithms.com/a02-_lines.html
-int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
+int Position3D::isInFrontOf(LinearPosition* lp, bool checkCodirectional) {
 	using namespace Unigine::Math;
 	//CHECK 2 NEIGHBORING SEGMENTS!!!
 	Unigine::SplineSegmentPtr seg0 = lp->splSegment;
@@ -34,15 +34,8 @@ int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
 	if (!seg1 && startDistOnSeg == len) return 0;//it can be if lp is the end of lane!
 
 	assert(startDistOnSeg < len);
-	dvec3 p0 = dvec3::INF;
+	dvec3 p0 = globalTransf * seg0->getStartPoint()->getPosition();
 
-	//if (startDistOnSeg == 0) {
-	p0 = globalTransf * seg0->getStartPoint()->getPosition();
-	/*}
-	else {
-		float param = seg0->linearToParametric(startDistOnSeg / seg0->getLength());
-		p0 = globalTransf * seg0->calcPoint(param);
-	}*/
 
 	dvec3 p1 = globalTransf * seg0->getEndPoint()->getPosition();
 
@@ -119,7 +112,7 @@ int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
 		dvec3 pi0 = dvec3::INF;
 		//double increaseLP0 = -DBL_MAX;
 		LinearPosition newLp0 = LinearPosition::Null();
-		bool codirectional0 = false;
+		bool codirectional0 = !checkCodirectional;
 		if (inFrontOfSeg0) {
 			double b = c1_0 / c2_0;
 			pi0 = p0 + v0 * b;
@@ -129,13 +122,14 @@ int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
 			newLp0.absLinearPos = newLp0.segStartLinearPos;
 			newLp0.increaseLinearPos((pi0 - p0).length());
 			float d = dot(normalize(tangent), vec3(normalize(v0)));
-			codirectional0 = /*seg1? d > 0.9f : */Unigine::Math::abs(d) > 0.9f;//на последней точке графа бывает наоборот
+			if (checkCodirectional)
+				codirectional0 = /*seg1? d > 0.9f : */Unigine::Math::abs(d) > 0.9f;//на последней точке графа бывает наоборот
 		}
 
 		dvec3 pi1 = dvec3::INF;
 		//double increaseLP1 = -DBL_MAX;
 		LinearPosition newLp1 = LinearPosition::Null();
-		bool codirectional1 = false;
+		bool codirectional1 = !checkCodirectional;
 		if (seg1 && inFrontOfSeg1) {
 			double b = c1_1 / c2_1;
 			pi1 = p1 + v1 * b;
@@ -144,7 +138,8 @@ int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
 			newLp1.moveToNextSegment();
 			newLp1.increaseLinearPos((pi1 - p1).length());
 			float d = dot(normalize(tangent), vec3(normalize(v1)));
-			codirectional1 = Unigine::Math::abs(d) > 0.9f;
+			if (checkCodirectional)
+				codirectional1 = Unigine::Math::abs(d) > 0.9f;
 		}
 
 
@@ -182,9 +177,9 @@ int Position3D::isParallelLineInFrontOf(LinearPosition* lp) {
 		assert(increaseLP <= seg0->getLength());*/
 
 
-	//assert(increaseLP >= 0);
+		//assert(increaseLP >= 0);
 
-	//if (increaseLP == 0) return 0;
+		//if (increaseLP == 0) return 0;
 	if (newLp.isEmpty()) return 0;
 
 	//lp->increaseLinearPos(increaseLP);

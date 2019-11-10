@@ -180,7 +180,7 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 
 			while (i != neighboringLanes.end()) {//https://stackoverflow.com/a/596180/8020304
 				Position3D pos = (*i)->startOfLane();
-				int checkResult = pos.isParallelLineInFrontOf(&lp);
+				int checkResult = pos.isInFrontOf(&lp);
 				if (checkResult != 0) {
 					//start of lane founded
 					LinearSpan* ls = nullptr;
@@ -234,7 +234,7 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 
 				//Position3D test = lp.getPos3D();
 
-				int checkResult = endPos.isParallelLineInFrontOf(&lp);
+				int checkResult = endPos.isInFrontOf(&lp);
 				if (checkResult != 0) {
 					//end of lane founded
 					ls->end = lp;
@@ -287,17 +287,16 @@ void TrafficLane::update() {
 	Unigine::Vector<std::list<Vehicle*>::iterator> toErase;
 	std::list<Vehicle*>::iterator it;
 	for (it = vehicles.begin(); it != vehicles.end(); ++it) {
-		if (!(*it)->isReachedEndOfRoad()) {
-			(*it)->update();
-		}
-		else
-		{
+		if ((*it)->isReachedEndOfRoad()) {
 			toErase.append(it);
 		}
 	}
 
 	//remove from list end delete
 	for (int i = 0; i < toErase.size(); i++) {
+		//удалить из очеренди на update
+		carriageway->vehicles.erase((*toErase[i])->getMainIterator());
+
 		//нужно пока сохранить объекты, так как на них могут быть ссылки
 		(*toErase[i])->deleteNode();
 		carriageway->deletedVehicles.splice(carriageway->deletedVehicles.end(), vehicles, toErase[i]);
@@ -400,8 +399,8 @@ void TrafficLane::getNewVehicleVelocity(Vehicle * vehicle, float &velocity, floa
 {
 	ObstacleType obstacleType;
 	LinearPosition obstacleLP = LinearPosition::Null();
-	double clearDist = vehicle->getClearDist(vehicles.begin(),
-		startOfLaneLinear(), obstacleType, obstacleLP);
+	double clearDist = Vehicle::getClearDist(vehicles.begin(),
+		startOfLaneLinear(), obstacleType, obstacleLP, this, false);
 	if (clearDist == DBL_MAX)
 	{
 		velocity = speedLimit;
@@ -416,9 +415,11 @@ void TrafficLane::startNewVehicle(Vehicle * &vehicle, float velocity)
 {
 	vehicles.push_front(vehicle);
 	std::list<Vehicle*>::iterator it = vehicles.begin();
-	vehicle->setIterator(it);
+	vehicle->setLaneIterator(it);
 	vehicle->setVelocity(velocity);
 
+	carriageway->vehicles.push_front(vehicle);
+	vehicle->setMainIterator(carriageway->vehicles.begin());
 
 	timeToAddNewVehicle = timeSpanBetweenAddingVehicles;
 }
@@ -486,7 +487,7 @@ void TrafficLane::calcNeighborLanesLinearSpansOneSide(
 
 
 
-					int checkResult = pos.isParallelLineInFrontOf(&lp);
+					int checkResult = pos.isInFrontOf(&lp);
 					if (checkResult != 0) {
 						//TODO: можно сверить лево-право
 
@@ -512,7 +513,7 @@ void TrafficLane::calcNeighborLanesLinearSpansOneSide(
 
 					Position3D pos = (*i)->endOfLane();
 					LinearPosition lp = LinearPosition(segmentPositions[s]);
-					int checkResult = pos.isParallelLineInFrontOf(&lp);
+					int checkResult = pos.isInFrontOf(&lp);
 					if (checkResult != 0) {
 						//TODO: можно сверить лево-право
 
@@ -545,7 +546,7 @@ void TrafficLane::calcNeighborLanesLinearSpansOneSide(
 
 			Position3D pos = tl->endOfLane();
 			LinearPosition lp = LinearPosition(segmentPositions[s]);
-			int checkResult = pos.isParallelLineInFrontOf(&lp);
+			int checkResult = pos.isInFrontOf(&lp);
 			if (checkResult != 0) {
 				//TODO: можно сверить лево-право
 
@@ -604,9 +605,10 @@ void TrafficLane::getNextAndPrevVehicles(
 	LinearPosition lp, std::list<Vehicle*>::iterator* result) {
 	bool found = false;
 
-	std::list<Vehicle*>::iterator founded = std::find_if(vehicles.begin(), vehicles.end(), [lp](Vehicle* v)
+	std::list<Vehicle*>::iterator founded = std::find_if(vehicles.begin(), vehicles.end(), 
+		[lp, this](Vehicle* v)
 	{
-		return v->getCurrPosOnLane().absLinearPos > lp.absLinearPos;
+		return v->getCurrPosOnLane(this).absLinearPos > lp.absLinearPos;
 	});
 
 	if (founded != vehicles.end()) {

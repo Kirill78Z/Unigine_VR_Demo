@@ -71,6 +71,7 @@ struct LinearPosition
 
 	//returns true if end of spline graph reached
 	bool increaseLinearPos(double s) {
+		assert(s > 0);
 		absLinearPos += s;
 #ifdef DEBUG
 		lastIncrease = 1;

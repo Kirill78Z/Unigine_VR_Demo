@@ -18,6 +18,6 @@ struct Position3D
 	Unigine::Math::vec3 up = Unigine::Math::vec3::ZERO;
 
 
-	int isParallelLineInFrontOf(LinearPosition* lp);
+	int isInFrontOf(LinearPosition* lp, bool checkCodirectional = true);
 };
 

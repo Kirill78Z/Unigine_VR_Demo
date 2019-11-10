@@ -140,6 +140,23 @@ public:
 	void TrafficLane::getNextAndPrevVehicles(
 		LinearPosition lp, std::list<Vehicle*>::iterator* result);
 
+
+	std::list<Vehicle*>::iterator createTempChangeLaneIterator
+	(Vehicle* vehChangingLane, std::list<Vehicle*>::iterator itAhead)
+	{
+		return vehicles.insert(itAhead, vehChangingLane);
+	}
+
+
+	void replaceVehicleItTo(std::list<Vehicle*>::iterator to, TrafficLane* from, std::list<Vehicle*>::iterator it) {
+		vehicles.splice(to, from->vehicles, it);
+	}
+
+	void deleteTempChangeLaneIt(std::list<Vehicle*>::iterator tempIt) {
+		carriageway->deletedTempChangeLaneIts.splice
+		(carriageway->deletedTempChangeLaneIts.end(),vehicles, tempIt);
+	}
+
 protected:
 
 

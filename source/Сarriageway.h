@@ -50,8 +50,14 @@ public:
 	int neighborsChangedLanes = 0;
 	int linearSearchOnEmptyLane = 0;
 #endif
+	//общий список машин для запуска update
+	std::list<Vehicle*> vehicles;
 
 	std::list<Vehicle*> deletedVehicles;
+	std::list<Vehicle*> deletedTempChangeLaneIts;
+
+	Unigine::Math::dmat4 changeLaneTracksTransf;
+	Unigine::Math::dmat4 changeLaneTracksITransf;
 
 private:
 	Unigine::NodeDummyPtr _node;
