@@ -74,45 +74,45 @@ void Сarriageway::update() {
 	}
 
 	//garbage collection
-	if (deletedTempChangeLaneIts.size() > 100) {
-		long ltime = time(NULL);
-		std::list<Vehicle*>::iterator it = deletedTempChangeLaneIts.begin();
-		while (it != deletedTempChangeLaneIts.end())
-		{
-			if ((*it)->isReachedEndOfRoad()) {
-				double t = difftime(ltime, (*it)->reachedEndOfRoadTimeStamp());
-				if (t > 60) {
-					//удалить итератор только тогда, когда машина, на которую он указывал уже уехала
-					//но не удалять саму машину здесь
-					deletedTempChangeLaneIts.erase(++it);
-					continue;
-				}
-			}
+	//if (deletedTempChangeLaneIts.size() > 100) {
+	//	long ltime = time(NULL);
+	//	std::list<Vehicle*>::iterator it = deletedTempChangeLaneIts.begin();
+	//	while (it != deletedTempChangeLaneIts.end())
+	//	{
+	//		if ((*it)->isReachedEndOfRoad()) {
+	//			double t = difftime(ltime, (*it)->reachedEndOfRoadTimeStamp());
+	//			if (t > 60) {
+	//				//удалить итератор только тогда, когда машина, на которую он указывал уже уехала
+	//				//но не удалять саму машину здесь
+	//				deletedTempChangeLaneIts.erase(++it);
+	//				continue;
+	//			}
+	//		}
 
-			//перейти к следующему
-			it++;
-		}
-	}
+	//		//перейти к следующему
+	//		it++;
+	//	}
+	//}
 
 
-	if (deletedVehicles.size() > 100) {
-		long ltime = time(NULL);
-		std::list<Vehicle*>::iterator it = deletedVehicles.begin();
-		while (it != deletedVehicles.end())
-		{
-			double t = difftime(ltime, (*it)->reachedEndOfRoadTimeStamp());
-			if (t > 60) {
-				//удалить окончательно
-				delete (*it);
-				deletedVehicles.erase(++it);
-			}
-			else
-			{
-				//перейти к следующему
-				it++;
-			}
-		}
-	}
+	//if (deletedVehicles.size() > 100) {
+	//	long ltime = time(NULL);
+	//	std::list<Vehicle*>::iterator it = deletedVehicles.begin();
+	//	while (it != deletedVehicles.end())
+	//	{
+	//		double t = difftime(ltime, (*it)->reachedEndOfRoadTimeStamp());
+	//		if (t > 60) {
+	//			//удалить окончательно
+	//			delete (*it);
+	//			deletedVehicles.erase(++it);
+	//		}
+	//		else
+	//		{
+	//			//перейти к следующему
+	//			it++;
+	//		}
+	//	}
+	//}
 
 
 }

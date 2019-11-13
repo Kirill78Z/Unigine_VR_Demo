@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>2726d7af436ea1427cbf6fb941bc55c47d4f6653</guid>
+	<type>fbx</type>
+	<hash>e529f1c7</hash>
+	<parameters>
+		<parameter type="float" name="bound_size">10000</parameter>
+		<parameter type="float" name="fps">30</parameter>
+		<parameter type="bool" name="import_lights">0</parameter>
+		<parameter type="string" name="lods"/>
+		<parameter type="float" name="scale">1</parameter>
+		<parameter type="bool" name="need_triagulate">1</parameter>
+		<parameter type="bool" name="vertex_cache">1</parameter>
+		<parameter type="bool" name="import_animations">0</parameter>
+		<parameter type="int" name="index_max_count_lods">1</parameter>
+		<parameter type="int" name="workflow">0</parameter>
+		<parameter type="bool" name="import_tangent_space">0</parameter>
+		<parameter type="bool" name="merge_similar_materials">1</parameter>
+		<parameter type="bool" name="merge_static_meshes">0</parameter>
+		<parameter type="bool" name="create_transform_bones_for_joints">0</parameter>
+		<parameter type="bool" name="import_morph_targets">0</parameter>
+		<parameter type="bool" name="joints_reorientation">1</parameter>
+		<parameter type="bool" name="import_textures">1</parameter>
+		<parameter type="float" name="angular_deflection">0.699999988</parameter>
+		<parameter type="int" name="import_materials_mode">0</parameter>
+		<parameter type="string" name="animations"/>
+		<parameter type="bool" name="need_split">0</parameter>
+		<parameter type="bool" name="import_materials">1</parameter>
+		<parameter type="bool" name="need_repivot">1</parameter>
+		<parameter type="int" name="up_axis">0</parameter>
+		<parameter type="bool" name="skip_empty_nodes">0</parameter>
+		<parameter type="bool" name="use_instances">1</parameter>
+		<parameter type="bool" name="combine_by_lods">0</parameter>
+		<parameter type="int" name="front_axis">0</parameter>
+		<parameter type="float" name="linear_deflection">0.200000003</parameter>
+		<parameter type="bool" name="import_cameras">0</parameter>
+		<parameter type="string" name="prefix_materials"/>
+		<parameter type="bool" name="import_bones_without_skin">0</parameter>
+		<parameter type="bool" name="import_meshes">1</parameter>
+		<parameter type="bool" name="merge_surfaces_by_materials">0</parameter>
+		<parameter type="string" name="material_guids">proxyobject_sunandsky,193d254c05d2203b66b5185e7c84a425702f0740,Индекс цвета autocad 10,483789e07f1033bf3286ae127662f6493ab78b14</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="139bad572fe66aca6768dba136fd408c3caf027b" name="ПК.node" link="1" type="3">
+			<parameters>
+				<parameter type="string" name="id">da9eb3c7</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2726d7af436ea1427cbf6fb941bc55c47d4f6653" name="ПК.fbx" link="0"/>
+	</runtimes>
+</asset>

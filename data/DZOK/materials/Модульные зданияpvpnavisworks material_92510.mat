@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="Модульные зданияpvpnavisworks material_92510" guid="6db069235cb33c263b36254d75908648674e7507" base_material="mesh_base">
+	<parameter name="albedo_color">0.313725501 0.313725501 0.313725501 1</parameter>
+</material>

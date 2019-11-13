@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="ПВП СОРДpvpmaterial" guid="7197305e778fdc252010df40637dc99f18ae8a72" base_material="mesh_base">
+	<parameter name="albedo_color">0.650980413 0.650980413 0.650980413 1</parameter>
+</material>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="Знакиjnavisworks material_29774" guid="487a991f37b213f2770e62a925fa4bf44f3c06c3" base_material="mesh_base">
+	<parameter name="albedo_color">0.501960814 1 0 1</parameter>
+</material>

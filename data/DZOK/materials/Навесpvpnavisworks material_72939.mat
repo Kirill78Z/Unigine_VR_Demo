@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="Навесpvpnavisworks material_72939" guid="109f52691b9cf8b478134c837eb108067d34bfad" base_material="mesh_base">
+	<parameter name="albedo_color">0.00784313772 0.756862819 0.0470588282 1</parameter>
+</material>

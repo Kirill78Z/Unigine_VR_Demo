@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>35ac8e5f1e330832672c49e956e28a346814b003</guid>
+	<type>fbx</type>
+	<hash>36d54b09</hash>
+	<parameters>
+		<parameter type="float" name="bound_size">10000</parameter>
+		<parameter type="float" name="fps">30</parameter>
+		<parameter type="bool" name="import_lights">0</parameter>
+		<parameter type="string" name="lods"/>
+		<parameter type="float" name="scale">1</parameter>
+		<parameter type="bool" name="need_triagulate">1</parameter>
+		<parameter type="bool" name="vertex_cache">1</parameter>
+		<parameter type="bool" name="import_animations">0</parameter>
+		<parameter type="int" name="index_max_count_lods">1</parameter>
+		<parameter type="int" name="workflow">0</parameter>
+		<parameter type="bool" name="import_tangent_space">0</parameter>
+		<parameter type="bool" name="merge_similar_materials">1</parameter>
+		<parameter type="bool" name="merge_static_meshes">0</parameter>
+		<parameter type="bool" name="create_transform_bones_for_joints">0</parameter>
+		<parameter type="bool" name="import_morph_targets">0</parameter>
+		<parameter type="bool" name="joints_reorientation">1</parameter>
+		<parameter type="bool" name="import_textures">1</parameter>
+		<parameter type="float" name="angular_deflection">0.699999988</parameter>
+		<parameter type="int" name="import_materials_mode">0</parameter>
+		<parameter type="string" name="animations"/>
+		<parameter type="bool" name="need_split">0</parameter>
+		<parameter type="bool" name="import_materials">1</parameter>
+		<parameter type="bool" name="need_repivot">1</parameter>
+		<parameter type="int" name="up_axis">0</parameter>
+		<parameter type="bool" name="skip_empty_nodes">0</parameter>
+		<parameter type="bool" name="use_instances">1</parameter>
+		<parameter type="bool" name="combine_by_lods">0</parameter>
+		<parameter type="int" name="front_axis">0</parameter>
+		<parameter type="float" name="linear_deflection">0.200000003</parameter>
+		<parameter type="bool" name="import_cameras">0</parameter>
+		<parameter type="string" name="prefix_materials"/>
+		<parameter type="bool" name="import_bones_without_skin">0</parameter>
+		<parameter type="bool" name="import_meshes">1</parameter>
+		<parameter type="bool" name="merge_surfaces_by_materials">0</parameter>
+		<parameter type="string" name="material_guids">proxyobject_sunandsky,193d254c05d2203b66b5185e7c84a425702f0740,Индекс цвета autocad 7,5f600083614e2c061f8793ad470d612829bad267,Индекс цвета autocad 92,673baf97682c080a5ad957e107750fcc4c9808bb</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="08a4bb501a3e566f58e0910262cf1c790e1c9b84" name="др.node" link="1" type="3">
+			<parameters>
+				<parameter type="string" name="id">df770c23</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="09bd711340f643563b2aa2bd1ee584f83d4983f7" name="3d тело|99f1928f-424e-4a03-bf38-e52e0d8e97e7|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ea779683</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="06de10ea374d0b41572d6bac466ff31b289e0dbe" name="3d тело|6a2c59c1-f719-4975-a314-4e8242899aaa|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6d9faf02</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1d7d5a05782783a06f82627f77b38dd23490d309" name="3d тело|6140b099-e32c-4ae2-99e8-c7b0e086a8e6|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">0238abd4</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="37c040d47fbab62366e725262faefa4d51915748" name="3d тело|1c7c204a-5df6-4c5e-a559-e4fdd8813983|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">1129ae9</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4f9f12076b60a7ba145593d14d15bafc11a5da2b" name="3d тело|031a17dd-1a25-46f9-9cd5-4df642e5a31c|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">716c82</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="04fb298e1e9ca3952d1d9ff07319b28f41d8fea2" name="3d тело|17151b17-9882-4f7d-9f1e-4f02d5099e0a|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">4e0ca5ba</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="67ba6d997c827a24793d7f335137baf652c775dd" name="3d тело|3178d085-fa55-4b49-af58-9157f0623580|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">97a1f2e9</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6c1afd983eb064177984328a03c2806175ef1e4c" name="3d тело|b880724d-ec23-4ae4-be4b-f570ee9e4bf1|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">d77cf687</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7511c53b05ae795e64d4912539ac10404ee5469f" name="3d тело|ca33d874-46e4-42f2-ab4e-bd6cf74ed425|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">0ed679e3</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7dbde3727dd4ec290658477435b6cc433ea504c6" name="3d тело|cc644ce7-e938-470c-a2b9-f93ba7c02485|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">5ff7904c</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="220d156d454777e8707e7a274555b15a383cd0f1" name="3d тело|789fa777-bf77-4079-80e9-2a8f4e97713b|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">d3e7f7d3</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="3a4e959c1e44b44b4114fd2e20de22b54d37d490" name="3d тело|3dbfeebf-75ff-47c2-96a2-210c8178679b|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">3cbd847b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="29061eaf410f3c427ea94eb95076a8c414d79d53" name="3d тело|e9f92f3a-fde7-415c-840c-bb3102e34278|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">696f9743</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="112c02966558d8fd791bc6384f4a54371a22242a" name="3d тело|76c99ddd-53e0-4df7-9460-43b7f07aeb7c|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">da63fa85</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="32ad85817c0920ec630fa75b58cbb4fe15b25845" name="3d тело|c2db8a1a-0dea-43bc-9d8c-c1e00ca97297|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">58875bee</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0465ece033dd3abf40ba09120840954977529e14" name="3d тело|b1f3b24e-76b7-435b-9b85-0d5778a3f5ea|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">f0323dbc</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2690f2631e09b4663ec3c08d38dce8885994f247" name="3d тело|065e1fdc-361d-4d6f-a65b-1c49392423f6|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">655ad20c</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4a768afa523d9e116633c03c51839e6b49afa0ce" name="3d тело|5a0356b6-8764-4457-a8f9-f14fec656be3|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">2ab1bc1</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="288a31d5391b59303e0b9acf20eb49e25ee3bfd9" name="3d тело|67967a54-61cf-4bb3-93ec-3fbcd5fe3c48|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">5caf0ff8</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="08a127643b13cb737dbb1a363aa6cc1d1b0fded8" name="3d тело|3dcca36b-67cf-49c4-ad0b-5461dccedd4c|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">267d4c9e</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="321f5457001fe5ca64561aa13d23738c3ff1997b" name="3d тело|b8fdc1c0-f511-44ad-a0c5-5c7b7e7d8f13|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">5ba02074</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="3bddc09e70deaf65527d198042723edf450ffeb2" name="3d тело|c1689a93-913d-4ae1-8c85-e63a504ec8f5|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6c872c4b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7d1bce69535744b472d128835bfd34065f9afbad" name="3d тело|35e79692-a07d-4db1-908d-9c8333bdea57|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">f61246b4</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6b79a9282fea7a670c2b349a349ffb312e6d3adc" name="3d тело|ae431e91-0599-48a8-9027-feb9a86ec323|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a4ea4795</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5cea988b52b3146e4868d0f514f02dd0783226ef" name="3d тело|049a99eb-3416-42be-995e-1244d0322a79|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">69be6c7</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1fd5278223b1c0f937a9f6044e7a099347cd01d6" name="3d тело|9e70e454-5e1f-4950-adbd-d8e365fa1e1d|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">5ef5b4e1</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="3e794f3d7b1f47786e37647736e5776a1d043fc1" name="3d тело|74e49490-6700-428c-80d2-5981475a8310|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">1506fb04</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="20e6162c3f3f9b9b7ccc9c3e5b21968572199620" name="3d тело|09f57f5c-ee67-405c-96b0-b1ff9515861c|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c05f221a</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="62ac52ff0327c45269ae9789770e3b543eff6ea3" name="3d тело|f6e8d6e0-ec18-4105-9825-8839ddface89|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">f21b3034</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="036783a6025ac6cd7045b9c85c8712870fdbae3a" name="3d тело|3f7d56da-4f06-4a2b-8ed7-f47e432b947c|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6f069d86</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="15abe85104a3057c7601a2ab4407580e37420015" name="3d тело|5fa9ab1e-1947-4419-ad5f-f20833094112|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">d671ad2c</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="58de52706181c30f7034d5224c5b5219043914a4" name="3d тело|13c499e4-c4c9-4a70-96a6-52c8a54b24f4|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">036ab0b1</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="359257b35449b9760098625d167200184e9a8497" name="3d тело|c1076c4d-8325-430f-9197-2472e1451640|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">f01cc845</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="3ddad90a44fff4e122f908cc1881adbb1d8047de" name="3d тело|6d01d563-5761-477a-a439-79b647ce5884|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">86433dd8</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5d430da5056362c04093771f676959f23f40f0a9" name="3d тело|d3dca97d-b41a-4006-974e-ee2e7f513e20|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">30da7052</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="531f81f433a3c4c35330a34648cb21ed2e691a68" name="3d тело|ad2f4f53-ebb8-4aa0-aa70-7c6404b119dc|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6d3cf9f5</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0c72baa74eeff7da0fa965716e7d201c5650bccb" name="3d тело|3782aed2-4ac2-4088-bccf-3739e08f5d41|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">78243ee1</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="39946bae4fddbf35510dc71048026f2f387252c2" name="3d тело|d6883021-3a5e-4381-b7ae-ce6a0d8b8fef|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">93e41c29</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="3c28733928f683445ae4b5d33c19411634cc057d" name="3d тело|cfbb496e-2515-41f6-9a86-1b27110601d2|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">995f937c</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="3e3008b86250b4b708680aaa28913a0153044b6c" name="3d тело|83883cd1-8c88-426e-8b8a-d1b90c4696e3|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">e9d6aa7d</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="073fcfdb53e0c37e240b14c502827f604c2fab3f" name="3d тело|7c808ef4-c53d-4fbf-96ae-582266f6a02d|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">e37e2545</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="523cbf92531ad9c96c3318947d462ae33e4092e6" name="3d тело|8484f24b-c1ac-4cee-8f73-74f9b93d3dc7|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">cc22e9e7</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="78b40d0d610bcb0830b572c736d0117a20e07291" name="3d тело|44c2fea4-715a-4a12-9d08-418c21f9b576|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">8d91f3f3</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="05a38abc3b5fe6eb03424f4e11040e551da68bb0" name="3d тело|8c441490-364c-4e0a-9a24-42fde1af7b93|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">87ca2e11</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="3dbc2b4f12f5a0623a612459748a41e42cf923f3" name="3d тело|6bf75c2e-f375-453a-a7e6-3cc2c2354f5b|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">5a61120e</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4c2398b632dc389d178161587c61f4d77df50c4a" name="3d тело|00e9ce3b-4a10-43b9-bad6-4972f615f9bf|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">70f5e4a5</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="78000f2154afde0c4b0201fb09d60f1e0041abe5" name="3d тело|d132b435-9e4d-420c-b1ff-800eed091489|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">fe073906</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="339eec003988ef5f1809f5325e8452e95af0ff34" name="3d тело|1a510733-bcac-4c94-8e63-de2b0c7d92a1|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">d1abb18b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4c6ea1036b7f52867bdd882d1755cba87e573ae7" name="3d тело|e7b3eff8-89eb-4a3e-a534-11247c41faa7|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">f6c06115</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="28e3fb1a2b990fb177be455c66b7210b24f902ee" name="3d тело|7cd86e9f-8e9a-4f34-ac9f-32700c49854d|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9318c46c</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1d7ced7532d0a05018b6f76f0e26be02724d6579" name="3d тело|dc6e23dc-bdfd-4210-89db-75354b3d6508|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9e8178ba</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="499c50841e57a2130550c0567690fbbd1b8e09f8" name="3d тело|099d5389-edf4-4d83-b10e-de446dcf9f24|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">941b0354</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="33d644f779e9ddea479474415fa3c0ac2750441b" name="3d тело|e82674a2-67b7-4216-affc-c7225264c8e6|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">4e8da17</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5d482abe66aed30536e0a8a000a7437f0138fad2" name="3d тело|1bb39af0-499a-4164-8f3c-423b1da17105|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b46310f4</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7ec55c094c0135d455a5272335d4e226600f934d" name="3d тело|3fa1a546-58db-40a1-befd-9d74964e0ee1|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">bd7ee17</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="346f1c486e6013077a93b4ba761b3cd106754ffc" name="3d тело|2a7f27b8-8434-4210-b013-745b8989e9a2|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c706f771</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="35ac8e5f1e330832672c49e956e28a346814b003" name="др.fbx" link="0"/>
+	</runtimes>
+</asset>

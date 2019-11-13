@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="Знакиjmaterial #27" guid="650884602ffbec3f1e820c92544dc2c9059eed94" base_material="mesh_base">
+	<parameter name="albedo_color">0.203921586 0.203921586 0.203921586 1</parameter>
+</material>

@@ -42,7 +42,7 @@ Vehicle::Vehicle(Сarriageway* carriageway,
 	changeLaneTrack = Unigine::WorldSplineGraph::create();
 	changeLaneTrack->setWorldTransform(carriageway->changeLaneTracksTransf);
 #ifdef DEBUG 
-	{
+	/*{
 		Unigine::MeshPtr sphere = Unigine::Mesh::create();
 		sphere->addSphereSurface("testMarker", 0.5f, 8, 8);
 
@@ -60,7 +60,7 @@ Vehicle::Vehicle(Сarriageway* carriageway,
 		Unigine::Editor::get()->addNode(testMarkerRight->getNode());
 		testMarkerRight->setMaterialParameter("albedo_color", Unigine::Math::vec4(1, 0, 0, 1), 0);
 		testMarkerRight->setEnabled(0);
-	}
+	}*/
 
 
 	carriageway->vehn++;
@@ -86,33 +86,9 @@ void Vehicle::update() {
 #endif // DEBUG
 
 
-	//if currently changing lane in process continue change line
-
-	//check if there is obstacle at the front in dynamic envelope in current lane
-	//if there is obstacle make desision about changing lane
-	//start changing lane if possible
-	//otherwise slow down
-
-	//if there is no obstacle accelerate to the speed limit
-
-	//set acceleration and velocity...
-	//update dynamic envelope
-	//update position
-
-	//keep track vehicle position on all traffic lanes of current carrageway
-
 	TrafficLane* lane = trafficLane;
-	float currDynEnv = getDynamicEnvelop();
+
 	float time = Unigine::Game::get()->getIFps();
-
-	//if (justChangedLane) {//TODO: По окончании перестроения выполнить 
-	//необъодимые действия по поддержанию сканирования соседних полос
-	//	laneToTheLeft = trafficLane->lanesToTheLeftBegin();
-	//	laneToTheRight = trafficLane->lanesToTheRightBegin();
-	//	justChangedLane = false;
-	//}
-
-
 
 
 
@@ -125,6 +101,13 @@ performAction:
 		//posOnLaneAfterChange
 
 		std::list<Vehicle*>::iterator nextIt = std::next(tempChangeLaneIt);
+		while (nextIt != trafficLaneChangeTo->getQueueEnd()
+			&& (*nextIt)->getCurrPosOnLane(trafficLaneChangeTo).absLinearPos < posOnLaneAfterChange.absLinearPos)
+		{
+			nextIt = std::next(nextIt);
+		}
+
+
 		ObstacleType obstacleType;
 		LinearPosition obstacleLP = LinearPosition::Null();
 		double clearDist = getClearDist(nextIt, posOnLaneAfterChange,
@@ -133,12 +116,51 @@ performAction:
 		assert(toMoveChangeLaneTrack > 0);
 		clearDist += toMoveChangeLaneTrack;
 
+		//Если перестроение идет на полосу, которая еще не началась,
+		//то учитывать машины, которые находятся спереди на старой полосе
+		//но только пока не будет пройдена треть пути перестроения
+		std::list<Vehicle*>::iterator nextItOldLane = std::next(vehicleIterator);
+		if (currPosOnChangeLaneTrack < changeLaneTrackSeg->getLength() / 3
+			&& posOnLaneAfterChange.absLinearPos - this->changeLaneDist < 0
+			&& nextItOldLane != trafficLane->getQueueEnd()) {
+			LinearPosition nextVehOldLane = (*nextItOldLane)->getCurrPosOnLane(trafficLane);
+			double toNextVehOldLane = nextVehOldLane.absLinearPos - currLinearPosOnLane.absLinearPos;
+			if (clearDist > toNextVehOldLane)
+				clearDist = toNextVehOldLane;
+		}
+
+		float currDynEnv = 0;
+		switch (this->changeLaneBehabior)
+		{
+		case ChangeLaneBehabior::Persistent:
+			currDynEnv = getBoldDynamicEnvelop();
+			break;
+		case ChangeLaneBehabior::Aggressive:
+			currDynEnv = getAggressiveDynamicEnvelop();
+			break;
+		default:
+			currDynEnv = getDynamicEnvelop();
+			break;
+		}
+
+
 		//определение ускорения с учетом препятствий
-		float currAcceleration;
+		float currAcceleration = 0;
 		if (clearDist >= currDynEnv) {
 			//way is clear -> accelerate to speed limit
 			if (velocity < speedLimit) {
-				currAcceleration = standartAcceleration;
+				switch (this->changeLaneBehabior)
+				{
+				case ChangeLaneBehabior::Persistent:
+					currAcceleration = fastAcceleration;
+					break;
+				case ChangeLaneBehabior::Aggressive:
+					currAcceleration = urgentAcceleration;
+					break;
+				default:
+					currAcceleration = standartAcceleration;
+					break;
+				}
 			}
 			else
 			{
@@ -166,7 +188,8 @@ performAction:
 			velocity = velocity + currAcceleration * time;
 		}
 
-		if (velocity < UNIGINE_EPSILON) velocity = 0;
+		if (velocity < UNIGINE_EPSILON)
+			velocity = 0;
 
 		if (velocity != 0) {
 			float s = velocity * time;
@@ -191,13 +214,16 @@ performAction:
 				//если перемещение превысило длину траектории перестроения
 				//поменять режим на StraightMove
 				currentActivity = VehicleActivity::StraightMove;
-				//перенести старый узел в очередь новой полосы
-				trafficLaneChangeTo->replaceVehicleItTo(
-					tempChangeLaneIt, trafficLane, vehicleIterator);
-				//удалить временный узел из очереди новой полосы
-				trafficLaneChangeTo->deleteTempChangeLaneIt(tempChangeLaneIt);
-				//поменять указатель trafficLane
-				trafficLane = trafficLaneChangeTo;
+
+				if (!vehicleIteratorReplaced) {
+					//перенести старый узел в очередь новой полосы
+					trafficLaneChangeTo->replaceVehicleItTo(
+						tempChangeLaneIt, trafficLane, vehicleIterator);
+					//удалить временный узел из очереди новой полосы
+					trafficLaneChangeTo->deleteTempChangeLaneIt(tempChangeLaneIt);
+					//поменять указатель trafficLane
+					trafficLane = trafficLaneChangeTo;
+				}
 
 
 				//очистить данные о полосах справа/слева
@@ -205,8 +231,10 @@ performAction:
 				laneToTheRight = trafficLane->lanesToTheRightBegin();
 				posOnLaneToTheLeft = LinearPosition::Null();
 				posOnLaneToTheRight = LinearPosition::Null();
-				delete[] neighborVehiclesLeft;
-				delete[] neighborVehiclesRight;
+				if (neighborVehiclesLeft)
+					delete[] neighborVehiclesLeft;
+				if (neighborVehiclesRight)
+					delete[] neighborVehiclesRight;
 				neighborVehiclesLeft = nullptr;
 				neighborVehiclesRight = nullptr;
 
@@ -214,20 +242,20 @@ performAction:
 				//машинах на соседних полосах у ближайшей машины сзади, которая находится в состоянии StraightMove
 				//если такая найдется
 
-				//if (vehicleIterator != trafficLane->getQueueStart()) {
-				//	std::list<Vehicle*>::iterator it;
-				//	for (it = std::prev(vehicleIterator); it != trafficLane->getQueueStart(); it--) {
-				//		if ((*it)->currentActivity != VehicleActivity::ChangeLane) {
+				if (vehicleIterator != trafficLane->getQueueStart()) {
+					std::list<Vehicle*>::iterator it;
+					for (it = std::prev(vehicleIterator); it != trafficLane->getQueueStart(); it--) {
+						if ((*it)->currentActivity != VehicleActivity::ChangeLane) {
 
-				//			if ((*it)->neighborVehiclesLeft==nullptr) {
-				//				int a = 0;
-				//			}
+							if ((*it)->neighborVehiclesLeft == nullptr) {
+								int a = 0;
+							}
 
-				//			(*it)->copyNeighborLanesDataTo(this);//копировать данные
-				//			break;
-				//		}
-				//	}
-				//}
+							(*it)->copyNeighborLanesDataTo(this);//копировать данные
+							break;
+						}
+					}
+				}
 
 
 				//очистить траекторию перестроения и другие переменные
@@ -235,8 +263,11 @@ performAction:
 				posOnLaneAfterChange = LinearPosition::Null();
 				trafficLaneChangeTo = nullptr;
 				tempLPosOnLaneChangeTo = LinearPosition::Null();
-				currPosOnChangeLaneTrack = -1;
+				currPosOnChangeLaneTrack = 0.0f;
 				distFromLastChangeLanesScanning = 0.0f;
+				this->changeLaneDist = 0;
+				this->changeLaneBehabior = ChangeLaneBehabior::Standard;
+				vehicleIteratorReplaced = false;
 				//TODO: после перестроения возможно поменяется ограничение по скорости для этой машины
 
 #ifdef DEBUG
@@ -265,20 +296,47 @@ performAction:
 				//(tempLPosOnLaneChangeTo и currLinearPosOnLane)
 				if (distFromLastChangeLanesScanning > 1e-3f) {
 
+
 #ifdef DEBUG
 					int n = 0;
 #endif
-					while (vp.isInFrontOf(&currLinearPosOnLane, false) == 0)
-					{
+					if (!vehicleIteratorReplaced) {
+						while (vp.isInFrontOf(&currLinearPosOnLane, false) == 0)
+						{
 #ifdef DEBUG
-						n++;
+							n++;
 #endif
-						if (currLinearPosOnLane.moveToNextSegment()) {
-							//сплайн закончился. Ничего не делать
-							break;
-						}
+							if (currLinearPosOnLane.moveToNextSegment()) {
+								//сплайн закончился. Ничего не делать
+								break;
+							}
 
+						}
 					}
+
+
+
+					/*
+					//в какой-то момент мы можем опередить машину спереди
+					//В этом случае убрать итератор из старой очереди
+					if (nextItOldLane != trafficLane->getQueueEnd()) {
+						double nextCarPos = (*nextItOldLane)->getCurrPosOnLane(trafficLane).absLinearPos;
+						if (currLinearPosOnLane.absLinearPos > nextCarPos)
+						{
+							//перенести старый узел в очередь новой полосы
+							trafficLaneChangeTo->replaceVehicleItTo(
+								tempChangeLaneIt, trafficLane, vehicleIterator);
+							//удалить временный узел из очереди новой полосы
+							trafficLaneChangeTo->deleteTempChangeLaneIt(tempChangeLaneIt);
+							//поменять указатель trafficLane
+							trafficLane = trafficLaneChangeTo;
+
+							tempChangeLaneIt = vehicleIterator;
+
+							vehicleIteratorReplaced = true;
+						}
+					}
+					*/
 
 
 #ifdef DEBUG
@@ -289,7 +347,7 @@ performAction:
 #ifdef DEBUG
 						n++;
 #endif
-						if (tempLPosOnLaneChangeTo.absLinearPos == 0)
+						if (posOnLaneAfterChange.absLinearPos - this->changeLaneDist < 0)
 							break;//новая полоса могла еще не начаться TODO: эта логика может сломаться
 
 						if (tempLPosOnLaneChangeTo.moveToNextSegment()) {
@@ -332,158 +390,191 @@ performAction:
 	break;
 	case StraightMove:
 	{
-		//сканирование соседних полос
+#pragma region сканирование соседних полос
 		//if (testigVeh) 
+		//{
+		if (distFromLastNeighborLanesScanning > 1e-3f)
+			//to avoid errors update neighbor positions only if moved significaly
 		{
-			if (distFromLastNeighborLanesScanning > 1e-3f)
-				//to avoid errors update neighbor positions only if moved significaly
-			{
-				//update current laneToTheLeft and laneToTheRight
-				laneToTheLeft = updateNeighborLane(laneToTheLeft, trafficLane->lanesToTheLeftEnd());
-				laneToTheRight = updateNeighborLane(laneToTheRight, trafficLane->lanesToTheRightEnd());
+			//update current laneToTheLeft and laneToTheRight
+			laneToTheLeft = updateNeighborLane(laneToTheLeft, trafficLane->lanesToTheLeftEnd());
+			laneToTheRight = updateNeighborLane(laneToTheRight, trafficLane->lanesToTheRightEnd());
 
-				if (laneToTheLeft != trafficLane->lanesToTheLeftEnd())
-					updatePosOnNeighborLane(&posOnLaneToTheLeft, *laneToTheLeft);
-				else
-					posOnLaneToTheLeft = LinearPosition::Null();//больше доп полос с этой стороны нет
-				if (laneToTheRight != trafficLane->lanesToTheRightEnd())
-					updatePosOnNeighborLane(&posOnLaneToTheRight, *laneToTheRight);
-				else
-					posOnLaneToTheRight = LinearPosition::Null();
+			if (laneToTheLeft != trafficLane->lanesToTheLeftEnd())
+				updatePosOnNeighborLane(&posOnLaneToTheLeft, *laneToTheLeft);
+			else
+				posOnLaneToTheLeft = LinearPosition::Null();//больше доп полос с этой стороны нет
+			if (laneToTheRight != trafficLane->lanesToTheRightEnd())
+				updatePosOnNeighborLane(&posOnLaneToTheRight, *laneToTheRight);
+			else
+				posOnLaneToTheRight = LinearPosition::Null();
 
-#ifdef DEBUG 
-				//Визуализация положения на соседних полосах
-				if (!posOnLaneToTheLeft.isEmpty()) {
-					testMarkerLeft->setEnabled(1);
-					Position3D pos = posOnLaneToTheLeft.getPos3D();
-					testMarkerLeft->setWorldPosition(pos.absPos);
-					testMarkerLeft->setWorldDirection(pos.tangent, pos.up, Unigine::Math::AXIS_Y);
-				}
-				else
-				{
-					testMarkerLeft->setEnabled(0);
-				}
+			//#ifdef DEBUG 
+			//			//Визуализация положения на соседних полосах
+			//			if (!posOnLaneToTheLeft.isEmpty()) {
+			//				testMarkerLeft->setEnabled(1);
+			//				Position3D pos = posOnLaneToTheLeft.getPos3D();
+			//				testMarkerLeft->setWorldPosition(pos.absPos);
+			//				testMarkerLeft->setWorldDirection(pos.tangent, pos.up, Unigine::Math::AXIS_Y);
+			//			}
+			//			else
+			//			{
+			//				testMarkerLeft->setEnabled(0);
+			//			}
+			//
+			//			if (!posOnLaneToTheRight.isEmpty()) {
+			//				testMarkerRight->setEnabled(1);
+			//				Position3D pos = posOnLaneToTheRight.getPos3D();
+			//				testMarkerRight->setWorldPosition(pos.absPos);
+			//				testMarkerRight->setWorldDirection(pos.tangent, pos.up, Unigine::Math::AXIS_Y);
+			//			}
+			//			else
+			//			{
+			//				testMarkerRight->setEnabled(0);
+			//			}
+			//#endif
 
-				if (!posOnLaneToTheRight.isEmpty()) {
-					testMarkerRight->setEnabled(1);
-					Position3D pos = posOnLaneToTheRight.getPos3D();
-					testMarkerRight->setWorldPosition(pos.absPos);
-					testMarkerRight->setWorldDirection(pos.tangent, pos.up, Unigine::Math::AXIS_Y);
-				}
-				else
-				{
-					testMarkerRight->setEnabled(0);
-				}
-#endif
-
-				distFromLastNeighborLanesScanning = 0;//increase if moved
-			}
-
-
-
-			//отслеживание ближайших машин на соседних полосах
-			//Если положение на соседней полосе устарело, то возможно неточное определение автомобилей,
-			//которые находятся очень близко к положению на соседней полосе
-			//Такие машины все равно будут определяться, но положение впереди или позади может быть неточным
-			if (laneToTheLeft != trafficLane->lanesToTheLeftEnd()) {
-				TrafficLane* neighborLane = (*laneToTheLeft)->data;
-				if (neighborVehiclesLeft == nullptr)//TODO: при перестроении удалять массив или брать данные с соседних машин
-				{
-					neighborVehiclesLeft = new std::list<Vehicle*>::iterator[2]
-					{ neighborLane->getQueueEnd(), neighborLane->getQueueEnd() };
-				}
-
-
-				if (!posOnLaneToTheLeft.isEmpty())
-				{
-					if (neighborLane->endOfLaneLinear().absLinearPos - posOnLaneToTheLeft.absLinearPos > changeLineMinDistance)
-						updateNeighborVehicles(neighborVehiclesLeft, neighborLane, posOnLaneToTheLeft);
-					else
-					{
-						//места на соседней полосе все равно не хватает для перестроения - можно не отслеживать
-						neighborVehiclesLeft[0] = neighborLane->getQueueEnd();
-						neighborVehiclesLeft[1] = neighborLane->getQueueEnd();
-					}
-				}
-				else
-				{
-					//поддъезжаем к полосе уширения
-					//просто брать первую машину на этой полосе
-					neighborVehiclesLeft[0] = neighborLane->getQueueEnd();
-					neighborVehiclesLeft[1] = neighborLane->getQueueStart();
-				}
-
-#ifdef DEBUG Визуализация
-				if (testigVeh) {
-					if (neighborVehiclesLeft[0] != neighborLane->getQueueEnd()) {
-						(*neighborVehiclesLeft[0])->highlight();
-						Unigine::Visualizer::get()->renderLine3D(node->getWorldPosition(),
-							(*neighborVehiclesLeft[0])->getCurrPosOnLane(neighborLane).getPos3D().absPos,
-							Unigine::Math::vec4(0, 0, 1, 1));
-					}
-
-					if (neighborVehiclesLeft[1] != neighborLane->getQueueEnd()) {
-						(*neighborVehiclesLeft[1])->highlight();
-						Unigine::Visualizer::get()->renderLine3D(node->getWorldPosition(),
-							(*neighborVehiclesLeft[1])->getCurrPosOnLane(neighborLane).getPos3D().absPos,
-							Unigine::Math::vec4(0, 0, 1, 1));
-					}
-				}
-#endif	
-			}
-			if (laneToTheRight != trafficLane->lanesToTheRightEnd()) {
-				TrafficLane* neighborLane = (*laneToTheRight)->data;
-
-				if (neighborVehiclesRight == nullptr)//TODO: при перестроении удалять массив или брать данные с соседних машин
-				{
-					neighborVehiclesRight = new std::list<Vehicle*>::iterator[2]
-					{ neighborLane->getQueueEnd(), neighborLane->getQueueEnd() };
-				}
-
-				if (!posOnLaneToTheRight.isEmpty()) {
-					if (neighborLane->endOfLaneLinear().absLinearPos - posOnLaneToTheRight.absLinearPos
-			> changeLineMinDistance)
-						updateNeighborVehicles(neighborVehiclesRight, neighborLane, posOnLaneToTheRight);
-					else
-					{
-						//места на соседней полосе все равно не хватает для перестроения
-						neighborVehiclesRight[0] = neighborLane->getQueueEnd();
-						neighborVehiclesRight[1] = neighborLane->getQueueEnd();
-					}
-				}
-				else
-				{
-					//просто брать первую машину на полосе
-					neighborVehiclesRight[0] = neighborLane->getQueueEnd();
-					neighborVehiclesRight[1] = neighborLane->getQueueStart();
-				}
-
-#ifdef DEBUG Визуализация
-				if (testigVeh) {
-					if (neighborVehiclesRight[0] != neighborLane->getQueueEnd()) {
-						(*neighborVehiclesRight[0])->highlight();
-						Unigine::Visualizer::get()->renderLine3D(node->getWorldPosition(),
-							(*neighborVehiclesRight[0])->getCurrPosOnLane(neighborLane).getPos3D().absPos,
-							Unigine::Math::vec4(0, 0, 1, 1));
-					}
-
-					if (neighborVehiclesRight[1] != neighborLane->getQueueEnd()) {
-						(*neighborVehiclesRight[1])->highlight();
-						Unigine::Visualizer::get()->renderLine3D(node->getWorldPosition(),
-							(*neighborVehiclesRight[1])->getCurrPosOnLane(neighborLane).getPos3D().absPos,
-							Unigine::Math::vec4(0, 0, 1, 1));
-					}
-				}
-#endif
-			}
-
-
+			distFromLastNeighborLanesScanning = 0;//increase if moved
 		}
 
 
 
+#ifdef DEBUG
+		int left = 0;
+		int right = 0;
+#endif // DEBUG
+
+
+
+		//отслеживание ближайших машин на соседних полосах
+		//Если положение на соседней полосе устарело, то возможно неточное определение автомобилей,
+		//которые находятся очень близко к положению на соседней полосе
+		//Такие машины все равно будут определяться, но положение впереди или позади может быть неточным
+		if (laneToTheLeft != trafficLane->lanesToTheLeftEnd()) {
+			TrafficLane* neighborLane = (*laneToTheLeft)->data;
+			if (neighborVehiclesLeft == nullptr)//TODO: при перестроении удалять массив или брать данные с соседних машин
+			{
+				neighborVehiclesLeft = new std::list<Vehicle*>::iterator[2]
+				{ neighborLane->getQueueEnd(), neighborLane->getQueueEnd() };
+			}
+
+
+			if (!posOnLaneToTheLeft.isEmpty())
+			{
+				if (neighborLane->endOfLaneLinear().absLinearPos - posOnLaneToTheLeft.absLinearPos > changeLaneMinDistance) {
+					updateNeighborVehicles(neighborVehiclesLeft, neighborLane, posOnLaneToTheLeft);
+#ifdef DEBUG
+					left = 1;
+#endif // DEBUG
+				}
+				else
+				{
+					//места на соседней полосе все равно не хватает для перестроения - можно не отслеживать
+					neighborVehiclesLeft[0] = neighborLane->getQueueEnd();
+					neighborVehiclesLeft[1] = neighborLane->getQueueEnd();
+#ifdef DEBUG
+					left = 2;
+#endif // DEBUG
+				}
+			}
+			else
+			{
+				//поддъезжаем к полосе уширения
+				//просто брать первую машину на этой полосе
+				neighborVehiclesLeft[0] = neighborLane->getQueueEnd();
+				neighborVehiclesLeft[1] = neighborLane->getQueueStart();
+#ifdef DEBUG
+				left = 3;
+#endif // DEBUG
+			}
+
+#ifdef DEBUG Визуализация
+			if (testigVeh) {
+				if (neighborVehiclesLeft[0] != neighborLane->getQueueEnd()) {
+					(*neighborVehiclesLeft[0])->highlight();
+					Unigine::Visualizer::get()->renderLine3D(node->getWorldPosition(),
+						(*neighborVehiclesLeft[0])->getCurrPosOnLane(neighborLane).getPos3D().absPos,
+						Unigine::Math::vec4(0, 0, 1, 1));
+				}
+
+				if (neighborVehiclesLeft[1] != neighborLane->getQueueEnd()) {
+					(*neighborVehiclesLeft[1])->highlight();
+					Unigine::Visualizer::get()->renderLine3D(node->getWorldPosition(),
+						(*neighborVehiclesLeft[1])->getCurrPosOnLane(neighborLane).getPos3D().absPos,
+						Unigine::Math::vec4(0, 0, 1, 1));
+				}
+			}
+#endif	
+		}
+		if (laneToTheRight != trafficLane->lanesToTheRightEnd()) {
+			TrafficLane* neighborLane = (*laneToTheRight)->data;
+
+			if (neighborVehiclesRight == nullptr)//TODO: при перестроении удалять массив или брать данные с соседних машин
+			{
+				neighborVehiclesRight = new std::list<Vehicle*>::iterator[2]
+				{ neighborLane->getQueueEnd(), neighborLane->getQueueEnd() };
+			}
+
+			if (!posOnLaneToTheRight.isEmpty()) {
+				if (neighborLane->endOfLaneLinear().absLinearPos - posOnLaneToTheRight.absLinearPos
+		> changeLaneMinDistance)
+				{
+					updateNeighborVehicles(neighborVehiclesRight, neighborLane, posOnLaneToTheRight);
+#ifdef DEBUG
+					right = 1;
+#endif // DEBUG
+				}
+				else
+				{
+					//места на соседней полосе все равно не хватает для перестроения
+					neighborVehiclesRight[0] = neighborLane->getQueueEnd();
+					neighborVehiclesRight[1] = neighborLane->getQueueEnd();
+#ifdef DEBUG
+					right = 2;
+#endif // DEBUG
+				}
+			}
+			else
+			{
+				//просто брать первую машину на полосе
+				neighborVehiclesRight[0] = neighborLane->getQueueEnd();
+				neighborVehiclesRight[1] = neighborLane->getQueueStart();
+#ifdef DEBUG
+				right = 3;
+#endif // DEBUG
+			}
+
+#ifdef DEBUG Визуализация
+			if (testigVeh) {
+				if (neighborVehiclesRight[0] != neighborLane->getQueueEnd()) {
+					(*neighborVehiclesRight[0])->highlight();
+					Unigine::Visualizer::get()->renderLine3D(node->getWorldPosition(),
+						(*neighborVehiclesRight[0])->getCurrPosOnLane(neighborLane).getPos3D().absPos,
+						Unigine::Math::vec4(0, 0, 1, 1));
+				}
+
+				if (neighborVehiclesRight[1] != neighborLane->getQueueEnd()) {
+					(*neighborVehiclesRight[1])->highlight();
+					Unigine::Visualizer::get()->renderLine3D(node->getWorldPosition(),
+						(*neighborVehiclesRight[1])->getCurrPosOnLane(neighborLane).getPos3D().absPos,
+						Unigine::Math::vec4(0, 0, 1, 1));
+				}
+			}
+#endif
+		}
+
+
+		//}
+#pragma endregion
+
+
 		//определение препятствий впереди
 		std::list<Vehicle*>::iterator nextIt = std::next(vehicleIterator);
+		while (nextIt != trafficLane->getQueueEnd()
+			&& (*nextIt)->getCurrPosOnLane(trafficLane).absLinearPos < currLinearPosOnLane.absLinearPos)
+		{
+			nextIt = std::next(nextIt);
+		}
 		ObstacleType obstacleType;
 		LinearPosition obstacleLP = LinearPosition::Null();
 		double clearDist = getClearDist(nextIt, currLinearPosOnLane,
@@ -494,6 +585,7 @@ performAction:
 		//if the path is free, then we accelerate with standard acceleration. 
 		//if something interferes, then current acceleration is such that, with an equally slow motion, stop at a free site
 		float currAcceleration;
+		float currDynEnv = getDynamicEnvelop();
 		if (clearDist >= currDynEnv) {
 			//way is clear -> accelerate to speed limit
 			if (velocity < speedLimit) {
@@ -508,36 +600,57 @@ performAction:
 		}
 		else
 		{
+			bool closeToEndOfLane = !trafficLane->getLeadToEndOfRoad() && trafficLane->endOfLaneLinear()
+				.absLinearPos - currLinearPosOnLane.absLinearPos <= needToChangeLaneIfItEndsAfter;
+			bool trafficJam = velocity <= trafficJamVelocity;
+
 			//start to change lane if possible
 			LinearPosition canChangeLP = LinearPosition::Null();
 			LinearPosition currPosOnLaneChangeTo = LinearPosition::Null();
 			TrafficLane* changeTo = nullptr;
 			std::list<Vehicle*>::iterator* itAheadOnLaneChangeTo = nullptr;
+			double changeLaneDist = 0;
+			ChangeLaneBehabior changeLaneBehabior = ChangeLaneBehabior::Standard;
 			int decision = 0;
-			//предпочтительнее перестроиться вправо
-			if (laneToTheRight != trafficLane->lanesToTheRightEnd()) {
-				canChangeLP = canChangeLane(*laneToTheRight,
-					posOnLaneToTheRight, obstacleType, neighborVehiclesRight, currDynEnv);
-				if (!canChangeLP.isEmpty())
-				{
-					decision = 1;
-					changeTo = (*laneToTheRight)->data;
-					currPosOnLaneChangeTo = posOnLaneToTheRight;
-					itAheadOnLaneChangeTo = &neighborVehiclesRight[1];//TODO: НЕ НАЕБНЕТСЯ ЛИ ЭТО???
+
+			//если впереди пвп или мы проезжаем через него, то никаких перестроений
+			if (!endChangeLanePrevFrame
+				&& !(obstacleType == ObstacleType::PaymentCollectionPoint
+					|| !movingThroughObstacle.isEmpty())) {
+				//предпочтительнее перестроиться вправо
+				//TODO: Перестраиваться туда где больше пространства
+				if (laneToTheRight != trafficLane->lanesToTheRightEnd()) {
+					canChangeLP = changeLaneDecision(*laneToTheRight,
+						posOnLaneToTheRight, obstacleType, neighborVehiclesRight,
+						currDynEnv, closeToEndOfLane, trafficJam, changeLaneBehabior, changeLaneDist);
+					if (!canChangeLP.isEmpty())
+					{
+						decision = 1;
+						changeTo = (*laneToTheRight)->data;
+						currPosOnLaneChangeTo = posOnLaneToTheRight;
+						itAheadOnLaneChangeTo = &neighborVehiclesRight[1];
+					}
+				}
+				//если вправо нельзя, то проверить можно ли влево
+				if (decision == 0 && laneToTheLeft != trafficLane->lanesToTheLeftEnd()) {
+					canChangeLP = changeLaneDecision(*laneToTheLeft,
+						posOnLaneToTheLeft, obstacleType, neighborVehiclesLeft,
+						currDynEnv, closeToEndOfLane, trafficJam, changeLaneBehabior, changeLaneDist);
+					if (!canChangeLP.isEmpty())
+					{
+						decision = 1;
+						changeTo = (*laneToTheLeft)->data;
+						currPosOnLaneChangeTo = posOnLaneToTheLeft;
+						itAheadOnLaneChangeTo = &neighborVehiclesLeft[1];
+					}
 				}
 			}
-			//если вправо нельзя, то проверить можно ли влево
-			if (decision == 0 && laneToTheLeft != trafficLane->lanesToTheLeftEnd()) {
-				canChangeLP = canChangeLane(*laneToTheLeft,
-					posOnLaneToTheLeft, obstacleType, neighborVehiclesLeft, currDynEnv);
-				if (!canChangeLP.isEmpty())
-				{
-					decision = 1;
-					changeTo = (*laneToTheLeft)->data;
-					currPosOnLaneChangeTo = posOnLaneToTheLeft;
-					itAheadOnLaneChangeTo = &neighborVehiclesLeft[1];//TODO: НЕ НАЕБНЕТСЯ ЛИ ЭТО???
-				}
-			}
+
+
+
+
+
+
 
 
 			switch (decision)
@@ -560,7 +673,9 @@ performAction:
 
 				currPosOnChangeLaneTrack = 0;
 				distFromLastChangeLanesScanning = 0;
-
+				this->changeLaneDist = changeLaneDist;
+				this->changeLaneBehabior = changeLaneBehabior;
+				vehicleIteratorReplaced = false;
 
 				//в этот же кадр продолжить движение по траектории смены полосы
 				goto performAction;

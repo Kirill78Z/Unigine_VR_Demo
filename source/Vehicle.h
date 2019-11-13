@@ -15,6 +15,13 @@ enum VehicleActivity
 	ChangeLane
 };
 
+enum ChangeLaneBehabior
+{
+	Standard,
+	Persistent,
+	Aggressive
+};
+
 
 class Vehicle
 {
@@ -95,14 +102,35 @@ public:
 		if (node) {
 			Unigine::Editor::get()->removeNode(node->getNode(), 1);
 			node.clear();
-
-#ifdef DEBUG 
-			Unigine::Editor::get()->removeNode(testMarkerLeft->getNode(), 1);
-			testMarkerLeft.clear();
-			Unigine::Editor::get()->removeNode(testMarkerRight->getNode(), 1);
-			testMarkerRight.clear();
-#endif
+			node = Unigine::NodeDummyPtr::Ptr();
 		}
+
+		currLinearPosOnLane = LinearPosition::Null();
+		changeLaneTrack = Unigine::WorldSplineGraphPtr::Ptr();
+		changeLaneTrackSeg = Unigine::SplineSegmentPtr::Ptr();
+		posOnLaneAfterChange = LinearPosition::Null();
+		trafficLaneChangeTo = nullptr;
+		tempLPosOnLaneChangeTo = LinearPosition::Null();
+		
+
+		laneToTheLeft = trafficLane->lanesToTheLeftBegin();
+		laneToTheRight = trafficLane->lanesToTheRightBegin();
+		posOnLaneToTheLeft = LinearPosition::Null();
+		posOnLaneToTheRight = LinearPosition::Null();
+		if (neighborVehiclesLeft)
+			delete[] neighborVehiclesLeft;
+		if (neighborVehiclesRight)
+			delete[] neighborVehiclesRight;
+		neighborVehiclesLeft = nullptr;
+		neighborVehiclesRight = nullptr;
+
+
+		vehicleIterator = trafficLane->getQueueEnd();
+		tempChangeLaneIt = trafficLane->getQueueEnd();
+		trafficLane = nullptr;
+		mainIterator = carriageway->vehicles.end();
+		carriageway = nullptr;
+
 	}
 
 private:
@@ -110,18 +138,25 @@ private:
 
 	//measurement unit - meter/(sec^2)
 	const float standartAcceleration = 7.0f;
+	const float fastAcceleration = 21.0f;
+	const float urgentAcceleration = 35.0f;
+
 	const float standartDamping = 7.0f;//TODO?: 5.5 for tracks by Babkov's textbook...
+	const float fastDamping = 21.0f;
+	const float urgentDamping = 35.0f;
 
 	const float timeToWaitOnPaymentCollectionPoint = 0.5;
 
-	const double changeLineMinDistance = 10;
+	const double changeLaneMinDistance = 10;//TODO: Зависимость от скорости?
 
 	const double trafficJamVelocity = 2.78;
 
-	const double changeLineMinSpaceToPrevVehicle = 30;
+	const double changeLineMinSpaceToPrevVehicle = 30;//TODO: Зависимость от скорости?
 
-	Сarriageway* carriageway;
-	TrafficLane* trafficLane;
+	const double needToChangeLaneIfItEndsAfter = 50;//TODO: Зависимость от скорости?
+
+	Сarriageway* carriageway = nullptr;
+	TrafficLane* trafficLane = nullptr;
 
 
 	Unigine::NodeDummyPtr node;
@@ -149,6 +184,14 @@ private:
 	//dynamic envelop of vehicle depending of current velocity
 	float getDynamicEnvelop() {
 		return length * 2 + Unigine::Math::pow(velocity, 2) / (2 * standartDamping);
+	}
+
+	float getBoldDynamicEnvelop() {
+		return length * 2 + Unigine::Math::pow(velocity, 2) / (2 * fastDamping);
+	}
+
+	float getAggressiveDynamicEnvelop() {
+		return length * 2 + Unigine::Math::pow(velocity, 2) / (2 * urgentDamping);
 	}
 
 	LinearPosition currLinearPosOnLane = LinearPosition::Null();
@@ -204,11 +247,7 @@ private:
 
 
 #ifdef DEBUG 
-	Unigine::ObjectMeshStaticPtr testMarkerLeft;
-	Unigine::ObjectMeshStaticPtr testMarkerRight;
-
 	bool testigVeh = false;
-
 #endif
 
 	void updatePosOnNeighborLane(LinearPosition* lp, LinearSpan* ls) {
@@ -248,24 +287,36 @@ private:
 
 	}
 
-
+#ifdef DEBUG
+	int _updateNeighborVehicles = 0;
+#endif
 
 	void updateNeighborVehicles(std::list<Vehicle*>::iterator* neighborVehicles,
 		TrafficLane* neighborLane, LinearPosition posOnNeighborLane) {
 #ifdef DEBUG
 		carriageway->updateNeighborVehiclesCalls++;
+		_updateNeighborVehicles = 1;
 #endif
+		/*
 		if (!updateNeighborVehiclesByOldValues(
 			neighborVehicles, neighborLane, posOnNeighborLane)) {
 #ifdef DEBUG
-			if (neighborLane->getQueueStart() == neighborLane->getQueueEnd())
+			_updateNeighborVehicles == 2;
+			if (neighborLane->getQueueStart() == neighborLane->getQueueEnd()) {
 				carriageway->linearSearchOnEmptyLane++;
+				neighborVehicles[0] = neighborLane->getQueueEnd();
+				neighborVehicles[1] = neighborLane->getQueueEnd();
+			}
+
 #endif
+*/
 			neighborLane->getNextAndPrevVehicles(posOnNeighborLane, neighborVehicles);
-		}
+		//}
 	}
 
+#ifdef DEBUG
 
+#endif
 
 	bool updateNeighborVehiclesByOldValues(
 		std::list<Vehicle*>::iterator* neighborVehiclesOld,
@@ -277,6 +328,12 @@ private:
 		std::list<Vehicle*>::iterator prev = neighborVehiclesOld[0];
 		std::list<Vehicle*>::iterator next = neighborVehiclesOld[1];
 		std::list<Vehicle*>::iterator i_null = neighborLane->getQueueEnd();
+
+		if ((*prev) == nullptr) 
+			prev = i_null;
+		if((*next) == nullptr) 
+			next = i_null;
+
 
 		//проверить что машины не уехали с дороги
 		if (prev != i_null && (*prev)->isReachedEndOfRoad())
@@ -298,32 +355,61 @@ private:
 		//Но как только перестроение заканчивается временный итератор переносится в очередь на удаление
 		//Поэтому если текущее состояние машины не ChangeLane
 		//уточнить prev и next, чтобы они были равны полю vehicleIterator самого объекта Vehicle
+		//Это не работает?
+		//Временный итератор может быть удален до окончания
 		if (prev != i_null
-			&& (*prev)->currentActivity != VehicleActivity::ChangeLane
+			&& ((*prev)->currentActivity != VehicleActivity::ChangeLane 
+				|| (*prev)->vehicleIteratorReplaced)
 			&& prev != (*prev)->vehicleIterator) {
 			prev = (*prev)->vehicleIterator;
 		}
 		if (next != i_null
-			&& (*next)->currentActivity != VehicleActivity::ChangeLane
+			&& ((*next)->currentActivity != VehicleActivity::ChangeLane 
+				|| (*next)->vehicleIteratorReplaced)
 			&& next != (*next)->vehicleIterator) {
 			next = (*next)->vehicleIterator;
 		}
 
 
-		//проверить, что машины не перестроились на другую полосу
-		{
-			//убирать из рассмотрения машины, которые поменяли полосы
-			if (prev != i_null 
-				&& (*prev)->currentActivity != VehicleActivity::ChangeLane
-				&& (*prev)->trafficLane != neighborLane) {
-				prev = i_null;
-			}
-			if (next != i_null 
-				&& (*next)->currentActivity != VehicleActivity::ChangeLane
-				&& (*next)->trafficLane != neighborLane) {
-				next = i_null;
-			}
+		if (prev != i_null && (*prev) == this) {
+			prev = i_null;
 		}
+
+		if (next != i_null && (*next) == this) {
+			next = i_null;
+		}
+
+		if (prev == next)
+			next = i_null;
+
+
+		
+
+
+
+
+		//проверить, что машины не перестроились на другую полосу
+		//убирать из рассмотрения машины, которые поменяли полосы
+		if (prev != i_null
+			&& (*prev)->currentActivity != VehicleActivity::ChangeLane
+			&& (*prev)->trafficLane != neighborLane) {
+			prev = i_null;
+		}
+		if (next != i_null
+			&& (*next)->currentActivity != VehicleActivity::ChangeLane
+			&& (*next)->trafficLane != neighborLane) {
+			next = i_null;
+		}
+
+		if (prev != i_null && (*prev)->currentActivity == VehicleActivity::ChangeLane
+			&& (*prev)->trafficLane != neighborLane
+			&& (*prev)->trafficLaneChangeTo != neighborLane)
+			prev = i_null;//Никогда сюда не попадает
+
+		if (next != i_null && (*next)->currentActivity == VehicleActivity::ChangeLane
+			&& (*next)->trafficLane != neighborLane
+			&& (*next)->trafficLaneChangeTo != neighborLane)
+			next = i_null;//Никогда сюда не попадает
 
 
 		if (prev == i_null && next == i_null)
@@ -335,14 +421,99 @@ private:
 		}
 
 
-		if (next == i_null && prev != i_null) {
-			next = std::next(prev);//принять next - следующий просле prev
+
+		if (next != i_null && prev != i_null && prev != std::prev(next)) {
+			next = i_null;
 		}
 
-		if (prev == i_null && next != i_null
+
+//#ifdef DEBUG 
+//		bool shrink = false;
+//#endif
+//		if (next != i_null && prev != i_null) {
+//			
+//
+//			assert(prev != next);
+//
+//			std::list<Vehicle*>::iterator nextnext = std::next(next);
+//			assert(prev != nextnext);
+//			if (nextnext != i_null) {
+//				std::list<Vehicle*>::iterator nextnextnext = std::next(std::next(next));
+//				assert(prev != nextnextnext);
+//			}
+//			
+//#ifdef DEBUG 
+//			int shrinkn = 0;
+//#endif
+//			//убедиться, что между ними нет нового узла
+//			while (prev != std::prev(next))//TODO: проваливается в бесконечный цикл => узлы находятся в разных очередях
+//			{
+//				if ((*prev)->currentActivity != VehicleActivity::ChangeLane)
+//					assert((*prev)->trafficLane == neighborLane);
+//				else
+//					assert((*prev)->trafficLane == neighborLane
+//						|| (*prev)->trafficLaneChangeTo == neighborLane);
+//				if (next != i_null) {
+//					if ((*next)->currentActivity != VehicleActivity::ChangeLane)
+//						assert((*next)->trafficLane == neighborLane);
+//					else
+//						assert((*next)->trafficLane == neighborLane
+//							|| (*next)->trafficLaneChangeTo == neighborLane);
+//				}
+//				
+//
+//
+//				next = std::prev(next);
+//				shrink = true;
+//				shrinkn++;
+//				assert(next != carriageway->deletedTempChangeLaneIts.begin());
+//			}
+//		}
+//		else
+
+#ifdef DEBUG 
+		bool next_nextprev = false;
+		bool prev_prevnext = false;
+#endif
+
+		if (next == i_null && prev != i_null) {
+			next = std::next(prev);//принять next - следующий просле prev
+#ifdef DEBUG 
+			bool next_nextprev = true;
+#endif
+		}
+		else if (prev == i_null && next != i_null
 			&& next != neighborLane->getQueueStart()) {
 			prev = std::prev(next);
+#ifdef DEBUG 
+			bool prev_prevnext = true;
+#endif
 		}
+
+
+		//что за хрень?
+		if (prev != i_null
+			&& (*prev)->currentActivity != VehicleActivity::ChangeLane
+			&& (*prev)->trafficLane != neighborLane) {
+			prev = i_null;
+		}
+		if (next != i_null
+			&& (*next)->currentActivity != VehicleActivity::ChangeLane
+			&& (*next)->trafficLane != neighborLane) {
+			next = i_null;
+		}
+
+
+		if (prev != i_null && (*prev)->currentActivity == VehicleActivity::ChangeLane
+			&& (*prev)->trafficLane != neighborLane
+			&& (*prev)->trafficLaneChangeTo != neighborLane)
+			prev = i_null;
+
+		if (next != i_null && (*next)->currentActivity == VehicleActivity::ChangeLane
+			&& (*next)->trafficLane != neighborLane
+			&& (*next)->trafficLaneChangeTo != neighborLane)
+			next = i_null;
+		//что за хрень?
 
 
 #ifdef DEBUG 
@@ -392,18 +563,25 @@ private:
 		assert(prev != i_null || next != i_null);
 
 		if (prev != i_null) {
-			assert((*prev)->getCurrPosOnLane(neighborLane).absLinearPos < posOnNeighborLane.absLinearPos);
+			assert((*prev)->getCurrPosOnLane(neighborLane).absLinearPos <= posOnNeighborLane.absLinearPos);
 		}
 
 		if (next != i_null) {
-			assert((*next)->getCurrPosOnLane(neighborLane).absLinearPos > posOnNeighborLane.absLinearPos);
+			assert((*next)->getCurrPosOnLane(neighborLane).absLinearPos >= posOnNeighborLane.absLinearPos);
 		}
+
+		if (prev != i_null && next != i_null) {
+			assert(prev == std::prev(next));
+			assert(next == std::next(prev));
+		}
+
 
 		neighborVehiclesOld[0] = prev;
 		neighborVehiclesOld[1] = next;
 
 #ifdef DEBUG
 		carriageway->succcessfulUpdatedByOldValues++;
+		_updateNeighborVehicles == 3;
 #endif
 
 		return true;
@@ -414,11 +592,18 @@ private:
 
 #pragma region подготовка к перестроению
 	//возвращает линейное положение на соседней полосе, на которое можно перестроиться
-	LinearPosition canChangeLane(
+	LinearPosition changeLaneDecision(
 		LinearSpan* neighborlaneLS, LinearPosition posOnNeighborLane,
 		ObstacleType obstacleType, std::list<Vehicle*>::iterator* neighborVehicles,
-		float currDynEnv)
+		float currDynEnv, bool closeToEndOfLane, bool trafficJam, ChangeLaneBehabior& changeLaneBehabior, double& changeLaneDist)
 	{
+		changeLaneBehabior = ChangeLaneBehabior::Standard;
+		if (closeToEndOfLane || trafficJam)
+			changeLaneBehabior = ChangeLaneBehabior::Persistent;
+
+		//if (aggressiveChange)
+		//	currDynEnv = getBoldDynamicEnvelop();
+
 		if (!movingThroughObstacle.isEmpty())
 			return LinearPosition::Null();
 
@@ -427,7 +612,6 @@ private:
 
 		double transitionDist = 0;//перестроение заканчивать не раньше 
 		//чем заканчивается отгон соседней полосы если она еще не началась
-		double distToChangeLineMax;
 
 		LinearPosition startNeighborLaneLP = neighborlaneLS->start;
 		TrafficLane* neighborLane = neighborlaneLS->data;
@@ -436,10 +620,20 @@ private:
 
 
 		//расстояние, которое необходимо для перестроении при текущей скорости
-		double changeLaneDist = changeLineMinDistance;
-		//TODO: сделать зависимость от текущей скорости
+		changeLaneDist = changeLaneMinDistance + velocity * 1.1;//зависимость от скорости приблизительная
 
-		
+		//если конец полосы попадает в расстояние перестроения, то
+		//отгона этой полосы должно быть достаточно 
+		//(но при этом не учитывается changeLaneMinDistance)
+		if (!trafficLane->getLeadToEndOfRoad())
+		{
+			double toEndOfThisLane = trafficLane->endOfLaneLinear().absLinearPos - currLinearPosOnLane.absLinearPos;
+			if (toEndOfThisLane < changeLaneDist - changeLaneMinDistance) {
+				double transitionLenEnd = trafficLane->getTransitionLengthEnd();
+				if (toEndOfThisLane + transitionLenEnd < changeLaneDist)
+					return LinearPosition::Null();
+			}
+		}
 
 
 		if (currLinearPosOnLane.absLinearPos < startNeighborLaneLP.absLinearPos)
@@ -472,55 +666,112 @@ private:
 		LinearPosition obstacleLp = neighborLane->getNextObstacle(posOnNeighborLane, false);
 		assert(neighborVehicles);
 
+		//TODO?: Учет доступного расстояния на текущей полосе и ее отгона
+		//на текущей полосе тоже нужно некоторое расстояние
 
 		//машина спереди
 		std::list<Vehicle*>::iterator nextIt = neighborVehicles[1];
+
+
+
+
 		//свободное пространство спереди
 		ObstacleType obstacleTypeNeighborLane = ObstacleType::None;
 		LinearPosition obstacleLPNeighborLane = LinearPosition::Null();
+
+
+#ifdef DEBUG
+		//std::list<Vehicle*>::iterator test1 = std::next(nextIt);
+		//std::list<Vehicle*>::iterator test2 = std::prev(nextIt);
+		//std::list<Vehicle*>::iterator test3 = std::prev(std::prev(nextIt));
+#endif // DEBUG
+
+
 		double clearDist = getClearDist(nextIt, posOnNeighborLane,
 			obstacleTypeNeighborLane, obstacleLPNeighborLane, neighborLane, false);
+
+
+		if (obstacleTypeNeighborLane == ObstacleType::MovingVehicle && trafficJam
+			&& (*nextIt)->velocity > trafficJamVelocity*1.5)
+			changeLaneBehabior = ChangeLaneBehabior::Aggressive;//мы стоим, а соседняя полоса едет
+
+		//уточнить наш динамический габарит и габарит машины сзади
+		//исходя из нашего поведения
+		std::list<Vehicle*>::iterator prevIt = neighborVehicles[0];
+		float prevDynEnv = 0;
+		switch (changeLaneBehabior)
+		{
+		case ChangeLaneBehabior::Persistent:
+			//currDynEnv = getBoldDynamicEnvelop();
+			if (prevIt != neighborLane->getQueueEnd())
+				prevDynEnv = (*prevIt)->getBoldDynamicEnvelop();
+			break;
+		case ChangeLaneBehabior::Aggressive:
+			//currDynEnv = getAggressiveDynamicEnvelop();
+			if (prevIt != neighborLane->getQueueEnd())
+				prevDynEnv = (*prevIt)->getAggressiveDynamicEnvelop();
+			break;
+		default:
+			if (prevIt != neighborLane->getQueueEnd())
+				prevDynEnv = (*prevIt)->getDynamicEnvelop();
+			break;
+		}
+
+
+		if (changeLaneBehabior == ChangeLaneBehabior::Standard) {
+			//не перестраиваться если машина впереди перестраивается
+			if (nextIt != neighborLane->getQueueEnd() && (*nextIt)->currentActivity == VehicleActivity::ChangeLane)
+				return LinearPosition::Null();
+		}
+
+
+
+
+
+		if (clearDist < reserveDistBetweenCars)
+			return LinearPosition::Null();//недостаточно места (возможно кто-то едет по отгону полосы)
+
 		if (clearDist != DBL_MAX)
 			clearDist += transitionDist;//учесть также и переходный участок 
 
 
-		if (currDynEnv > clearDist || changeLaneDist + reserveDistBetweenCars >= clearDist) {
-			return LinearPosition::Null();//места спереди недостаточно
+
+		if (changeLaneBehabior == ChangeLaneBehabior::Aggressive) {
+			//выезжать без учета динамич габарита
+			//но только если машина спереди не перестраивается на нашу полосу
+			if (changeLaneDist + reserveDistBetweenCars + length * 2 >= clearDist
+				|| (currDynEnv > clearDist && obstacleType == ObstacleType::MovingVehicle
+					&& (*nextIt)->currentActivity == VehicleActivity::ChangeLane
+					&& (*nextIt)->trafficLaneChangeTo == trafficLane))
+				return LinearPosition::Null();
+		}
+		else
+		{
+			//если поведение стандартное, то проверить, что по новой полосе 
+			//можно будет продолжить движение с прежней скоростью
+			//иначе не перестраиваться
+			if (changeLaneDist + reserveDistBetweenCars + currDynEnv > clearDist) {
+				return LinearPosition::Null();//места спереди недостаточно
+			}
+
 		}
 
+
 		//машина сзади
-		std::list<Vehicle*>::iterator prevIt = neighborVehicles[0];
 		if (prevIt != neighborLane->getQueueEnd()) {
 
 			//сзади есть машина. Мы не должны попадать в ее динамический габарит
 			double spaceToPrevCar = posOnNeighborLane.absLinearPos - (*prevIt)->getCurrPosOnLane(neighborLane).absLinearPos;
 
-			if ((*prevIt)->getDynamicEnvelop() > spaceToPrevCar)
+			if (prevDynEnv > spaceToPrevCar)
 			{
-				//если мы встряли в пробку, то машина сзади должна нас выпустить если есть небольшой зазор
-				if (velocity <= trafficJamVelocity
-					&& spaceToPrevCar > changeLineMinSpaceToPrevVehicle) {
-
-				}
-				else
-				{
-					return LinearPosition::Null();
-					//места сзади недостаточно, чтобы перестроиться не создавая помех
-				}
+				return LinearPosition::Null();//места сзади недостаточно, чтобы перестроиться
 			}
 		}
 
 
 		//мы готовы перестраиваться
 		//найти положение на соседней полосе в конце перестроения и вернуть его
-
-
-
-		/*if (obstacleType == ObstacleType::EndOfLane)
-			//TODO: Учет доступного расстояния на текущей полосе и ее отгона
-		{
-
-		}*/
 
 		//posOnNeighborLane.absLinearPos
 		LinearPosition result = LinearPosition(posOnNeighborLane);
@@ -529,6 +780,9 @@ private:
 			bool reachedEnd = result.increaseLinearPos(forwardShift);
 			assert(!reachedEnd);
 		}
+
+
+
 
 		return result;
 
@@ -568,7 +822,11 @@ private:
 
 	float distFromLastChangeLanesScanning = 0.0f;
 
+	double changeLaneDist = 0;
 
+	ChangeLaneBehabior changeLaneBehabior = ChangeLaneBehabior::Standard;
+
+	bool vehicleIteratorReplaced = false;
 
 
 	void copyNeighborLanesDataTo(Vehicle* veh) {

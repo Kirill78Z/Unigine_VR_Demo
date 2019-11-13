@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="Шлагбаум 1pvpnavisworks material_91247" guid="794aeb523a0192891e46fa547ffb21a314819aa6" base_material="mesh_base">
+	<parameter name="albedo_color">0.952941239 0.878431439 0.231372565 1</parameter>
+</material>

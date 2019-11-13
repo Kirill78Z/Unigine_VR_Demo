@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="Знакиj0_0_0" guid="0ea89a9340f05ed61153083d00e3ac78566e8577" base_material="mesh_base">
+	<parameter name="albedo_color">0 0 0 1</parameter>
+</material>

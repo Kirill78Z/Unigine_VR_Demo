@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="Станция водоснабженияpvpnavisworks material_14571" guid="1b9f683053ba5dcf677d30e225567ad915f6a664" base_material="mesh_base">
+	<parameter name="albedo_color">0.741176486 0.733333349 0.725490212 1</parameter>
+</material>

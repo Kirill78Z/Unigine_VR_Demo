@@ -603,6 +603,10 @@ void TrafficLane::calcNeighborLanesLinearSpans() {
 //запуск линейного поиска должен быть редкой процедурой
 void TrafficLane::getNextAndPrevVehicles(
 	LinearPosition lp, std::list<Vehicle*>::iterator* result) {
+
+	result[0] = vehicles.end();
+	result[1] = vehicles.end();
+
 	bool found = false;
 
 	std::list<Vehicle*>::iterator founded = std::find_if(vehicles.begin(), vehicles.end(), 

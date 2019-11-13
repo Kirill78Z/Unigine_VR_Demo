@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="Демпферыj120_120_120" guid="259c1e5a503e59f16ff88a9c7c84254b5a53ba2e" base_material="mesh_base">
+	<parameter name="albedo_color">0.470588297 0.470588297 0.470588297 1</parameter>
+</material>

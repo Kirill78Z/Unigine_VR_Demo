@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>2dd862215cbe150c3ca4ccfb7efc5e1e6dadaee5</guid>
+	<type>fbx</type>
+	<hash>a33f0895</hash>
+	<parameters>
+		<parameter type="bool" name="merge_static_meshes">0</parameter>
+		<parameter type="bool" name="merge_surfaces_by_materials">0</parameter>
+		<parameter type="bool" name="use_instances">1</parameter>
+		<parameter type="bool" name="vertex_cache">1</parameter>
+		<parameter type="bool" name="import_meshes">1</parameter>
+		<parameter type="bool" name="import_materials">1</parameter>
+		<parameter type="bool" name="merge_similar_materials">1</parameter>
+		<parameter type="bool" name="import_textures">1</parameter>
+		<parameter type="bool" name="import_animations">0</parameter>
+		<parameter type="bool" name="import_bones_without_skin">0</parameter>
+		<parameter type="bool" name="create_transform_bones_for_joints">0</parameter>
+		<parameter type="bool" name="joints_reorientation">1</parameter>
+		<parameter type="bool" name="import_lights">0</parameter>
+		<parameter type="bool" name="import_cameras">0</parameter>
+		<parameter type="bool" name="import_tangent_space">0</parameter>
+		<parameter type="bool" name="import_morph_targets">0</parameter>
+		<parameter type="float" name="scale">1</parameter>
+		<parameter type="float" name="fps">30</parameter>
+		<parameter type="string" name="prefix_materials"/>
+		<parameter type="int" name="import_materials_mode">0</parameter>
+		<parameter type="int" name="workflow">0</parameter>
+		<parameter type="int" name="up_axis">0</parameter>
+		<parameter type="int" name="front_axis">0</parameter>
+		<parameter type="bool" name="need_split">0</parameter>
+		<parameter type="bool" name="need_repivot">1</parameter>
+		<parameter type="bool" name="need_triagulate">1</parameter>
+		<parameter type="bool" name="skip_empty_nodes">0</parameter>
+		<parameter type="float" name="bound_size">10000</parameter>
+		<parameter type="float" name="linear_deflection">0.200000003</parameter>
+		<parameter type="float" name="angular_deflection">0.699999988</parameter>
+		<parameter type="bool" name="combine_by_lods">0</parameter>
+		<parameter type="int" name="index_max_count_lods">1</parameter>
+		<parameter type="string" name="lods"/>
+		<parameter type="string" name="animations"/>
+		<parameter type="string" name="material_guids">Навесpvpnavisworks material_6,156acc034c6f818631c9eb2d2ec8d2a832f895e7,Навесpvpnavisworks material_32268,3173e9863c73332d34117aa852991de75bae821a,Навесpvpnavisworks material_90254,2139a8f765cdf1ea162178417064f4ac0fd7e81b,Навесpvpnavisworks material_29997,64c93fa240d3ba991c7963243a9d54331ef38bf6,Навесpvpnavisworks material_91247,26fdf9be4c6456057e4a4fa0088ebe7f25fc39d2</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="7e1cf1dd4ada499832af4017651d5e8a4e11bc61" name="Специальное оборудование (46)f15f9e3c-9491-430c-9963-acb5b153c3c5_.node" link="1" type="3">
+			<parameters>
+				<parameter type="string" name="id">fec42879</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="29dd2a4c1cf0613b7a24655e56d98d251c54dc40" name="Оболочка|cbdd7679-3c82-4a51-baf4-267c8c28867e|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">3cf6627a</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7ebfa29f687c8f722e0ba8292407d3745568e843" name="Оболочка|c4d16ae5-d494-4224-9cf5-42d23a833445|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">34ae59eb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0dd870c630b1916d2909c3e857a4562713e9dd5a" name="Оболочка|1a29ac15-d21a-4224-baf7-3ac0e8c1ada7|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a1d84bcd</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0b4b0cf179efa19c303a504b42b5e92e60121eb5" name="Оболочка|b70b9962-bf53-4d7b-b36e-8ae2c6e3f321|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">15f3ce5b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5543a09030e77aaf6e28e8424f7f0ab9703934c4" name="Оболочка|d3e8de35-e554-4d2a-902e-8a3a888835ad|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">3cf6627a</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6180b95312ea6e96670c54fd2ea112380f573037" name="Оболочка|6d4011c0-d14a-41a0-9184-c4108cfb547b|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">0027bfdb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7671502a3a3ac181001d2cec40dc435b5e57a0fe" name="Оболочка|07d2a565-07ce-4616-8580-5a35011c41e9|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a1d84bcd</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="29d554451694b8e0318596bf32eeb5121d755149" name="Оболочка|83a91331-a762-4fb4-995a-0dff5ddbde47|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">15f3ce5b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="69e82a1439f10e632113206633463c8d3ce53488" name="Оболочка|4713c7a5-c6a3-4ba2-80e3-0fa34cecefe3|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">3cf6627a</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4848ce470f40b6fa2a09da11177acc3c4ce73a6b" name="Оболочка|c268bbbf-86e1-4ba2-8094-3fd90348cf8a|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">0027bfdb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="79e68cce095c2dd56a2d25303f3af6cf0afaf5e2" name="Оболочка|d5124086-1ea7-4d34-bb4e-7f6010b45875|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a1d84bcd</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4c377bd94ec9b3641eeae77300cf863611b8481d" name="Оболочка|2631f70b-7290-4b6c-8f77-2282adb54f34|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">15f3ce5b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1a5b2ad8153a3057382511ca182156a1345d7f8c" name="Оболочка|b20f83ec-813d-4351-b8ec-ad082ffda4a4|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">3cf6627a</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1aac357b6d7fac9e061fab656731e58044e89adf" name="Оболочка|7d821025-54e1-4aab-b9b4-4c6cac1db260|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">34ae59eb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="09baaab2464e8a691dd2d0b420df44830ddca006" name="Оболочка|b4228586-20e5-447f-a9c1-8c43fd82d4da|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a1d84bcd</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="78fb77ad42c7f5283d2c5667722b609a402a3731" name="Оболочка|b7c2e955-8592-4910-b4aa-d6e662649cf5|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">15f3ce5b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="345a46dc48bc348b0c80006e69d8ccf50207f9d0" name="Оболочка|89535305-7b6f-4b75-8bd6-3e75de73aa83|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">3cf6627a</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="69af82ef51dad3823c837cf967388204307f2593" name="Оболочка|1c014677-7554-4aa9-a45e-e048c37dfb51|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">34ae59eb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="07376dd669e8cb3d373093784b60407735a0a36a" name="Оболочка|e40b8d9f-a031-4b20-a9f8-0e82ce21acac|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a1d84bcd</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6c0d7bc12e46222c5de8379b7584883e50809285" name="Оболочка|f1d4246a-1587-4367-84bf-53422d0c08da|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">15f3ce5b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5c54622020f0aeff6548705235df53891c6fc754" name="Оболочка|838ae15c-2094-4b85-bb54-d6c148fe28dc|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">3cf6627a</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2ebb8aa35f1cefa67f9942cd4dda05c81f56ee87" name="Оболочка|0eca53d3-308b-4b70-9a5a-594e817414ef|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">34ae59eb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4211da3a03f424514236117c59413eab626a440e" name="Оболочка|ce13a37e-21a2-402d-bea7-76d995f9c457|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a1d84bcd</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="384ffc1514fc1e703a4d1f0f753081221fab0e19" name="Оболочка|942b02b0-15ea-420e-bd0e-b724b56b85bf|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">15f3ce5b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="602da0a47cc573b30b0a25767f65de5d02494c18" name="Оболочка|ebce28fa-8564-436d-8b53-fcaabe226ab9|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">3cf6627a</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7cd160976e4c050a1e4730e1697f14cc421849bb" name="Оболочка|33d2ba02-c70a-4ae0-86c0-5951ff5351e3|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">34ae59eb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="784e33de11c009a518242ec071a5d31f320005f2" name="Оболочка|eaebf913-d737-49e4-a01b-571941988592|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a1d84bcd</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5d6faca956670df40c0de0c353bc0f4668e79ded" name="Оболочка|f89f8567-8952-457c-817f-049a255c998c|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">15f3ce5b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="454366681bd096a7785c23da0fafa17146b62c1c" name="Оболочка|222cefbe-047d-4e34-b3a3-055122f5649a|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6733e478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="37fe58cb178d57ae4f89bb356f3193107f1bcb2f" name="Оболочка|0d1825bc-908d-4811-810a-e3c7821e0cc4|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">574abff9</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1b63fec258f62f3974510f446e45d1d3252fad16" name="Оболочка|bae8fef9-bf16-467b-94c1-65ed31ae372c|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ea9bcb22</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="05f7817d4ccd54b8389590b7558f36aa7b167601" name="Оболочка|b3fefa6e-1a18-4fa0-9427-d5f6de41326a|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">465b6478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="75b0576c02c46bdb2bc4af7e76a610c510c94b60" name="Оболочка|24c6c41d-dac7-4940-9b9e-f6af151eb898|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6733e478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2710073f50496b92124795c95060a494655e46e3" name="Оболочка|dbef15b5-86cf-4a2e-b1ea-3bc97149731f|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">574abff9</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5ea1fee67aae890d642c170823a14ec702723d7a" name="Оболочка|38a9bd2f-b928-4399-819a-d68a1e6ccda8|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ea9bcb22</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="61a4ae915b8296bc227b82eb7bd13b4e2e4e0a55" name="Оболочка|2053b1a7-7624-4999-a34e-88bbdf6adae1|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">465b6478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="30d057b04a23874f5edd4c622face059724acde4" name="Оболочка|b1ad70f1-6cf5-42bb-91da-6181e92b18f8|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6733e478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="73883ff3229004b65565b49d3be4ad5851b4d0d7" name="Оболочка|805996c4-2466-4363-9036-3bbadd760d74|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">3be193e3</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="52d2384a32c34b217681ea0c5f749dfb79cffb1e" name="Оболочка|e976d3e2-8746-4753-8f18-42652e4d4b97|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ea9bcb22</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4ffaa7e5106bb80075374b5f148ca1320daf0ee9" name="Оболочка|51795864-f916-4150-b04b-cef7c475bf01|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">465b6478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="23048b346b34bd0326b6be861eb6042d39bc17a8" name="Оболочка|78d2fea0-c558-4849-b929-ba68183b44b9|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6733e478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6bd116e741bc271a5c1b4bb12e43515c5a40bd0b" name="Оболочка|9d2c3583-f802-4c17-864a-06735ee1aa60|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">3be193e3</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="131deeee7764e9754e006c50716c536f4e046a02" name="Оболочка|8f1fa82d-6313-41ef-b264-5a9dfc6be80b|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ea9bcb22</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4f1721793cc2dc847f14be1304132c56697877bd" name="Оболочка|e8e990cb-ccfb-470e-b89a-c525e45a62b7|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">465b6478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="48b755f85f3720f7417d09ea5995b041239bccac" name="Оболочка|767cb4bb-f181-41ec-a787-6e094620f2b0|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6733e478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1bb0e01b005816be1285cf05353374a054239f7f" name="Оболочка|4ecd5b12-660c-4bce-8cf1-07a30e2bf1b3|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">574abff9</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4731a6d26cee18097afac1d45219432306e24e26" name="Оболочка|1b1a0590-9ce8-4591-985b-e91391ecf87f|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ea9bcb22</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="62c60f4d291b68486d67ef070ba1e0ba455b78d1" name="Оболочка|765fbf7f-0506-4d49-a762-c2aeb80fea2d|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">465b6478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="00a05bfc24d6072b155b728e719658950ee9d0f0" name="Оболочка|dc011dcc-c176-4cc2-a802-db623af22a3d|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6733e478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0efe2f8f6b4157a2467cf2994a613b2407734c33" name="Оболочка|d9b7dab6-da5f-4856-9f73-068daa42dc21|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">3be193e3</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7ea123f661f7cadd406d4e983c24811770f7ab8a" name="Оболочка|3b9460b8-d8ae-4ef1-9d58-38e1f7066e0d|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ea9bcb22</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="67d5a56148a5ff4c7f01323b1145025e570f8625" name="Оболочка|d2b6e3b2-799c-498f-9e64-f4f8a3b43e1f|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">465b6478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="714881407fdd039f24a07c72314cb12918eb4874" name="Оболочка|8dbd9ee7-ae5e-4750-9955-b7edcf2aa319|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">6733e478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5293d9430e0cadc678a6aa6d697208e8656dd727" name="Оболочка|6a6ab8c6-34c3-4335-bce6-a8ec3206b84e|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">574abff9</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="298b6a5a47ad35f12841b69c4bc3614b6e71c62e" name="Оболочка|e950643c-e553-480f-921b-499c8b2c4288|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ea9bcb22</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="07aa57b50fb4859000e11baf2cfc1542092653b9" name="Оболочка|3b01e3e8-837d-45a8-917b-d2d5e37a232b|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">465b6478</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="25cde9c4072bea537b21eb9602abadfd442e9738" name="Оболочка|8b486a51-58cf-4ca4-b3c7-0d0f493ee02a|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">259b83db</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0784f13724aa1d2a39cb2a81454881ec54ed945b" name="Оболочка|e0ba6443-8b97-4897-9ea7-35fce32201a6|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">263f365f</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="327ebdfe5a5fcd450ad2dde0786b77bf5d412212" name="Оболочка|4790c639-5792-4818-8137-4fec33393cbd|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">259b83db</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4012da49517e1f14292c7f637f1ddd66361fd58d" name="Оболочка|25a318a3-ef62-4f33-bfa8-fb59226699d7|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">263f365f</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="05e7f98854eacf4758e0c3fa715883110ecf613c" name="Оболочка|bd60714b-f8d0-4f83-998f-64191a4fcaef|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">259b83db</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1c90cb6b3e48e9ce4868e6d540888a30691d17cf" name="Оболочка|821181b0-fee0-47ba-938b-3196d4995294|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">259b83db</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7d9ca2e26e5b44d96db0e8647cc69873167d8336" name="Оболочка|45983d83-b313-435f-a10c-b7ba31a71451|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">263f365f</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="335c211d49232fd82460715713fc5eca0fbe3fa1" name="Оболочка|5bd000cc-e168-4a2e-b665-2d8d2896605c|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">259b83db</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0d2b548c6cfe067b1ded499e7d3ea4651bfa8a80" name="Оболочка|55ef0712-1c40-4177-b570-7f7af0146cbd|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">263f365f</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="01d6fbdf157b97b2628893690d5b45b4166b3583" name="Оболочка|ccf6a7d8-a7dc-4c49-998a-f49d56319760|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">259b83db</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="50fddd0614f990ad5da53a2800e6d7674b09ed9a" name="Оболочка|8df5beba-e5aa-4149-bfc6-3fc42c36e1f1|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c237978b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="34a5603131f15bdc68c6458b58c8dd6e669a05f5" name="Оболочка|28bfc83e-a30c-4184-bc45-df00ae259465|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b5ac132b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="658dded02dba23ef3b8b00823163c5f954b23704" name="Оболочка|deec58e1-36b8-4c36-87a8-c7079b99c11a|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c237978b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6acb5693219bead67fd1243d1873187839bf0177" name="Оболочка|2ebb7ee9-349f-49d4-9f80-0d0daa88aa5b|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b5ac132b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6a56706a0df6e4c127f6772c1aba889b4178a53e" name="Оболочка|abf67ca8-8f3a-4061-965a-6a1115b7d9fc|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c237978b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="44740b8512e7872024278fff65b7dd5245f5dc89" name="Оболочка|f1e01830-ded4-442b-812d-5e2a7358af97|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c237978b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="492abc545ed7fba32e94aca632fbdbcd23d1cac8" name="Оболочка|2a6cc50b-2d00-4a43-91c1-48dc0274ae1e|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b5ac132b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7269ef87256ee73a67dbcd51234fa67c05ebcfab" name="Оболочка|ca37e087-cefa-4a37-8bfa-b0e5e1262643|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c237978b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="45d9a10e3905b51516ec837078c0400f392f2e22" name="Оболочка|c989806f-8611-4445-bd05-ee325ac67ffb|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b5ac132b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7187d7192179d5a457c224b32165227617d2b75d" name="Оболочка|4ee81d89-ae4f-4053-a3d5-6e36e5da83a8|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c237978b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4f46511832a8a1974720520a3cbd19e13151e9cc" name="Оболочка|47c5a5c4-444c-428d-85e1-2ffad91e4363|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c237978b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="35ab1abb3f08d0de58c802a531c1d3c02b65341f" name="Оболочка|bb8370f1-ec57-42c5-b022-e545f282b6b2|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">259b83db</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5a5df2f27ba2b5a9159482f44afad1c376ca4c46" name="Оболочка|b3393f29-520a-4e3b-8e48-f817acacd43d|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">259b83db</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="51eeb6ed5f95ab68767c17a70177b0da4543ca71" name="Оболочка|967a42af-1134-407e-af5f-d81d2c9579c2|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c237978b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0892411c4d8969cb416334ae3a73f43540cc7810" name="Оболочка|b645988d-266a-4a98-8297-690968909994|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c237978b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="38376c2f3cf12bc2320f78392eafc4444e3302d3" name="Оболочка|c52890dc-b7b8-4613-9444-2cbf247f6f3f|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b5ac132b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4ec12a164f28da7d5ec4d9b83e2551b73dc203aa" name="Оболочка|7a065aca-17a1-421e-a144-8d134cca1ed5|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">80b5b304</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0858df0158e5ac6c1957bcdb6c85cc7e070289c5" name="Оболочка|5769a302-7f99-4a7a-b471-53e5f61130d2|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c237978b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0eb170602797e83f73d5d89278d71ec917409994" name="Оболочка|32a1e4cd-8f8f-47a2-aad9-ea99683f4a7e|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b5ac132b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="275bb7e33c86bbe6579a220d6c18dc081e254fc7" name="Оболочка|ec870731-8c74-4dfa-9122-63b1dbb7d052|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">80b5b304</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6c8c4a7a6b2557911b612bbc1d2713eb3b4d984e" name="Оболочка|a12a663d-34d4-4d3d-ae8b-4e8edb63c0ea|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">c237978b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="09acc3552355bcb01e27a84f0138f9625a42a959" name="Оболочка|1349c6fa-cbbb-4ece-9099-8f44a1ddedbd|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b5ac132b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6afc02e45ca5f0f3169801b61d9b8d9d0c16b258" name="Оболочка|d80a2e53-a5e2-41d9-875c-39c8745fdbae|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">80b5b304</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4f3d11d755a3854a411234216259bf0c25486efb" name="Оболочка|1aaf4493-889d-4771-949c-0b86e7522836|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">259b83db</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="53d7981e3feba0e513de5d006cc7ac5f26878e32" name="Оболочка|fd314b8a-768b-49af-93d7-3a7b6ee6b4a0|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">263f365f</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="16db17e906d700344482ae0346b1fb864dc61d2d" name="Оболочка|c2bd9ac1-70c9-45c0-9730-c61e45fb78c5|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">259b83db</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="78835ca83e6d97e76814b41a5bc874b12964665c" name="Оболочка|5f3c9884-aa6b-4f70-a5d0-b88bccd83d04|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">263f365f</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="564cce0b5780cbee6978227552b051502098f46f" name="Оболочка|30bdfe76-c501-4dc1-8f07-ca3151819242|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">259b83db</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="346e970235696a795906918415a2ef1319d1a956" name="Оболочка|7adb761a-b6f9-4710-b0b9-4158a190730e|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a6ec0d36</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1ef2d0bd7063daf81cf7e1f70a2cd6ea1b311941" name="Оболочка|c0029999-7bde-4231-9199-49c6d891a650|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9838cc8e</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="255621ac3d05311b32e633be184b48057f7099a0" name="Оболочка|b6cfeffe-17de-4031-bfc8-4f20a6686267|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a6ec0d36</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="12fc807f5adb13d212f6a10930ffb6d476f7b423" name="Оболочка|b82de377-e019-436d-a940-eaf421015fce|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">80b5b304</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="10340b26623aa84d07fd2d48705cf0076978edba" name="Оболочка|41512745-c06a-4660-8b32-802a4c5f3139|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9ee0d04d</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7d7521d11443f0fc5e82982b6de4cf8e409e1195" name="Оболочка|7a89850b-2bfc-47de-a35a-0e1c3971e763|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">80b5b304</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="370435f07993508f78fa04a272cbbb990f777024" name="Оболочка|f3c44885-3728-4db1-896c-23fe4399eee1|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a6ec0d36</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0fb1fd332d5620f612f6a3dd78d45398225dc217" name="Оболочка|9053a7d8-59a2-4200-a10b-ba2a5036841b|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a6ec0d36</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4ac5f88a2efd8e610d82d44c4816033b7b999f5e" name="Оболочка|dd3eddb2-017a-40c5-af65-1e9ef1624b0b|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a6ec0d36</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="48e97f2563902640763e649f6d3869720e71ba29" name="Оболочка|d01d5b27-e5e5-4299-91b3-3985ce83f224|_.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9838cc8e</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2dd862215cbe150c3ca4ccfb7efc5e1e6dadaee5" name="Специальное оборудование (46)f15f9e3c-9491-430c-9963-acb5b153c3c5_.fbx" link="0"/>
+	</runtimes>
+</asset>

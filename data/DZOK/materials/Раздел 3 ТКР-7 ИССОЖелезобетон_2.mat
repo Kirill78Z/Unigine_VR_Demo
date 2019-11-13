@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="Раздел 3 ТКР-7 ИССОЖелезобетон_2" guid="1a339efa28cfa2115d35f43c5158426b04d3f4ce" base_material="mesh_base">
+	<parameter name="albedo_color">0.505882382 0.517647088 0.4627451 1</parameter>
+</material>

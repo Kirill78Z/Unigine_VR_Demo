@@ -42,6 +42,10 @@ struct LinearPosition
 		this->absLinearPos = absLinearPos;
 	}
 
+	~LinearPosition()
+	{
+		
+	}
 
 	bool isEmpty() {
 		if (splSegment) {
