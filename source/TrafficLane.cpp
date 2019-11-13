@@ -167,124 +167,6 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 
 }
 
-/*void TrafficLane::scanNeighboringLanes(std::list<TrafficLane *> &neighboringLanes)
-{
-	LinearSpan* currentLSLeft = nullptr;
-	LinearSpan* currentLSLeftInverse = nullptr;
-
-
-	LinearSpan* currentLSRight = nullptr;
-	LinearSpan* currentLSRightInverse = nullptr;
-
-
-	for (int s = 0; s < segmentPositions.size(); s++) {
-
-		LinearPosition lp = LinearPosition(segmentPositions[s]);
-
-
-		if (currentLSLeft == nullptr || currentLSRight == nullptr) {
-			//searching for start points of lanes
-			std::list<TrafficLane*>::iterator i = neighboringLanes.begin();
-
-			while (i != neighboringLanes.end()) {//https://stackoverflow.com/a/596180/8020304
-				Position3D pos = (*i)->startOfLane();
-				int checkResult = pos.isInFrontOf(&lp);
-				if (checkResult != 0) {
-					//start of lane founded
-					LinearSpan* ls = nullptr;
-
-					ls = new LinearSpan;
-					ls->start = lp;
-					ls->dataType = DataType::AdditionalLane_;
-					ls->data = (*i);
-
-
-					LinearSpan lsPointingThisLane;
-					lsPointingThisLane.start = (*i)->startOfLaneLinear();
-					lsPointingThisLane.end = (*i)->endOfLaneLinear();//this can be changed if this line ends earler
-					lsPointingThisLane.dataType = this->laneType;
-					lsPointingThisLane.data = this;
-
-					if (checkResult == -1) {
-						assert(currentLSLeft == nullptr);
-						currentLSLeft = ls;
-						currentLSLeftInverse = &lsPointingThisLane;
-						(*i)->lanesToTheRight.append(lsPointingThisLane);
-					}
-					else {
-						assert(currentLSRight == nullptr);
-						currentLSRight = ls;
-						currentLSRightInverse = &lsPointingThisLane;
-						(*i)->lanesToTheLeft.append(lsPointingThisLane);
-					}
-
-
-					neighboringLanes.erase(i++);
-				}
-				else
-				{
-					++i;
-				}
-			}
-		}
-
-		if (currentLSLeft != nullptr || currentLSRight != nullptr) {
-			//searching for end points of lanes
-			Unigine::Vector< LinearSpan*> lanesToSearchEnd;
-			if (currentLSLeft != nullptr)
-				lanesToSearchEnd.append(currentLSLeft);
-			if (currentLSRight != nullptr)
-				lanesToSearchEnd.append(currentLSRight);
-
-			for (int l = 0; l < lanesToSearchEnd.size(); l++) {
-				LinearSpan* ls = lanesToSearchEnd[l];
-				Position3D endPos = ((MainLane*)ls->data)->endOfLane();
-
-				//Position3D test = lp.getPos3D();
-
-				int checkResult = endPos.isInFrontOf(&lp);
-				if (checkResult != 0) {
-					//end of lane founded
-					ls->end = lp;
-
-					if (checkResult == -1) {
-						assert(currentLSLeft == ls);
-						lanesToTheLeft.append(*currentLSLeft);
-						currentLSLeft = nullptr;
-						currentLSLeftInverse = nullptr;
-					}
-					else
-					{
-						assert(currentLSRight == ls);
-						lanesToTheRight.append(*currentLSRight);
-						currentLSRight = nullptr;
-						currentLSRightInverse = nullptr;
-					}
-
-
-
-				}
-
-			}
-
-
-		}
-
-	}
-
-
-	//if we still have currentLSLeft or currentLSRight
-	//then this lane ends earler than neighbor lane
-	if (currentLSLeft) {
-		currentLSLeft->end = endOfLaneLinear();
-		currentLSLeftInverse->end = ;//чтобы найти это значение нужно ???
-		lanesToTheLeft.append(*currentLSLeft);
-	}
-
-
-}
-*/
-
 TrafficLane::~TrafficLane()
 {
 }
@@ -304,9 +186,8 @@ void TrafficLane::update() {
 	for (int i = 0; i < toErase.size(); i++) {
 		//удалить из очеренди на update
 		carriageway->vehicles.erase((*toErase[i])->getMainIterator());
-
-		//нужно пока сохранить объекты, так как на них могут быть ссылки
 		(*toErase[i])->deleteNode();
+		//нужно пока сохранить объекты, так как на них могут быть ссылки
 		carriageway->deletedVehicles.splice(carriageway->deletedVehicles.end(), vehicles, toErase[i]);
 	}
 

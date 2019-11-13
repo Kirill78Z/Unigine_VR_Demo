@@ -106,23 +106,28 @@ public:
 		}
 
 		currLinearPosOnLane = LinearPosition::Null();
+		movingThroughObstacle = LinearPosition::Null();
+		posOnLaneAfterChange = LinearPosition::Null();
+		tempLPosOnLaneChangeTo = LinearPosition::Null();
+		posOnLaneToTheLeft = LinearPosition::Null();
+		posOnLaneToTheRight = LinearPosition::Null();
+
 		changeLaneTrack = Unigine::WorldSplineGraphPtr::Ptr();
 		changeLaneTrackSeg = Unigine::SplineSegmentPtr::Ptr();
-		posOnLaneAfterChange = LinearPosition::Null();
+		
 		trafficLaneChangeTo = nullptr;
-		tempLPosOnLaneChangeTo = LinearPosition::Null();
+		neighborVehiclesLeft = nullptr;
+		neighborVehiclesRight = nullptr;
 
 
 		laneToTheLeft = trafficLane->lanesToTheLeftBegin();
 		laneToTheRight = trafficLane->lanesToTheRightBegin();
-		posOnLaneToTheLeft = LinearPosition::Null();
-		posOnLaneToTheRight = LinearPosition::Null();
+		
 		if (neighborVehiclesLeft)
 			delete[] neighborVehiclesLeft;
 		if (neighborVehiclesRight)
 			delete[] neighborVehiclesRight;
-		neighborVehiclesLeft = nullptr;
-		neighborVehiclesRight = nullptr;
+		
 
 
 		vehicleIterator = trafficLane->getQueueEnd();
@@ -786,7 +791,7 @@ private:
 		double forwardShift = changeLaneDist - transitionDist;
 		if (forwardShift > 0) {
 			bool reachedEnd = result.increaseLinearPos(forwardShift);
-			assert(!reachedEnd);
+			if(reachedEnd) return LinearPosition::Null();//дорога уже заканчивается - не перестраиваться
 		}
 
 
