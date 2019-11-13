@@ -600,9 +600,20 @@ performAction:
 		}
 		else
 		{
-			bool closeToEndOfLane = !trafficLane->getLeadToEndOfRoad() && trafficLane->endOfLaneLinear()
+			bool closeToImmovableObstacle = !trafficLane->getLeadToEndOfRoad() && trafficLane->endOfLaneLinear()
 				.absLinearPos - currLinearPosOnLane.absLinearPos <= needToChangeLaneIfItEndsAfter;
-			bool trafficJam = velocity <= trafficJamVelocity;
+			//bool trafficJam = velocity <= trafficJamVelocity;
+
+			bool closeToPCP = false;
+			double toNextPCP = DBL_MAX;
+			LinearPosition nextPCPLp = lane->getNextObstacle(currLinearPosOnLane, false);//повтор поиска как в getClearDist
+			if (!nextPCPLp.isEmpty()
+				&& nextPCPLp.absLinearPos > currLinearPosOnLane.absLinearPos)//на всякий случай
+			{
+				toNextPCP = nextPCPLp.absLinearPos - currLinearPosOnLane.absLinearPos;
+				closeToPCP = toNextPCP < needToChangeLaneIfItEndsAfter;
+				if (!closeToImmovableObstacle) closeToImmovableObstacle = closeToPCP;//та же логика, что и для конца полосы
+			}
 
 			//start to change lane if possible
 			LinearPosition canChangeLP = LinearPosition::Null();
@@ -614,15 +625,17 @@ performAction:
 			int decision = 0;
 
 			//если впереди пвп или мы проезжаем через него, то никаких перестроений
-			if (!endChangeLanePrevFrame
+			if (!endChangeLanePrevFrame//на всякий случай
 				&& !(obstacleType == ObstacleType::PaymentCollectionPoint
-					|| !movingThroughObstacle.isEmpty())) {
+					|| !movingThroughObstacle.isEmpty()
+					|| toNextPCP < noChangeLaneIfPCPCloser//до пункта сбора оплаты осталось слишком мало места
+					)) {
 				//предпочтительнее перестроиться вправо
 				//TODO: Перестраиваться туда где больше пространства
 				if (laneToTheRight != trafficLane->lanesToTheRightEnd()) {
 					canChangeLP = changeLaneDecision(*laneToTheRight,
 						posOnLaneToTheRight, obstacleType, neighborVehiclesRight,
-						currDynEnv, closeToEndOfLane, trafficJam, changeLaneBehabior, changeLaneDist);
+						currDynEnv, closeToImmovableObstacle, changeLaneBehabior, changeLaneDist);
 					if (!canChangeLP.isEmpty())
 					{
 						decision = 1;
@@ -635,7 +648,7 @@ performAction:
 				if (decision == 0 && laneToTheLeft != trafficLane->lanesToTheLeftEnd()) {
 					canChangeLP = changeLaneDecision(*laneToTheLeft,
 						posOnLaneToTheLeft, obstacleType, neighborVehiclesLeft,
-						currDynEnv, closeToEndOfLane, trafficJam, changeLaneBehabior, changeLaneDist);
+						currDynEnv, closeToImmovableObstacle, changeLaneBehabior, changeLaneDist);
 					if (!canChangeLP.isEmpty())
 					{
 						decision = 1;

@@ -82,6 +82,9 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Ñarriageway* carriageway
 	std::list< TrafficLane*> neighborLanes;
 
 
+	barriers.allocate(obstacles.size());
+
+
 	//get start intensity for all vehicle types
 
 	int n = worldSplineGraph->findProperty("traffic_lane_main");
@@ -107,6 +110,11 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Ñarriageway* carriageway
 			else if (pn == "transition_length_end")
 			{
 				transitionLengthEnd = prop->getParameterDouble(p);
+			}
+			else if(pn == "barriers")
+			{
+				/*prop->getpa
+				Unigine::NodePtr* barriers =  prop->getParameterNode(p);*/
 			}
 			//TODO: Also add speed limit for each vehicle type
 			else
@@ -356,7 +364,13 @@ void TrafficLane::update() {
 
 
 
-				float speedLimit = 30.5556f;//TODO: speed limit
+				float speedLimit = 25.0f;//TODO: speed limit
+				Unigine::String vehTypeName = vehContainer->getName();
+				if (vehTypeName.contains("track", 0) || vehTypeName.contains("bus", 0)) {
+					speedLimit = 19.4444;
+				}
+
+
 
 				Vehicle* vehicle = new Vehicle(carriageway, this,
 					Unigine::NodeDummy::cast(car), speedLimit, startOfLaneLinear());
@@ -408,6 +422,8 @@ void TrafficLane::getNewVehicleVelocity(Vehicle * vehicle, float &velocity, floa
 	else
 	{
 		velocity = vehicle->getVelocityToFitIntoSpan(clearDist);
+		if (velocity > speedLimit)
+			velocity = speedLimit;
 	}
 }
 
@@ -609,7 +625,7 @@ void TrafficLane::getNextAndPrevVehicles(
 
 	bool found = false;
 
-	std::list<Vehicle*>::iterator founded = std::find_if(vehicles.begin(), vehicles.end(), 
+	std::list<Vehicle*>::iterator founded = std::find_if(vehicles.begin(), vehicles.end(),
 		[lp, this](Vehicle* v)
 	{
 		return v->getCurrPosOnLane(this).absLinearPos > lp.absLinearPos;
@@ -617,7 +633,7 @@ void TrafficLane::getNextAndPrevVehicles(
 
 	if (founded != vehicles.end()) {
 		result[1] = founded;
-		if (founded!= vehicles.begin()) {
+		if (founded != vehicles.begin()) {
 			std::list<Vehicle*>::iterator prev = std::prev(founded);
 			result[0] = prev;
 		}

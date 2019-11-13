@@ -134,7 +134,8 @@ struct LinearPosition
 			segStartLinearPos += splSegment->getLength();
 			splSegment = nextSeg;
 
-			assert(this->distOnSplineSeg() < splSegment->getLength());
+			float segLen = splSegment->getLength();
+			assert(this->distOnSplineSeg() < segLen);
 			return false;
 		}
 		else

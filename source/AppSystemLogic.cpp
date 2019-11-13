@@ -3,6 +3,7 @@
 #include "ComponentSystem/ComponentSystem.h"
 #include <UnigineSplash.h>
 #include <UnigineMathLib.h>
+#include <UnigineFileSystem.h>
 
 int AppSystemLogic::init()
 {

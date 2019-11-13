@@ -188,7 +188,7 @@ protected:
 	Unigine::Vector<Unigine::SplineSegmentPtr> segments;
 	Unigine::Vector<LinearPosition> segmentPositions;
 	Unigine::Vector<LinearPosition> obstacles;//Immovable obstacles. Currently it is PaymentCollectionPoint only
-
+	Unigine::Vector<Unigine::NodePtr> barriers;
 	int searchNearestLinearPosAhead(
 		Unigine::Vector<LinearPosition> arr, int first, int last, LinearPosition searchingPos)
 	{

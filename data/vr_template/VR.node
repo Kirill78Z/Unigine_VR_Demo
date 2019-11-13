@@ -2,36 +2,9 @@
 <nodes version="2.7.3.0">
 	<node type="NodeDummy" id="1807330459" name="VR">
 		<transform>0.99999976 -2.3841855e-007 0 0.0 2.3841855e-007 0.99999976 0 0.0 0 0 1 0.0 0 0 0 1.0</transform>
-		<node type="PlayerDummy" id="757766267" name="spawn_point">
-			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
-			<is_oblique_frustum>0</is_oblique_frustum>
-			<data>0 0.000000</data>
-			<properties>
-				<property parent="3cd9deba5d3c5381ff109507c66bde670019b919" guid="2f59f7cad9bc5df72800f52a6ff29928b93b4876">
-					<parameter name="vive_basestation_0">917771756</parameter>
-					<parameter name="vive_basestation_1">1449303410</parameter>
-					<parameter name="vive_controller_0">704167994</parameter>
-					<parameter name="vive_controller_1">2141071959</parameter>
-					<parameter name="vive_teleport_marker">884085613</parameter>
-					<parameter name="vive_teleport_marker_mat">3105dcdd9a8231cf0db5af084675244dd66a3a3b</parameter>
-					<parameter name="vive_obstacles">1953853657</parameter>
-					<parameter name="oculus_warning_message">1290526990</parameter>
-					<parameter name="oculus_success_message">818699807</parameter>
-					<parameter name="oculus_controller_0">238529386</parameter>
-					<parameter name="oculus_controller_1">2080365445</parameter>
-					<parameter name="oculus_teleport_marker">884085613</parameter>
-					<parameter name="oculus_teleport_marker_mat">3105dcdd9a8231cf0db5af084675244dd66a3a3b</parameter>
-					<parameter name="oculus_obstacles">1953853657</parameter>
-					<parameter name="move_speed">20</parameter>
-					<parameter name="acceleration">15</parameter>
-					<parameter name="damping">15</parameter>
-				</property>
-			</properties>
-			<transform>0.99997592 0.0069813062 -9.8254546e-008 0.0 -0.0024566243 0.35189074 0.93603802 0.0 0.0065348013 -0.93601537 0.35189927 0.0 0.027523844 -0.93915486 1.3220505 1.0</transform>
-		</node>
 		<node type="NodeDummy" id="1259061244" name="HTC Vive">
 			<transform>1 0 0 0.0 0 1 0 0.0 0 0 1 0.0 0 0 0 1.0</transform>
-			<node type="NodeReference" id="704167994" name="controller_0">
+			<node type="NodeReference" id="704167994" enabled="0" name="controller_0">
 				<reference>guid://a9f22a948b7fbb481cdb370c9d2909067db3c076</reference>
 				<transform>0.999998452651 -3.02859991953e-016 0 0.0 3.02893502694e-016 0.999997260557 0 0.0 0 0 0.999997914233 0.0 0.0848612818488 -0.689594143799 0.083881341 1.0</transform>
 				<node type="ObjectGui" id="523201013" enabled="0" collider="0" name="menu_btn_caption">
@@ -125,22 +98,22 @@
 					<transform>0.999999284743 -2.84218178506e-014 0 0.0 2.84218415675e-014 0.999997258178 0 0.0 0 0 0.999994039523 0.0 0.0143180757817 -0.049026419769 0.00556900753468 1.0</transform>
 				</node>
 			</node>
-			<node type="NodeReference" id="2141071959" name="controller_1">
+			<node type="NodeReference" id="2141071959" enabled="0" name="controller_1">
 				<reference>guid://a9f22a948b7fbb481cdb370c9d2909067db3c076</reference>
 				<transform>0.99999845 0 0 0.0 0 0.99999726 0 0.0 0 0 0.99999791 0.0 -0.061000001 -0.6833334 0.083881341 1.0</transform>
 			</node>
-			<node type="NodeReference" id="917771756" name="basestation_0">
+			<node type="NodeReference" id="917771756" enabled="0" name="basestation_0">
 				<reference>guid://32c0ab98522f35527a3ec2a98d52db3e087cef55</reference>
 				<transform>0.99999976 0 0 0.0 0 0.99999881 0 0.0 0 0 0.99999976 0.0 -0.26112115 -0.63038027 0.049862765 1.0</transform>
 			</node>
-			<node type="NodeReference" id="1449303410" name="basestation_1">
+			<node type="NodeReference" id="1449303410" enabled="0" name="basestation_1">
 				<reference>guid://32c0ab98522f35527a3ec2a98d52db3e087cef55</reference>
 				<transform>0.99999928 0 0 0.0 0 0.99999928 0 0.0 0 0 0.99999952 0.0 0.23667538 -0.63038027 0.049862765 1.0</transform>
 			</node>
 		</node>
 		<node type="NodeDummy" id="1756049254" enabled="0" name="Oculus">
 			<transform>1 0 0 0.0 0 1 0 0.0 0 0 1 0.0 0 0 0 1.0</transform>
-			<node type="NodeReference" id="238529386" name="oculus_touch_left">
+			<node type="NodeReference" id="238529386" enabled="0" name="oculus_touch_left">
 				<reference>guid://c8f383022b3bfd13b3017498e2d7819d8830167d</reference>
 				<transform>0.99999845 -9.5367278e-007 0 0.0 9.536725e-007 0.99999809 0 0.0 0 0 0.99999845 0.0 -0.12499948 -1.456275 0.096853606 1.0</transform>
 				<node type="ObjectGui" id="132106933" collider="0" name="vr_gui">
@@ -159,11 +132,11 @@
 					<transform>-1.0000007 1.8199279e-006 2.7801095e-008 0.0 -1.8199248e-006 -0.99999964 5.7220395e-006 0.0 2.7811364e-008 5.7220204e-006 0.99999541 0.0 -4.0978193e-008 -0.19224358 9.6857548e-008 1.0</transform>
 				</node>
 			</node>
-			<node type="NodeReference" id="2080365445" name="oculus_touch_right">
+			<node type="NodeReference" id="2080365445" enabled="0" name="oculus_touch_right">
 				<reference>guid://c98f7f78ef069f08002a797a890e935b7368fc2f</reference>
 				<transform>0.9999994 -4.7683685e-007 0 0.0 4.7683685e-007 0.9999994 0 0.0 0 0 0.99999952 0.0 0.12500061 -1.456 0.096910305 1.0</transform>
 			</node>
-			<node type="NodeDummy" id="1290526990" name="warning_message">
+			<node type="NodeDummy" id="1290526990" enabled="0" name="warning_message">
 				<transform>1 0 0 0.0 0 1 0 0.0 0 0 1 0.0 0.060786393 -1.8360749 0.048590973 1.0</transform>
 				<node type="ObjectText" id="915952994" name="object">
 					<font_name>guid://671a9d3da0f30578b529fb38d7e2f421f82fa096</font_name>
@@ -178,7 +151,7 @@
 					<transform>1.0000001 0 0 0.0 0 1.0000001 0 0.0 0 0 1 0.0 -0.48899999 0.044 0 1.0</transform>
 				</node>
 			</node>
-			<node type="NodeDummy" id="818699807" name="success_message">
+			<node type="NodeDummy" id="818699807" enabled="0" name="success_message">
 				<transform>1 0 0 0.0 0 1 0 0.0 0 0 1 0.0 0.060786393 -1.9259943 0.048590973 1.0</transform>
 				<node type="ObjectText" id="795554714" name="object">
 					<font_name>guid://671a9d3da0f30578b529fb38d7e2f421f82fa096</font_name>
@@ -196,12 +169,12 @@
 		</node>
 		<node type="NodeDummy" id="780513947" name="Common">
 			<transform>1 0 0 0.0 0 1 0 0.0 0 0 1 0.0 0 0 0 1.0</transform>
-			<node type="NodeReference" id="884085613" name="teleport_point">
+			<node type="NodeReference" id="884085613" enabled="0" name="teleport_point">
 				<reference>guid://742c9568384905911c0456eb582feec2edfe7876</reference>
 				<transform>1.0000001 0 0 0.0 0 1.0000001 0 0.0 0 0 1 0.0 0 -1.0680258 0.039927505 1.0</transform>
 			</node>
 		</node>
-		<node type="NodeDummy" id="1953853657" name="Obstacles">
+		<node type="NodeDummy" id="1953853657" enabled="0" name="Obstacles">
 			<transform>1.0000001 0 0 0.0 0 1.0000001 0 0.0 0 0 1 0.0 0 0 0 1.0</transform>
 		</node>
 	</node>
@@ -230,19 +203,6 @@
 	</node>
 	<node type="NodeDummy" id="1531025213" name="vr_hotpoints">
 		<transform>1.0000000604 0 0 0.0 0 1.0000000604 0 0.0 0 0 1.0000000004 0.0 0 0 0 1.0</transform>
-		<node type="PlayerDummy" id="267830127" name="vr_hotpoint_-1">
-			<fov>50</fov>
-			<zfar>200000</zfar>
-			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
-			<is_oblique_frustum>0</is_oblique_frustum>
-			<properties>
-				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="54a37a2b199c498e7d8b439532fbbff06021528f">
-					<parameter name="Name">Траффик</parameter>
-					<parameter name="Image">guid://5abc2c7a299fd1917e355dbc0fd99deb2b5a9a4e</parameter>
-				</property>
-			</properties>
-			<transform>0.843653252339 0.531854005564 -0.0733492492642 0.0 -0.374056659581 0.680276076807 0.630320169346 0.0 0.38513594181 -0.50433477785 0.772860513496 0.0 546116.951185 4841423.57517 151.769152744 1.0</transform>
-		</node>
 		<node type="PlayerDummy" id="1811213659" name="vr_hotpoint_4">
 			<fov>50</fov>
 			<zfar>200000</zfar>
@@ -309,6 +269,19 @@
 				</property>
 			</properties>
 			<transform>0.999999701972 0 0 0.0 0 -0.444512036114 0.895771914464 0.0 0 -0.89577185486 -0.444511976509 0.0 0 -8 1.28444118569 1.0</transform>
+		</node>
+		<node type="PlayerDummy" id="267830127" name="vr_hotpoint_-1">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<properties>
+				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="54a37a2b199c498e7d8b439532fbbff06021528f">
+					<parameter name="Name">Траффик</parameter>
+					<parameter name="Image">guid://5abc2c7a299fd1917e355dbc0fd99deb2b5a9a4e</parameter>
+				</property>
+			</properties>
+			<transform>0.843653252339 0.531854005564 -0.0733492790665 0.0 -0.374056659581 0.680276076807 0.63032022895 0.0 0.385135971612 -0.50433477785 0.772860513496 0.0 546116.951185 4841423.57517 151.769152744 1.0</transform>
 		</node>
 	</node>
 </nodes>

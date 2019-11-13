@@ -16,6 +16,9 @@
 #include <UnigineGui.h>
 #include <UnigineEditor.h>
 #include <UnigineGame.h>
+#include <UnigineFileSystem.h>
+#include <UnigineWorlds.h>
+#include <UnigineConsole.h>
  // World logic, it takes effect only when the world is loaded.
  // These methods are called right after corresponding world script's (UnigineScript) methods.
 
@@ -51,11 +54,61 @@ int AppWorldLogic::init() {
 
 
 
-	
-	
+
+
+
+	Unigine::Vector<Unigine::String> splToLoad;
+	Unigine::FileSystem* fs = Unigine::FileSystem::get();
+	Unigine::Vector<Unigine::String> files;
+	fs->getVirtualFiles(files);
+	for (int f = 0; f < files.size(); f++) {
+		Unigine::String fname = files[f];
+		Unigine::String dir = fname.dirname();
+		Unigine::String ext = fname.extension();
+		if (dir == "LoadingSplineGraphs/" && ext == "spl") {
+			splToLoad.append(fname);
+		}
+	}
+
+	if (splToLoad.size() > 0) {
+		//Загрузка сплайнов
+		for (int f = 0; f < splToLoad.size(); f++) {
+			Unigine::String fname = splToLoad[f];
+			Unigine::StringArray<> coordStrs = Unigine::String::split(fname.filename(), "_");
+			if (coordStrs.size() != 3) continue;
+			Unigine::String xstr = coordStrs[0];
+			double x = Unigine::String::atod(xstr);
+			Unigine::String ystr = coordStrs[1];
+			double y = Unigine::String::atod(ystr);
+			Unigine::String zstr = coordStrs[2];
+			double z = Unigine::String::atod(zstr);
+
+			Unigine::WorldSplineGraphPtr splGr = Unigine::WorldSplineGraph::create(fname);
+			//if (splGr->load(fname) != 1) continue;
+			splGr->setName(fname.filename());
+
+			splGr->release();
+			Unigine::Editor::get()->addNode(splGr->getNode(), 0);
+			
+			splGr->setWorldParent(Unigine::NodePtr::Ptr());
+
+			splGr->setWorldPosition(Unigine::Math::dvec3(x, y, z));
+		}
+
+
+		Unigine::Console::get()->run("world_save");
+		Unigine::Console::get()->flush();
+
+	}
+
+
+
+
+
 
 	//traffic
 	trafficSimulation = new TrafficSimulation;
+
 
 
 	return 1;

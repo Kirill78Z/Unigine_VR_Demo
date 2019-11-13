@@ -18,4 +18,5 @@
 	<parameter name="lane_num_from_left_to_right" min="-50" max="50" flags="expand">0</parameter>
 	<parameter name="transition_length_start" type="double" min="0" max="300" flags="max_expand">0</parameter>
 	<parameter name="transition_length_end" type="double" min="0" max="300" flags="max_expand">0</parameter>
+	<parameter name="barriers" type="array"/>
 </property>

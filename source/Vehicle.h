@@ -111,7 +111,7 @@ public:
 		posOnLaneAfterChange = LinearPosition::Null();
 		trafficLaneChangeTo = nullptr;
 		tempLPosOnLaneChangeTo = LinearPosition::Null();
-		
+
 
 		laneToTheLeft = trafficLane->lanesToTheLeftBegin();
 		laneToTheRight = trafficLane->lanesToTheRightBegin();
@@ -147,13 +147,16 @@ private:
 
 	const float timeToWaitOnPaymentCollectionPoint = 0.5;
 
-	const double changeLaneMinDistance = 10;//TODO: Зависимость от скорости?
+	const double changeLaneMinDistance = 10;
+
+	//const double denseTrafficVelocity = 11.111;
 
 	const double trafficJamVelocity = 2.78;
 
-	const double changeLineMinSpaceToPrevVehicle = 30;//TODO: Зависимость от скорости?
+	//const double changeLineMinSpaceToPrevVehicle = 30;//TODO: Зависимость от скорости?
 
-	const double needToChangeLaneIfItEndsAfter = 50;//TODO: Зависимость от скорости?
+	const double needToChangeLaneIfItEndsAfter = 150;//TODO: Зависимость от скорости?
+	const double noChangeLaneIfPCPCloser = 35;
 
 	Сarriageway* carriageway = nullptr;
 	TrafficLane* trafficLane = nullptr;
@@ -310,7 +313,7 @@ private:
 
 #endif
 */
-			neighborLane->getNextAndPrevVehicles(posOnNeighborLane, neighborVehicles);
+		neighborLane->getNextAndPrevVehicles(posOnNeighborLane, neighborVehicles);
 		//}
 	}
 
@@ -329,9 +332,9 @@ private:
 		std::list<Vehicle*>::iterator next = neighborVehiclesOld[1];
 		std::list<Vehicle*>::iterator i_null = neighborLane->getQueueEnd();
 
-		if ((*prev) == nullptr) 
+		if ((*prev) == nullptr)
 			prev = i_null;
-		if((*next) == nullptr) 
+		if ((*next) == nullptr)
 			next = i_null;
 
 
@@ -358,13 +361,13 @@ private:
 		//Это не работает?
 		//Временный итератор может быть удален до окончания
 		if (prev != i_null
-			&& ((*prev)->currentActivity != VehicleActivity::ChangeLane 
+			&& ((*prev)->currentActivity != VehicleActivity::ChangeLane
 				|| (*prev)->vehicleIteratorReplaced)
 			&& prev != (*prev)->vehicleIterator) {
 			prev = (*prev)->vehicleIterator;
 		}
 		if (next != i_null
-			&& ((*next)->currentActivity != VehicleActivity::ChangeLane 
+			&& ((*next)->currentActivity != VehicleActivity::ChangeLane
 				|| (*next)->vehicleIteratorReplaced)
 			&& next != (*next)->vehicleIterator) {
 			next = (*next)->vehicleIterator;
@@ -383,7 +386,7 @@ private:
 			next = i_null;
 
 
-		
+
 
 
 
@@ -427,49 +430,49 @@ private:
 		}
 
 
-//#ifdef DEBUG 
-//		bool shrink = false;
-//#endif
-//		if (next != i_null && prev != i_null) {
-//			
-//
-//			assert(prev != next);
-//
-//			std::list<Vehicle*>::iterator nextnext = std::next(next);
-//			assert(prev != nextnext);
-//			if (nextnext != i_null) {
-//				std::list<Vehicle*>::iterator nextnextnext = std::next(std::next(next));
-//				assert(prev != nextnextnext);
-//			}
-//			
-//#ifdef DEBUG 
-//			int shrinkn = 0;
-//#endif
-//			//убедиться, что между ними нет нового узла
-//			while (prev != std::prev(next))//TODO: проваливается в бесконечный цикл => узлы находятся в разных очередях
-//			{
-//				if ((*prev)->currentActivity != VehicleActivity::ChangeLane)
-//					assert((*prev)->trafficLane == neighborLane);
-//				else
-//					assert((*prev)->trafficLane == neighborLane
-//						|| (*prev)->trafficLaneChangeTo == neighborLane);
-//				if (next != i_null) {
-//					if ((*next)->currentActivity != VehicleActivity::ChangeLane)
-//						assert((*next)->trafficLane == neighborLane);
-//					else
-//						assert((*next)->trafficLane == neighborLane
-//							|| (*next)->trafficLaneChangeTo == neighborLane);
-//				}
-//				
-//
-//
-//				next = std::prev(next);
-//				shrink = true;
-//				shrinkn++;
-//				assert(next != carriageway->deletedTempChangeLaneIts.begin());
-//			}
-//		}
-//		else
+		//#ifdef DEBUG 
+		//		bool shrink = false;
+		//#endif
+		//		if (next != i_null && prev != i_null) {
+		//			
+		//
+		//			assert(prev != next);
+		//
+		//			std::list<Vehicle*>::iterator nextnext = std::next(next);
+		//			assert(prev != nextnext);
+		//			if (nextnext != i_null) {
+		//				std::list<Vehicle*>::iterator nextnextnext = std::next(std::next(next));
+		//				assert(prev != nextnextnext);
+		//			}
+		//			
+		//#ifdef DEBUG 
+		//			int shrinkn = 0;
+		//#endif
+		//			//убедиться, что между ними нет нового узла
+		//			while (prev != std::prev(next))//TODO: проваливается в бесконечный цикл => узлы находятся в разных очередях
+		//			{
+		//				if ((*prev)->currentActivity != VehicleActivity::ChangeLane)
+		//					assert((*prev)->trafficLane == neighborLane);
+		//				else
+		//					assert((*prev)->trafficLane == neighborLane
+		//						|| (*prev)->trafficLaneChangeTo == neighborLane);
+		//				if (next != i_null) {
+		//					if ((*next)->currentActivity != VehicleActivity::ChangeLane)
+		//						assert((*next)->trafficLane == neighborLane);
+		//					else
+		//						assert((*next)->trafficLane == neighborLane
+		//							|| (*next)->trafficLaneChangeTo == neighborLane);
+		//				}
+		//				
+		//
+		//
+		//				next = std::prev(next);
+		//				shrink = true;
+		//				shrinkn++;
+		//				assert(next != carriageway->deletedTempChangeLaneIts.begin());
+		//			}
+		//		}
+		//		else
 
 #ifdef DEBUG 
 		bool next_nextprev = false;
@@ -595,10 +598,11 @@ private:
 	LinearPosition changeLaneDecision(
 		LinearSpan* neighborlaneLS, LinearPosition posOnNeighborLane,
 		ObstacleType obstacleType, std::list<Vehicle*>::iterator* neighborVehicles,
-		float currDynEnv, bool closeToEndOfLane, bool trafficJam, ChangeLaneBehabior& changeLaneBehabior, double& changeLaneDist)
+		float currDynEnv, bool closeToImmovableObstacle, ChangeLaneBehabior& changeLaneBehabior, double& changeLaneDist)
 	{
+		bool trafficJam = velocity < trafficJamVelocity;
 		changeLaneBehabior = ChangeLaneBehabior::Standard;
-		if (closeToEndOfLane || trafficJam)
+		if (closeToImmovableObstacle || trafficJam)
 			changeLaneBehabior = ChangeLaneBehabior::Persistent;
 
 		//if (aggressiveChange)
@@ -690,9 +694,13 @@ private:
 		double clearDist = getClearDist(nextIt, posOnNeighborLane,
 			obstacleTypeNeighborLane, obstacleLPNeighborLane, neighborLane, false);
 
+		if (obstacleTypeNeighborLane == ObstacleType::MovingVehicle
+			&& (*nextIt)->velocity > velocity)
+			changeLaneBehabior = ChangeLaneBehabior::Persistent;
+
 
 		if (obstacleTypeNeighborLane == ObstacleType::MovingVehicle && trafficJam
-			&& (*nextIt)->velocity > trafficJamVelocity*1.5)
+			&& (*nextIt)->velocity > trafficJamVelocity*1.2)
 			changeLaneBehabior = ChangeLaneBehabior::Aggressive;//мы стоим, а соседняя полоса едет
 
 		//уточнить наш динамический габарит и габарит машины сзади
@@ -845,9 +853,8 @@ private:
 
 	}
 
-#ifdef DEBUG
-	//VehicleActivity prevFrameActivity;
 	bool endChangeLanePrevFrame = false;
+#ifdef DEBUG
 	int endChangeLaneCount = 0;
 #endif
 
