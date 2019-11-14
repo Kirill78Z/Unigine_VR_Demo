@@ -103,7 +103,7 @@ void Сarriageway::update() {
 			double t = difftime(ltime, (*it)->reachedEndOfRoadTimeStamp());
 			if (t > 60) {
 				//удалить окончательно
-				//delete (*it);
+				//delete (*it);//TODO: Полноценное удаление объектов приводит к повреждению кучи!!
 				deletedVehicles.erase(++it);
 			}
 			else
