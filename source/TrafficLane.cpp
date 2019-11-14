@@ -32,6 +32,8 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 	segmentPositions.append(startLp);
 	double currLinearPos = prevSeg->getLength();
 	int startSegCount = segments.size();
+
+
 	for (int s = 1; s < startSegCount; s++) {
 		Unigine::SplineSegmentPtr seg = segments[s];
 
@@ -53,6 +55,14 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 						points[prevSegEndIndex - 1], -prevSeg->getEndTangent(), prevSeg->getEndUp(),
 						seg->getStartPoint(), -seg->getStartTangent(), seg->getStartUp());
 				segments.append(closingGapSeg);
+
+				//ось вращения для шлагбаума
+				//TODO: Сделать нормально для множества ПВП
+
+
+				rotationAxis = Unigine::Math::vec3(Unigine::Math::normalize(
+					points[prevSegEndIndex - 1]->getPosition()
+					- seg->getStartPoint()->getPosition()));
 
 				//segmentPositions
 				LinearPosition additionalLp =
@@ -82,9 +92,6 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 	std::list< TrafficLane*> neighborLanes;
 
 
-	barriers.allocate(obstacles.size());
-
-
 	//get start intensity for all vehicle types
 
 	int n = worldSplineGraph->findProperty("traffic_lane_main");
@@ -111,10 +118,44 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 			{
 				transitionLengthEnd = prop->getParameterDouble(p);
 			}
-			else if(pn == "barriers")
+			else if (pn == "barrier")
 			{
-				/*prop->getpa
-				Unigine::NodePtr* barriers =  prop->getParameterNode(p);*/
+				if (obstacles.size() == 1) {
+					//TODO: На случай если ПВП больше одного
+					//Нужно использовать массив ссылок на узлы - https://developer.unigine.com/en/personal/support-ticket/2388
+					barrier = prop->getParameterNode(p);
+					if (barrier) {
+						//определить точку вращения
+						rotationPt = barrier->getParent();
+						if (rotationPt) {
+							Unigine::String parName = rotationPt->getName();
+							if (parName.contains("rotation_point")) {
+								//направление оси вращения завивит от того, с какой стороны находится точка вращения
+								Position3D pcpPos3d = obstacles[0].getPos3D();
+								Unigine::Math::dvec3 p0 = pcpPos3d.absPos;
+								Unigine::Math::dvec3 p1 = pcpPos3d.absPos
+									+ Unigine::Math::dvec3(Unigine::Math::normalize(pcpPos3d.tangent));
+								Unigine::Math::dvec2 v = Unigine::Math::dvec2(p1) - Unigine::Math::dvec2(p0);
+								Unigine::Math::dvec2 w = Unigine::Math::dvec2(rotationPt->getWorldPosition()) - Unigine::Math::dvec2(p0);
+								double cz = v.x*w.y - v.y*w.x;
+								if (cz < 0) {
+									rotationAxis = -rotationAxis;
+								}
+
+								initialTransf = barrier->getTransform();
+							}
+							else {
+								barrier = Unigine::NodePtr::Ptr();
+								rotationPt = Unigine::NodePtr::Ptr();
+							}
+						}
+
+					}
+
+				}
+
+
+
 			}
 			//TODO: Also add speed limit for each vehicle type
 			else
@@ -171,9 +212,35 @@ TrafficLane::~TrafficLane()
 {
 }
 
+using namespace Unigine::Math;
 
 void TrafficLane::update() {
-	//update all vehicles on lane
+	//update barrier
+	if (barrier) {
+		float time = Unigine::Game::get()->getIFps();
+		float thisFrameRotAngle = rotationAngleVelocity * time;
+		if (barrierIsOpened && barrierCurrRotation < 90) {
+			//поднимать до 90 гр
+			if (barrierCurrRotation + thisFrameRotAngle > 90)
+				thisFrameRotAngle = 90 - barrierCurrRotation;
+			barrierCurrRotation += thisFrameRotAngle;
+
+			dmat4 rotM = Unigine::Math::rotate(dvec3(rotationAxis), barrierCurrRotation);
+			barrier->setTransform(rotM*initialTransf);
+		}
+		else if (!barrierIsOpened && barrierCurrRotation > 0)
+		{
+			//опускать до 0 гр
+			if (barrierCurrRotation - thisFrameRotAngle < 0)
+				thisFrameRotAngle = barrierCurrRotation;
+			barrierCurrRotation -= thisFrameRotAngle;
+
+			dmat4 rotM = Unigine::Math::rotate(dvec3(rotationAxis), barrierCurrRotation);
+			barrier->setTransform(rotM*initialTransf);
+		}
+	}
+
+
 	Unigine::Vector<std::list<Vehicle*>::iterator> toErase;
 	std::list<Vehicle*>::iterator it;
 	for (it = vehicles.begin(); it != vehicles.end(); ++it) {

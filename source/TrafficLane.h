@@ -154,15 +154,27 @@ public:
 
 	void deleteTempChangeLaneIt(std::list<Vehicle*>::iterator tempIt) {
 		carriageway->deletedTempChangeLaneIts.splice
-		(carriageway->deletedTempChangeLaneIts.end(),vehicles, tempIt);
+		(carriageway->deletedTempChangeLaneIts.end(), vehicles, tempIt);
+	}
+
+
+	void openBarrier() {
+		barrierIsOpened = true;
+		/*if (barrier) {
+			Unigine::Math::dmat4 rotM = Unigine::Math::rotate(Unigine::Math::dvec3(rotationAxis), 90);
+			barrier->setTransform(rotM*initialTransf);
+		}*/
+
+	}
+
+	void closeBarrier() {
+		barrierIsOpened = false;
+		/*if (barrier) {
+			barrier->setTransform(initialTransf);
+		}*/
 	}
 
 protected:
-
-
-
-
-
 
 	//vehicles
 	Unigine::HashMap<int, float> vehProbability;
@@ -188,7 +200,18 @@ protected:
 	Unigine::Vector<Unigine::SplineSegmentPtr> segments;
 	Unigine::Vector<LinearPosition> segmentPositions;
 	Unigine::Vector<LinearPosition> obstacles;//Immovable obstacles. Currently it is PaymentCollectionPoint only
-	Unigine::Vector<Unigine::NodePtr> barriers;
+
+	//barrier
+	//TODO:Перенести в отдельный класс. На одной полосе может быть несколько ПВП
+	Unigine::NodePtr barrier;
+	Unigine::NodePtr rotationPt;
+	Unigine::Math::dmat4 initialTransf;
+	float barrierCurrRotation = 0;
+	Unigine::Math::vec3 rotationAxis = Unigine::Math::vec3::ZERO;
+	bool barrierIsOpened = false;
+	const float rotationAngleVelocity = 90;
+	//barrier
+
 	int searchNearestLinearPosAhead(
 		Unigine::Vector<LinearPosition> arr, int first, int last, LinearPosition searchingPos)
 	{

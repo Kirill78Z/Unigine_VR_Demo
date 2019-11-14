@@ -752,6 +752,7 @@ performAction:
 					&& currLinearPosOnLane.absLinearPos >= movingThroughObstacle.getSegEndLinearPos()) {
 					//we path through obstacle!
 					movingThroughObstacle = LinearPosition::Null();
+					trafficLane->closeBarrier();
 				}
 			}
 		}
@@ -763,6 +764,8 @@ performAction:
 			currentActivity = VehicleActivity::Wait;
 			timeToWait = timeToWaitOnPaymentCollectionPoint;
 			movingThroughObstacle = obstacleLP;
+
+			trafficLane->openBarrier();
 		}
 	}
 	break;
