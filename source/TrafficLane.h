@@ -209,7 +209,7 @@ protected:
 	float barrierCurrRotation = 0;
 	Unigine::Math::vec3 rotationAxis = Unigine::Math::vec3::ZERO;
 	bool barrierIsOpened = false;
-	const float rotationAngleVelocity = 90;
+	const float rotationAngleVelocity = 360;
 	//barrier
 
 	int searchNearestLinearPosAhead(

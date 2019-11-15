@@ -161,7 +161,7 @@ private:
 	//const double changeLineMinSpaceToPrevVehicle = 30;//TODO: Зависимость от скорости?
 
 	const double needToChangeLaneIfItEndsAfter = 150;//TODO: Зависимость от скорости?
-	const double noChangeLaneIfPCPCloser = 35;
+	const double noChangeLaneIfPCPCloser = 70;
 
 	Сarriageway* carriageway = nullptr;
 	TrafficLane* trafficLane = nullptr;

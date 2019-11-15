@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>ff13278907a538c88c32dc6674871f0212ac61da</guid>
+	<type>material</type>
+	<hash>1ce965f1</hash>
+	<runtimes>
+		<runtime id="ff13278907a538c88c32dc6674871f0212ac61da" name="particles_emission" link="0"/>
+	</runtimes>
+</asset>

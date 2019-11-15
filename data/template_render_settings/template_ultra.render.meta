@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>6e72f2b05827664f66e99f621c5f1759584198e4</guid>
+	<type>render_settings</type>
+	<hash>39ac2a01</hash>
+	<runtimes>
+		<runtime id="6e72f2b05827664f66e99f621c5f1759584198e4" name="template_ultra.render" link="0"/>
+	</runtimes>
+</asset>

@@ -14,21 +14,21 @@ TrafficSimulation::TrafficSimulation()
 #endif // DEBUG
 
 	//find vehicle parking
-	{
-		vehicles = Unigine::NodeDummy::cast(Unigine::Editor::get()->getNodeByName("vehicles"));
-		assert(vehicles);
-	}
+	vehicles = Unigine::NodeDummy::cast(Unigine::Editor::get()->getNodeByName("vehicles"));
 
-	//find all carriageways
-	{
-		Unigine::NodePtr carriagewaysNode = Unigine::Editor::get()->getNodeByName("carriageways");
-		for (int n = 0; n < carriagewaysNode->getNumChildren(); n++) {
-			Unigine::NodePtr node = carriagewaysNode->getChild(n);
-			if (node->getType() != Unigine::Node::NODE_DUMMY) continue;
-			Ñarriageway* cw = new Ñarriageway(this, Unigine::NodeDummy::cast(node));
-			carriageways.append(cw);
+	if (vehicles) {
+		//find all carriageways
+		{
+			Unigine::NodePtr carriagewaysNode = Unigine::Editor::get()->getNodeByName("carriageways");
+			for (int n = 0; n < carriagewaysNode->getNumChildren(); n++) {
+				Unigine::NodePtr node = carriagewaysNode->getChild(n);
+				if (node->getType() != Unigine::Node::NODE_DUMMY) continue;
+				Ñarriageway* cw = new Ñarriageway(this, Unigine::NodeDummy::cast(node));
+				carriageways.append(cw);
+			}
 		}
 	}
+
 
 }
 
