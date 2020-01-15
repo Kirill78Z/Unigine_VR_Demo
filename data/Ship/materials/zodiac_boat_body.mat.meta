@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>009f0700504c4e5f5ecfc83263a209e9535d4a34</guid>
+	<type>material</type>
+	<hash>379f0b82</hash>
+	<runtimes>
+		<runtime id="009f0700504c4e5f5ecfc83263a209e9535d4a34" name="zodiac_boat_body" link="0"/>
+	</runtimes>
+</asset>

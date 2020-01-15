@@ -20,6 +20,7 @@
 #include <UnigineWidgets.h>
 #include <UnigineGui.h>
 #include "TrafficSimulation.h"
+#include "MovementPath.h"
 
 class AppWorldLogic : public Unigine::WorldLogic {
 	
@@ -51,6 +52,8 @@ private:
 	void enableTraffic();
 
 	TrafficSimulation* trafficSimulation;
+
+	Unigine::Vector<MovementPath*> movementPaths;
 };
 
 #endif // __APP_WORLD_LOGIC_H__

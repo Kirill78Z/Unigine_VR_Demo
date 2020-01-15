@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="wall" guid="41b5597b114e809e74186f653eebd9802491fedf" base_material="mesh_base">
+	<parameter name="albedo_color">1 0.521568656 0.458823562 1</parameter>
+</material>

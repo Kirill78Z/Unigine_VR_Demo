@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="railing" guid="3505bea255802d991a0d3a2401c93f332ed07af6" base_material="mesh_base">
+	<parameter name="albedo_color">0.956862807 0.992156923 0 1</parameter>
+</material>

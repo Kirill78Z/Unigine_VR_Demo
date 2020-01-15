@@ -367,11 +367,11 @@ void VRPlayerVR::gui_init() {
 	imageContainer = WidgetHBox::create(gui);
 	imageContainer->setWidth(imageMaxWidth);
 	imageContainer->setHeight(imageMaxHeight);
-	hBox->addChild(imageContainer->getWidget(),Gui::ALIGN_CENTER | Gui::ALIGN_EXPAND);
+	hBox->addChild(imageContainer->getWidget(), Gui::ALIGN_CENTER | Gui::ALIGN_EXPAND);
 
 	//create image
 	image = WidgetSprite::create(gui);
-	
+
 	image->setWidth(imageMaxWidth);
 	image->setHeight(imageMaxHeight);
 	imageContainer->addChild(image->getWidget(), Gui::ALIGN_CENTER);
@@ -1046,14 +1046,16 @@ void VRPlayerVR::push_hand_angular_velocity(int num, const vec3 &velocity)
 //hot points
 void VRPlayerVR::hotpoints_init(const char * hotpoints_name)
 {
+	int pageNum = 0;
+	pages.append(pageNum);
+	pageCount = 1;
+
 
 	Unigine::NodePtr hotpointsNode = Editor::get()->getNodeByName(hotpoints_name);
 	if (hotpointsNode)
 	{
 		int nc = hotpointsNode->getNumChildren();
-		int pageNum = 0;
-		pages.append(pageNum);
-		pageCount = 1;
+
 		for (int c = 0; c < nc; c++) {
 
 			if (pages[pageNum].size() >= btnsOnPageMaxCount) {
@@ -1070,24 +1072,30 @@ void VRPlayerVR::hotpoints_init(const char * hotpoints_name)
 			pages[pageNum].append(hp);
 
 			hotpoints.append(hp);
+		}
+	}
 
-			//find teleport bound
-			/*Unigine::StringArray<> strArr = Unigine::String::split(hpNode->getName(), "_");
-			Unigine::String num = strArr[strArr.size() - 1];
-			for (int i = 0; i < num.size(); i++) {
-				if (!Unigine::String::isdigit(num[i])) continue;
-			}
+	//хотпойнты привязанные к объектам
+	Unigine::Vector<Unigine::NodePtr> hotpoints_binded;
+	Editor::get()->getNodesByName("vr_hotpoint_binded", hotpoints_binded);
 
-			Unigine::String searchStr("teleport_bound");
-			searchStr.append("_");
-			searchStr.append(num);
+	for (Unigine::NodePtr node : hotpoints_binded) {
+		if (node->getType() != Unigine::Node::PLAYER_DUMMY) continue;
 
-			Unigine::NodePtr teleportBoundNode = Editor::get()->getNodeByName(searchStr);
-			if (!teleportBoundNode) continue;
-
-			hp->teleport_bound = teleportBoundNode;*/
+		if (pages[pageNum].size() >= btnsOnPageMaxCount) {
+			//next page
+			pageNum++;
+			pages.append(pageNum);
+			pageCount++;
 		}
 
+		HotPoint* hp = new HotPoint(node, hotpoints.size(), pageNum);//TODO: Проверить индекс
+
+		pages[pageNum].append(hp);
+		hotpoints.append(hp);
+	}
+
+	if (hotpoints.size() > 0) {
 		//set current hotpoint 0
 		setCurrHotpoint(0);
 	}

@@ -19,6 +19,7 @@
 #include <UnigineFileSystem.h>
 #include <UnigineWorlds.h>
 #include <UnigineConsole.h>
+#include <UnigineWorlds.h>
  // World logic, it takes effect only when the world is loaded.
  // These methods are called right after corresponding world script's (UnigineScript) methods.
 
@@ -89,7 +90,7 @@ int AppWorldLogic::init() {
 
 			splGr->release();
 			Unigine::Editor::get()->addNode(splGr->getNode(), 0);
-			
+
 			splGr->setWorldParent(Unigine::NodePtr::Ptr());
 
 			splGr->setWorldPosition(Unigine::Math::dvec3(x, y, z));
@@ -102,14 +103,16 @@ int AppWorldLogic::init() {
 	}
 
 
-
-
-
-
 	//traffic
 	trafficSimulation = new TrafficSimulation;
 
 
+	//simple movement
+	//TODO: отвести для траекторий отдельную специальную папку в world
+	Unigine::WorldSplineGraphPtr test_path = Unigine::WorldSplineGraph
+		::cast(Unigine::Editor::get()->getNodeByName("testPath"));
+	MovementPath* testPath = new MovementPath(test_path);
+	movementPaths.append(testPath);
 
 	return 1;
 }
@@ -130,6 +133,10 @@ void AppWorldLogic::enableTraffic() {
 int AppWorldLogic::update() {
 	// Write here code to be called before updating each render frame: specify all graphics-related functions you want to be called every frame while your application executes.
 	trafficSimulation->update();
+
+	for (MovementPath* path : movementPaths) {
+		path->update();
+	}
 	return 1;
 }
 

@@ -32,12 +32,6 @@
     <ClCompile Include="Vehicle.cpp">
       <Filter>TrafficSimulation</Filter>
     </ClCompile>
-    <ClCompile Include="AdditionalLane.cpp">
-      <Filter>TrafficSimulation\Lanes</Filter>
-    </ClCompile>
-    <ClCompile Include="MainLane.cpp">
-      <Filter>TrafficSimulation\Lanes</Filter>
-    </ClCompile>
     <ClCompile Include="TrafficLane.cpp">
       <Filter>TrafficSimulation\Lanes</Filter>
     </ClCompile>
@@ -46,6 +40,12 @@
     </ClCompile>
     <ClCompile Include="LinearPosition.cpp">
       <Filter>TrafficSimulation\Orientation</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementPath.cpp">
+      <Filter>TrafficSimulation\SimpleMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingObject.cpp">
+      <Filter>TrafficSimulation\SimpleMovement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,12 +77,6 @@
     <ClInclude Include="Vehicle.h">
       <Filter>TrafficSimulation</Filter>
     </ClInclude>
-    <ClInclude Include="AdditionalLane.h">
-      <Filter>TrafficSimulation\Lanes</Filter>
-    </ClInclude>
-    <ClInclude Include="MainLane.h">
-      <Filter>TrafficSimulation\Lanes</Filter>
-    </ClInclude>
     <ClInclude Include="TrafficLane.h">
       <Filter>TrafficSimulation\Lanes</Filter>
     </ClInclude>
@@ -91,6 +85,12 @@
     </ClInclude>
     <ClInclude Include="LinearPosition.h">
       <Filter>TrafficSimulation\Orientation</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementPath.h">
+      <Filter>TrafficSimulation\SimpleMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingObject.h">
+      <Filter>TrafficSimulation\SimpleMovement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +102,9 @@
     </Filter>
     <Filter Include="TrafficSimulation\Orientation">
       <UniqueIdentifier>{b7ab2f8a-17b8-4918-a7a3-b9b7e082c181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TrafficSimulation\SimpleMovement">
+      <UniqueIdentifier>{4a1be524-d7ed-4406-a3cd-87b306f26083}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

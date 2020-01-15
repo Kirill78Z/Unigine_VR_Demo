@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>41b5597b114e809e74186f653eebd9802491fedf</guid>
+	<type>material</type>
+	<hash>300f836b</hash>
+	<runtimes>
+		<runtime id="41b5597b114e809e74186f653eebd9802491fedf" name="wall" link="0"/>
+	</runtimes>
+</asset>

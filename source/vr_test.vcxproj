@@ -123,7 +123,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AdditionalLane.cpp" />
     <ClCompile Include="AppEditorLogic.cpp" />
     <ClCompile Include="AppSystemLogic.cpp" />
     <ClCompile Include="AppWorldLogic.cpp" />
@@ -144,7 +143,8 @@
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="LinearPosition.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainLane.cpp" />
+    <ClCompile Include="MovementPath.cpp" />
+    <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="Position3D.cpp" />
     <ClCompile Include="TrafficLane.cpp" />
     <ClCompile Include="TrafficSimulation.cpp" />
@@ -152,7 +152,6 @@
     <ClCompile Include="Сarriageway.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AdditionalLane.h" />
     <ClInclude Include="AppEditorLogic.h" />
     <ClInclude Include="AppSystemLogic.h" />
     <ClInclude Include="AppWorldLogic.h" />
@@ -173,7 +172,8 @@
     <ClInclude Include="Framework\Triggers.h" />
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="LinearPosition.h" />
-    <ClInclude Include="MainLane.h" />
+    <ClInclude Include="MovementPath.h" />
+    <ClInclude Include="MovingObject.h" />
     <ClInclude Include="Position3D.h" />
     <ClInclude Include="TrafficLane.h" />
     <ClInclude Include="TrafficSimulation.h" />

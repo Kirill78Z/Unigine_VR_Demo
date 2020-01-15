@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="zodiac_boat_body" guid="009f0700504c4e5f5ecfc83263a209e9535d4a34" base_material="mesh_base">
+	<parameter name="albedo_color">0.117647067 0.611764729 0.898039281 1</parameter>
+</material>

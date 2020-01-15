@@ -203,6 +203,19 @@
 	</node>
 	<node type="NodeDummy" id="1531025213" name="vr_hotpoints">
 		<transform>1.0000000604 0 0 0.0 0 1.0000000604 0 0.0 0 0 1.0000000004 0.0 0 0 0 1.0</transform>
+		<node type="PlayerDummy" id="267830127" name="vr_hotpoint_-1">
+			<fov>50</fov>
+			<zfar>200000</zfar>
+			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
+			<is_oblique_frustum>0</is_oblique_frustum>
+			<properties>
+				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="54a37a2b199c498e7d8b439532fbbff06021528f">
+					<parameter name="Name">Траффик</parameter>
+					<parameter name="Image">guid://5abc2c7a299fd1917e355dbc0fd99deb2b5a9a4e</parameter>
+				</property>
+			</properties>
+			<transform>0.395950102563 -0.302862185409 0.866889409233 0.0 -0.210726974053 0.88888125949 0.406794542477 0.0 -0.893764489513 -0.343747308476 0.288131373412 0.0 353.192667977 480.557202939 53.9720074738 1.0</transform>
+		</node>
 		<node type="PlayerDummy" id="1811213659" name="vr_hotpoint_4">
 			<fov>50</fov>
 			<zfar>200000</zfar>
@@ -269,19 +282,6 @@
 				</property>
 			</properties>
 			<transform>0.999999701972 0 0 0.0 0 -0.444512036114 0.895771914464 0.0 0 -0.89577185486 -0.444511976509 0.0 0 -8 1.28444118569 1.0</transform>
-		</node>
-		<node type="PlayerDummy" id="267830127" name="vr_hotpoint_-1">
-			<fov>50</fov>
-			<zfar>200000</zfar>
-			<oblique_frustum_plane>0 0 -1 0</oblique_frustum_plane>
-			<is_oblique_frustum>0</is_oblique_frustum>
-			<properties>
-				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="54a37a2b199c498e7d8b439532fbbff06021528f">
-					<parameter name="Name">Траффик</parameter>
-					<parameter name="Image">guid://5abc2c7a299fd1917e355dbc0fd99deb2b5a9a4e</parameter>
-				</property>
-			</properties>
-			<transform>0.843653252339 0.531854005564 -0.0733492790665 0.0 -0.374056659581 0.680276076807 0.63032022895 0.0 0.385135971612 -0.50433477785 0.772860513496 0.0 546116.951185 4841423.57517 151.769152744 1.0</transform>
 		</node>
 	</node>
 </nodes>

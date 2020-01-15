@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="glass_opacity" guid="236fda686e4a7aa77d64b7da301725710e8fe01c" base_material="mesh_base">
+	<parameter name="albedo_color">0 1 0.870588303 1</parameter>
+</material>

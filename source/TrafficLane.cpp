@@ -1,6 +1,5 @@
 #include "TrafficLane.h"
 #include "Vehicle.h"
-#include "AdditionalLane.h"
 #include <UnigineEditor.h>
 #include <UnigineGame.h>
 #include <algorithm>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<material version="2.7.3.0" name="glass" guid="1bef6b3f05797f9261b099c9144dd8946f21eae3" base_material="mesh_base">
+	<parameter name="albedo_color">1 0 0 1</parameter>
+</material>

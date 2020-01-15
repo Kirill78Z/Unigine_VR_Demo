@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>63843edb1e94667e6d1c5bc509ad1a60461b8a3f</guid>
+	<type>fbx</type>
+	<hash>de904c91</hash>
+	<parameters>
+		<parameter type="bool" name="merge_static_meshes">0</parameter>
+		<parameter type="bool" name="merge_surfaces_by_materials">0</parameter>
+		<parameter type="bool" name="use_instances">1</parameter>
+		<parameter type="bool" name="vertex_cache">1</parameter>
+		<parameter type="bool" name="import_meshes">1</parameter>
+		<parameter type="bool" name="import_materials">1</parameter>
+		<parameter type="bool" name="merge_similar_materials">1</parameter>
+		<parameter type="bool" name="import_textures">1</parameter>
+		<parameter type="bool" name="import_animations">1</parameter>
+		<parameter type="bool" name="import_bones_without_skin">0</parameter>
+		<parameter type="bool" name="create_transform_bones_for_joints">0</parameter>
+		<parameter type="bool" name="joints_reorientation">1</parameter>
+		<parameter type="bool" name="import_lights">1</parameter>
+		<parameter type="bool" name="import_cameras">1</parameter>
+		<parameter type="bool" name="import_tangent_space">0</parameter>
+		<parameter type="bool" name="import_morph_targets">0</parameter>
+		<parameter type="float" name="scale">1</parameter>
+		<parameter type="float" name="fps">30</parameter>
+		<parameter type="string" name="prefix_materials"/>
+		<parameter type="int" name="import_materials_mode">0</parameter>
+		<parameter type="int" name="workflow">0</parameter>
+		<parameter type="int" name="up_axis">0</parameter>
+		<parameter type="int" name="front_axis">0</parameter>
+		<parameter type="bool" name="need_split">0</parameter>
+		<parameter type="bool" name="need_repivot">1</parameter>
+		<parameter type="bool" name="need_triagulate">1</parameter>
+		<parameter type="bool" name="skip_empty_nodes">1</parameter>
+		<parameter type="float" name="bound_size">10000</parameter>
+		<parameter type="float" name="linear_deflection">0.200000003</parameter>
+		<parameter type="float" name="angular_deflection">0.699999988</parameter>
+		<parameter type="bool" name="combine_by_lods">0</parameter>
+		<parameter type="int" name="index_max_count_lods">1</parameter>
+		<parameter type="string" name="lods"/>
+		<parameter type="string" name="animations"/>
+		<parameter type="string" name="material_guids">main_element,62ee340d4089c6083f1d31c76f2ec47a34018991,zodiac_boat_body,009f0700504c4e5f5ecfc83263a209e9535d4a34,interior,70d143f77b42d0ea04eacb4162b02bac3493b31b,railing,3505bea255802d991a0d3a2401c93f332ed07af6,body,352a90f10ce1559c0838744b00f5bd2e2bc7e2b5,element,41ed5e1458ecb2637b3274667655808d5dc3a888,wall,41b5597b114e809e74186f653eebd9802491fedf,floor,1085c1d64c5b0f3d62160778393f24775cca376a,text,2ecbc0150d5d12704c71830f24e195220da11219,glass_opacity,236fda686e4a7aa77d64b7da301725710e8fe01c,glass,1bef6b3f05797f9261b099c9144dd8946f21eae3</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="60f9cc4a23bdcf2167d29e0c5c45c1fb28c6cf1e" name="supply_ship.node" link="1" type="3">
+			<parameters>
+				<parameter type="string" name="id">b90e8f69</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="3efb6be5258dac006328af5f1ba6b53241fa12e9" name="supply_ship_screw_2.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">cef9f4c8</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="126bbf34462a61032888128651cf482d071c8ba8" name="supply_ship_screw_1.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">9b8f152</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1beefae76018bb1a3dc6cfb15e91055c57eae10b" name="zodiak.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ceb05bfe</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4319c2ee71a6ad755b6f60502946b76f6bf37e02" name="interer.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">e71caf2e</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0a3325794ac7108476036213278980560ff2bbbd" name="supply_ship_railing_lod_2.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">f0f3686f</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1804c9f8165e04f7514e9dea1c323441462680ac" name="supply_ship_body_lod_2.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a4e211f2</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="3474041b0698eabe6c489305022f68a07427037f" name="supply_ship_element_lod_2.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b8edac0e</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="0535bad2271b1c0942dbf5d44740e723493da226" name="supply_ship_main_element_lod_2.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">558ee853</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="58e1534d2995dc4811d7d3073e2874ba6928fcd1" name="supply_ship_wall_lod_2.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">cc6c97ae</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="18a80ffc02f22b2b1721468e0f1a1c9532b2c4f0" name="supply_ship_railing_lod_1.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">2796310e</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="456a938f229a6ba207faf699375f6f246d13f033" name="supply_ship_body_lod_1.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">85a1bb52</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2d2177f613f40edd7154c298441d651747733f8a" name="supply_ship_element_lod_1.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b9e1a1d2</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7d142961296ab34c5cb6563b03cfd65e2c944a25" name="supply_ship_main_element_lod_1.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">1531e99b</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="531e75400af2679f7e8e9072125bb52966467c74" name="supply_ship_floor_lod_1.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b02303d</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="2aed7d4345f201c662c3ee6d1a067ce8572fbb27" name="supply_ship_wall_lod_1.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">b18dc854</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="753bfe5a6e9cb9f175036a9c7351854b17019a2e" name="supply_ship_body_lod_0.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">ea6f1b1c</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="19701bb566d779902edf7faf22bf2942320657b9" name="supply_ship_wall_lod_0.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">a1fa5816</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="5ec61dc4647e8e5329ac3f963129f1fd13b00b38" name="supply_ship_text.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">7363733d</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="794fd53706cfb12a22abae81714735ec2094b85b" name="supply_ship_floor_lod_0.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">0ddb5a2e</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="265391fe3ca691455e82d1e02792dbbf38193612" name="supply_ship_glass_opacity.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">3532a954</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="6903de49515353142db82363618d3166453f198d" name="supply_ship_glass.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">09ed06b7</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="63966d886cfeb34742bb57fa5c6a07115d4b153c" name="supply_ship_railing_lod_0.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">18205975</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="7690ef6b62a2bdce1f70aad568057e3007ad7bcf" name="supply_ship_main_element_lod_0.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">8face9bb</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="56c9b6e25f9d48d95fa31c645acb3c733a11d736" name="supply_ship_element_lod_0.mesh" link="2" type="1">
+			<parameters>
+				<parameter type="string" name="id">1b9c622</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="4f5c651d743ea3d818fd555746cbf2ca4d40c3a1" name="supply_ship_screw_2.anim" link="2" type="2">
+			<parameters>
+				<parameter type="string" name="id">3b25d1df</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="1164088c4f972a7b280c1d9e7d4768653e847e80" name="supply_ship_screw_1.anim" link="2" type="2">
+			<parameters>
+				<parameter type="string" name="id">88028dbf</parameter>
+			</parameters>
+		</runtime>
+		<runtime id="63843edb1e94667e6d1c5bc509ad1a60461b8a3f" name="supply_ship.FBX" link="0"/>
+	</runtimes>
+</asset>

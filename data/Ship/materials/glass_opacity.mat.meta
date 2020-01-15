@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>236fda686e4a7aa77d64b7da301725710e8fe01c</guid>
+	<type>material</type>
+	<hash>9ad9571</hash>
+	<runtimes>
+		<runtime id="236fda686e4a7aa77d64b7da301725710e8fe01c" name="glass_opacity" link="0"/>
+	</runtimes>
+</asset>
