@@ -121,7 +121,9 @@ protected:
 
 	void update_gui();
 
-	void update_information();
+	void update_information(int num, int button_pressed);
+
+	void update_teleport_ray_visibility();
 
 	/*Unigine::ObjectPtr objBoundTo;
 
@@ -140,6 +142,27 @@ protected:
 	int teleportation_mask = 1;
 	Unigine::ObjectMeshDynamicPtr teleport_ray;
 	int teleport_button_pressed[CONTROLLER_COUNT];
+
+	//info
+	int info_button_pressed[CONTROLLER_COUNT];
+	Unigine::Vector<Unigine::ObjectPtr> highlightedObjs;
+
+	void highlight(Unigine::ObjectPtr obj) {
+		for (int s = 0; s < obj->getNumSurfaces(); s++) {
+			obj->setMaterialState("auxiliary", 1, s);
+		}
+
+		highlightedObjs.append(obj);
+	}
+
+	void unhighlightAll() {
+		for (Unigine::ObjectPtr obj : highlightedObjs) {
+			for (int s = 0; s < obj->getNumSurfaces(); s++) {
+				obj->setMaterialState("auxiliary", 0, s);
+			}
+		}
+		highlightedObjs.clear();
+	}
 
 	// grabbing
 	Unigine::Vector<int> hand_state;		// status of hand: free, grab, hold, throw, etc.

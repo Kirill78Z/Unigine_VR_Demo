@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>2a258f4e560e4e5574abcbb000806b4f686ce062</guid>
+	<type>property</type>
+	<hash>14512d1</hash>
+	<parameters>
+		<parameter type="bool" name="unchanged">1</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="2a258f4e560e4e5574abcbb000806b4f686ce062" name="data" link="0"/>
+	</runtimes>
+</asset>

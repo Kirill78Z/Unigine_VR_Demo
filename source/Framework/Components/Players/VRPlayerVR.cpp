@@ -586,56 +586,67 @@ void VRPlayerVR::update_gui()
 }
 
 
-
-void VRPlayerVR::update_information() {
-	/*controller_info_btn_down = -1;
-	if (getControllerButtonDown(0, BUTTON::TRIGGER))
-		controller_info_btn_down = 0;
-	if (getControllerButtonDown(1, BUTTON::TRIGGER))
-		controller_info_btn_down = 1;
-
-	if (controller_info_btn_down == -1) return;
-
-	int c = controller_info_btn_down;
-
-	Vec3 p0 = controller[c]->getWorldPosition();
-	mat4 m = mat4(controller[c]->getWorldTransform());
-	Vec3 p1 = controller[c]->getWorldPosition() + Vec3(controller[c]->getWorldDirection(Math::AXIS_Y)) * player->getZFar();
-
-	Vec3 p1_end = p1;
-	ObjectPtr hitObj = World::get()->getIntersection(p0, p1, 2, intersection);
-	if (hitObj)
-	{
-		p1_end = intersection->getPoint();
-	}
-
-
-	teleport_ray->clearVertex();
-	teleport_ray->clearIndices();
-
-	dmat4 transf = teleport_ray->getIWorldTransform();
-	vec3 from = vec3(transf*p0);
-	vec3 to = vec3(transf*p1_end);
-	vec3 from_right = cross(normalize(to - from), vec3(
-		normalize(vec3(transf*head->getWorldPosition()) - from)));
-	vec3 to_right = cross(normalize(to - from), vec3(
-		normalize(vec3(transf*head->getWorldPosition()) - to)));
-
-	addLineSegment(teleport_ray, from, to, from_right, to_right, 0.01f);
-	teleport_ray->updateBounds();
-	teleport_ray->updateTangents();
-	teleport_ray->flushVertex();
-	teleport_ray->flushIndices();
-	teleport_ray->setEnabled(1);*/
-
+void VRPlayerVR::update_teleport_ray_visibility() {
+	teleport_ray->setEnabled(object_gui->isEnabled()
+		|| info_button_pressed[0] || info_button_pressed[1]
+		|| teleport_button_pressed[0] || teleport_button_pressed[1]);
 }
 
 
+void VRPlayerVR::update_information(int num, int button_pressed) {
+	unhighlightAll();
+	// check if nobody using our info ray
+	if (button_pressed &&
+		!info_button_pressed[num] &&
+		info_button_pressed[1 - num]) // if controllers > 2 it doesn't work!
+		return;
+
+	if (!button_pressed && !info_button_pressed[num])
+		return;
+
+	if (object_gui->isEnabled())
+		return;
+
+	int last_button_state = info_button_pressed[num];
+	info_button_pressed[num] = button_pressed;
+
+
+	Vec3 pos1 = controller[num]->getWorldPosition();
+	Vec3 pos2 = controller[num]->getWorldPosition() + Vec3(controller[num]->getWorldDirection(Math::AXIS_Y)) * player->getZFar();
+
+	ObjectPtr hitObj = World::get()->getIntersection(pos1, pos2, teleportation_mask, intersection);
+	if (hitObj) {
+		//highlight obj
+		highlight(hitObj);
+	}
+
+
+
+	// show ray
+	if (button_pressed) {
+		teleport_ray->clearVertex();
+		teleport_ray->clearIndices();
+
+		dmat4 transf = teleport_ray->getIWorldTransform();
+		vec3 from = vec3(transf * pos1);
+		vec3 to = vec3(transf * pos2);
+		vec3 from_right = cross(normalize(to - from), vec3(
+			normalize(vec3(transf*head->getWorldPosition()) - from)));
+		vec3 to_right = cross(normalize(to - from), vec3(
+			normalize(vec3(transf*head->getWorldPosition()) - to)));
+
+		addLineSegment(teleport_ray, from, to, from_right, to_right, 0.01f);
+		teleport_ray->updateBounds();
+		teleport_ray->updateTangents();
+		teleport_ray->flushVertex();
+		teleport_ray->flushIndices();
+		teleport_ray->setEnabled(1);
+	}
+
+
+
+}
 #pragma endregion
-
-
-
-
 
 
 void VRPlayerVR::find_obj_in_children(const NodePtr &node, Vector<ObjectPtr> *obj)
@@ -698,6 +709,9 @@ void VRPlayerVR::teleport_init()
 	// clear array
 	for (int i = 0; i < CONTROLLER_COUNT; i++)
 		teleport_button_pressed[i] = 0;
+
+	for (int i = 0; i < CONTROLLER_COUNT; i++)
+		info_button_pressed[i] = 0;
 }
 
 void VRPlayerVR::teleport_update(int num, int button_pressed, const Vec3 &offset)
