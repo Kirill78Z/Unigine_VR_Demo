@@ -81,6 +81,7 @@ void VRPlayerVive::update()
 		: 0, head_offset);
 
 	move_update(hmd_transform_world);
+
 	collisions_update(hmd_transform_world, head_offset);
 
 	grab_update(0, controller_valid[0], getControllerAxis(0, BUTTON::GRIP), getControllerButtonDown(0, BUTTON::TRIGGER));
@@ -115,8 +116,9 @@ void VRPlayerVive::update()
 		(controller_valid[1] && dpadLeftReleased1),
 		(controller_valid[0] && dpadRightReleased0) ||
 		(controller_valid[1] && dpadRightReleased1)
-		);
+	);
 	update_gui();
+	update_information();
 
 	if (!object_gui->isEnabled())
 		hotpoints_update(
@@ -126,7 +128,7 @@ void VRPlayerVive::update()
 			(controller_valid[1] && dpadRightReleased1));
 	else
 		hotpoints_update(
-			(controller_valid[0] && dpadUpReleased0) ||
+		(controller_valid[0] && dpadUpReleased0) ||
 			(controller_valid[1] && dpadUpReleased1)
 			,
 			(controller_valid[0] && dpadDownReleased0) ||
@@ -143,6 +145,20 @@ void VRPlayerVive::update()
 	dpadRightPressed1 = vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_RIGHT);
 	dpadUpPressed1 = vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_UP);
 	dpadDownPressed1 = vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_DOWN);
+
+
+
+
+	//TODO: добавить трансформацию объекта, к которому привязан если есть
+	//if (objBoundTo)
+	//{
+	//	Unigine::Math::dmat4 oldTransf = objBoundTo->getOldWorldTransform();
+	//	Unigine::Math::dmat4 newTransf = objBoundTo->getWorldTransform();
+	//	if (oldTransf != newTransf) {
+	//		Unigine::Math::dmat4 transfCorrection = Unigine::Math::inverse(oldTransf) * newTransf;
+	//		player->setWorldTransform(transfCorrection * player->getWorldTransform());//вращение относительно положения игрока???
+	//	}
+	//}
 }
 
 void VRPlayerVive::setLock(int lock)

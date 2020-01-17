@@ -180,25 +180,25 @@
 	</node>
 	<node type="NodeDummy" id="189508612" name="vr_teleport_bounds">
 		<transform>1.0000000604 0 0 0.0 0 1.0000000604 0 0.0 0 0 1.0000000004 0.0 0 0 0 1.0</transform>
-		<node type="FieldSpacer" id="704002483" name="teleport_bound_0">
-			<ellipse>0</ellipse>
-			<size>5 10 15</size>
-			<transform>0.999999821186 0 0 0.0 0 0.999999940395 0 0.0 0 0 1 0.0 0 -8 0 1.0</transform>
+		<node id="176319083" type="ObjectMeshDynamic" name="teleport_bound_0">
+			<object_surface name="box" begin="0" end="36"/>
+			<vertex type="float" num_vertex="24" offset="0" size="3">-0.5 -0.5 -0.5 -0.5 -0.5 -0.5 -0.5 -0.5 -0.5 -0.5 -0.5 0.5 -0.5 -0.5 0.5 -0.5 -0.5 0.5 -0.5 0.5 -0.5 -0.5 0.5 -0.5 -0.5 0.5 -0.5 -0.5 0.5 0.5 -0.5 0.5 0.5 -0.5 0.5 0.5 0.5 -0.5 -0.5 0.5 -0.5 -0.5 0.5 -0.5 -0.5 0.5 -0.5 0.5 0.5 -0.5 0.5 0.5 -0.5 0.5 0.5 0.5 -0.5 0.5 0.5 -0.5 0.5 0.5 -0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</vertex>
+			<vertex type="float" num_vertex="24" offset="16" size="4">1 1 1 1 0 1 0 1 1 1 1 1 1 0 1 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 1 0 1 1 1 1 0 0 0 0 0 0 0 0 1 0 1 0 1 1 1 1 0 1 0 1 0 1 0 1 1 0 1 0 1 1 1 1 0 0 0 0 0 0 0 0 0 1 0 1 1 1 1 1 1 0 1 0 0 0 0 0 1 0 1 0</vertex>
+			<vertex type="float" num_vertex="24" offset="32" size="4">-0.5 0.5 0.5 -0.5 -0.707106769 -0 -0 -0.707106769 -0 -1 -0 -0.00100000005 -0.5 0.5 0.5 -0.5 -0.707106769 -0 -0 -0.707106769 -0 -0 -0 -1 -0.5 0.5 0.5 -0.5 -0 -1 -0 -0.00100000005 -0 -0.707106769 -0.707106769 -0.00100000005 -0.5 0.5 0.5 -0.5 -0 -0 -0 -1 -0 -0.707106769 -0.707106769 -0.00100000005 -0.707106769 -0 -0 -0.707106769 -0 -1 -0 -0.00100000005 -0.5 -0.5 -0.5 -0.5 -0.707106769 -0 -0 -0.707106769 -0 -0 -0 -1 -0.5 -0.5 -0.5 -0.5 -0 -1 -0 -0.00100000005 -0 -0.707106769 -0.707106769 -0.00100000005 -0.5 -0.5 -0.5 -0.5 -0 -0 -0 -1 -0 -0.707106769 -0.707106769 -0.00100000005 -0.5 -0.5 -0.5 -0.5</vertex>
+			<vertex type="float" num_vertex="24" offset="48" size="4">1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</vertex>
+			<indices num_indices="36">20 23 17 17 14 20 0 3 9 9 6 0 8 11 22 22 19 8 12 15 4 4 1 12 10 5 16 16 21 10 2 7 18 18 13 2</indices>
+			<surface name="box" intersection_mask="0x80" physics_friction="1" physics_restitution="1" material="25abde1a513196b15547205c10ec400b7b0595ee"/>
+			<transform>6.40976181085 0 0 0.0 0 4.89589434239 0 0.0 0 0 3.30423088693 0.0 -0.108679898563 -7.84809835803 1.17619778861 1.0</transform>
 		</node>
-		<node type="FieldSpacer" id="965739932" name="teleport_bound_1">
-			<ellipse>0</ellipse>
-			<size>10 15 15</size>
-			<transform>0.999999821186 0 0 0.0 0 0.999999940395 0 0.0 0 0 1 0.0 0 8 0 1.0</transform>
+		<node type="ObjectMeshDynamic" id="294192024" name="teleport_bound_1">
+			<reference>176319083</reference>
+			<surface name="box" intersection_mask="0x80" physics_friction="1" physics_restitution="1" material="25abde1a513196b15547205c10ec400b7b0595ee"/>
+			<transform>6.40976181085 0 0 0.0 0 4.89589434239 0 0.0 0 0 3.30423088693 0.0 -0.0451078759792 8.06362896124 1.47129574536 1.0</transform>
 		</node>
-		<node type="FieldSpacer" id="2123714070" name="teleport_bound_2">
-			<ellipse>0</ellipse>
-			<size>30 30 15</size>
-			<transform>0.999999821186 0 0 0.0 0 0.999999940395 0 0.0 0 0 1 0.0 -24 0 0 1.0</transform>
-		</node>
-		<node type="FieldSpacer" id="1392394172" name="teleport_bound_4">
-			<ellipse>0</ellipse>
-			<size>10 10 15</size>
-			<transform>0.999999821181 0 0 0.0 0 0.999999940391 0 0.0 0 0 0.999999999995 0.0 -14.9212384423 -14.6842375822 0 1.0</transform>
+		<node type="ObjectMeshDynamic" id="358526576" name="teleport_bound_2">
+			<reference>176319083</reference>
+			<surface name="box" intersection_mask="0x80" physics_friction="1" physics_restitution="1" material="25abde1a513196b15547205c10ec400b7b0595ee"/>
+			<transform>6.40976181085 0 0 0.0 0 4.89589434239 0 0.0 0 0 3.30423088693 0.0 -23.8329825535 0.154490891878 1.30221389011 1.0</transform>
 		</node>
 	</node>
 	<node type="NodeDummy" id="1531025213" name="vr_hotpoints">
@@ -214,7 +214,7 @@
 					<parameter name="Image">guid://5abc2c7a299fd1917e355dbc0fd99deb2b5a9a4e</parameter>
 				</property>
 			</properties>
-			<transform>0.395950102563 -0.302862185409 0.866889409233 0.0 -0.210726974053 0.88888125949 0.406794542477 0.0 -0.893764489513 -0.343747308476 0.288131373412 0.0 353.192667977 480.557202939 53.9720074738 1.0</transform>
+			<transform>-0.401267701461 0.149641045906 0.903654509996 0.0 -0.494847863603 -0.86561375055 -0.076395486378 0.0 0.770783947153 -0.47782656418 0.421392406306 0.0 1359688.97509 488468.060401 29.0393407866 1.0</transform>
 		</node>
 		<node type="PlayerDummy" id="1811213659" name="vr_hotpoint_4">
 			<fov>50</fov>
@@ -225,7 +225,6 @@
 				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="1b9394f67c4d87dd3515e79846aa46170340ac8a">
 					<parameter name="Name">Точка 5 ДЛИННОЕ НАЗВАНИЕЕЕЕЕЕЕЕ</parameter>
 					<parameter name="Image">guid://67aff1c1368a202c2e901d9b69af363e35ff6885</parameter>
-					<parameter name="Teleport bound">1392394172</parameter>
 				</property>
 			</properties>
 			<transform>0.588822697924 -0.808261621487 1.78813831297e-007 0.0 1.25169681908e-006 1.01327833945e-006 0.999999523158 0.0 -0.808261740696 -0.588822936343 1.5497201744e-006 0.0 1359622.11429 488374.362754 153.136280061 1.0</transform>
@@ -250,7 +249,7 @@
 			<is_oblique_frustum>0</is_oblique_frustum>
 			<properties>
 				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="418295be3748420547e54ba021d58a7f0fdc95d2">
-					<parameter name="Teleport bound">2123714070</parameter>
+					<parameter name="Teleport bound">358526576</parameter>
 				</property>
 			</properties>
 			<transform>-0.432702805561 -0.901535981985 1.0728828741e-006 0.0 1.3411035642e-006 4.76836817143e-007 0.999999284745 0.0 -0.901535683962 0.43270253734 8.94068758584e-007 0.0 -24 0 1.28444662783 1.0</transform>
@@ -264,7 +263,7 @@
 				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="263247d2391c450924410ad40cc0f82300847f26">
 					<parameter name="Name">Точка 2</parameter>
 					<parameter name="Image">guid://07cde814564fb4637e058e664169d28d4877d288</parameter>
-					<parameter name="Teleport bound">965739932</parameter>
+					<parameter name="Teleport bound">294192024</parameter>
 				</property>
 			</properties>
 			<transform>-0.999999523163 1.74845524725e-007 1.04109676613e-006 0.0 1.04109653876e-006 5.96046092483e-008 0.999999344349 0.0 1.74845425249e-007 0.999999046326 5.96045914847e-008 0.0 0 8 1.28443596895 1.0</transform>
@@ -278,7 +277,7 @@
 				<property parent="4da32fe66044060d51917008443cd3c71e55fe7a" guid="7ca71be75f98681a7b3098b144063a5c5efc920b">
 					<parameter name="Name">Точка 1</parameter>
 					<parameter name="Image">guid://5abc2c7a299fd1917e355dbc0fd99deb2b5a9a4e</parameter>
-					<parameter name="Teleport bound">704002483</parameter>
+					<parameter name="Teleport bound">176319083</parameter>
 				</property>
 			</properties>
 			<transform>0.999999701972 0 0 0.0 0 -0.444512036114 0.895771914464 0.0 0 -0.89577185486 -0.444511976509 0.0 0 -8 1.28444118569 1.0</transform>

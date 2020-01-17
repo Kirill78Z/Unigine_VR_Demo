@@ -30,7 +30,7 @@
     <OutDir>$(ProjectDir)../bin/</OutDir>
     <TargetName>$(ProjectName)_x64d</TargetName>
     <LocalDebuggerEnvironment>PATH=$(ProjectDir)../bin/x64;$(ProjectDir)../bin/;%PATH%</LocalDebuggerEnvironment>
-    <LocalDebuggerCommandArguments>-data_path ../ -engine_config "../data/vr_test/unigine.cfg" -console_command "world_load \"vr_test\""</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-data_path ../ -engine_config "../data/vr_test/unigine.cfg" -console_command "world_load \"vr_test\"" -extern_plugin "AppVive"</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <PlatformToolset>v141</PlatformToolset>
@@ -38,7 +38,7 @@
     <OutDir>$(ProjectDir)../bin/</OutDir>
     <TargetName>$(ProjectName)_x64</TargetName>
     <LocalDebuggerEnvironment>PATH=$(ProjectDir)../bin/x64;$(ProjectDir)../bin/;%PATH%</LocalDebuggerEnvironment>
-    <LocalDebuggerCommandArguments>-data_path ../ -engine_config "../data/vr_test/unigine.cfg" -console_command "world_load \"vr_test\""</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-data_path ../ -engine_config "../data/vr_test/unigine.cfg" -console_command "world_load \"vr_test\"" -extern_plugin "AppVive"</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <PlatformToolset>v141</PlatformToolset>
@@ -46,7 +46,7 @@
     <OutDir>$(ProjectDir)../bin/</OutDir>
     <TargetName>$(ProjectName)_x86d</TargetName>
     <LocalDebuggerEnvironment>PATH=$(ProjectDir)../bin/;%PATH%</LocalDebuggerEnvironment>
-    <LocalDebuggerCommandArguments>-data_path ../ -engine_config "../data/vr_test/unigine.cfg" -console_command "world_load \"vr_test\""</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-data_path ../ -engine_config "../data/vr_test/unigine.cfg" -console_command "world_load \"vr_test\"" -extern_plugin "AppVive"</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <PlatformToolset>v141</PlatformToolset>
@@ -54,7 +54,7 @@
     <OutDir>$(ProjectDir)../bin/</OutDir>
     <TargetName>$(ProjectName)_x86</TargetName>
     <LocalDebuggerEnvironment>PATH=$(ProjectDir)../bin/;%PATH%</LocalDebuggerEnvironment>
-    <LocalDebuggerCommandArguments>-data_path ../ -engine_config "../data/vr_test/unigine.cfg" -console_command "world_load \"vr_test\""</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-data_path ../ -engine_config "../data/vr_test/unigine.cfg" -console_command "world_load \"vr_test\"" -extern_plugin "AppVive"</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="PropertySheets">

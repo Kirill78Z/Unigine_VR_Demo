@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.7.3.0">
+	<guid>25abde1a513196b15547205c10ec400b7b0595ee</guid>
+	<type>material</type>
+	<hash>ee83e498</hash>
+	<parameters>
+		<parameter type="bool" name="unchanged">1</parameter>
+	</parameters>
+	<runtimes>
+		<runtime id="25abde1a513196b15547205c10ec400b7b0595ee" name="teleport_bound" link="0"/>
+	</runtimes>
+</asset>

@@ -59,7 +59,7 @@ protected:
 	void save_player_height();
 	void put_head_to_position(const Unigine::Math::mat4 &hmd_transform, const Unigine::Math::Vec3 &pos);
 	void land_player_to(const Unigine::Math::mat4 &hmd_transform, const Unigine::Math::Vec3 &position, const Unigine::Math::vec3 &direction); // teleport player to position, head to direction, foot to ground
-	void move_update(const Unigine::Math::Mat4 &world_head_transform);
+	void move_update(const Unigine::Math::Mat4 &world_head_transform);//добавить параметр - объект, к которому привязан игрок
 	void collisions_update(const Unigine::Math::Mat4 &head_transform, const Unigine::Math::Vec3 &offset);
 
 	void controllers_init();
@@ -121,7 +121,11 @@ protected:
 
 	void update_gui();
 
+	void update_information();
 
+	/*Unigine::ObjectPtr objBoundTo;
+
+	Unigine::Math::dmat4 transfInObjCoordSys;*/
 
 
 	// moving
@@ -180,17 +184,19 @@ protected:
 
 
 	// - hotpoints
-	int cur_hotpoint;
+	int cur_hotpoint = 0;
 
 	void hotpoints_init(const char * hotpoints_name);
 
 	void hotpoints_update(int button_prev, int button_next);
 
 	// bounds
-	UNIGINE_BOUND_BOX teleport_bound_box;
+	//UNIGINE_BOUND_BOX teleport_bound_box;
+	//Unigine::ObjectPtr teleport_bound;
 
 private:
 	int controller_menu_btn_down;
+	int controller_info_btn_down;
 
 	void setCurrHotpoint(int index);
 

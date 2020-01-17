@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<property version="2.7.3.0" manual="1" name="simple_movement_path" guid="2b8404be0294e5050ebb92a00a01257f5cd574d2" parent="1c613bbca0afd78c1ef165fc8e419352c5903d9e">
+	<parameter name="velocity" type="double" min="0" max="100" flags="max_expand">0</parameter>
+	<parameter name="movingObjects" type="array" array_type="node"/>
+	<parameter name="objectStartPositions" type="array" array_type="double" min="0" max="10000" flags="max_expand"/>
+</property>

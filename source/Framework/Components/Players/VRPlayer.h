@@ -42,8 +42,16 @@ struct HotPoint
 
 
 			n = prop->findParameter("Teleport bound");
-			if (n != -1)
-				teleport_bound = prop->getParameterNode(n);
+			if (n != -1) {
+				Unigine::NodePtr node = prop->getParameterNode(n);
+				if (node && node->isObject()) {
+					teleport_bound = Unigine::Object::cast(node);
+					tel_bound_def_transp = teleport_bound->getMaterialParameter("transparent", 0);
+					ShowBound(false);
+				}
+					
+			}
+
 		}
 
 		if (name.size() > 43) {
@@ -56,6 +64,18 @@ struct HotPoint
 
 	}
 
+	void ShowBound(bool show) {
+		if (!teleport_bound) return;
+
+		if (show) {
+			teleport_bound->setMaterialParameter("transparent", tel_bound_def_transp, 0);
+		}
+		else
+		{
+			teleport_bound->setMaterialParameter("transparent", Unigine::Math::vec4(0.0), 0);
+		}
+	}
+
 	int _index;
 
 	int _pageNum;
@@ -66,7 +86,9 @@ struct HotPoint
 
 	Unigine::NodePtr hotpoint;
 
-	Unigine::NodePtr teleport_bound;
+	Unigine::ObjectPtr teleport_bound;
+
+	Unigine::Math::vec4 tel_bound_def_transp = Unigine::Math::vec4::ZERO;
 
 	Unigine::WidgetButtonPtr toggle;
 

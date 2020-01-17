@@ -32,7 +32,7 @@ ivec2 getScreenPosition(const NodePtr &node, const CameraPtr &cam)
 
 ivec2 getScreenPosition(const Vec3 &point, const CameraPtr &cam)
 {
-	float width =  static_cast<float>(App::get()->getWidth());
+	float width = static_cast<float>(App::get()->getWidth());
 	float height = static_cast<float>(App::get()->getHeight());
 
 	mat4 projection = cam->getProjection();
@@ -53,7 +53,7 @@ Vec3 getCameraLookPoint(const PlayerPtr &player, float maxDist)
 {
 	Vec3 p0 = player->getWorldPosition();
 	Vec3 p1 = p0 + Vec3(player->getWorldDirection()) * maxDist;
-	
+
 	WorldIntersectionPtr intersection = WorldIntersection::create();
 	ObjectPtr hitObj = World::get()->getIntersection(p0, p1, 1, intersection);
 	if (hitObj)
@@ -86,7 +86,7 @@ NodePtr getChildNodeRecursively(const NodePtr &node, const std::string &name)
 	else
 	{
 		// go deeper
-		for (int i = 0; i<node->getNumChildren(); ++i)
+		for (int i = 0; i < node->getNumChildren(); ++i)
 		{
 			NodePtr r = getChildNodeRecursively(node->getChild(i), name);
 			if (r)
@@ -176,7 +176,7 @@ float linearRegression(const Vector<float> &values)
 
 	float yintercept = meanY - ((sCo / ssX) * meanX);
 	float slope = sCo / ssX;
-	
+
 	return slope * values.size() + yintercept;
 }
 
@@ -266,7 +266,7 @@ void setDirection(const NodePtr &node, bool local, const vec3 &dir, const vec3 &
 	mat3 rotation = mat3(local ? node->getTransform() : node->getWorldTransform());
 	orthonormalize(rotate, rotation);
 	mul(scale, transpose(rotate), rotation);
-	vec3 x, y, z = normalize(dir); 
+	vec3 x, y, z = normalize(dir);
 	x = y = z;
 	cross(ret0 == X ? x : (ret0 == Y ? y : z), v00 == X ? x : (v00 == Y ? y : (v00 == Z ? z : up)), v01 == X ? x : (v01 == Y ? y : (v01 == Z ? z : up))).normalize();
 	cross(ret1 == X ? x : (ret1 == Y ? y : z), v10 == X ? x : (v10 == Y ? y : (v10 == Z ? z : up)), v11 == X ? x : (v11 == Y ? y : (v11 == Z ? z : up))).normalize();
@@ -284,7 +284,7 @@ void setDirection(const NodePtr &node, bool local, const vec3 &dir, const vec3 &
 void setDirectionX(const NodePtr &node, const vec3 &dir, const vec3 &up) { setDirection(node, true, dir, up, Y, UP, X, Z, X, Y); }
 void setDirectionY(const NodePtr &node, const vec3 &dir, const vec3 &up) { setDirection(node, true, dir, up, X, Y, UP, Z, X, Y); }
 void setDirectionZ(const NodePtr &node, const vec3 &dir, const vec3 &up) { setDirection(node, true, dir, up, X, UP, Z, Y, Z, X); }
-void setDirectionNX(const NodePtr &node, const vec3 &dir, const vec3 &up) {	setDirection(node, true, -dir, up, Y, UP, X, Z, X, Y); }
+void setDirectionNX(const NodePtr &node, const vec3 &dir, const vec3 &up) { setDirection(node, true, -dir, up, Y, UP, X, Z, X, Y); }
 void setDirectionNY(const NodePtr &node, const vec3 &dir, const vec3 &up) { setDirection(node, true, -dir, up, X, Y, UP, Z, X, Y); }
 void setDirectionNZ(const NodePtr &node, const vec3 &dir, const vec3 &up) { setDirection(node, true, -dir, up, X, UP, Z, Y, Z, X); }
 void setWorldDirectionX(const NodePtr &node, const vec3 &dir, const vec3 &up) { setDirection(node, false, dir, up, Y, UP, X, Z, X, Y); }
@@ -464,13 +464,25 @@ void setBoneRotation(ObjectMeshSkinnedPtr &skin, int boneNum, const quat &rot, c
 	skin->setBoneChildrenTransform(boneNum, transform);
 }
 
-void addLineSegment(const ObjectMeshDynamicPtr &mesh, const vec3 &from, const vec3 &to, const vec3 &from_right, const vec3 &to_right, float width)
+void addLineSegment(const ObjectMeshDynamicPtr &mesh, const vec3 &from, const vec3 &to,
+	const vec3 &from_right, const vec3 &to_right, float width)
 {
-	mesh->addTriangleQuads(1);
+	mesh->addTriangleQuads(2);
 	vec3 p0 = from - from_right * width * 0.5f;	// 0, 0
 	vec3 p1 = from + from_right * width * 0.5f;  // 1, 0
 	vec3 p2 = to + to_right * width * 0.5f;	// 1, 1
 	vec3 p3 = to - to_right * width * 0.5f;	// 0, 1
+	mesh->addVertex(p0); mesh->addTexCoord(vec4(0, 0, 0, 0));
+	mesh->addVertex(p1); mesh->addTexCoord(vec4(1, 0, 0, 0));
+	mesh->addVertex(p2); mesh->addTexCoord(vec4(1, 1, 0, 0));
+	mesh->addVertex(p3); mesh->addTexCoord(vec4(0, 1, 0, 0));
+
+	vec3 forward = (to - from).normalize();
+	vec3 up = normalize(cross(to_right, forward));
+	p0 = from - up * width * 0.5f;	// 0, 0
+	p1 = from + up * width * 0.5f;  // 1, 0
+	p2 = to + up * width * 0.5f;	// 1, 1
+	p3 = to - up * width * 0.5f;	// 0, 1
 	mesh->addVertex(p0); mesh->addTexCoord(vec4(0, 0, 0, 0));
 	mesh->addVertex(p1); mesh->addTexCoord(vec4(1, 0, 0, 0));
 	mesh->addVertex(p2); mesh->addTexCoord(vec4(1, 1, 0, 0));
@@ -530,7 +542,7 @@ vec3 getOffsetToBoundBox(const vec3 &point, const vec3 &bound_min, const vec3 &b
 
 	if (point.z > bound_max.z) result.z = bound_max.z - point.z;
 	else if (point.z < bound_min.z) result.z = bound_min.z - point.z;
-	
+
 	return result;
 }
 

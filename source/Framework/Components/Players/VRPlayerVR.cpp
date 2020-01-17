@@ -127,7 +127,7 @@ void VRPlayerVR::put_head_to_position(const mat4 &hmd_transform, const Vec3 &pos
 		player_transform.getTranslate() - hmd_transform_world.getTranslate();
 	head_offset.z = player_height;
 
-	player->setPosition(pos + head_offset);
+	player->setWorldPosition(pos + head_offset);
 }
 
 void VRPlayerVR::land_player_to(const mat4 &hmd_transform, const Vec3 &position, const vec3 &direction)
@@ -138,7 +138,7 @@ void VRPlayerVR::land_player_to(const mat4 &hmd_transform, const Vec3 &position,
 	dir = normalize(dir);
 	quat rot = conjugate(quat(lookAt(Vec3(0, 0, 0), Vec3(dir), vec3(0, 0, 1))));
 	vec3 angles = decomposeRotationYXZ(mat3(hmd_transform));
-	player->setRotation(rot * quat(0.0f, -angles.y, 0.0f));
+	player->setWorldRotation(rot * quat(0.0f, -angles.y, 0.0f));
 
 	// move player
 	Mat4 player_transform = player->getWorldTransform();
@@ -152,9 +152,20 @@ void VRPlayerVR::land_player_to(const mat4 &hmd_transform, const Vec3 &position,
 	Vec3 pos2 = position + Vec3(0, 0, -1) * player->getZFar();
 	ObjectPtr hitObj = World::get()->getIntersection(pos1, pos2, teleportation_mask, intersection);
 	if (hitObj)
-		player->setPosition(intersection->getPoint() + head_offset);
+		player->setWorldPosition(intersection->getPoint() + head_offset);
 
-
+	//привязать игрока к объекту
+	if (hitObj) {
+		player->setWorldParent(hitObj->getNode());
+		if (object_gui)
+			object_gui->setWorldParent(hitObj->getNode());
+	}
+	else
+	{
+		player->setWorldParent(Unigine::NodePtr::Ptr());
+		if (object_gui)
+			object_gui->setWorldParent(Unigine::NodePtr::Ptr());
+	}
 }
 
 void VRPlayerVR::move_update(const Mat4 &world_head_transform)
@@ -179,7 +190,7 @@ void VRPlayerVR::move_update(const Mat4 &world_head_transform)
 			}
 			vec3 move_dir = head_dir * vec3(lx, 0, -ly);
 			move_dir.z = 0;
-			player->setPosition(player->getPosition() + Vec3(move_dir) * ifps);
+			player->setWorldPosition(player->getPosition() + Vec3(move_dir) * ifps);
 		}
 		else
 			is_moving = false;
@@ -201,8 +212,8 @@ void VRPlayerVR::move_update(const Mat4 &world_head_transform)
 				quat rot = quat(0, 0, -Math::sign(rx) * 75.0f * step);
 				Vec3 offset0 = world_head_transform.getTranslate() - player->getWorldPosition();
 				Vec3 offset1 = rot * offset0;
-				player->setPosition(player->getPosition() + offset0 - offset1);
-				player->setRotation(rot * player->getRotation());
+				player->setWorldPosition(player->getPosition() + offset0 - offset1);
+				player->setWorldRotation(rot * player->getRotation());
 
 				// apply rotation to moving too
 				head_dir = rot * head_dir;
@@ -237,7 +248,7 @@ void VRPlayerVR::collisions_update(const Mat4 &head_transform, const Vec3 &offse
 		if (trigger_timer > black_screen_max_sec)
 		{
 			// teleport to last point, where was no collisions
-			player->setPosition(before_collision_point - before_collision_dir + offset);
+			player->setWorldPosition(before_collision_point - before_collision_dir + offset);
 		}
 	}
 	else
@@ -301,7 +312,8 @@ void VRPlayerVR::gui_init() {
 
 	object_gui->setIntersectionMask(2, 0);
 
-
+	if (player)
+		object_gui->setWorldParent(player->getParent());
 
 
 	gui = object_gui->getGui();
@@ -555,10 +567,13 @@ void VRPlayerVR::update_gui()
 
 	teleport_ray->clearVertex();
 	teleport_ray->clearIndices();
-	vec3 from = vec3(p0);
-	vec3 to = vec3(p1_end);
-	vec3 from_right = cross(normalize(to - from), vec3(normalize(head->getWorldPosition() - p0)));
-	vec3 to_right = cross(normalize(to - from), vec3(normalize(head->getWorldPosition() - p1_end)));
+	dmat4 transf = teleport_ray->getIWorldTransform();
+	vec3 from = vec3(transf*p0);
+	vec3 to = vec3(transf*p1_end);
+	vec3 from_right = cross(normalize(to - from), vec3(
+		normalize(vec3(transf*head->getWorldPosition()) - from)));
+	vec3 to_right = cross(normalize(to - from), vec3(
+		normalize(vec3(transf*head->getWorldPosition()) - to)));
 	addLineSegment(teleport_ray, from, to, from_right, to_right, 0.01f);
 	teleport_ray->updateBounds();
 	teleport_ray->updateTangents();
@@ -571,6 +586,49 @@ void VRPlayerVR::update_gui()
 }
 
 
+
+void VRPlayerVR::update_information() {
+	/*controller_info_btn_down = -1;
+	if (getControllerButtonDown(0, BUTTON::TRIGGER))
+		controller_info_btn_down = 0;
+	if (getControllerButtonDown(1, BUTTON::TRIGGER))
+		controller_info_btn_down = 1;
+
+	if (controller_info_btn_down == -1) return;
+
+	int c = controller_info_btn_down;
+
+	Vec3 p0 = controller[c]->getWorldPosition();
+	mat4 m = mat4(controller[c]->getWorldTransform());
+	Vec3 p1 = controller[c]->getWorldPosition() + Vec3(controller[c]->getWorldDirection(Math::AXIS_Y)) * player->getZFar();
+
+	Vec3 p1_end = p1;
+	ObjectPtr hitObj = World::get()->getIntersection(p0, p1, 2, intersection);
+	if (hitObj)
+	{
+		p1_end = intersection->getPoint();
+	}
+
+
+	teleport_ray->clearVertex();
+	teleport_ray->clearIndices();
+
+	dmat4 transf = teleport_ray->getIWorldTransform();
+	vec3 from = vec3(transf*p0);
+	vec3 to = vec3(transf*p1_end);
+	vec3 from_right = cross(normalize(to - from), vec3(
+		normalize(vec3(transf*head->getWorldPosition()) - from)));
+	vec3 to_right = cross(normalize(to - from), vec3(
+		normalize(vec3(transf*head->getWorldPosition()) - to)));
+
+	addLineSegment(teleport_ray, from, to, from_right, to_right, 0.01f);
+	teleport_ray->updateBounds();
+	teleport_ray->updateTangents();
+	teleport_ray->flushVertex();
+	teleport_ray->flushIndices();
+	teleport_ray->setEnabled(1);*/
+
+}
 
 
 #pragma endregion
@@ -621,6 +679,10 @@ void VRPlayerVR::teleport_init()
 
 	// ray init
 	teleport_ray = ObjectMeshDynamic::create();
+
+
+	teleport_ray->setWorldParent(player->getNode());
+
 	for (int i = 0; i < teleport_ray->getNumSurfaces(); i++)
 	{
 		teleport_ray->setMaterial(teleport_marker_mat.get(), i);
@@ -665,13 +727,28 @@ void VRPlayerVR::teleport_update(int num, int button_pressed, const Vec3 &offset
 		{
 			bool inside_bound = true;
 
-			if (teleport_bound_box.isValid())
-				inside_bound = teleport_bound_box.inside(intersection->getPoint(), UNIGINE_EPSILON);
+			Unigine::Math::dvec3 hitPt = intersection->getPoint();
+
+			if (hotpoints.size() > 0 && hotpoints[cur_hotpoint]->teleport_bound) {
+				//inside_bound = teleport_bound_box.inside(intersection->getPoint(), UNIGINE_EPSILON);
+				Unigine::Math::dvec3 auxPt1 = hitPt + Vec3(0, 0, 1);
+				Unigine::Math::dvec3 auxPt2 = hitPt + Vec3(0, 0, -1);
+
+				hotpoints[cur_hotpoint]->teleport_bound->setIntersectionMask(128, 0);
+				hotpoints[cur_hotpoint]->teleport_bound->setIntersection(1, 0);
+				Unigine::WorldIntersectionPtr intersectionAux = Unigine::WorldIntersection::create();
+				ObjectPtr o1 = World::get()->getIntersection(hitPt, auxPt1, 128, intersectionAux);
+				ObjectPtr o2 = World::get()->getIntersection(hitPt, auxPt2, 128, intersectionAux);
+				inside_bound = o1 || o2;
+
+				hotpoints[cur_hotpoint]->ShowBound(!inside_bound);
+			}
+
 
 			// show marker
 			if (button_pressed == 1)
 			{
-				pos2 = intersection->getPoint() + Vec3(0, 0, 0.1f);
+				pos2 = hitPt + Vec3(0, 0, 0.1f);
 				teleport_marker->setWorldPosition(pos2);
 				teleport_marker->setEnabled(1);
 
@@ -683,14 +760,25 @@ void VRPlayerVR::teleport_update(int num, int button_pressed, const Vec3 &offset
 			// teleport!
 			if (button_pressed == 0 && last_button_state == 1)
 			{
-				if (inside_bound)
-					player->setPosition(intersection->getPoint() + offset);
+				if (inside_bound) {
+					player->setWorldPosition(hitPt + offset);
+
+					//привязать игрока к объекту
+					player->setWorldParent(hitObj->getNode());
+					if (object_gui)
+						object_gui->setWorldParent(hitObj->getNode());
+				}
+
 				teleport_marker->setEnabled(0);
+				if (hotpoints.size() > 0)
+					hotpoints[cur_hotpoint]->ShowBound(false);
 			}
 		}
 		else
 		{
 			teleport_marker->setEnabled(0);
+			if (hotpoints.size() > 0)
+				hotpoints[cur_hotpoint]->ShowBound(false);
 		}
 	}
 
@@ -703,10 +791,13 @@ void VRPlayerVR::teleport_update(int num, int button_pressed, const Vec3 &offset
 		int num = 30;	// num of quads
 		float inum = 1.0f / num;
 
-		Vec3 last_p = pos1;
+
+		dmat4 transf = teleport_ray->getIWorldTransform();
+		Vec3 last_p = transf * pos1;
+
 		for (int i = 1; i <= num; i++)
 		{
-			Vec3 p = getHermiteSpline(pos1, pos1, pos2, pos2 + Vec3(0, 0, -3), inum * i);
+			Vec3 p = getHermiteSpline(transf * pos1, transf * pos1, transf * pos2, transf * (pos2 + Vec3(0, 0, -3)), inum * i);
 			addLineSegment(teleport_ray, vec3(last_p), vec3(p), 0.025f);
 			last_p = p;
 		}
@@ -1104,6 +1195,9 @@ void VRPlayerVR::hotpoints_init(const char * hotpoints_name)
 
 void VRPlayerVR::setCurrHotpoint(int index)
 {
+	if (hotpoints.size() > 0)
+		hotpoints[cur_hotpoint]->ShowBound(false);
+
 	cur_hotpoint = index;
 
 	HotPoint* hotpoint = hotpoints[cur_hotpoint];
@@ -1121,13 +1215,8 @@ void VRPlayerVR::setCurrHotpoint(int index)
 	landPlayerTo(hpNode->getWorldPosition(), hpNode->getWorldDirection());
 	//hotpoint_button_pressed = 0;
 
-	if (hotpoint->teleport_bound) {
-		teleport_bound_box = hotpoint->teleport_bound->getWorldBoundBox();
-	}
-	else
-	{
-		teleport_bound_box = Unigine::WorldBoundBox(dvec3::ZERO, dvec3(-1, -1, -1));
-	}
+	//teleport_bound = hotpoint->teleport_bound;
+
 
 	if (object_gui)
 		object_gui->setWorldTransform(gui_near_eyes_pos() * guiLocalTransf);
