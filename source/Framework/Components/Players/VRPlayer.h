@@ -49,7 +49,7 @@ struct HotPoint
 					tel_bound_def_transp = teleport_bound->getMaterialParameter("transparent", 0);
 					ShowBound(false);
 				}
-					
+
 			}
 
 		}
@@ -217,7 +217,7 @@ protected:
 	Unigine::NodeDummyPtr head;
 	GRAB_MODE grab_mode = GRAB_MODE::BOUNDBOX;
 
-	// gui
+	// navigation gui
 	Unigine::GuiPtr gui;
 	Unigine::WidgetSpritePtr background;
 	Unigine::WidgetGridBoxPtr hBox;
@@ -236,6 +236,24 @@ protected:
 
 	Unigine::WidgetHBoxPtr imageContainer;
 	Unigine::WidgetSpritePtr image;
+
+
+	//info gui
+	const int info_gui_width = 1;
+	const int info_gui_height = 1;
+	const int info_gui_width_pixel = info_gui_width * 1000;
+	const int info_gui_height_pixel = info_gui_height * 1000;
+
+	Unigine::GuiPtr info_gui;
+	Unigine::WidgetSpritePtr info_background;
+
+	Unigine::WidgetLabelPtr info_text;
+	Unigine::WidgetVBoxPtr infoVBox;
+	Unigine::WidgetSpritePtr infoImage;
+	Unigine::ImagePtr currentImg;
+	Unigine::HashMap<unsigned int, Unigine::ImagePtr> cashedImgs;
+	bool prev_show_info = false;
+
 
 	Unigine::Vector<HotPoint*> hotpoints;
 

@@ -34,6 +34,7 @@ public:
 	void vibrateController(int controller_num, float amplitude = 1.0f) override;
 
 	Unigine::Math::Mat4 gui_near_eyes_pos() override;
+	Unigine::Math::Mat4 info_gui_pos();
 
 protected:
 	// main loop

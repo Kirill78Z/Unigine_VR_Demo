@@ -104,6 +104,9 @@ protected:
 	void set_image(Unigine::ImagePtr img);
 	Unigine::ObjectGuiPtr object_gui;
 
+	Unigine::ObjectGuiPtr info_object_gui;
+
+
 	int imageMaxWidth;
 	int imageMaxHeight;
 

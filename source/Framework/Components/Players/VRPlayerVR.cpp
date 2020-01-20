@@ -292,13 +292,7 @@ void VRPlayerVR::controllers_init()
 
 
 void VRPlayerVR::gui_init() {
-
-	// find gui on left controller
-	int gui_index = controller[0]->findChild("vr_gui");
-	if (gui_index == -1)
-		Log::error("VRPlayerVR::controllers_init(): Node \"vr_gui\" does not exist in the left controller!\n");
-
-
+#pragma region Navigation gui
 	// GUI near eyes
 	//ObjectGui::cast(controller[0]->getChild(gui_index))->setEnabled(0);
 
@@ -397,6 +391,54 @@ void VRPlayerVR::gui_init() {
 	if (pageCount == 1) {
 		nextPageBtn->setEnabled(0);
 	}
+#pragma endregion
+
+#pragma region Information gui
+	info_object_gui = ObjectGui::create(info_gui_width, info_gui_height);
+	info_object_gui->setScreenSize(info_gui_width_pixel, info_gui_height_pixel);
+	info_object_gui->setBackground(0);
+	info_object_gui->setMouseMode(ObjectGui::MOUSE_VIRTUAL);
+	info_object_gui->setEnabled(0);
+
+	info_object_gui->setDepthTest(0);
+
+	info_object_gui->setIntersectionMask(2, 0);
+
+	if (player)
+		info_object_gui->setWorldParent(player->getParent());
+
+	info_gui = info_object_gui->getGui();
+
+	// create background
+	if (info_gui != Gui::get())
+	{
+		info_background = WidgetSprite::create(info_gui, "black.dds");
+		info_background->setColor(Math::vec4(1, 1, 1, 0.25f));
+		info_gui->addChild(info_background->getWidget(), Gui::ALIGN_BACKGROUND | Gui::ALIGN_EXPAND);
+	}
+
+	//container
+	infoVBox = WidgetVBox::create(info_gui);
+	infoVBox->setWidth(info_gui_width_pixel);
+	infoVBox->setHeight(info_gui_height_pixel);
+	info_gui->addChild(infoVBox->getWidget(), Gui::ALIGN_OVERLAP | Gui::ALIGN_EXPAND );
+
+	//image
+	infoImage = WidgetSprite::create(info_gui);
+
+	infoImage->setWidth(info_gui_width_pixel/2);
+	infoImage->setHeight(info_gui_height_pixel/2);
+	infoVBox->addChild(infoImage->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
+
+	//text
+	info_text = WidgetLabel::create(info_gui, "");
+	info_text->setWidth(info_gui_width_pixel);
+	info_text->setFontWrap(1);
+	info_text->setFontSize(36);
+	infoVBox->addChild(info_text->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
+
+#pragma endregion
+
 }
 
 void VRPlayerVR::set_image(Unigine::ImagePtr img) {
@@ -594,7 +636,6 @@ void VRPlayerVR::update_teleport_ray_visibility() {
 
 
 void VRPlayerVR::update_information(int num, int button_pressed) {
-	unhighlightAll();
 	// check if nobody using our info ray
 	if (button_pressed &&
 		!info_button_pressed[num] &&

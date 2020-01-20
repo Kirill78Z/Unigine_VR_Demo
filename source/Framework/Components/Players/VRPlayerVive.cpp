@@ -80,10 +80,84 @@ void VRPlayerVive::update()
 		vive_getControllerDPadPressed(CONTROLLER_DEVICE_1, BUTTON_DPAD_UP)
 		: 0, head_offset);
 
+	unhighlightAll();
+
 	update_information(0, getControllerButton(0, BUTTON::TRIGGER));
 	update_information(1, getControllerButton(1, BUTTON::TRIGGER));
-	if (highlightedObjs.size() > 0)
+
+	bool show_info = highlightedObjs.size() > 0;
+	if (show_info) {
+		assert(highlightedObjs.size() == 1);
+
 		player->setPostMaterials("vr_post_filter_selection");
+
+		Unigine::ObjectPtr o = highlightedObjs[0];
+		int n = o->findProperty("data");
+		if (n != -1) {
+			Unigine::PropertyPtr prop = o->getProperty();
+
+			n = prop->findParameter("Text");
+			if (n != -1) {
+				const char* text = prop->getParameterString(n);
+				info_text->setText(text);
+
+				infoImage->setHeight(0);
+
+				n = prop->findParameter("Image");
+				if (n != -1) {
+					Unigine::String fileName = prop->getParameterFile(n);
+					if (Unigine::FileSystem::get()->isFileExist(fileName)) {
+						unsigned int key = Unigine::String::hash(fileName, fileName.size());
+						Unigine::ImagePtr image = Unigine::ImagePtr::Ptr();
+						if (cashedImgs.find(key) != cashedImgs.end()) {
+							image = cashedImgs[key];
+						}
+						else
+						{
+							image = Unigine::Image::create(fileName);
+							cashedImgs[key] = image;
+						}
+
+						if (image) {
+							if (currentImg != image) {
+								infoImage->setImage(image);
+								currentImg = image;
+							}
+
+
+							infoImage->setHeight(info_gui_height_pixel / 2);
+						}
+					}
+
+				}
+
+
+				//info gui
+				info_object_gui->setEnabled(1);
+
+				// put GUI around player
+				if (!prev_show_info) {
+					info_object_gui->setWorldTransform(info_gui_pos());
+				}
+
+			}
+
+			else
+				show_info = false;
+		}
+		else
+			show_info = false;
+
+
+	}
+
+	if (!show_info)
+	{
+		player->setPostMaterials("");
+		info_object_gui->setEnabled(0);
+	}
+
+	prev_show_info = show_info;
 
 	move_update(hmd_transform_world);
 
@@ -275,6 +349,22 @@ Mat4 VRPlayerVive::gui_near_eyes_pos() {
 
 	return player->getWorldTransform()
 		* flatHeadTransform;
+}
+
+Mat4 VRPlayerVive::info_gui_pos() {
+	Mat4 flatHeadTransform = Mat4::IDENTITY;
+
+	Mat4 headTransform = Mat4(vive.getDevicePose(HMD_DEVICE_0));
+	flatHeadTransform.setRotateY(headTransform.getRotate().getAngle(vec3::FORWARD) + 20);
+
+	dvec3 transl = headTransform.getTranslate();
+	flatHeadTransform.setColumn3(3, transl);
+
+	
+	return player->getWorldTransform()
+		* flatHeadTransform 
+		* Mat4(rotate(vec3(1, 0, 0), -15))
+		* Mat4(translate(0.0f, player_height, -1.0f));
 }
 
 
