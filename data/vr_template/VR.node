@@ -198,7 +198,7 @@
 		<node type="ObjectMeshDynamic" id="358526576" name="teleport_bound_2">
 			<reference>176319083</reference>
 			<surface name="box" intersection_mask="0x80" physics_friction="1" physics_restitution="1" material="25abde1a513196b15547205c10ec400b7b0595ee"/>
-			<transform>6.40976181085 0 0 0.0 0 4.89589434239 0 0.0 0 0 3.30423088693 0.0 -23.8329825535 0.154490891878 1.30221389011 1.0</transform>
+			<transform>5.93294846609 2.42593541299 0 0.0 -1.79387305938 4.38715531747 1.22664852301 0.0 0.313325692016 -0.766279683484 3.19884176246 0.0 -23.8329825535 0.154490891878 1.30221389011 1.0</transform>
 		</node>
 	</node>
 	<node type="NodeDummy" id="1531025213" name="vr_hotpoints">

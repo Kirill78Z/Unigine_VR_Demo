@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <asset version="2.7.3.0">
-	<guid>161f8399daa8a2d4ca85cf4c734f16bb208d675a</guid>
+	<guid>4effe8d8734bd6573d2e7fca596feca17b1f1d8c</guid>
 	<type>property</type>
-	<hash>10e675a3</hash>
+	<hash>7a22650b</hash>
+	<parameters>
+		<parameter type="bool" name="unchanged">1</parameter>
+	</parameters>
 	<runtimes>
-		<runtime id="01828a98a40841c723beddf0c1a44c12ba134e5f" name="traffic_lane_main" link="0"/>
+		<runtime id="4effe8d8734bd6573d2e7fca596feca17b1f1d8c" name="simple_movement_path" link="0"/>
 	</runtimes>
 </asset>
