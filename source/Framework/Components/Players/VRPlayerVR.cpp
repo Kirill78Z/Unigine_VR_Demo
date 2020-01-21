@@ -394,7 +394,7 @@ void VRPlayerVR::gui_init() {
 #pragma endregion
 
 #pragma region Information gui
-	info_object_gui = ObjectGui::create(info_gui_width, info_gui_height);
+	info_object_gui = ObjectGui::create(info_gui_physical_width(), info_gui_physical_height());
 	info_object_gui->setScreenSize(info_gui_width_pixel, info_gui_height_pixel);
 	info_object_gui->setBackground(0);
 	info_object_gui->setMouseMode(ObjectGui::MOUSE_VIRTUAL);
@@ -418,24 +418,25 @@ void VRPlayerVR::gui_init() {
 	}
 
 	//container
-	infoVBox = WidgetVBox::create(info_gui);
-	infoVBox->setWidth(info_gui_width_pixel);
-	infoVBox->setHeight(info_gui_height_pixel);
-	info_gui->addChild(infoVBox->getWidget(), Gui::ALIGN_OVERLAP | Gui::ALIGN_EXPAND );
+	infoBox = WidgetGridBox::create(info_gui,1);
+	infoBox->setWidth(info_gui_width_pixel);
+	infoBox->setHeight(info_gui_height_pixel);
+	infoBox->setPadding(50, 50, 50, 50);
+	info_gui->addChild(infoBox->getWidget(), Gui::ALIGN_OVERLAP | Gui::ALIGN_EXPAND);
+
 
 	//image
 	infoImage = WidgetSprite::create(info_gui);
-
-	infoImage->setWidth(info_gui_width_pixel/2);
-	infoImage->setHeight(info_gui_height_pixel/2);
-	infoVBox->addChild(infoImage->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
+	infoImage->setWidth(info_gui_width_pixel / 2);
+	infoImage->setHeight(info_gui_height_pixel / 4);
+	infoBox->addChild(infoImage->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
 
 	//text
 	info_text = WidgetLabel::create(info_gui, "");
-	info_text->setWidth(info_gui_width_pixel);
+	info_text->setWidth(info_gui_width_pixel * 0.95);
 	info_text->setFontWrap(1);
 	info_text->setFontSize(36);
-	infoVBox->addChild(info_text->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
+	infoBox->addChild(info_text->getWidget(), Gui::ALIGN_LEFT | Gui::ALIGN_TOP);
 
 #pragma endregion
 
@@ -445,27 +446,38 @@ void VRPlayerVR::set_image(Unigine::ImagePtr img) {
 	if (!image) return;
 
 	//set aspect ratio of WidgetSprite same as Image
-	int imgWidth = img->getWidth();
-	int imgHeight = img->getHeight();
+	float w, h;
 
-	float imgAspect = (float)imgWidth / imgHeight;
-	float spaceAspect = (float)imageMaxWidth / imageMaxHeight;
+	fitImage(img, w, h, imageMaxWidth, imageMaxHeight);
 
-	if (imgAspect > spaceAspect) {
-		image->setWidth(imageMaxWidth);
-		float h = (float)imageMaxWidth* imgHeight / imgWidth;
-		image->setHeight(h);
-	}
-	else
-	{
-		image->setHeight(imageMaxHeight);
-		float w = (float)imgWidth *imageMaxHeight / imgHeight;
-		image->setWidth(w);
-	}
+	image->setWidth(w);
+	image->setHeight(h);
 
 	image->setImage(img);
 	image->arrange();
 	hBox->arrange();
+}
+
+void VRPlayerVR::fitImage(Unigine::ImagePtr &img, float &w, float &h, int maxWidth, int maxHeight)
+{
+	int imgWidth = img->getWidth();
+	int imgHeight = img->getHeight();
+
+	w = imgWidth;
+	h = imgHeight;
+
+	float imgAspect = (float)imgWidth / imgHeight;
+	float spaceAspect = (float)maxWidth / maxHeight;
+
+	if (imgAspect > spaceAspect) {
+		w = maxWidth;
+		h = (float)maxWidth / imgAspect;
+	}
+	else
+	{
+		h = maxHeight;
+		w = (float)imgAspect *maxHeight;
+	}
 }
 
 
@@ -580,6 +592,8 @@ void VRPlayerVR::update_gui()
 			object_gui->setWorldTransform(gui_near_eyes_pos()* Mat4(translate(0.0f, player_height, -2.0f)));
 
 			refresh_current_page();
+
+			unhighlight();
 		}
 	}
 
@@ -635,7 +649,7 @@ void VRPlayerVR::update_teleport_ray_visibility() {
 }
 
 
-void VRPlayerVR::update_information(int num, int button_pressed) {
+void VRPlayerVR::update_info_ray_shooting(int num, int button_pressed) {
 	// check if nobody using our info ray
 	if (button_pressed &&
 		!info_button_pressed[num] &&
@@ -647,6 +661,8 @@ void VRPlayerVR::update_information(int num, int button_pressed) {
 
 	if (object_gui->isEnabled())
 		return;
+
+	unhighlight();
 
 	int last_button_state = info_button_pressed[num];
 	info_button_pressed[num] = button_pressed;
@@ -822,6 +838,8 @@ void VRPlayerVR::teleport_update(int num, int button_pressed, const Vec3 &offset
 					player->setWorldParent(hitObj->getNode());
 					if (object_gui)
 						object_gui->setWorldParent(hitObj->getNode());
+
+					unhighlight();
 				}
 
 				teleport_marker->setEnabled(0);
@@ -1310,5 +1328,7 @@ void VRPlayerVR::hotpoints_update(int button_prev, int button_next)
 			cur_hotpoint = 0;
 
 		setCurrHotpoint(cur_hotpoint);
+
+		unhighlight();
 	}
 }

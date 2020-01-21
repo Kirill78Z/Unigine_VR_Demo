@@ -41,6 +41,8 @@ protected:
 	void init();
 	void update();
 
+	void display_info_update();
+
 private:
 	void set_controller_trigger_position(Unigine::NodeReferencePtr &controller, float position);
 	void find_devices();

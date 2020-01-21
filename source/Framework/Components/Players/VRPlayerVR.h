@@ -102,13 +102,25 @@ protected:
 	// gui
 	void gui_init();
 	void set_image(Unigine::ImagePtr img);
+	void fitImage(Unigine::ImagePtr &img, float &w, float &h, int maxWidth, int maxHeight);
 	Unigine::ObjectGuiPtr object_gui;
 
 	Unigine::ObjectGuiPtr info_object_gui;
 
+	void info_gui_resize() {
+		if (info_object_gui->isEnabled() && info_text->getHeight() != 0) {
+			int height_pixel = infoImage->getHeight() + info_text->getHeight() + 100;
 
-	int imageMaxWidth;
-	int imageMaxHeight;
+
+			if (height_pixel != info_gui_height_pixel) {
+				info_gui_height_pixel = height_pixel;
+
+				info_object_gui->setPhysicalSize(info_gui_physical_width(), info_gui_physical_height());
+				info_object_gui->setScreenSize(info_gui_width_pixel, info_gui_height_pixel);
+			}
+		}
+	}
+
 
 	void create_hotpoint_toggle(HotPoint * hotpt);
 
@@ -124,7 +136,7 @@ protected:
 
 	void update_gui();
 
-	void update_information(int num, int button_pressed);
+	void update_info_ray_shooting(int num, int button_pressed);
 
 	void update_teleport_ray_visibility();
 
@@ -148,23 +160,25 @@ protected:
 
 	//info
 	int info_button_pressed[CONTROLLER_COUNT];
-	Unigine::Vector<Unigine::ObjectPtr> highlightedObjs;
+	Unigine::ObjectPtr highlightedObj;
+	Unigine::ObjectPtr prev_highlightedObj;
 
 	void highlight(Unigine::ObjectPtr obj) {
 		for (int s = 0; s < obj->getNumSurfaces(); s++) {
 			obj->setMaterialState("auxiliary", 1, s);
 		}
 
-		highlightedObjs.append(obj);
+		highlightedObj = obj;
 	}
 
-	void unhighlightAll() {
-		for (Unigine::ObjectPtr obj : highlightedObjs) {
-			for (int s = 0; s < obj->getNumSurfaces(); s++) {
-				obj->setMaterialState("auxiliary", 0, s);
+	void unhighlight() {
+		if (highlightedObj) {
+			for (int s = 0; s < highlightedObj->getNumSurfaces(); s++) {
+				highlightedObj->setMaterialState("auxiliary", 0, s);
 			}
 		}
-		highlightedObjs.clear();
+
+		highlightedObj = Unigine::ObjectPtr::Ptr();
 	}
 
 	// grabbing

@@ -236,23 +236,30 @@ protected:
 
 	Unigine::WidgetHBoxPtr imageContainer;
 	Unigine::WidgetSpritePtr image;
+	int imageMaxWidth;
+	int imageMaxHeight;
 
 
 	//info gui
-	const int info_gui_width = 1;
-	const int info_gui_height = 1;
-	const int info_gui_width_pixel = info_gui_width * 1000;
-	const int info_gui_height_pixel = info_gui_height * 1000;
+	int info_gui_width_pixel = 1000;
+	int info_gui_height_pixel = 400;
+
+	float info_gui_physical_width() { return (float)(info_gui_width_pixel) / 1000; }
+	float info_gui_physical_height() { return (float)(info_gui_height_pixel) / 1000; }
+
+	const int infoImageMaxWidth = info_gui_width_pixel;
+	const int infoImageMaxHeight = 400;
 
 	Unigine::GuiPtr info_gui;
 	Unigine::WidgetSpritePtr info_background;
 
 	Unigine::WidgetLabelPtr info_text;
-	Unigine::WidgetVBoxPtr infoVBox;
+	Unigine::WidgetGridBoxPtr infoBox;
+
 	Unigine::WidgetSpritePtr infoImage;
 	Unigine::ImagePtr currentImg;
 	Unigine::HashMap<unsigned int, Unigine::ImagePtr> cashedImgs;
-	bool prev_show_info = false;
+
 
 
 	Unigine::Vector<HotPoint*> hotpoints;
