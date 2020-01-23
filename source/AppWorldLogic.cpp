@@ -109,14 +109,17 @@ int AppWorldLogic::init() {
 
 	//simple movement
 	Unigine::NodePtr pathsContainer = Unigine::Editor::get()->getNodeByName("SimpleMovement");
-	for (int c = 0; c < pathsContainer->getNumChildren(); c++) {
-		Unigine::NodePtr child = pathsContainer->getChild(c);
-		if (child->getType()== Unigine::Node::WORLD_SPLINE_GRAPH) {
-			Unigine::WorldSplineGraphPtr path = Unigine::WorldSplineGraph::cast(child);
-			MovementPath* movePath = new MovementPath(path);
-			movementPaths.append(movePath);
+	if (pathsContainer) {
+		for (int c = 0; c < pathsContainer->getNumChildren(); c++) {
+			Unigine::NodePtr child = pathsContainer->getChild(c);
+			if (child->getType() == Unigine::Node::WORLD_SPLINE_GRAPH) {
+				Unigine::WorldSplineGraphPtr path = Unigine::WorldSplineGraph::cast(child);
+				MovementPath* movePath = new MovementPath(path);
+				movementPaths.append(movePath);
+			}
 		}
 	}
+
 
 	return 1;
 }

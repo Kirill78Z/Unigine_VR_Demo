@@ -193,7 +193,7 @@
 		<node type="ObjectMeshDynamic" id="294192024" name="teleport_bound_1">
 			<reference>176319083</reference>
 			<surface name="box" intersection_mask="0x80" physics_friction="1" physics_restitution="1" material="25abde1a513196b15547205c10ec400b7b0595ee"/>
-			<transform>6.40976181085 0 0 0.0 0 4.89589434239 0 0.0 0 0 3.30423088693 0.0 -0.0451078759792 8.06362896124 1.47129574536 1.0</transform>
+			<transform>6.40976181085 0 0 0.0 0 4.89589434239 0 0.0 0 0 14.3549660655 0.0 -0.0451078759792 8.06362896124 6.12568578179 1.0</transform>
 		</node>
 		<node type="ObjectMeshDynamic" id="358526576" name="teleport_bound_2">
 			<reference>176319083</reference>

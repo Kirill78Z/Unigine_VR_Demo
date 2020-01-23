@@ -418,7 +418,7 @@ void VRPlayerVR::gui_init() {
 	}
 
 	//container
-	infoBox = WidgetGridBox::create(info_gui,1);
+	infoBox = WidgetGridBox::create(info_gui, 1);
 	infoBox->setWidth(info_gui_width_pixel);
 	infoBox->setHeight(info_gui_height_pixel);
 	infoBox->setPadding(50, 50, 50, 50);
@@ -802,8 +802,8 @@ void VRPlayerVR::teleport_update(int num, int button_pressed, const Vec3 &offset
 
 			if (hotpoints.size() > 0 && hotpoints[cur_hotpoint]->teleport_bound) {
 				//inside_bound = teleport_bound_box.inside(intersection->getPoint(), UNIGINE_EPSILON);
-				Unigine::Math::dvec3 auxPt1 = hitPt + Vec3(0, 0, 1);
-				Unigine::Math::dvec3 auxPt2 = hitPt + Vec3(0, 0, -1);
+				Unigine::Math::dvec3 auxPt1 = hitPt + Vec3(0, 0, 1) * 1000000;
+				Unigine::Math::dvec3 auxPt2 = hitPt + Vec3(0, 0, -1) * 1000000;
 
 				hotpoints[cur_hotpoint]->teleport_bound->setIntersectionMask(128, 0);
 				hotpoints[cur_hotpoint]->teleport_bound->setIntersection(1, 0);
