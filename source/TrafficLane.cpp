@@ -43,17 +43,22 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 		{
 			//there is gap
 			if (seg->getStartPoint() == points[++prevSegEndIndex]) {
-				//gap in one segment - obstacle
-				LinearPosition obstacleLp = LinearPosition(
-					segments[s - 1], currLinearPos, currLinearPos);
-				obstacles.append(obstacleLp);
-
 				//add segment to close this gap
+				double gaplen = (points[prevSegEndIndex - 1]->getPosition() - seg->getStartPoint()->getPosition()).length();
+
 				Unigine::SplineSegmentPtr closingGapSeg
 					= worldSplineGraph->createSplineSegment(
-						points[prevSegEndIndex - 1], -prevSeg->getEndTangent(), prevSeg->getEndUp(),
-						seg->getStartPoint(), -seg->getStartTangent(), seg->getStartUp());
+						points[prevSegEndIndex - 1], -normalize(prevSeg->getEndTangent()) * gaplen / 4, prevSeg->getEndUp(),
+						seg->getStartPoint(), -normalize(seg->getStartTangent()) * gaplen / 4, seg->getStartUp());
+
+
+				//gap in one segment - obstacle
+				LinearPosition obstacleLp = LinearPosition(
+					closingGapSeg, currLinearPos, currLinearPos);
+				obstacles.append(obstacleLp);
+
 				segments.append(closingGapSeg);
+
 
 				//ось вращения для шлагбаума
 				//TODO: Сделать нормально для множества ПВП
@@ -204,7 +209,16 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 
 	}
 
+	//перевести ось вращения в систему координат шлагбаума
+	//до этого считается, что отс вращения в глобальной системе координат
+	if (barrier) {
+		Unigine::Math::dmat4 transf = barrier->getIWorldTransform();
+		transf.m03 = 0;
+		transf.m13 = 0;
+		transf.m23 = 0;
+		rotationAxis = transf * rotationAxis;
 
+	}
 }
 
 TrafficLane::~TrafficLane()

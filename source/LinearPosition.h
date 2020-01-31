@@ -61,9 +61,7 @@ struct LinearPosition
 	float distOnSplineSeg() {
 		float distOnSplineSeg = (float)(absLinearPos - segStartLinearPos);
 
-		assert(distOnSplineSeg > -UNIGINE_EPSILON);
-
-		if (Unigine::Math::abs(distOnSplineSeg) < UNIGINE_EPSILON)
+		if (Unigine::Math::abs(distOnSplineSeg) < 1e-5f)
 			distOnSplineSeg = 0;
 
 		/*float len = splSegment->getLength();

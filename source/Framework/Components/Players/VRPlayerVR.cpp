@@ -155,16 +155,21 @@ void VRPlayerVR::land_player_to(const mat4 &hmd_transform, const Vec3 &position,
 		player->setWorldPosition(intersection->getPoint() + head_offset);
 
 	//привязать игрока к объекту
+	//не забываем про все панельки
 	if (hitObj) {
 		player->setWorldParent(hitObj->getNode());
 		if (object_gui)
 			object_gui->setWorldParent(hitObj->getNode());
+		if(info_object_gui)
+			info_object_gui->setWorldParent(hitObj->getNode());
 	}
 	else
 	{
 		player->setWorldParent(Unigine::NodePtr::Ptr());
 		if (object_gui)
 			object_gui->setWorldParent(Unigine::NodePtr::Ptr());
+		if (info_object_gui)
+			info_object_gui->setWorldParent(Unigine::NodePtr::Ptr());
 	}
 }
 
