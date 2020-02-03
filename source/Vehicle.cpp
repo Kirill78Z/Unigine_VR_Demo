@@ -728,7 +728,7 @@ performAction:
 			velocity = velocity + currAcceleration * time;
 		}
 
-		if (velocity < UNIGINE_EPSILON) velocity = 0;
+		if (velocity < 0.01) velocity = 0;
 
 		if (velocity != 0) {
 			float s = velocity * time;
