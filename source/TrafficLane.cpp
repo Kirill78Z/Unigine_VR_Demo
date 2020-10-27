@@ -196,7 +196,7 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Ñarriageway* carriageway
 				prevProbDivider = probDivider;
 
 				if (std::next(it) == absIntencity.end()) {
-					assert(probDivider == 1.0f);
+					assert(Unigine::Math::abs(probDivider - 1.0f) < 10E-6);
 				}
 
 			}
