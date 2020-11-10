@@ -34,8 +34,8 @@ public:
 	void update();
 
 	static double getClearDist(std::list<Vehicle*>::iterator nextIt,
-		LinearPosition linPos, ObstacleType &obstacleType,
-		LinearPosition &obstacleLP, TrafficLane * lane, bool ignoreFirstObstacle);
+		LinearPosition linPos, ObstacleType& obstacleType,
+		LinearPosition& obstacleLP, TrafficLane* lane, bool ignoreFirstObstacle);
 
 	//используется только при начале движения
 	void setLaneIterator(std::list<Vehicle*>::iterator it) {
@@ -114,7 +114,7 @@ public:
 
 		changeLaneTrack = Unigine::WorldSplineGraphPtr::Ptr();
 		changeLaneTrackSeg = Unigine::SplineSegmentPtr::Ptr();
-		
+
 		trafficLaneChangeTo = nullptr;
 		neighborVehiclesLeft = nullptr;
 		neighborVehiclesRight = nullptr;
@@ -122,12 +122,12 @@ public:
 
 		laneToTheLeft = trafficLane->lanesToTheLeftBegin();
 		laneToTheRight = trafficLane->lanesToTheRightBegin();
-		
+
 		if (neighborVehiclesLeft)
 			delete[] neighborVehiclesLeft;
 		if (neighborVehiclesRight)
 			delete[] neighborVehiclesRight;
-		
+
 
 
 		vehicleIterator = trafficLane->getQueueEnd();
@@ -161,7 +161,7 @@ private:
 	//const double changeLineMinSpaceToPrevVehicle = 30;//TODO: Зависимость от скорости?
 
 	const double needToChangeLaneIfItEndsAfter = 150;//TODO: Зависимость от скорости?
-	const double noChangeLaneIfPCPCloser = 70;
+	const double noChangeLaneIfPCPCloser = 50;
 
 	Сarriageway* carriageway = nullptr;
 	TrafficLane* trafficLane = nullptr;
@@ -705,7 +705,7 @@ private:
 
 
 		if (obstacleTypeNeighborLane == ObstacleType::MovingVehicle && trafficJam
-			&& (*nextIt)->velocity > trafficJamVelocity*1.2)
+			&& (*nextIt)->velocity > trafficJamVelocity * 1.2)
 			changeLaneBehabior = ChangeLaneBehabior::Aggressive;//мы стоим, а соседняя полоса едет
 
 		//уточнить наш динамический габарит и габарит машины сзади
@@ -791,7 +791,7 @@ private:
 		double forwardShift = changeLaneDist - transitionDist;
 		if (forwardShift > 0) {
 			bool reachedEnd = result.increaseLinearPos(forwardShift);
-			if(reachedEnd) return LinearPosition::Null();//дорога уже заканчивается - не перестраиваться
+			if (reachedEnd) return LinearPosition::Null();//дорога уже заканчивается - не перестраиваться
 		}
 
 

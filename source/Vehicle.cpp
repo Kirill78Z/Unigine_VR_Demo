@@ -887,10 +887,10 @@ double Vehicle::getClearDist(std::list<Vehicle*>::iterator nextIt,
 float Vehicle::getVelocityToFitIntoSpan(double span) {
 	double stoppingDist = span - length - reserveDistBetweenCars;
 
-	if (stoppingDist < UNIGINE_EPSILON) {
+	if (stoppingDist < /*UNIGINE_EPSILON*/0.5) {
 		return 0;
 	}
 
 	double calcVelocity = Unigine::Math::dsqrt(2 * stoppingDist * standartDamping);
-	return calcVelocity > UNIGINE_EPSILON ? calcVelocity : 0;
+	return calcVelocity > 0.5/*UNIGINE_EPSILON*/ ? calcVelocity : 0;
 }
