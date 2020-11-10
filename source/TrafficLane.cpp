@@ -141,7 +141,7 @@ TrafficLane::TrafficLane(TrafficSimulation* trafficSim, Сarriageway* carriageway
 									+ Unigine::Math::dvec3(Unigine::Math::normalize(pcpPos3d.tangent));
 								Unigine::Math::dvec2 v = Unigine::Math::dvec2(p1) - Unigine::Math::dvec2(p0);
 								Unigine::Math::dvec2 w = Unigine::Math::dvec2(rotationPt->getWorldPosition()) - Unigine::Math::dvec2(p0);
-								double cz = v.x*w.y - v.y*w.x;
+								double cz = v.x * w.y - v.y * w.x;
 								if (cz < 0) {
 									rotationAxis = -rotationAxis;
 								}
@@ -239,7 +239,7 @@ void TrafficLane::update() {
 			barrierCurrRotation += thisFrameRotAngle;
 
 			dmat4 rotM = Unigine::Math::rotate(dvec3(rotationAxis), barrierCurrRotation);
-			barrier->setTransform(rotM*initialTransf);
+			barrier->setTransform(rotM * initialTransf);
 		}
 		else if (!barrierIsOpened && barrierCurrRotation > 0)
 		{
@@ -249,7 +249,7 @@ void TrafficLane::update() {
 			barrierCurrRotation -= thisFrameRotAngle;
 
 			dmat4 rotM = Unigine::Math::rotate(dvec3(rotationAxis), barrierCurrRotation);
-			barrier->setTransform(rotM*initialTransf);
+			barrier->setTransform(rotM * initialTransf);
 		}
 	}
 
@@ -370,7 +370,7 @@ void TrafficLane::update() {
 }
 
 
-void TrafficLane::getNewVehicleVelocity(Vehicle * vehicle, float &velocity, float speedLimit)
+void TrafficLane::getNewVehicleVelocity(Vehicle* vehicle, float& velocity, float speedLimit)
 {
 	ObstacleType obstacleType;
 	LinearPosition obstacleLP = LinearPosition::Null();
@@ -388,7 +388,7 @@ void TrafficLane::getNewVehicleVelocity(Vehicle * vehicle, float &velocity, floa
 	}
 }
 
-void TrafficLane::startNewVehicle(Vehicle * &vehicle, float velocity)
+void TrafficLane::startNewVehicle(Vehicle*& vehicle, float velocity)
 {
 	vehicles.push_front(vehicle);
 	std::list<Vehicle*>::iterator it = vehicles.begin();
@@ -519,7 +519,7 @@ void TrafficLane::calcNeighborLanesLinearSpansOneSide(
 
 		//поиск конца полосы для которой найдено начало
 		if (currNeighborLaneLS) {
-			TrafficLane*tl = currNeighborLaneLS->data;
+			TrafficLane* tl = currNeighborLaneLS->data;
 
 			Position3D pos = tl->endOfLane();
 			LinearPosition lp = LinearPosition(segmentPositions[s]);

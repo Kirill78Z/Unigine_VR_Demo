@@ -100,10 +100,21 @@ int Position3D::isInFrontOf(LinearPosition* lp, bool checkCodirectional) {
 	if (afterSeg0 && beforeSeg1) {
 		assert(!inFrontOfSeg0 && !inFrontOfSeg1);
 		//point is from the outside of convex vertex
-		//increaseLP = seg0->getLength() - startDistOnSeg;
-		newLp.copyFrom(*lp);
-		//newLp.moveToNextSegment();
-		newLp.absLinearPos = newLp.segStartLinearPos + newLp.splSegment->getLength() - 0.001;//must stay on current segment
+
+		bool result = !checkCodirectional;//если нужно, то проверить сонаправленность
+		if (checkCodirectional) {
+			dvec3 vaverage = (v0 + v1).normalize();
+			float d = dot(normalize(tangent), vec3(normalize(vaverage)));
+			result = Unigine::Math::abs(d) > 0.9f;//на последней точке графа бывает наоборот
+			if (result) {
+				int a = 0;
+			}
+		}
+
+		if (result) {
+			newLp.copyFrom(*lp);
+			newLp.absLinearPos = newLp.segStartLinearPos + newLp.splSegment->getLength() - 0.001;//must stay on current segment
+		}
 	}
 	else
 	{
@@ -180,7 +191,8 @@ int Position3D::isInFrontOf(LinearPosition* lp, bool checkCodirectional) {
 		//assert(increaseLP >= 0);
 
 		//if (increaseLP == 0) return 0;
-	if (newLp.isEmpty()) return 0;
+	if (newLp.isEmpty()) 
+		return 0;
 
 	//lp->increaseLinearPos(increaseLP);
 	lp->copyFrom(newLp);
